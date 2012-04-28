@@ -1,0 +1,18 @@
+%h1
+  Invoice!
+%buttons
+  = link_to 'nuova fattura', new_invoice_path
+%table
+  %thead
+    %tr
+      %td Numero
+      %td Data
+      %td Cliente
+      %td Importo
+  %tbody
+    -@invoices.each do |i|
+      %tr
+        %td i.number
+        %td i.date
+        %td
+        %td
