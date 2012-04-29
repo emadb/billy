@@ -1,0 +1,23 @@
+%h1 Listing foos
+
+%table
+  %tr
+    %th Name
+    %th Published
+    %th Customer
+    %th
+    %th
+    %th
+
+  - @foos.each do |foo|
+    %tr
+      %td= foo.name
+      %td= foo.published
+      %td= foo.customer_id
+      %td= link_to 'Show', foo
+      %td= link_to 'Edit', edit_foo_path(foo)
+      %td= link_to 'Destroy', foo, :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New Foo', new_foo_path

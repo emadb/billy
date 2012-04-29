@@ -1,9 +1,12 @@
 Scrooge::Application.routes.draw do
+  resources :foos
+  resources :invoices
+
   mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
 
   devise_for :users
 
-  resources :invoice
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

@@ -1,0 +1,41 @@
+%h1 new
+
+= form_for @invoice do |f|
+  -if @invoice.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@invoice.errors.count, "error")} prohibited this foo from being saved:"
+      %ul
+        - @invoice.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :number
+    = f.text_field :number
+  .field
+    = f.label :due_date
+    = f.text_field :due_date
+  .field
+    = f.label :customer
+    = f.select :customer, @customers
+  .field
+    = f.label :has_tax
+    = f.check_box :has_tax
+  .field
+    = f.label :is_sent
+    = f.check_box :is_sent
+  .field
+    = f.label :is_payed
+    = f.check_box :is_payed
+  %fieldset
+    %legend items
+    - f.fields_for :invoice_items do |i|
+      .field
+        = i.label :description
+        = i.text_field :description
+      .field
+        = i.label :amount
+        = i.text_field :amount
+        
+    
+  .actions
+    = f.submit 'Save'
