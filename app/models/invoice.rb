@@ -19,6 +19,16 @@ class Invoice
   field :is_payed, :type => Boolean
   field :is_sent, :type => Boolean
 
+  def self.create_new
+    @invoice = Invoice.new
+    @invoice.number = (Invoice.max(:number) || 0) + 1
+    @invoice.date = DateTime.now  
+    @invoice.invoice_items.push(InvoiceItem.new)
+    @invoice.invoice_items.push(InvoiceItem.new)
+    @invoice.invoice_items.push(InvoiceItem.new)
+    return @invoice
+  end
+
 end
 
 

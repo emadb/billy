@@ -12,7 +12,9 @@
   %tbody
     -@invoices.each do |i|
       %tr
-        %td i.number
-        %td i.date
+        %td 
+          = i.number
+        %td 
+          = i.date
         %td
         %td
