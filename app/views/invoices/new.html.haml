@@ -16,7 +16,7 @@
     = f.text_field :date
   .field
     = f.label :customer
-    = f.select :customer, @customers
+    = select_tag "invoice[customer_id]", options_from_collection_for_select(@customers, "_id", "name")
   .field
     = f.label :has_tax
     = f.check_box :has_tax

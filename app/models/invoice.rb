@@ -2,7 +2,7 @@ class Invoice
   include Mongoid::Document
   embeds_one :customer
   embeds_many :invoice_items
-
+  before_save :update_totals
   accepts_nested_attributes_for :customer, :invoice_items
 
   field :number, :type => Integer
@@ -27,6 +27,16 @@ class Invoice
     @invoice.invoice_items.push(InvoiceItem.new)
     @invoice.invoice_items.push(InvoiceItem.new)
     return @invoice
+  end
+
+  def update_totals
+    self.taxable_income = self.invoice_items.inject(0) {|tot,item| tot += item.amount }
+    self.tax = self.invoice_items.inject(0) { |tot,item| tot += item.amount * 0.21 }
+    if self.has_tax then
+      self.total = self.taxable_income + self.tax
+    else
+      self.total = self.taxable_income
+    end
   end
 
 end
