@@ -15,7 +15,7 @@
     -@invoices.each do |i|
       %tr
         %td 
-          = i.number
+          = link_to i.number, edit_invoice_path(i)
         %td 
           = i.date
         %td

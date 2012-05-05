@@ -25,4 +25,16 @@ class InvoicesController < ApplicationController
     @invoice.save
     redirect_to invoices_path
   end
+
+  def edit  
+    @invoice = Invoice.find(params[:id])
+    @customers = Customer.all #.map{|c| [c.name, c._id]}
+  end
+
+  def update  
+    @invoice = Invoice.find(params[:id])
+    @invoice.update_attributes(params[:invoice])
+    redirect_to invoices_path
+  end
+
 end
