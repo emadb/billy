@@ -1,10 +1,11 @@
 class InvoicesController < ApplicationController
   def index
-    @invoices = Invoice.all
+    @invoices = Invoice.all.order_by([:number, :desc])
   end
 
   def new
     @invoice = Invoice.create_new
+    @invoice.customer = Customer.new
     @invoice.has_tax = true
     @customers = Customer.all #.map{|c| [c.name, c._id]}
   end
