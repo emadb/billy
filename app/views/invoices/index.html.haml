@@ -1,7 +1,5 @@
 %h1
-  Invoice!
-%buttons
-  = link_to 'nuova fattura', new_invoice_path
+  Invoices
 %table.table.table-striped
   %thead
     %tr
@@ -26,3 +24,22 @@
           = number_to_currency(i.tax)
         %td.right
           = number_to_currency(i.total)
+
+  = content_for :side_bar do
+    .well.sidebar-nav
+      = link_to 'nuova fattura', new_invoice_path , {:class => 'btn btn-primary'}
+      %h3 Totals
+      %table
+        %tr
+          %td Taxable income:
+          %td.right
+            = number_to_currency(@taxable_income)
+        %tr
+          %td Tax:
+          %td.right
+            = number_to_currency(@tax)
+        %tr
+          %td Total:
+          %td.right
+            = number_to_currency(@total)
+        

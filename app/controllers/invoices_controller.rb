@@ -1,6 +1,9 @@
 class InvoicesController < ApplicationController
   def index
     @invoices = Invoice.all.order_by([:number, :desc])
+    @taxable_income = @invoices.sum(:taxable_income)
+    @tax = @invoices.sum(:tax)
+    @total = @invoices.sum(:total)
   end
 
   def new
