@@ -2,15 +2,15 @@
   Invoice!
 %buttons
   = link_to 'nuova fattura', new_invoice_path
-%table.table-striped
+%table.table.table-striped
   %thead
     %tr
       %td Numero
       %td Data
       %td Cliente
-      %td Imponibile
-      %td Iva
-      %td Totale
+      %td.right Imponibile
+      %td.right Iva
+      %td.right Totale
   %tbody
     -@invoices.each do |i|
       %tr
@@ -20,9 +20,9 @@
           = i.date
         %td
           = i.customer.name
-        %td
-          = i.taxable_income
-        %td
-          = i.tax
-        %td
-          = i.total
+        %td.right
+          = number_to_currency(i.taxable_income)
+        %td.right
+          = number_to_currency(i.tax)
+        %td.right
+          = number_to_currency(i.total)
