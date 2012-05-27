@@ -1,0 +1,23 @@
+%h1 edit
+%fieldset
+  %legend 
+    = "Edit invoice: #{@invoice.number}"
+  = render 'form'
+
+= content_for :side_bar do
+  .well.sidebar-nav
+    %h3 Totals
+    %table
+      %tr
+        %td Taxable income:
+        %td#taxable-income.right
+          = @totals.taxable_income
+      %tr
+        %td Tax:
+        %td#tax.right
+          = @totals.tax
+      %tr
+        %td Total:
+        %td#total.right
+          = @totals.total
+       

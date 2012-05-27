@@ -33,13 +33,13 @@
         %tr
           %td Taxable income:
           %td.right
-            = number_to_currency(@taxable_income)
+            = number_to_currency(@totals.taxable_income)
         %tr
           %td Tax:
           %td.right
-            = number_to_currency(@tax)
+            = number_to_currency(@totals.tax)
         %tr
           %td Total:
           %td.right
-            = number_to_currency(@total)
+            = number_to_currency(@totals.total)
         

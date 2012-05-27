@@ -3,7 +3,7 @@ class Invoice
   embeds_one :customer
   embeds_many :invoice_items
   before_save :update_totals
-  accepts_nested_attributes_for :customer, :invoice_items
+  accepts_nested_attributes_for :customer, :invoice_items, :allow_destroy => true
 
   field :number, :type => Integer
   field :date, :type => Date
@@ -38,13 +38,20 @@ class Invoice
       self.total = self.taxable_income
     end
   end
-
 end
-
 
 class InvoiceItem
   include Mongoid::Document
   embedded_in :invoice, :inverse_of => :invoice_items 
   field :description, :type => String
   field :amount, :type => Float
+end
+
+class InvoiceTotalsInfo
+  attr_accessor :taxable_income, :tax, :total
+  def initialize(taxable_income, tax, total)
+    @taxable_income = taxable_income
+    @tax = tax
+    @total = total
+  end
 end
