@@ -1,4 +1,3 @@
-%h1 edit
 %fieldset
   %legend 
     = "Edit invoice: #{@invoice.number}"
@@ -7,17 +6,14 @@
 = content_for :side_bar do
   .well.sidebar-nav
     %h3 Totals
-    %table
-      %tr
-        %td Taxable income:
-        %td#taxable-income.right
-          = @totals.taxable_income
-      %tr
-        %td Tax:
-        %td#tax.right
-          = @totals.tax
-      %tr
-        %td Total:
-        %td#total.right
-          = @totals.total
-       
+    %ul.totals
+      %li Taxable income:
+      %li.taxable-income.amount
+        = number_to_currency(@totals.taxable_income)
+      %li Tax:
+      %li.tax.amount
+        = number_to_currency(@totals.tax)
+      %li Total:
+      %li.total.amount
+        = number_to_currency(@totals.total)
+end     

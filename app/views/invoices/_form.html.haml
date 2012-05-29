@@ -1,54 +1,52 @@
-= form_for @invoice, {:html => {:class => 'form-horizontal'}} do |f|
-  -if @invoice.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@invoice.errors.count, "error")} prohibited this invoice from being saved:"
-      %ul
-        - @invoice.errors.full_messages.each do |msg|
-          %li= msg
-  .field.control-group
-    = f.label :is_sent, :class => 'control-label'
-    .controls
-      = f.check_box :is_sent
-  .field.control-group
-    = f.label :is_payed, :class => 'control-label'
-    .controls
-      = f.check_box :is_payed
-  .field.control-group
-    = f.label :number, :class => 'control-label'
-    .controls
-      = f.text_field :number, :class => 'span1'
-  .field.control-group
-    = f.label :date, :class => 'control-label'
-    .controls
-      = f.text_field :date, :class => 'date'
-  .field.control-group
-    = f.label :customer, :class => 'control-label'
-    .controls
-      = select_tag "invoice[customer_id]", options_from_collection_for_select(@customers, "_id", "name", @invoice.customer._id)
-  .field.control-group
-    = f.label :has_tax, :class => 'control-label'
-    .controls
-      = f.check_box :has_tax
-  %fieldset
-    %legend 
-      items
-      %a.new-item{:href=>'#', :class => 'btn'} 
-        %i{:class => 'icon-plus'}
-        nuova riga 
-    %table.items
-      %tr
-        %td description
-        %td amount
-        %td 
-      = f.fields_for :invoice_items do |i|
+.row
+  = form_for @invoice, {:html => {:class => 'form-horizontal'}} do |f|
+    .span4
+      .field.control-group
+        = f.label :number, :class => 'control-label'
+        .controls
+          = f.text_field :number, :class => 'span1'
+      .field.control-group
+        = f.label :customer, :class => 'control-label'
+        .controls
+          = select_tag "invoice[customer_id]", options_from_collection_for_select(@customers, "_id", "name", @invoice.customer._id)
+      .field.control-group
+        = f.label :is_sent, :class => 'control-label'
+        .controls
+          = f.check_box :is_sent
+      
+    .span2
+      .field.control-group
+        = f.label :date, :class => 'control-label'
+        .controls
+          = f.text_field :date, :class => 'date'
+      .field.control-group
+        = f.label :is_payed, :class => 'control-label'
+        .controls
+          = f.check_box :is_payed    
+      .field.control-group
+        = f.label :has_tax, :class => 'control-label'
+        .controls
+          = f.check_box :has_tax
+    %fieldset
+      %legend 
+        items
+        %a.new-item{:href=>'#', :class => 'btn'} 
+          %i{:class => 'icon-plus'}
+          nuova riga 
+      %table.items
         %tr
-          %td
-            = i.text_field :description, {:class => 'span5'}
-          %td
-            = i.text_field :amount, {:class => 'amount span1'}
-          %td
-            = i.hidden_field :_destroy
-            %a{:href => '#', :class => 'btn-mini btn-danger remove-item'}
-              %i{:class => 'icon-minus'}
-  .actions
-    = f.submit 'Save', :class => 'btn btn_primary'
+          %td description
+          %td amount
+          %td 
+        = f.fields_for :invoice_items do |i|
+          %tr
+            %td
+              = i.text_field :description, {:class => 'span5'}
+            %td
+              = i.text_field :amount, {:class => 'amount span1'}
+            %td
+              = i.hidden_field :_destroy
+              %a{:href => '#', :class => 'btn-mini btn-danger remove-item'}
+                %i{:class => 'icon-minus'}
+    .actions
+      = f.submit 'Save', :class => 'btn btn_primary'
