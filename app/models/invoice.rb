@@ -22,10 +22,13 @@ class Invoice
   def self.create_new
     @invoice = Invoice.new
     @invoice.number = (Invoice.max(:number) || 0) + 1
-    @invoice.date = DateTime.now  
+    today = DateTime.now
+    @invoice.date = Date.new(today.year, today.month, 1) - 1
     @invoice.invoice_items.push(InvoiceItem.new)
     @invoice.invoice_items.push(InvoiceItem.new)
-    @invoice.invoice_items.push(InvoiceItem.new)
+    @invoice.customer = Customer.new
+    @invoice.has_tax = true
+
     return @invoice
   end
 

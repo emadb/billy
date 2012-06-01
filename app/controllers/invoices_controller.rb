@@ -5,10 +5,9 @@ class InvoicesController < ApplicationController
   end
 
   def new
-    @invoice = Invoice.create_new
-    @invoice.customer = Customer.new
-    @invoice.has_tax = true
+    @invoice = Invoice.create_new    
     @customers = Customer.all #.map{|c| [c.name, c._id]}
+    @totals = InvoiceTotalsInfo.new(0, 0, 0)
   end
 
   def create

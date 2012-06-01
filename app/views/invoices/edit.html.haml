@@ -8,12 +8,11 @@
     %h3 Totals
     %ul.totals
       %li Taxable income:
-      %li.taxable-income.amount
+      %li#taxable-income.amount
         = number_to_currency(@totals.taxable_income)
       %li Tax:
-      %li.tax.amount
+      %li#tax.amount
         = number_to_currency(@totals.tax)
       %li Total:
-      %li.total.amount
+      %li#total.amount
         = number_to_currency(@totals.total)
-end     

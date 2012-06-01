@@ -1,6 +1,6 @@
 $(function (){
 
-  //$('.date').calendar();
+  $('.date').datepicker({format: 'dd-mm-yyyy'});
 
   $('.new-item').click(function(evt){
     evt.preventDefault();
@@ -10,13 +10,17 @@ $(function (){
 
   $('.amount').live('blur',function(){
     var total = 0;
-    $('.amount').each(function(i, a){
-      total = total + parseInt($(a).val());
-    });
     
-    $('#taxable-income').text(total);
-    $('#tax').text(total * 0.21);
-    $('#total').text(total * 1.21);
+    $('.amount').each(function(i, a){
+      var itemValue = $(a).val();
+      if (isNumber(itemValue)){
+        total = total + parseInt(itemValue);
+      }
+    });
+
+    $('#taxable-income').text(total.toFixed(2));
+    $('#tax').text((total * 0.21).toFixed(2));
+    $('#total').text((total * 1.21).toFixed(2));
   });
 
   $('.remove-item').click(function(){
