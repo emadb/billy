@@ -1,5 +1,5 @@
 %h1
-  Invoices
+  Inbound invoices
 %table.table.table-striped
   %thead
     %tr
@@ -26,7 +26,7 @@
           = number_to_currency(i.total)
         %td
           %a{:href=> inbound_invoice_path(i), :class => 'delete' } 
-            %i{:class => "icon-remove"}
+            %i.icon-trash
 
 
   = content_for :side_bar do

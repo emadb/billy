@@ -9,6 +9,7 @@
       %td.right Imponibile
       %td.right Iva
       %td.right Totale
+      %td 
   %tbody
     -@invoices.each do |i|
       %tr
@@ -24,6 +25,9 @@
           = number_to_currency(i.tax)
         %td.right
           = number_to_currency(i.total)
+        %td
+          %a{:href => invoice_path(i)} 
+            %i.icon-file
 
   = content_for :side_bar do
     .well.sidebar-nav
