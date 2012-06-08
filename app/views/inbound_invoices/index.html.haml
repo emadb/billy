@@ -25,7 +25,9 @@
         %td.right
           = number_to_currency(i.total)
         %td
-          = link_to 'Destroy', i, :confirm => 'Are you sure?', :method => :delete
+          %a{:href=> inbound_invoice_path(i), :class => 'delete' } 
+            %i{:class => "icon-remove"}
+
 
   = content_for :side_bar do
     .well.sidebar-nav
