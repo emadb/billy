@@ -1,6 +1,7 @@
 Scrooge::Application.routes.draw do
   resources :foos
   resources :invoices
+  resources :inbound_invoices
 
   mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
 

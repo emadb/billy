@@ -1,0 +1,43 @@
+%h1
+  Invoices
+%table.table.table-striped
+  %thead
+    %tr
+      %td Numero
+      %td Data
+      %td Cliente
+      %td.right Imponibile
+      %td.right Iva
+      %td.right Totale
+  %tbody
+    -@invoices.each do |i|
+      %tr
+        %td 
+          = i.number
+        %td 
+          = i.date
+        %td
+          = i.customer
+        %td.right
+          = number_to_currency(i.taxable_income)
+        %td.right
+          = number_to_currency(i.tax)
+        %td.right
+          = number_to_currency(i.total)
+        %td
+          = link_to 'Destroy', i, :confirm => 'Are you sure?', :method => :delete
+
+  = content_for :side_bar do
+    .well.sidebar-nav
+      = link_to 'nuova fattura', new_inbound_invoice_path , {:class => 'btn btn-primary'}
+      %ul.totals
+        %li Taxable income:
+        %li.taxable-income.amount
+          = number_to_currency(@totals.taxable_income)
+        %li Tax:
+        %li.tax.amount
+          = number_to_currency(@totals.tax)
+        %li Total:
+        %li.total.amount
+          = number_to_currency(@totals.total)
+        
