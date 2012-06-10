@@ -1,5 +1,14 @@
 %h1
   Inbound invoices
+%fieldset
+  %legend filters
+  %form.well.form-inline
+    Month:
+    = select_month(@filter_date, :field_name => 'month', :class => 'input-small')
+    Year
+    = select_year(@filter_date, :field_name => 'year', :class => 'input-small')
+    %button.btn{:type => 'submit'} apply
+
 %table.table.table-striped
   %thead
     %tr

@@ -1,7 +1,4 @@
 $(function (){
-
-  $('.date').datepicker({format: 'dd-mm-yyyy'});
-
   $('.new-item').click(function(evt){
     evt.preventDefault();
     var nextRow = $('.items').children.length + 1;

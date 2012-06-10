@@ -1,11 +1,22 @@
 class InboundInvoicesController < ApplicationController
   def index
-    @invoices = InboundInvoice.all.order_by([:due_date, :desc])
+
+    if (params[:date].nil?)
+      @filter_date  = Date.today
+    else
+      @filter_date= Date.new(params[:date][:year].to_i, params[:date][:month].to_i, 1)
+    end
+    filter_date_next = @filter_date.to_time.advance(:months => 1).to_date
+    @invoices = InboundInvoice
+      .where(:date.gte => @filter_date)
+      .where(:date.lte => filter_date_next)
+      .order_by([:due_date, :desc])
     @totals = InvoiceTotalsInfo.new(@invoices.sum(:taxable_income), @invoices.sum(:tax), @invoices.sum(:total))
   end
 
   def new
-    @invoice = InboundInvoice.new    
+    @invoice = InboundInvoice.new
+    @invoice.date = Date.today    
     @totals = InvoiceTotalsInfo.new(0, 0, 0)
   end
 
