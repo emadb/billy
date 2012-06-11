@@ -42,19 +42,3 @@ class Invoice
     end
   end
 end
-
-class InvoiceItem
-  include Mongoid::Document
-  embedded_in :invoice, :inverse_of => :invoice_items 
-  field :description, :type => String
-  field :amount, :type => Float
-end
-
-class InvoiceTotalsInfo
-  attr_accessor :taxable_income, :tax, :total
-  def initialize(taxable_income, tax, total)
-    @taxable_income = taxable_income
-    @tax = tax
-    @total = total
-  end
-end
