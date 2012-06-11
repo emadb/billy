@@ -1,6 +1,53 @@
 %h1
   Dashboard
-  = @title
+  %table
+    %tr
+      %th
+        Outbound
+      %th
+    %tr
+      %td
+        Fatturato
+      %td
+        = @invoices_totals.taxable_income
+    %tr
+      %td
+        Iva
+      %td
+        = @invoices_totals.tax
+    %tr
+      %td
+        Totale
+      %td
+        = @invoices_totals.total
+    %tr
+      %td
+        Da incassare
+      %td
+        = @to_receive
+
+  %table
+    %tr
+      %th
+        Spese
+      %th
+    %tr
+      %td
+        Netto
+      %td
+        = @inbound_invoices_totals.taxable_income
+    %tr
+      %td
+        Iva
+      %td
+        = @inbound_invoices_totals.tax
+    %tr
+      %td
+        Totale
+      %td
+        = @inbound_invoices_totals.total
+
+
   = content_for :side_bar do
     .well.sidebar-nav
       = link_to 'nuova fattura', new_invoice_path , {:class => 'btn btn-primary'}
