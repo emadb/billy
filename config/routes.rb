@@ -1,4 +1,6 @@
 Scrooge::Application.routes.draw do
+  get "dashboard/index"
+
   resources :foos
   resources :invoices
   resources :inbound_invoices

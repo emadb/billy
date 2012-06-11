@@ -1,0 +1,9 @@
+%h1
+  Dashboard
+  = @title
+  = content_for :side_bar do
+    .well.sidebar-nav
+      = link_to 'nuova fattura', new_invoice_path , {:class => 'btn btn-primary'}
+      = link_to 'nuova fattura inbound', new_inbound_invoice_path , {:class => 'btn btn-primary'}
+      
+        

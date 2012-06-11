@@ -10,7 +10,7 @@ RailsAdmin.config do |config|
   config.current_user_method { current_user } # auto-generated
 
 
-  config.included_models = [Customer, Invoice]
+  config.included_models = [User, Customer, Invoice, InboundInvoice]
   # If you want to track changes on your models:
   # config.audit_with :history, User
 

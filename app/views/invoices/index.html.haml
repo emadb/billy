@@ -28,6 +28,8 @@
         %td
           %a{:href => invoice_path(i)} 
             %i.icon-file
+          %a{:href=> invoice_path(i), :class => 'delete' } 
+            %i.icon-trash
 
   = content_for :side_bar do
     .well.sidebar-nav
