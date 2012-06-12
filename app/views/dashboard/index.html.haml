@@ -81,9 +81,10 @@
     - @perCustomer.each do |c|
       %tr
         %td
-          c.id
+          = c['value']['customer']
         %td 
-          c.value.value
+          = c['value']['value']
+        
      
         
 
