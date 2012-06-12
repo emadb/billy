@@ -72,6 +72,20 @@
         Totale
       %td
         = @inbound_invoices_totals.total
+  %table
+    %tr
+      %th
+        Cliente
+      %th
+        Fatturato
+    - @perCustomer.each do |c|
+      %tr
+        %td
+          c.id
+        %td 
+          c.value.value
+     
+        
 
 
   = content_for :side_bar do

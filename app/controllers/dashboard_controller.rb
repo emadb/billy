@@ -12,6 +12,23 @@ class DashboardController < ApplicationController
       @quarters.q3  = @quarters.q3 + i.taxable_income if [7,8,9].include?(i.date.month)
       @quarters.q4  = @quarters.q4 + i.taxable_income if [10, 11, 12].include?(i.date.month)
     end
+  map = %Q{
+    function() {
+      emit(this.customer.name, {customer: this.customer.name, value: this.taxable_income });
+    }
+  }
+
+  reduce = %Q{
+    function(key, values) {
+      var result = { customer: key, value: 0 };
+      values.forEach(function(value) {
+        result.value += value.value;
+      });
+      return result;
+    }
+  }
+
+    @perCustomer = Invoice.map_reduce(map, reduce).out(inline: 1)
 
     inbound_invoices = InboundInvoice.all
     @inbound_invoices_totals = InvoiceTotalsInfo.new(inbound_invoices.sum(:taxable_income), inbound_invoices.sum(:tax), inbound_invoices.sum(:total))
