@@ -1,97 +1,110 @@
-%h1
-  Dashboard
-  %table
+%div.span4
+  %table.table
     %tr
       %th
-        Outbound
+        In
       %th
     %tr
       %td
         Fatturato
-      %td
+      %td.right
         = @invoices_totals.taxable_income
     %tr
       %td
         Iva
-      %td
+      %td.right
         = @invoices_totals.tax
     %tr
-      %td
+      %td.italic
         Totale
-      %td
+      %td.right.italic
         = @invoices_totals.total
     %tr
       %td
         Da incassare
-      %td
+      %td.right
         = @to_receive
-  %table
+
+%div.span4
+  %table.table
     %tr
       %th
-        Trimestri
+        Fatturato per trimestre
       %th
     %tr
       %td
         1
-      %td
+      %td.right
         = @quarters.q1
     %tr
       %td
         2
-      %td
+      %td.right
         = @quarters.q2
     %tr
       %td
         3
-      %td
+      %td.right
         = @quarters.q3
     %tr
       %td
         4
-      %td
+      %td.right
         = @quarters.q4
 
-
-  %table
+%div.span4
+  %table.table
     %tr
       %th
-        Spese
+        Out
       %th
     %tr
       %td
         Netto
-      %td
+      %td.right
         = @inbound_invoices_totals.taxable_income
     %tr
       %td
         Iva
-      %td
+      %td.right
         = @inbound_invoices_totals.tax
     %tr
-      %td
+      %td.italic
         Totale
-      %td
+      %td.right.italic
         = @inbound_invoices_totals.total
-  %table
+
+%div.span4
+  %table.table
     %tr
       %th
-        Cliente
+        Fatturato per cliente
       %th
-        Fatturato
+        
     - @perCustomer.each do |c|
       %tr
         %td
           = c['value']['customer']
-        %td 
-          = c['value']['value']
-        
-     
-        
+        %td.right
+          = c['value']['income']
 
-
-  = content_for :side_bar do
-    .well.sidebar-nav
-      = link_to 'nuova fattura', new_invoice_path , {:class => 'btn btn-primary'}
-      = link_to 'nuova fattura inbound', new_inbound_invoice_path , {:class => 'btn btn-primary'}
+%div.span4
+  %table.table
+    %tr
+      %th
+        Attività di ieri (TODO)
+      %th
+        
+   
       
-        
+
+
+= content_for :side_bar do
+  .well.sidebar-nav
+    %ul
+      %li
+        = link_to 'nuova fattura', new_invoice_path , {:class => 'btn btn-primary'}
+      %li
+        = link_to 'nuova fattura inbound', new_inbound_invoice_path , {:class => 'btn btn-primary'}
+    
+      

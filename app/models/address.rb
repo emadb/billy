@@ -6,5 +6,5 @@ class Address
   field :city, :type => String
   field :province, :type => String
 
-  accepts_nested_attributes_for :user
+  #accepts_nested_attributes_for :user
 end

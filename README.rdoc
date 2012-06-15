@@ -9,3 +9,13 @@ This is a simple invoicing application that uses the following technologies:
 
 I'm developing it to learn Rails and Ruby.
 
+# job_order
+# => name
+# => customer
+# => notes
+# => hourly rate
+# => activities
+# => is_open
+# => => name
+# => => estimated time
+# => => 

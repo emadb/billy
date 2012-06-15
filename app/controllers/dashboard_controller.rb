@@ -6,6 +6,7 @@ class DashboardController < ApplicationController
     @invoices_totals = InvoiceTotalsInfo.new(invoices.sum(:taxable_income), invoices.sum(:tax), invoices.sum(:total))
 
     @quarters = Quarters.new
+    #TODO: refactor this...it's too c-sharpy!
     invoices.each do |i|
       @quarters.q1  = @quarters.q1 + i.taxable_income if [1,2,3].include?(i.date.month)
       @quarters.q2  = @quarters.q2 + i.taxable_income if [4,5,6].include?(i.date.month)
@@ -14,15 +15,15 @@ class DashboardController < ApplicationController
     end
   map = %Q{
     function() {
-      emit(this.customer.name, {customer: this.customer.name, value: this.taxable_income });
+      emit(this.customer.name, {customer: this.customer.name, income: this.taxable_income });
     }
   }
 
   reduce = %Q{
     function(key, values) {
-      var result = { customer: key, value: 0 };
+      var result = { customer: key, income: 0 };
       values.forEach(function(value) {
-        result.value += value.value;
+        result.income += value.income;
       });
       return result;
     }
@@ -31,25 +32,8 @@ class DashboardController < ApplicationController
     @perCustomer = Invoice.map_reduce(map, reduce).out(inline: 1)
 
     inbound_invoices = InboundInvoice.all
-    @inbound_invoices_totals = InvoiceTotalsInfo.new(inbound_invoices.sum(:taxable_income), inbound_invoices.sum(:tax), inbound_invoices.sum(:total))
+    @inbound_invoices_totals = InvoiceTotalsInfo.new(inbound_invoices.sum(:taxable_income), 
+      inbound_invoices.sum(:tax), 
+      inbound_invoices.sum(:total))
   end
 end
-
-# Totale inbound (numero fatture, fatturato)
-
-# Totali outbuound (numero fatture, fatturato)
-# => per trimestre
-# => per cliente
-
-# Totale attivita per mese
-
-
-# job_order
-# => name
-# => customer
-# => notes
-# => hourly rate
-# => activities
-# => => name
-# => => estimated time
-# => => 
