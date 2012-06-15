@@ -1,6 +1,10 @@
 class JobOrdersController < ApplicationController
   def index
-    @job_orders = JobOrder.all
+    if params[:archived] == "yes"
+      @job_orders = JobOrder.where(archived: true)
+    else
+      @job_orders = JobOrder.all
+    end
   end
 
   def new
@@ -30,10 +34,6 @@ class JobOrdersController < ApplicationController
   def destroy
     @job_order = JobOrder.find(params[:id])
     @job_order.destroy
-
-    respond_to do |format|
-      format.html { redirect_to job_orders_url }
-      format.json { head :no_content }
-    end
+    redirect_to job_orders_path
   end
 end

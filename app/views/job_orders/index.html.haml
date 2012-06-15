@@ -1,5 +1,9 @@
 %h1
-  Invoices
+  Job orders
+%fieldset
+  %legend &nbsp;
+  %a{href: job_orders_path + "/?archived=yes", class: 'archived-job-order'}
+    Show archived job orders
 %table.table.table-striped
   %thead
     %tr
