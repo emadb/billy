@@ -1,0 +1,21 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @job_order.name
+%p
+  %b Customer:
+  = @job_order.customer_id
+%p
+  %b Notes:
+  = @job_order.notes
+%p
+  %b Hourly rate:
+  = @job_order.hourly_rate
+%p
+  %b Archived?:
+  = @job_order.archived?
+
+= link_to 'Edit', edit_job_order_path(@job_order)
+\|
+= link_to 'Back', job_orders_path
