@@ -58,7 +58,16 @@ development:
 
     # Ensure all times are UTC in the app side. (default: false)
     # use_utc: false
+<% if ENV['MONGOHQ_URL'] %>
+  <% uri = URI.parse(ENV['MONGOHQ_URL']) %>
 production:
+  <<: *defaults
   sessions:
     default:
-      uri: <%= ENV['MONGOHQ_URL'] %>
+      <<: *default_session
+      database: <%= uri.path.sub('/','') %>
+      username: <%= uri.user %>
+      password: <%= uri.password %>
+      hosts:
+        - <%= uri.host %>:<%= uri.port %>
+<% end %>
