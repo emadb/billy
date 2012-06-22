@@ -1,9 +1,7 @@
 %h1
-  Job orders
+  = @title
 %fieldset
   %legend &nbsp;
-  %a{href: job_orders_path + "/?archived=yes", class: 'archived-job-order'}
-    Show archived job orders
 %table.table.table-striped
   %thead
     %tr
@@ -27,3 +25,5 @@
   = content_for :side_bar do
     .well.sidebar-nav
       = link_to 'nuova commessa', new_job_order_path , {:class => 'btn btn-primary'}
+      %a{href: job_orders_path + "/?archived=yes", class: 'archived-job-order, btn btn-primary'}
+        Show archived job orders
