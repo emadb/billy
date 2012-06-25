@@ -1,6 +1,5 @@
 class InboundInvoicesController < ApplicationController
   def index
-
     if (params[:date].nil?)
       @filter_date  = Date.today
     else

@@ -1,0 +1,39 @@
+%h1
+  Activity for %user%
+%fieldset
+  %legend &nbsp;
+  %form.well.form-inline
+    Month:
+    = select_month(@filter_date, :field_name => 'month', :class => 'input-small')
+    Year
+    = select_year(@filter_date, :field_name => 'year', :class => 'input-small')
+    User
+    = select_tag('usera', '<option value="1">uno</option><option value="2">due</option>'.html_safe, :class => 'input-small')
+    %button.btn{:type => 'submit'} apply
+
+%table.table.table-striped
+  %thead
+    %tr
+      %td Type
+      %td Data
+      %td Hours
+      %td Description
+  %tbody
+    -@activities.each do |a|
+      %tr
+        %td 
+          = a.activity_type.description
+        %td 
+          = a.date
+        %td
+          = a.hours
+        %td
+          = a.description
+   
+
+  = content_for :side_bar do
+    .well.sidebar-nav
+      = link_to 'nuova fattura', new_inbound_invoice_path , {:class => 'btn btn-primary'}
+      %ul.totals
+        
+        
