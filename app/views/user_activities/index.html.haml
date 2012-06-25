@@ -18,6 +18,16 @@
       %td Data
       %td Hours
       %td Description
+  %thead
+    %tr
+      %td 
+        =select_tag('type', '<option value="1">uno</option><option value="2">due</option>'.html_safe, :class => 'input-small')
+      %td 
+        = text_field_tag 'date', '', :class => 'date input-small'
+      %td 
+        = text_field_tag 'hours', '', :class => 'input-small'
+      %td
+        = text_field_tag :description
   %tbody
     -@activities.each do |a|
       %tr
@@ -35,5 +45,8 @@
     .well.sidebar-nav
       = link_to 'nuova fattura', new_inbound_invoice_path , {:class => 'btn btn-primary'}
       %ul.totals
+        %li Total hours
+        %li yesterday
+
         
         
