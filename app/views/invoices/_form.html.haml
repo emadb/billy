@@ -10,9 +10,9 @@
         .controls
           = select_tag "invoice[customer_id]", options_from_collection_for_select(@customers, "_id", "name", @invoice.customer._id)
       .field.control-group
-        = f.label :is_sent, :class => 'control-label'
+        = f.label :due_date, :class => 'control-label'
         .controls
-          = f.check_box :is_sent
+          = f.text_field :due_date, :class => 'date'
       
     .span2
       .field.control-group
@@ -27,6 +27,10 @@
         = f.label :has_tax, :class => 'control-label'
         .controls
           = f.check_box :has_tax
+      .field.control-group
+        = f.label :is_sent, :class => 'control-label'
+        .controls
+          = f.check_box :is_sent
     %fieldset
       %legend 
         items

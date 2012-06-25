@@ -24,6 +24,7 @@ class Invoice
     @invoice.number = (Invoice.max(:number) || 0) + 1
     today = DateTime.now
     @invoice.date = Date.new(today.year, today.month, 1) - 1
+    @invoice.due_date = @invoice.date + 30
     @invoice.invoice_items.push(InvoiceItem.new)
     @invoice.invoice_items.push(InvoiceItem.new)
     @invoice.customer = Customer.new
