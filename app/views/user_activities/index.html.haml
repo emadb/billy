@@ -8,8 +8,20 @@
     Year
     = select_year(@filter_date, :field_name => 'year', :class => 'input-small')
     User
-    = select_tag('usera', '<option value="1">uno</option><option value="2">due</option>'.html_safe, :class => 'input-small')
+    = select_tag('user', '<option value="1">uno</option><option value="2">due</option>'.html_safe, :class => 'input-small')
     %button.btn{:type => 'submit'} apply
+
+  %form.well.form-inline{"data-bind" => "submit: addActivity"}
+    Type
+    = select_tag('type', '<option value="1">uno</option><option value="2">due</option>'.html_safe, :class => 'input-small', "data-bind" => "value: type")
+    Date
+    = text_field_tag 'date', '', :class => 'date input-small', :data => {:bind => "value: date"}
+    Hours
+    = text_field_tag 'hours', '', :class => 'input-small', :data => {:bind => "value: hours"}
+    Description
+    = text_field_tag :description, '', :data => {:bind => "value: description"}
+    %button.btn{:type => 'submit'} add
+
 
 %table.table.table-striped
   %thead
@@ -18,28 +30,12 @@
       %td Data
       %td Hours
       %td Description
-  %thead
+  %tbody{"data-bind" => "{foreach: activities}"}
     %tr
-      %td 
-        =select_tag('type', '<option value="1">uno</option><option value="2">due</option>'.html_safe, :class => 'input-small')
-      %td 
-        = text_field_tag 'date', '', :class => 'date input-small'
-      %td 
-        = text_field_tag 'hours', '', :class => 'input-small'
-      %td
-        = text_field_tag :description
-  %tbody
-    -@activities.each do |a|
-      %tr
-        %td 
-          = a.activity_type.description
-        %td 
-          = a.date
-        %td
-          = a.hours
-        %td
-          = a.description
-   
+      %td{"data-bind"=>"{text:type}"}
+      %td{"data-bind"=>"{text:date}"}
+      %td{"data-bind"=>"{text:hours}"}
+      %td{"data-bind"=>"{text:description}"}        
 
   = content_for :side_bar do
     .well.sidebar-nav
@@ -47,6 +43,6 @@
       %ul.totals
         %li Total hours
         %li yesterday
-
+        
         
         

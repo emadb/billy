@@ -10,5 +10,12 @@ class UserActivitiesController < ApplicationController
       .where(:date.gte => @filter_date)
       .where(:date.lte => filter_date_next)
       .order_by([:due_date, :desc])
+  
+    respond_to do |format|
+      format.html
+      format.xml  { render :xml => @activities }
+      format.json { render :json => @activities }
+    end
+
   end
 end
