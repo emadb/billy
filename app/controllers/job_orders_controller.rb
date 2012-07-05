@@ -7,7 +7,10 @@ class JobOrdersController < ApplicationController
       @job_orders = JobOrder.where(archived: '0')
       @title = 'Job orders'
     end
-
+    respond_to do |format|
+      format.html
+      format.json { render :json => @job_orders }
+    end
   end
 
   def new
@@ -38,5 +41,12 @@ class JobOrdersController < ApplicationController
     @job_order = JobOrder.find(params[:id])
     @job_order.destroy
     redirect_to job_orders_path
+  end
+
+  def show
+    @job_order = JobOrder.find(params[:id])
+    respond_to do |format|
+      format.json { render :json => @job_order }
+    end
   end
 end

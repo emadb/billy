@@ -16,6 +16,19 @@ class UserActivitiesController < ApplicationController
       format.xml  { render :xml => @activities }
       format.json { render :json => @activities }
     end
-
   end
+
+  def create
+    logger.warn params
+    @activity = UserActivity.new(params)
+    @activity.type = ActivityType.find(params[:type])
+    @activity.user = current_user
+    @activity.save
+    respond_to do |format|
+      format.html { render :json => {:result => 'ok'} }
+      format.xml  { render :xml => @activities }
+      format.json { render :json => {:result => 'ok'} }
+    end      
+  end
+
 end
