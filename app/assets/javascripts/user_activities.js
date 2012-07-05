@@ -22,8 +22,9 @@ $(function(){
             var description = self.description();
             var jobOrder = self.jobOrder();
             var activity = self.activity();
-
-            $.post('user_activities', { type: type, date:date, hours:hours, description: description, jobOrder: jobOrder, activity: activity }, function (result){
+            var data = { type: type, date:date, hours:hours, description: description, jobOrder: jobOrder, activity: activity };
+            console.log(data);
+            $.post('user_activities', data, function (result){
                 var activity = new ActivityVM(type, date, hours, description, jobOrder, activity);
                 
                 self.activities.push(activity);
@@ -72,6 +73,13 @@ $(function(){
     
     $.getJSON('/job_orders', function(data){
         activityList.jobOrders(data);
+    });
+
+    $.getJSON('/user_activity_types', function(data){
+        console.log(data);
+        $.each(data, function(index, item){
+            $('#type').append('<option id=' + item._id + '>' + item.description + '</option>');
+        });
     });
 
     ko.applyBindings(activityList);

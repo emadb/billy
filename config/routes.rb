@@ -1,15 +1,16 @@
 Scrooge::Application.routes.draw do
 
   root :to => 'dashboard#index'
-  match 'user_activities/:user/:year/:month' => "user_activities#index"
+  match 'user_activities/:user/:year/:month' => 'user_activities#index'
+  match 'user_activity_types' => 'user_activity_types#index'
   
-  get "dashboard/index"
-
+  match 'dashboard' => 'dashboard#index'
   resources :foos
   resources :invoices
   resources :inbound_invoices
   resources :job_orders
   resources :user_activities
+
 
   mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
 
