@@ -18,13 +18,22 @@
       %fieldset
         %legend details
         .field.control-group
+          joborder
+          .controls
+            = select_tag :job_order, '', :data => {:bind => "value: jobOrder, options: jobOrders, optionsValue : '_id', optionsText: 'code'"}
+        .field.control-group
+          activity
+          .controls
+            = select_tag :activity, '', :data => {:bind => "value: activity, options: jobOrderActivities, optionsValue : '_id', optionsText: 'description'"}
+        .field.control-group
           type
           .controls
-            = select_tag 'type', '', "data-bind" => "value: type"
-        .field.control-group
-          date
-          .controls
-            = text_field_tag 'date', '', :class => 'date input-small', :data => {:bind => "value: date"}
+            = select_tag :type, '', :data => {:bind => "value: type, options: activityTypes, optionsValue : '_id', optionsText: 'description'"}
+        .span2
+          .field.control-group
+            date
+            .controls
+              = text_field_tag 'date', '', :class => 'date input-small', :data => {:bind => "value: date"}
         .field.control-group
           hours
           .controls
@@ -33,14 +42,6 @@
           description
           .controls
             = text_field_tag :description, '', :data => {:bind => "value: description"}
-        .field.control-group
-          joborder
-          .controls
-            = select_tag :job_order, '', :data => {:bind => "value: jobOrder, options: jobOrders, optionsValue : '_id', optionsText: 'code'"}
-        .field.control-group
-          activity
-          .controls
-            = select_tag :activity, '', :data => {:bind => "value: activity,options: jobOrderActivities, optionsValue : '_id', optionsText: 'description'"}
         %button.btn{:type => 'submit'} add
         %a.btn{:href=>"#", "data-dismiss"=>"modal"}
           Close

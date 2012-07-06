@@ -1,9 +1,9 @@
 $(function(){
   
-    function ActivitiesVM(activities)
+    function ActivitiesVM(acts)
     {
         var self = this;
-        this.activities = ko.observableArray(activities);
+        this.activities = ko.observableArray(acts);
 
         this.type = ko.observable();
         this.date = ko.observable();
@@ -14,6 +14,7 @@ $(function(){
 
         this.jobOrders = ko.observableArray();
         this.jobOrderActivities = ko.observableArray();
+        this.activityTypes = ko.observableArray();
 
         this.addActivity = function(){
             var type = self.type();
@@ -23,11 +24,11 @@ $(function(){
             var jobOrder = self.jobOrder();
             var activity = self.activity();
             var data = { type: type, date:date, hours:hours, description: description, jobOrder: jobOrder, activity: activity };
-            console.log(data);
-            $.post('user_activities', data, function (result){
-                var activity = new ActivityVM(type, date, hours, description, jobOrder, activity);
-                
-                self.activities.push(activity);
+            $.post('user_activities', data, function (data){
+                var result = $.parseJSON(data);
+                newActivity = new ActivityVM(result.id, result.type, result.date, result.hours, result.description, result.jobOrder, result.activity);
+                self.activities.push(newActivity);
+               
                 self.hours('');
                 self.description('');    
                 $('#newActivity').addClass('hide');
@@ -35,24 +36,28 @@ $(function(){
         };
 
         this.removeActivity = function(act){
-            self.activities.remove(act);
-            // TODO: remove dal server
-            $.ajax('user_activities', {})
+            console.log('remove', act.id());
+             $.ajax({
+                    type: 'DELETE',
+                    url: 'user_activities/' + act.id(),
+                    success: function(){
+                         self.activities.remove(act);
+                    }
+            });
         };
 
         this.jobOrder.subscribe(function(newJobOrder){
-          self.activity(undefined);
-          self.activities.removeAll();
+          self.jobOrderActivities.removeAll();
           $.getJSON('job_orders/' + self.jobOrder(), function(data){
             self.jobOrderActivities(data.activities);
           });
         });
     }
 
-    function ActivityVM(type, date, hours, description, jobOrder, activity)
+    function ActivityVM(id, type, date, hours, description, jobOrder, activity)
     {
         var self = this;
-        this.id = ko.observable();
+        this.id = ko.observable(id);
         this.type = ko.observable(type);
         this.date = ko.observable(date);
         this.hours = ko.observable(hours);
@@ -76,19 +81,17 @@ $(function(){
     });
 
     $.getJSON('/user_activity_types', function(data){
-        console.log(data);
-        $.each(data, function(index, item){
-            $('#type').append('<option id=' + item._id + '>' + item.description + '</option>');
+        activityList.activityTypes(data);
+    });
+
+
+    $.getJSON('/user_activities/'+ user + '/' + year + '/' + month, function (result){
+        var current = [];
+        $.each(result, function(index, item){
+            current.push(new ActivityVM(item.id, item.type, item.date, item.hours, item.description, item.jobOrder, item.activity));
         });
+        activityList.activities(current);
     });
 
     ko.applyBindings(activityList);
-
-    // $.getJSON('/user_activities/'+ user + '/' + year + '/' + month, function (result){
-    //     console.log(result);
-    //     var activities = [];
-    //     $.each(result, function(index, item){
-    //         activities.push(new ActivityVM(result.type, result.date, result.hours, result.description));
-    //     });
-    // })
 });
