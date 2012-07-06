@@ -2,7 +2,7 @@
   = "Activity for #{current_user}"
 %fieldset
   %legend &nbsp;
-  %form.well.form-inline
+  %form.well.form-inline{:method => 'POST', :action => '/user_activities/index'}
     Month:
     = select_month(@filter_date, :field_name => 'month', :class => 'input-small')
     Year
@@ -41,7 +41,7 @@
         .field.control-group
           description
           .controls
-            = text_field_tag :description, '', :data => {:bind => "value: description"}
+            = text_area_tag :description, '', :data => {:bind => "value: description"}
         %button.btn{:type => 'submit'} add
         %a.btn{:href=>"#", "data-dismiss"=>"modal"}
           Close

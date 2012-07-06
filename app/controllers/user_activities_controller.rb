@@ -6,10 +6,11 @@ class UserActivitiesController < ApplicationController
       @filter_date= Date.new(params[:date][:year].to_i, params[:date][:month].to_i, 1)
     end
     filter_date_next = @filter_date.to_time.advance(:months => 1).to_date
-    @activities = UserActivity.all
-      # .where(:date.gte => @filter_date)
-      # .where(:date.lte => filter_date_next)
-      #.order_by([:due_date, :desc])
+    
+    @activities = UserActivity
+      .where(:date.gte => @filter_date)
+      .where(:date.lte => filter_date_next)
+      .order_by([:due_date, :desc])
   
     respond_to do |format|
       format.html
@@ -30,7 +31,7 @@ class UserActivitiesController < ApplicationController
     @activity = UserActivity.new()
     
     @activity.user_activity_type = UserActivityType.find(params[:type])
-    @activity.date = DateTime.new # DateTime.parse(params[:date])
+    @activity.date = DateTime.parse(params[:date])
     @activity.hours = params[:hours].to_f
     @activity.description = params[:description]
     job_order = JobOrder.find(params[:jobOrder])

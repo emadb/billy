@@ -6,8 +6,8 @@ $(function(){
         this.activities = ko.observableArray(acts);
 
         this.type = ko.observable();
-        this.date = ko.observable();
-        this.hours = ko.observable();
+        this.date = ko.observable()
+        this.hours = ko.observable()
         this.description = ko.observable();
         this.jobOrder = ko.observable();
         this.activity = ko.observable();
@@ -24,7 +24,8 @@ $(function(){
             var jobOrder = self.jobOrder();
             var activity = self.activity();
             var data = { type: type, date:date, hours:hours, description: description, jobOrder: jobOrder, activity: activity };
-            $.post('user_activities', data, function (data){
+            console.log('ready to post', self.date());
+            $.post('user_activities', data, function (data){  
                 var result = $.parseJSON(data);
                 newActivity = new ActivityVM(result.id, result.type, result.date, result.hours, result.description, result.jobOrder, result.activity);
                 self.activities.push(newActivity);
@@ -36,14 +37,15 @@ $(function(){
         };
 
         this.removeActivity = function(act){
-            console.log('remove', act.id());
-             $.ajax({
-                    type: 'DELETE',
-                    url: 'user_activities/' + act.id(),
-                    success: function(){
-                         self.activities.remove(act);
-                    }
-            });
+            if (window.confirm('cancellare?')){
+                $.ajax({
+                        type: 'DELETE',
+                        url: 'user_activities/' + act.id(),
+                        success: function(){
+                             self.activities.remove(act);
+                        }
+                });
+            }
         };
 
         this.jobOrder.subscribe(function(newJobOrder){
@@ -86,6 +88,7 @@ $(function(){
 
 
     $.getJSON('/user_activities/'+ user + '/' + year + '/' + month, function (result){
+        console.log(result);
         var current = [];
         $.each(result, function(index, item){
             current.push(new ActivityVM(item.id, item.type, item.date, item.hours, item.description, item.jobOrder, item.activity));
@@ -94,4 +97,11 @@ $(function(){
     });
 
     ko.applyBindings(activityList);
+
+    ko.extenders.logChange = function(target, option) {
+    target.subscribe(function(newValue) {
+       console.log(option + ": " + newValue);
+    });
+    return target;
+};
 });
