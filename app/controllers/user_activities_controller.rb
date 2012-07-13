@@ -10,7 +10,7 @@ class UserActivitiesController < ApplicationController
     @activities = UserActivity
       .where(:date.gte => @filter_date)
       .where(:date.lte => filter_date_next)
-      .order_by([:due_date, :desc])
+      .order_by([:date, :asc])
   
     respond_to do |format|
       format.html
@@ -20,7 +20,7 @@ class UserActivitiesController < ApplicationController
           :date => a.date,
           :hours => a.hours,
           :description => a.description,
-          :jobOrder => 'cc',#a.activity.job_order.code,
+          :jobOrder => a.activity.job_order_code,
           :activity => a.activity.description
         }} }
     end

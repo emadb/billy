@@ -85,8 +85,7 @@ $(function(){
     var year = $('#date_year').val();
     var user = $('#user').val();
 
-
-    var activityList = new ActivitiesVM([new ActivityVM(1, 'today', '10', 'desc', 'yo', 'acy2')]);
+    var activityList = new ActivitiesVM([]);
     
     $.getJSON('/job_orders', function(data){
         activityList.jobOrders(data);
