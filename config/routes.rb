@@ -1,7 +1,10 @@
 Scrooge::Application.routes.draw do
 
   root :to => 'dashboard#index'
+  
   match 'user_activities/:user/:year/:month' => 'user_activities#index'
+  match '/user_activities/index' => 'user_activities#index', :via => :post
+  
   match 'user_activity_types' => 'user_activity_types#index'
   
   match 'dashboard' => 'dashboard#index'

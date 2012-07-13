@@ -1,12 +1,12 @@
 class UserActivitiesController < ApplicationController
   def index
-    if (params[:date].nil?)
+    if (params[:year].nil? or params[:month].nil?)
       @filter_date  = Date.today
     else
-      @filter_date= Date.new(params[:date][:year].to_i, params[:date][:month].to_i, 1)
+      @filter_date= Date.new(params[:year].to_i, params[:month].to_i, 1)
     end
     filter_date_next = @filter_date.to_time.advance(:months => 1).to_date
-    
+   
     @activities = UserActivity
       .where(:date.gte => @filter_date)
       .where(:date.lte => filter_date_next)
@@ -27,7 +27,6 @@ class UserActivitiesController < ApplicationController
   end
 
   def create
-    #{"type"=>"1", "date"=>"11-04-2012", "hours"=>"10", "description"=>"provpa", "jobOrder"=>"4ff59c05c788e13c52000002", "activity"=>"4fe48164412b6c841b000004", "action"=>"create", "controller"=>"user_activities"}
     @activity = UserActivity.new()
     
     @activity.user_activity_type = UserActivityType.find(params[:type])
