@@ -43,7 +43,7 @@ gem "devise"
 gem "haml", ">= 3.0.0"
 gem "haml-rails"
 gem "bson_ext"
-gem "moped", :git => 'https://github.com/mongoid/moped.git'
-gem "mongoid", "~> 3.0.0.rc"
+gem "moped", "~> 1.1.1"
+gem "mongoid", "~> 3.0.0"
 gem "rails_admin"
 gem "rspec-rails", ">= 2.0.1", :group => [:development, :test]

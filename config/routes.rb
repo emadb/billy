@@ -1,3 +1,4 @@
+
 Scrooge::Application.routes.draw do
 
   root :to => 'dashboard#index'
