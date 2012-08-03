@@ -5,13 +5,9 @@ class UserActivitiesController < ApplicationController
     else
       @filter_date= Date.new(params[:year].to_i, params[:month].to_i, 1)
     end
-    filter_date_next = @filter_date.to_time.advance(:months => 1).to_date
-   
-    @activities = UserActivity
-      .where(:date.gte => @filter_date)
-      .where(:date.lte => filter_date_next)
-      .order_by([:date, :asc])
-  
+    
+    @activities = UserActivity.get(params[:year], params[:month])
+
     respond_to do |format|
       format.html
       format.json { render :json => @activities.map{ |a| {
@@ -62,4 +58,27 @@ class UserActivitiesController < ApplicationController
     end      
   end
 
+  def stats
+    stats = ActivityStats.new
+    @activities = UserActivity.get(params[:year], params[:month])
+
+    stats.today_hours = UserActivity.where(:date => Date.today).sum(:hours) || 0
+    stats.yesterday_hours = UserActivity.where(:date => Date.yesterday).sum(:hours) || 0
+
+    render :json => stats
+  end
+
 end
+
+class ActivityStats
+  # total_hours_today
+  # total_hours_yesterday
+  #
+  def initialize 
+    @today_hours = 0
+    @yesterday_hours = 0 
+  end
+  attr_accessor :today_hours, :yesterday_hours
+
+end
+

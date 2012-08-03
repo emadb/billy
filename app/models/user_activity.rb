@@ -8,4 +8,18 @@ class UserActivity
   field :description
 
   accepts_nested_attributes_for :user, :activity, :user_activity_type
+
+  def self.get(year, month)
+    if (year.nil? or month.nil?)
+      filter_date  = Date.today
+    else
+      filter_date= Date.new(year.to_i, month.to_i, 1)
+    end
+    filter_date_next = filter_date.to_time.advance(:months => 1).to_date
+   
+    return UserActivity
+      .where(:date.gte => filter_date)
+      .where(:date.lte => filter_date_next)
+      .order_by([:date, :asc])
+  end
 end

@@ -7,7 +7,6 @@ $(function(){
         this.month = ko.observable();
         this.year = ko.observable();
 
-
         this.type = ko.observable();
         this.date = ko.observable()
         this.hours = ko.observable()
@@ -81,6 +80,11 @@ $(function(){
         }, this);
     }   
 
+    function StatsViewModel(today, yesterday){
+        this.today_hours = ko.observable(today);
+        this.yesterday_hours = ko.observable(yesterday);
+    }
+
     var month = $('#date_month').val();
     var year = $('#date_year').val();
     var user = $('#user').val();
@@ -95,8 +99,6 @@ $(function(){
         activityList.activityTypes(data);
     });
 
-
-    
     $.getJSON('/user_activities/'+ user + '/' + year + '/' + month, function (result){
         var current = [];
         $.each(result, function(index, item){
@@ -105,7 +107,15 @@ $(function(){
         activityList.activities(current);
     });
 
-    ko.applyBindings(activityList);
+    ko.applyBindings(activityList, $('.span9')[0]);
+
+    $.getJSON('/user_activities/stats/'+ user + '/' + year + '/' + month, function (response){
+        var stats = new StatsViewModel(response.today_hours, response.yesterday_hours);
+        ko.applyBindings(stats, $('#stats')[0]);
+    });
+
+  
+    
 
     // ko.extenders.logChange = function(target, option) {
     // target.subscribe(function(newValue) {

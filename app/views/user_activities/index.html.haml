@@ -69,9 +69,11 @@
   = content_for :side_bar do
     .well.sidebar-nav
       = link_to 'nuova fattura', new_inbound_invoice_path , {:class => 'btn btn-primary'}
-      %ul.totals
+      %ul#stats.totals
         %li Total hours
+        %li{"data-bind"=>"text: today_hours"}
         %li yesterday
+        %li{"data-bind"=>"text: yesterday_hours"}
         
         
         

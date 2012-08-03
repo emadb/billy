@@ -5,6 +5,7 @@ Scrooge::Application.routes.draw do
   
   match 'user_activities/:user/:year/:month' => 'user_activities#index'
   match '/user_activities/index' => 'user_activities#index', :via => :post
+  match '/user_activities/stats/:user/:year/:month' => 'user_activities#stats', :via => :get
   
   match 'user_activity_types' => 'user_activity_types#index'
   
