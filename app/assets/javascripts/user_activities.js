@@ -6,6 +6,7 @@ $(function(){
 
         this.month = ko.observable();
         this.year = ko.observable();
+        this.user = ko.observable();
 
         this.type = ko.observable();
         this.date = ko.observable()
@@ -18,7 +19,7 @@ $(function(){
         this.activityTypes = ko.observableArray();
 
         this.reload = function(){
-            $.getJSON('/user_activities/'+ 1 + '/' + self.year() + '/' + self.month(), function (result){
+            $.getJSON('/user_activities/'+ self.user() + '/' + self.year() + '/' + self.month(), function (result){
                 self.activities.removeAll();
                 $.each(result, function(index, item){
                     self.activities.push(new ActivityVM(item.id, item.type, item.date, item.hours, item.description, item.jobOrder, item.activity));
@@ -93,6 +94,10 @@ $(function(){
     
     $.getJSON('/job_orders', function(data){
         activityList.jobOrders(data);
+    });
+
+    $.getJSON('/user_activity_types', function(data){
+        activityList.activityTypes(data);
     });
 
     $.getJSON('/user_activity_types', function(data){

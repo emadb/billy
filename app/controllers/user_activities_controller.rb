@@ -3,10 +3,22 @@ class UserActivitiesController < ApplicationController
     if (params[:year].nil? or params[:month].nil?)
       @filter_date  = Date.today
     else
-      @filter_date= Date.new(params[:year].to_i, params[:month].to_i, 1)
+      @filter_date = Date.new(params[:year].to_i, params[:month].to_i, 1)
     end
     
-    @activities = UserActivity.get(params[:year], params[:month])
+    if (current_user.admin?)
+      @users = User.all
+    else
+      @users = [current_user]  
+    end
+
+    if (params[:user].nil?)
+      user = current_user
+    else
+      user = User.find(params[:user])
+    end
+    
+    @activities = UserActivity.get(params[:year], params[:month], user.email)
 
     respond_to do |format|
       format.html
@@ -60,7 +72,8 @@ class UserActivitiesController < ApplicationController
 
   def stats
     stats = ActivityStats.new
-    @activities = UserActivity.get(params[:year], params[:month])
+    user = User.find(params[:user])
+    @activities = UserActivity.get(params[:year], params[:month], user.email)
 
     stats.today_hours = UserActivity.where(:date => Date.today).sum(:hours) || 0
     stats.yesterday_hours = UserActivity.where(:date => Date.yesterday).sum(:hours) || 0

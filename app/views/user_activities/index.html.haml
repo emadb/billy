@@ -8,7 +8,7 @@
     Year
     = select_year @filter_date, {add_month_numbers: false}, {name: 'year', :class => 'input-small', 'data-bind' => 'value: year'}
     User
-    = select_tag('user', '<option value="1">uno</option><option value="2">due</option>'.html_safe, :class => 'input-small')
+    = select_tag 'user', options_from_collection_for_select(@users, "_id", "email"), 'data-bind' => 'value: user'
     %button.btn{:type => 'button', 'data-bind' => 'click: reload'} apply
     %a.btn{"data-toggle" => "modal", :href => "#newActivity"}
       %i.icon-plus

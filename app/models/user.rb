@@ -23,6 +23,9 @@ class User
   field :current_sign_in_ip, :type => String
   field :last_sign_in_ip,    :type => String
 
+  #custom data
+  field :admin?, :type => Boolean
+
   ## Encryptable
   # field :password_salt, :type => String
 
