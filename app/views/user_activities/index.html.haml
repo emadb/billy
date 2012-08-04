@@ -1,5 +1,5 @@
 %h1
-  = "Activity for #{current_user}"
+  = "Activity for #{current_user.email}"
 %fieldset
   %legend &nbsp;
   %form.well.form-inline{:method => 'POST', :action => '/user_activities/index'}

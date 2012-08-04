@@ -84,9 +84,7 @@ class UserActivitiesController < ApplicationController
 end
 
 class ActivityStats
-  # total_hours_today
-  # total_hours_yesterday
-  #
+  # todo: show current month (incomplete days)
   def initialize 
     @today_hours = 0
     @yesterday_hours = 0 
