@@ -18,7 +18,7 @@ class UserActivitiesController < ApplicationController
       user = User.find(params[:user])
     end
     
-    @activities = UserActivity.get(params[:year], params[:month], user.email)
+    @activities = UserActivity.get(params[:year], params[:month], user._id)
 
     respond_to do |format|
       format.html
@@ -73,7 +73,7 @@ class UserActivitiesController < ApplicationController
   def stats
     stats = ActivityStats.new
     user = User.find(params[:user])
-    @activities = UserActivity.get(params[:year], params[:month], user.email)
+    @activities = UserActivity.get(params[:year], params[:month], user._id)
 
     stats.today_hours = UserActivity.where(:date => Date.today).sum(:hours) || 0
     stats.yesterday_hours = UserActivity.where(:date => Date.yesterday).sum(:hours) || 0
