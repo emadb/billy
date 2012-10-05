@@ -1,5 +1,5 @@
 require 'spec_helper'
 
-describe InvoiceController do
+describe InvoicesController do
 
 end
