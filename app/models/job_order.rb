@@ -8,7 +8,8 @@ class JobOrder
   embeds_one :customer
   embeds_many :activities
 
-  accepts_nested_attributes_for :customer, :activities
+  accepts_nested_attributes_for :customer
+  accepts_nested_attributes_for :activities, :allow_destroy => true
 
   def self.create_new
     @job_order = JobOrder.new

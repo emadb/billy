@@ -24,7 +24,7 @@
     %fieldset
       %legend 
         Activities
-        %a.new-item{:href=>'#', :class => 'btn'} 
+        %a#new-activity.new-item{:href=>'#', :class => 'btn'} 
           %i{:class => 'icon-plus'}
             new activity
         %table.activities
@@ -40,7 +40,7 @@
                 = a.text_field :estimated_hours, {:class => 'amount span1'}
               %td
                 = a.hidden_field :_destroy
-                %a{:href => '#', :class => 'btn-mini btn-danger remove-item'}
+                %a#remove-activity{:href => '#', :class => 'btn-mini btn-danger remove-item'}
                   %i{:class => 'icon-minus'}
       .actions
         = f.submit 'Save', :class => 'btn btn_primary'
