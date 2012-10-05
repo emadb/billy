@@ -1,0 +1,10 @@
+"it":
+  number:
+    currency:
+        format:
+            format: "%u%n"
+            unit: "€"
+            # These three are to override number.format and are optional
+            separator: ","
+            delimiter: "."
+            precision: 2
