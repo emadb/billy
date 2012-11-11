@@ -25,6 +25,11 @@ $(function(){
                     self.activities.push(new ActivityVM(item.id, item.type, item.date, item.hours, item.description, item.jobOrder, item.activity));
                 });
             });
+
+            $.getJSON('/user_activities/stats/'+ user + '/' + year + '/' + month, function (response){
+                var stats = new StatsViewModel(response.today_hours, response.yesterday_hours);
+                ko.applyBindings(stats, $('#stats')[0]);
+            });
         };
 
         this.addActivity = function(){

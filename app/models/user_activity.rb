@@ -23,4 +23,8 @@ class UserActivity
       .where("user._id" => Moped::BSON::ObjectId(selected_user_id.to_s))
       .order_by([:date, :asc])
   end
+
+  def self.find_by_user_and_date(userId, date)
+    UserActivity.where("$and" => [{"user._id" => Moped::BSON::ObjectId(userId.to_s)}, {:date => date}]).sum(:hours) || 0
+  end
 end

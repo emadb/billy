@@ -1,5 +1,5 @@
-.row
-  = form_for @invoice, {:html => {:class => 'form-horizontal'}} do |f|
+= form_for @invoice, {:html => {:class => 'form-horizontal'}} do |f|
+  .row
     .span4
       .field.control-group
         = f.label :number, :class => 'control-label'
@@ -31,26 +31,30 @@
         = f.label :is_sent, :class => 'control-label'
         .controls
           = f.check_box :is_sent
-    %fieldset
-      %legend 
-        items
-        %a.new-item{:href=>'#', :class => 'btn'} 
-          %i{:class => 'icon-plus'}
-          nuova riga 
-      %table.items
-        %tr
-          %td description
-          %td amount
-          %td 
-        = f.fields_for :invoice_items do |i|
+  .row
+    .span10
+      %fieldset
+        %legend 
+          items
+          %a.new-item{:href=>'#', :class => 'btn'} 
+            %i{:class => 'icon-plus'}
+            nuova riga 
+        %table.items
           %tr
-            %td
-              = i.text_field :description, {:class => 'span5'}
-            %td
-              = i.text_field :amount, {:class => 'amount span1'}
-            %td
-              = i.hidden_field :_destroy
-              %a{:href => '#', :class => 'btn-mini btn-danger remove-item'}
-                %i{:class => 'icon-minus'}
-    .actions
-      = f.submit 'Save', :class => 'btn btn_primary'
+            %td description
+            %td amount
+            %td 
+          = f.fields_for :invoice_items do |i|
+            %tr
+              %td
+                = i.text_field :description, {:class => 'span5'}
+              %td
+                = i.text_field :amount, {:class => 'amount span1'}
+              %td
+                = i.hidden_field :_destroy
+                %a{:href => '#', :class => 'btn-mini btn-danger remove-item'}
+                  %i{:class => 'icon-minus'}
+  .row
+    .span10              
+      .actions
+        = f.submit 'Save', :class => 'btn btn_primary'
