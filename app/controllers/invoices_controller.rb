@@ -1,7 +1,7 @@
 class InvoicesController < ApplicationController
   def index
-    @invoices = Invoice.all.order_by([:number, :desc])
-    @totals = InvoiceTotalsInfo.new(@invoices.sum(:taxable_income), @invoices.sum(:tax), @invoices.sum(:total))
+    @invoices = Invoice.all
+    @totals = InvoiceTotalsInfo.new(Invoice.sum('taxable_income'), Invoice.sum('tax'), Invoice.sum('total'))
   end
 
   def new

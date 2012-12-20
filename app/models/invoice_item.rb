@@ -1,6 +1,4 @@
-class InvoiceItem
-  include Mongoid::Document
-  embedded_in :invoice, :inverse_of => :invoice_items 
-  field :description, :type => String
-  field :amount, :type => Float
+class InvoiceItem < ActiveRecord::Base
+  belongs_to :invoice
+  attr_accessible :amount, :description
 end

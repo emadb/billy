@@ -1,27 +1,13 @@
-class Invoice
-  include Mongoid::Document
-  embeds_one :customer
-  embeds_many :invoice_items
-  before_save :update_totals
+class Invoice < ActiveRecord::Base
+  belongs_to :customer
+  attr_accessible :date, :due_date, :has_tax, :is_payed, :notes, :number, :status, :tax, :taxable_income, :total
+  has_many :invoice_items
+  attr_accessible :customer_id, :invoice_items_attributes
   accepts_nested_attributes_for :customer, :invoice_items, :allow_destroy => true
-
-  field :number, :type => Integer
-  field :date, :type => Date
-  field :due_date, :type => Date
-
-  field :total, :type => Float
-  field :tax, :type => Float
-  field :taxable_income, :type => Float
-
-  field :has_tax, :type => Boolean
-  field :notes, :type => String
-
-  field :is_payed, :type => Boolean
-  field :is_sent, :type => Boolean
 
   def self.create_new
     @invoice = Invoice.new
-    @invoice.number = (Invoice.max(:number) || 0) + 1
+    @invoice.number = (Invoice.maximum(:number) || 0) + 1
     today = DateTime.now
     @invoice.date = Date.new(today.year, today.month, 1) - 1
     @invoice.due_date = @invoice.date + 30
