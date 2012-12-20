@@ -1,6 +1,8 @@
 Scrooge::Application.routes.draw do
   mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
 
+  root :to => 'dashboard#index'
+  
   devise_for :users
 
   match 'user_activities/:user/:year/:month' => 'user_activities#index'
