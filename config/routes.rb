@@ -4,7 +4,7 @@ Scrooge::Application.routes.draw do
   devise_for :users
 
   resources :invoices
-
+  resources :inbound_invoices
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
