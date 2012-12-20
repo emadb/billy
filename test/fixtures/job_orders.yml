@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  code: MyString
+  notes: MyText
+  archived: false
+  customer: 
+
+two:
+  code: MyString
+  notes: MyText
+  archived: false
+  customer: 

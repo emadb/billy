@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121220202551) do
+ActiveRecord::Schema.define(:version => 20121220232116) do
 
   create_table "customers", :force => true do |t|
     t.string   "name"
@@ -66,6 +66,28 @@ ActiveRecord::Schema.define(:version => 20121220202551) do
 
   add_index "invoices", ["customer_id"], :name => "index_invoices_on_customer_id"
 
+  create_table "job_order_activities", :force => true do |t|
+    t.string   "description"
+    t.integer  "estimated_hours"
+    t.integer  "job_order_id"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
+  add_index "job_order_activities", ["job_order_id"], :name => "index_job_order_activities_on_job_order_id"
+
+  create_table "job_orders", :force => true do |t|
+    t.string   "code"
+    t.text     "notes"
+    t.float    "hourly_rate"
+    t.boolean  "archived"
+    t.integer  "customer_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "job_orders", ["customer_id"], :name => "index_job_orders_on_customer_id"
+
   create_table "rails_admin_histories", :force => true do |t|
     t.text     "message"
     t.string   "username"
@@ -78,6 +100,27 @@ ActiveRecord::Schema.define(:version => 20121220202551) do
   end
 
   add_index "rails_admin_histories", ["item", "table", "month", "year"], :name => "index_rails_admin_histories"
+
+  create_table "user_activities", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "job_order_activity_id"
+    t.integer  "user_activity_type_id"
+    t.date     "date"
+    t.float    "hours"
+    t.string   "description"
+    t.datetime "created_at",            :null => false
+    t.datetime "updated_at",            :null => false
+  end
+
+  add_index "user_activities", ["job_order_activity_id"], :name => "index_user_activities_on_job_order_activity_id"
+  add_index "user_activities", ["user_activity_type_id"], :name => "index_user_activities_on_activity_type_id"
+  add_index "user_activities", ["user_id"], :name => "index_user_activities_on_user_id"
+
+  create_table "user_activity_types", :force => true do |t|
+    t.string   "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -92,6 +135,7 @@ ActiveRecord::Schema.define(:version => 20121220202551) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
+    t.boolean  "admin"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
