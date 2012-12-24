@@ -15,6 +15,7 @@ class InvoicesController < ApplicationController
     @invoice.customer = Customer.find(params[:invoice][:customer_id])
     @invoice.invoice_items = @invoice.invoice_items.delete_if {|i| i.description.empty?}
     @invoice.save
+    @invoice.save #TODO: why update_totals doesn't work if I don't call save twice?
     redirect_to invoices_path
   end
 

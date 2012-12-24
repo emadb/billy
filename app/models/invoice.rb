@@ -4,6 +4,7 @@ class Invoice < ActiveRecord::Base
   has_many :invoice_items
   attr_accessible :customer_id, :invoice_items_attributes
   accepts_nested_attributes_for :customer, :invoice_items, :allow_destroy => true
+  before_save :update_totals
 
   def self.create_new
     @invoice = Invoice.new
@@ -20,12 +21,14 @@ class Invoice < ActiveRecord::Base
   end
 
   def update_totals
-    self.taxable_income = self.invoice_items.inject(0) {|tot,item| tot += item.amount }
-    self.tax = self.invoice_items.inject(0) { |tot,item| tot += item.amount * 0.21 }
+    self.taxable_income = self.invoice_items.sum(:amount)
+
     if self.has_tax then
+      self.tax = self.taxable_income * 0.21
       self.total = self.taxable_income + self.tax
     else
       self.total = self.taxable_income
     end
+
   end
 end
