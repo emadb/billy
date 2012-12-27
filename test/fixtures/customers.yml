@@ -2,7 +2,7 @@
 
 one:
   name: MyString
-  vat_core: MyString
+  vat_code: MyString
   email: MyString
   address_street: MyString
   address_zip_code: MyString
@@ -11,7 +11,7 @@ one:
 
 two:
   name: MyString
-  vat_core: MyString
+  vat_code: MyString
   email: MyString
   address_street: MyString
   address_zip_code: MyString

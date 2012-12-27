@@ -11,11 +11,11 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121220232116) do
+ActiveRecord::Schema.define(:version => 20121227144101) do
 
   create_table "customers", :force => true do |t|
     t.string   "name"
-    t.string   "vat_core"
+    t.string   "vat_code"
     t.string   "email"
     t.string   "address_street"
     t.string   "address_zip_code"

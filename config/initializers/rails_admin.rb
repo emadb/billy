@@ -68,7 +68,7 @@ RailsAdmin.config do |config|
 
   #     configure :id, :integer 
   #     configure :name, :string 
-  #     configure :vat_core, :string 
+  #     configure :vat_code, :string 
   #     configure :email, :string 
   #     configure :address_street, :string 
   #     configure :address_zip_code, :string 

@@ -1,2 +1,69 @@
-psd
-<%= @invoice.number %>
+<!DOCTYPE html>
+<html class="no-js">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Fattura codiceplastico</title>
+        <style type="text/css">
+		.total{
+			font-weight: bold;
+		}
+		table{
+			width: 100%;
+		}
+		#customer{
+			height: 200px;
+		}
+		.right{
+			text-align: right;
+		}
+		#footer{
+			margin-top: 30px;
+		}
+        </style>
+    </head>
+    <body>
+    	<header><h2>CodicePlastico</h2></header>
+    	<table id="customer">
+    		<tr>
+    			<td colspan="3"></td>
+    			<td class="right">
+					<%= @invoice.customer.name %><br/>
+					<%= @invoice.customer.address_street %><br/>
+					<%= "#{@invoice.customer.address_zip_code} #{@invoice.customer.address_city} (#{@invoice.customer.address_province})"  %><br/
+					>
+					<%= @invoice.customer.vat_code %><br/>
+    			</td>
+    		</tr>
+    	</table>
+
+		<table id="items">
+			<% @invoice.invoice_items.each do |i| %>
+      		<tr>
+    			<td><%= i.description %></td>
+    			<td class="right"><%= number_to_currency(i.amount) %></td>
+    		</tr>
+    		<% end %>
+    		<tr>
+    			<td class="right">Imponibile</td>
+    			<td class="right"><%= number_to_currency(@invoice.taxable_income) %></td>
+			<tr>
+			<tr>
+    			<td class="right">Iva</td>
+    			<td class="right"><%= number_to_currency(@invoice.tax) %></td>
+			<tr>
+			<tr>
+    			<td class="right">Totale fattura</td>
+    			<td class="total right"><%= number_to_currency(@invoice.total) %></td>
+			<tr>
+    	</table>
+
+    	<div id="notes">
+    		Informazioni per il pagamento
+    	</div>
+    	<div id="footer">
+    		CodicePlastico srl, via B.Salvadori....
+    	</div>
+	</body>
+</html>
+
