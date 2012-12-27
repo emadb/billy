@@ -5,9 +5,8 @@ gem 'rails', '3.2.9'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'sqlite3'
-gem 'wicked_pdf'
 
+gem 'wicked_pdf'
 
 gem 'bootstrap-generators', '~>2.1'
 gem 'bootstrap-wysihtml5-rails'
