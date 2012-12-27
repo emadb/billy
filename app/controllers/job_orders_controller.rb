@@ -1,4 +1,5 @@
 class JobOrdersController < ApplicationController
+  before_filter :user_is_admin?
   def index
     if params[:archived] == "yes"
       @job_orders = JobOrder.where('archived = ?', true)

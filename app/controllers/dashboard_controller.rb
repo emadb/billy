@@ -1,4 +1,5 @@
 class DashboardController < ApplicationController
+  before_filter :user_is_admin?
   def index
     invoices = Invoice.all
     @to_receive = 0
