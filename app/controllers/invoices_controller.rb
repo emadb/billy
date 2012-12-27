@@ -40,9 +40,6 @@ class InvoicesController < ApplicationController
 
   def show
     @invoice = Invoice.find(params[:id])
-    #TODO configure wkpdfhtml
-    #WickedPdf.config[:exe_path] = "/usr/local/Cellar/wkhtmltopdf/0.11.0_rc1/bin/wkhtmltopdf" 
-    WickedPdf.config[:exe_path] = "/home/ema/Downloads/wkpdf/wkhtmltopdf"
     render  :pdf => "fattura_#{@invoice.number}",
             :layout => 'pdf_invoice.html'
     
