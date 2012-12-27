@@ -9,6 +9,8 @@
       %td.right Imponibile
       %td.right Iva
       %td.right Totale
+      %td Pagata
+      %td Stato
       %td 
   %tbody
     -@invoices.each do |i|
@@ -25,6 +27,14 @@
           = number_to_currency(i.tax)
         %td.right
           = number_to_currency(i.total)
+        %td
+          -if i.is_payed
+            %span.label.label-success si
+          - else
+            %span.label.label-important no
+        %td 
+          = status_helper(i.status)
+
         %td
           %a{:href => invoice_path(i)} 
             %i.icon-file
