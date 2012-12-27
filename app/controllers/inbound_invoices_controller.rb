@@ -1,4 +1,5 @@
 class InboundInvoicesController < ApplicationController
+  before_filter :user_is_admin?
   def index
     if (params[:date].nil?)
       @filter_date  = Date.today.beginning_of_month

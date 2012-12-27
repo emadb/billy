@@ -1,4 +1,5 @@
 class UserActivityTypesController < ApplicationController
+  before_filter :user_is_admin?
   def index
     @user_activities_type = UserActivityType.all
     logger.warn '##################################'

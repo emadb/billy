@@ -1,4 +1,5 @@
 class InvoicesController < ApplicationController
+  before_filter :user_is_admin?
   def index
     @invoices = Invoice.all
     @totals = InvoiceTotalsInfo.new(Invoice.sum('taxable_income'), Invoice.sum('tax'), Invoice.sum('total'))
