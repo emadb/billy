@@ -36,7 +36,6 @@
             %i.icon-remove
     = content_for :side_bar do
       .well.sidebar-nav
-        = link_to 'nuova fattura', new_inbound_invoice_path , {:class => 'btn btn-primary'}
         %ul#stats.totals.info-panel
           %li Oggi
           %li.amount{"data-bind"=>"text: today_hours"}
