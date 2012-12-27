@@ -1,20 +1,19 @@
 %fieldset
   %legend 
-    = "New inbound invoice"
+    = "Nuova fattura in ingresso"
   
   = render 'form'
 
 = content_for :side_bar do
   .well.sidebar-nav
-    %h3 Totals
-    %ul.totals
-      %li Taxable income:
+    %ul.totals.info-panel
+      %li Imponibile
       %li#taxable-income.amount
         = number_to_currency(@totals.taxable_income)
-      %li Tax:
+      %li Iva
       %li#tax.amount
         = number_to_currency(@totals.tax)
-      %li Total:
+      %li Totale  
       %li#total.amount
         = number_to_currency(@totals.total)
    

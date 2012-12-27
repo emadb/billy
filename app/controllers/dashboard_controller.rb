@@ -13,12 +13,16 @@ class DashboardController < ApplicationController
       @quarters.q3  = @quarters.q3 + i.taxable_income if [7,8,9].include?(i.date.month)
       @quarters.q4  = @quarters.q4 + i.taxable_income if [10, 11, 12].include?(i.date.month)
     end
- 
-    @perCustomer = []# Invoice.map_reduce(map, reduce).out(inline: 1)
 
+    @perCustomer = ActiveRecord::Base.connection.select_all("select customers.name as customer, sum(total) as total, sum(taxable_income) as taxable_income, sum(tax) as tax 
+        from invoices join customers on invoices.customer_id = customers.id 
+        group by customers.name")
+    
     inbound_invoices = InboundInvoice.all
     @inbound_invoices_totals = InvoiceTotalsInfo.new(InboundInvoice.sum(:taxable_income), 
       InboundInvoice.sum(:tax), 
       InboundInvoice.sum(:total))
+
+    
   end
 end

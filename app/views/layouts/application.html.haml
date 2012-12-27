@@ -14,7 +14,7 @@
     %link(href="images/apple-touch-icon-72x72.png" rel="apple-touch-icon" sizes="72x72")
     %link(href="images/apple-touch-icon-114x114.png" rel="apple-touch-icon" sizes="114x114")
 
-  %body
+  %body    
     .navbar.navbar-fixed-top
       .navbar-inner
         .container
@@ -32,16 +32,16 @@
               %li= link_to "Activities", "/user_activities"
               %li= link_to "Admin", "/admin"
 
-    .container
-      .content
-        .row
-          .span9
-            = yield
-          .span3
-            = yield :side_bar
-    
-      %footer
-        %p &copy; CodicePlastico 2012
+    .container.wrap
+      .row
+        .span9
+          = yield
+        .span3
+          = yield :side_bar
+      #push
+    #footer
+      .container
+        %p.muted.credit CodicePlastico
     /
       Javascripts
       \==================================================

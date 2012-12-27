@@ -1,0 +1,12 @@
+.well.sidebar-nav
+  %ul.totals.info-panel
+    %li Imponibile
+    %li#taxable-income.amount
+      = number_to_currency(@totals.taxable_income)
+    %li IVA
+    %li#tax.amount
+      = number_to_currency(@totals.tax)
+    %li Totale
+    %li#total.amount
+      = number_to_currency(@totals.total)
+ 

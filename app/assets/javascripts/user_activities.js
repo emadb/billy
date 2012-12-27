@@ -1,5 +1,7 @@
 $(function(){
 
+    var postbox = new ko.subscribable();
+
     function ActivtyPage(activities){
         var self = this;
 
@@ -9,6 +11,11 @@ $(function(){
 
         self.activities = ko.observableArray(activities);
 
+        postbox.subscribe(function(data){
+            console.log('new!');
+            self.activities.push(data);
+        }, self, 'new-activity-created');
+
         this.reload = function(){
             $.getJSON('/user_activities/'+ self.user() + '/' + self.year() + '/' + self.month(), function (result){
                 self.activities.removeAll();
@@ -17,10 +24,10 @@ $(function(){
                 });
             });
 
-            // $.getJSON('/user_activities/stats/'+ user + '/' + year + '/' + month, function (response){
-            //     var stats = new StatsViewModel(response.today_hours, response.yesterday_hours);
-            //     ko.applyBindings(stats, $('#stats')[0]);
-            // });
+            $.getJSON('/user_activities/stats/'+ user + '/' + year + '/' + month, function (response){
+                var stats = new StatsViewModel(response.today_hours, response.yesterday_hours);
+                ko.applyBindings(stats, $('#stats')[0]);
+            });
         };
 
     }
@@ -44,21 +51,23 @@ $(function(){
         });
 
         self.save = function(){
-            var data = { type: self.type, date:self.date, hours:self.hours, description: self.description, jobOrder: self.jobOrder, activity: self.activity };
+            var data = { type: self.type, date:self.date(), hours:self.hours(), description: self.description(), jobOrder: self.jobOrder(), activity: self.activity() };
+            console.log(data);
             $.post('/user_activities', data, function (data){  
                 var result = $.parseJSON(data);
                 newActivity = new ActivityVM(result.id, result.type, result.date, result.hours, result.description, result.jobOrder, result.activity);
-                self.activities.push(newActivity);
+                postbox.notifySubscribers(newActivity, 'new-activity-created');
                
                 self.hours('');
                 self.description('');    
-                $('#newActivity').addClass('hide');
+                $('#newActivity').modal('hide')
             });
         }
 
         self.loadJobOrderActivities = function(jobOrderId){
             $.getJSON('/job_orders/' + jobOrderId + '/job_order_activities', function(data){
                 self.jobOrderActivities(data);
+                self.activity(self.jobOrderActivities()[0]);
             });
         }
 
@@ -135,10 +144,10 @@ $(function(){
         activity.init();
         ko.applyBindings(activity, $('#newActivity')[0]);
 
-        // $.getJSON('/user_activities/stats/'+ user + '/' + year + '/' + month, function (response){
-        //     var stats = new StatsViewModel(response.today_hours, response.yesterday_hours);
-        //     ko.applyBindings(stats, $('#stats')[0]);
-        // });
+        $.getJSON('/user_activities/stats/'+ user + '/' + year + '/' + month, function (response){
+            var stats = new StatsViewModel(response.today_hours, response.yesterday_hours);
+            ko.applyBindings(stats, $('#stats')[0]);
+        });
 
       
     }

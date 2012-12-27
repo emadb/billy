@@ -18,16 +18,7 @@ class UserActivitiesController < ApplicationController
       user = User.find(params[:user])
     end
     
-    logger.warn '####################'
-    logger.warn params[:year]
-    logger.warn params[:month]
-    logger.warn user.id
-    logger.warn '####################'
-
     @activities = UserActivity.get(params[:year], params[:month], user.id)
-
-
-    logger.warn '####################'
 
     respond_to do |format|
       format.html
@@ -84,21 +75,13 @@ class UserActivitiesController < ApplicationController
     @activities = UserActivity.get(params[:year], params[:month], user.id)
 
     stats = ActivityStats.new
-    stats.today_hours = UserActivity.find_by_user_and_date(user.id, Date.today)
-    stats.yesterday_hours = UserActivity.find_by_user_and_date(user.id, Date.yesterday)
+    stats.today_hours = UserActivity.find_by_user_and_date(user.id, "#{Date.today} 00:00:00")
+    stats.yesterday_hours = UserActivity.find_by_user_and_date(user.id, "#{Date.yesterday} 00:00:00")
 
     render :json => stats
   end
 
 end
 
-class ActivityStats
-  # todo: show current month (incomplete days)
-  def initialize 
-    @today_hours = 0
-    @yesterday_hours = 0 
-  end
-  attr_accessor :today_hours, :yesterday_hours
 
-end
 

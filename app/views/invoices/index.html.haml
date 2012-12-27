@@ -1,6 +1,6 @@
 %h1
   Invoices
-%table.table.table-striped
+%table.table.table-striped.table-bordered
   %thead
     %tr
       %td Numero
@@ -34,14 +34,15 @@
   = content_for :side_bar do
     .well.sidebar-nav
       = link_to 'nuova fattura', new_invoice_path , {:class => 'btn btn-primary'}
-      %ul.totals
-        %li Taxable income:
+      %hr
+      %ul.totals.info-panel
+        %li Imponibile
         %li.taxable-income.amount
-          = @totals.taxable_income
-        %li Tax:
+          = number_to_currency(@totals.taxable_income)
+        %li IVA
         %li.tax.amount
-          = @totals.tax
-        %li Total:
+          = number_to_currency(@totals.tax)
+        %li Totale
         %li.total.amount
-          = @totals.total
+          = number_to_currency(@totals.total)
         

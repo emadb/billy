@@ -15,7 +15,7 @@
       %a.btn{"data-toggle" => "modal", :href => '#newActivity'}
         %i.icon-plus
 
-  %table.table.table-striped
+  %table.table.table-striped.table-bordered
     %thead
       %tr
         %td Type
@@ -37,11 +37,11 @@
     = content_for :side_bar do
       .well.sidebar-nav
         = link_to 'nuova fattura', new_inbound_invoice_path , {:class => 'btn btn-primary'}
-        %ul#stats.totals
-          %li Total hours
-          %li{"data-bind"=>"text: today_hours"}
-          %li yesterday
-          %li{"data-bind"=>"text: yesterday_hours"}
+        %ul#stats.totals.info-panel
+          %li Oggi
+          %li.amount{"data-bind"=>"text: today_hours"}
+          %li Ieri
+          %li.amount{"data-bind"=>"text: yesterday_hours"}
             
 #newActivity.div.modal.hide
   %form.well.form-inline{"data-bind" => "submit: save"}

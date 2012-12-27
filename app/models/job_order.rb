@@ -15,4 +15,12 @@ class JobOrder < ActiveRecord::Base
 
     return job_order
   end
+
+  def total_estimated_hours
+    activities.sum(:estimated_hours)
+  end
+
+  def total_executed_hours
+    activities.joins(:user_activities).sum(:hours)
+  end
 end
