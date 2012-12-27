@@ -1,6 +1,6 @@
 %h1
   Invoices
-%table.table.table-striped
+%table.table.table-striped.table-bordered
   %thead
     %tr
       %td Numero
@@ -9,6 +9,8 @@
       %td.right Imponibile
       %td.right Iva
       %td.right Totale
+      %td Pagata
+      %td Stato
       %td 
   %tbody
     -@invoices.each do |i|
@@ -26,6 +28,14 @@
         %td.right
           = number_to_currency(i.total)
         %td
+          -if i.is_payed
+            %span.label.label-success si
+          - else
+            %span.label.label-important no
+        %td 
+          = status_helper(i.status)
+
+        %td
           %a{:href => invoice_path(i)} 
             %i.icon-file
           %a{:href=> invoice_path(i), :class => 'delete' } 
@@ -34,14 +44,15 @@
   = content_for :side_bar do
     .well.sidebar-nav
       = link_to 'nuova fattura', new_invoice_path , {:class => 'btn btn-primary'}
-      %ul.totals
-        %li Taxable income:
+      %hr
+      %ul.totals.info-panel
+        %li Imponibile
         %li.taxable-income.amount
           = number_to_currency(@totals.taxable_income)
-        %li Tax:
+        %li IVA
         %li.tax.amount
           = number_to_currency(@totals.tax)
-        %li Total:
+        %li Totale
         %li.total.amount
           = number_to_currency(@totals.total)
         

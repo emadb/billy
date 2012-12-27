@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  description: MyString
+  estimated_hours: 1
+  job_order: 
+
+two:
+  description: MyString
+  estimated_hours: 1
+  job_order: 

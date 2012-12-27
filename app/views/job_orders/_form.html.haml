@@ -18,15 +18,15 @@
         .controls
           = f.text_area :notes, :class => 'span2', rows: 3
         .field.control-group
-          = f.label :archived?, :class => 'control-label'
+          = f.label :archived, :class => 'control-label'
           .controls
-            = f.check_box :archived?, :class => 'span2'
+            = f.check_box :archived, :class => 'span2'
     %fieldset
       %legend 
         Activities
         %a#new-activity.new-item{:href=>'#', :class => 'btn'} 
-          %i{:class => 'icon-plus'}
-            new activity
+          %i{:class => 'icon-plus'} 
+          new activity
         %table.activities
           %tr
             %td description

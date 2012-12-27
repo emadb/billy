@@ -18,18 +18,18 @@ class UserActivitiesController < ApplicationController
       user = User.find(params[:user])
     end
     
-    @activities = UserActivity.get(params[:year], params[:month], user._id)
+    @activities = UserActivity.get(params[:year], params[:month], user.id)
 
     respond_to do |format|
       format.html
       format.json { render :json => @activities.map{ |a| {
-          :id => a._id,
+          :id => a.id,
           :type => a.user_activity_type.description, 
           :date => a.date,
           :hours => a.hours,
           :description => a.description,
-          :jobOrder => a.activity.job_order_code,
-          :activity => a.activity.description
+          :jobOrder => a.job_order_activity.job_order.code,
+          :activity => a.job_order_activity.description
         }} }
     end
   end
@@ -42,18 +42,18 @@ class UserActivitiesController < ApplicationController
     @activity.hours = params[:hours].to_f
     @activity.description = params[:description]
     job_order = JobOrder.find(params[:jobOrder])
-    @activity.activity = job_order.activities.select{|a| a._id = params[:activity]}[0]
+    @activity.job_order_activity = job_order.activities.select{|a| a.id = params[:activity]}[0]
     @activity.user = current_user
     @activity.save
 
     @result = {
-      :id => @activity._id,
+      :id => @activity.id,
       :type => @activity.user_activity_type.description, 
       :date => @activity.date,
       :hours => @activity.hours,
       :description => @activity.description,
       :jobOrder => job_order.code,
-      :activity => @activity.activity.description
+      :activity => @activity.job_order_activity.description
     }
 
     respond_to do |format|
@@ -72,24 +72,16 @@ class UserActivitiesController < ApplicationController
 
   def stats
     user = User.find(params[:user])
-    @activities = UserActivity.get(params[:year], params[:month], user._id)
+    @activities = UserActivity.get(params[:year], params[:month], user.id)
 
     stats = ActivityStats.new
-    stats.today_hours = UserActivity.find_by_user_and_date(user._id, Date.today)
-    stats.yesterday_hours = UserActivity.find_by_user_and_date(user._id, Date.yesterday)
+    stats.today_hours = UserActivity.find_by_user_and_date(user.id, "#{Date.today} 00:00:00")
+    stats.yesterday_hours = UserActivity.find_by_user_and_date(user.id, "#{Date.yesterday} 00:00:00")
 
     render :json => stats
   end
 
 end
 
-class ActivityStats
-  # todo: show current month (incomplete days)
-  def initialize 
-    @today_hours = 0
-    @yesterday_hours = 0 
-  end
-  attr_accessor :today_hours, :yesterday_hours
 
-end
 

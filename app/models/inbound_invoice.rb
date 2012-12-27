@@ -1,14 +1,3 @@
-class InboundInvoice
-  include Mongoid::Document
-
-  field :customer, :type => String
-  field :number, :type => String
-  field :date, :type => Date
-  field :due_date, :type => Date
-
-  field :total, :type => Float
-  field :tax, :type => Float
-  field :taxable_income, :type => Float
-
-  field :notes, :type => String
+class InboundInvoice < ActiveRecord::Base
+  attr_accessible :customer, :date, :due_date, :notes, :number, :tax, :taxable_income, :total
 end

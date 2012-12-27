@@ -2,8 +2,8 @@ class DashboardController < ApplicationController
   def index
     invoices = Invoice.all
     @to_receive = 0
-    invoices.each{ |x| @to_receive = @to_receive + x.total unless x.is_payed }
-    @invoices_totals = InvoiceTotalsInfo.new(invoices.sum(:taxable_income), invoices.sum(:tax), invoices.sum(:total))
+    invoices.each{ |x| @to_receive = @to_receive + (x.total || 0) unless x.is_payed }
+    @invoices_totals = InvoiceTotalsInfo.new(Invoice.sum(:taxable_income), Invoice.sum(:tax), Invoice.sum(:total))
 
     @quarters = Quarters.new
     #TODO: refactor this...it's too c-sharpy!
@@ -13,27 +13,16 @@ class DashboardController < ApplicationController
       @quarters.q3  = @quarters.q3 + i.taxable_income if [7,8,9].include?(i.date.month)
       @quarters.q4  = @quarters.q4 + i.taxable_income if [10, 11, 12].include?(i.date.month)
     end
-  map = %Q{
-    function() {
-      emit(this.customer.name, {customer: this.customer.name, income: this.taxable_income });
-    }
-  }
 
-  reduce = %Q{
-    function(key, values) {
-      var result = { customer: key, income: 0 };
-      values.forEach(function(value) {
-        result.income += value.income;
-      });
-      return result;
-    }
-  }
-
-    @perCustomer = Invoice.map_reduce(map, reduce).out(inline: 1)
-
+    @perCustomer = ActiveRecord::Base.connection.select_all("select customers.name as customer, sum(total) as total, sum(taxable_income) as taxable_income, sum(tax) as tax 
+        from invoices join customers on invoices.customer_id = customers.id 
+        group by customers.name")
+    
     inbound_invoices = InboundInvoice.all
-    @inbound_invoices_totals = InvoiceTotalsInfo.new(inbound_invoices.sum(:taxable_income), 
-      inbound_invoices.sum(:tax), 
-      inbound_invoices.sum(:total))
+    @inbound_invoices_totals = InvoiceTotalsInfo.new(InboundInvoice.sum(:taxable_income), 
+      InboundInvoice.sum(:tax), 
+      InboundInvoice.sum(:total))
+
+    
   end
 end

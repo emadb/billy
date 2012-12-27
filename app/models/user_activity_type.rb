@@ -1,4 +1,3 @@
-class UserActivityType
-    include Mongoid::Document
-    field :description 
+class UserActivityType < ActiveRecord::Base
+  attr_accessible :description
 end

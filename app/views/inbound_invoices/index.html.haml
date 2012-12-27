@@ -1,5 +1,5 @@
 %h1
-  Inbound invoices
+  Fatture in ingresso
 %fieldset
   %legend &nbsp;
   %form.well.form-inline
@@ -9,7 +9,7 @@
     = select_year(@filter_date, :field_name => 'year', :class => 'input-small')
     %button.btn{:type => 'submit'} apply
 
-%table.table.table-striped
+%table.table.table-striped.table-bordered
   %thead
     %tr
       %td Numero
@@ -41,14 +41,14 @@
   = content_for :side_bar do
     .well.sidebar-nav
       = link_to 'nuova fattura', new_inbound_invoice_path , {:class => 'btn btn-primary'}
-      %ul.totals
-        %li Taxable income:
+      %ul.totals.info-panel
+        %li Imponibile
         %li.taxable-income.amount
           = number_to_currency(@totals.taxable_income)
-        %li Tax:
+        %li Iva
         %li.tax.amount
           = number_to_currency(@totals.tax)
-        %li Total:
+        %li Totale
         %li.total.amount
           = number_to_currency(@totals.total)
         

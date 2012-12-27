@@ -1,25 +1,22 @@
-
 Scrooge::Application.routes.draw do
+  mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
 
   root :to => 'dashboard#index'
   
+  devise_for :users
+  match 'dashboard' => 'dashboard#index'
   match 'user_activities/:user/:year/:month' => 'user_activities#index'
   match '/user_activities/index' => 'user_activities#index', :via => :post
   match '/user_activities/stats/:user/:year/:month' => 'user_activities#stats', :via => :get
-  
   match 'user_activity_types' => 'user_activity_types#index'
-  
-  match 'dashboard' => 'dashboard#index'
-  resources :foos
+
   resources :invoices
   resources :inbound_invoices
-  resources :job_orders
+  resources :job_orders do
+    resources :job_order_activities
+  end
+
   resources :user_activities
-
-
-  mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
-
-  devise_for :users
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

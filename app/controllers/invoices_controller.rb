@@ -1,7 +1,7 @@
 class InvoicesController < ApplicationController
   def index
-    @invoices = Invoice.all.order_by([:number, :desc])
-    @totals = InvoiceTotalsInfo.new(@invoices.sum(:taxable_income), @invoices.sum(:tax), @invoices.sum(:total))
+    @invoices = Invoice.all
+    @totals = InvoiceTotalsInfo.new(Invoice.sum('taxable_income'), Invoice.sum('tax'), Invoice.sum('total'))
   end
 
   def new
@@ -15,6 +15,7 @@ class InvoicesController < ApplicationController
     @invoice.customer = Customer.find(params[:invoice][:customer_id])
     @invoice.invoice_items = @invoice.invoice_items.delete_if {|i| i.description.empty?}
     @invoice.save
+    @invoice.save #TODO: why update_totals doesn't work if I don't call save twice?
     redirect_to invoices_path
   end
 
@@ -27,6 +28,7 @@ class InvoicesController < ApplicationController
   def update  
     @invoice = Invoice.find(params[:id])
     @invoice.update_attributes!(params[:invoice])
+    @invoice.save
     redirect_to invoices_path
   end
   
@@ -39,7 +41,8 @@ class InvoicesController < ApplicationController
   def show
     @invoice = Invoice.find(params[:id])
     #TODO configure wkpdfhtml
-    WickedPdf.config[:exe_path] = "/usr/local/Cellar/wkhtmltopdf/0.11.0_rc1/bin/wkhtmltopdf" 
+    #WickedPdf.config[:exe_path] = "/usr/local/Cellar/wkhtmltopdf/0.11.0_rc1/bin/wkhtmltopdf" 
+    WickedPdf.config[:exe_path] = "/home/ema/Downloads/wkpdf/wkhtmltopdf"
     render  :pdf => "fattura_#{@invoice.number}",
             :layout => 'pdf_invoice.html'
     

@@ -1,12 +1,3 @@
-class Customer
-  include Mongoid::Document
-  field :name, :type => String
-  field :vat_code, :type => String
-  
-  field :email, :type => String
-  
-  embeds_one :address
-  accepts_nested_attributes_for :address
-  
-  delegate :street, :to => :address
+class Customer < ActiveRecord::Base
+	attr_accessible :address_city, :address_province, :address_street, :address_zip_code, :email, :name, :vat_code
 end

@@ -1,23 +1,26 @@
-class JobOrder
-  include Mongoid::Document
-  field :code, type: String
-  field :notes, type: String
-  field :hourly_rate, type: Float
-  field :archived?, type: Boolean
+class JobOrder < ActiveRecord::Base
+  belongs_to :customer
+  has_many :activities, :foreign_key => 'job_order_id', :class_name => "JobOrderActivity"
   
-  embeds_one :customer
-  embeds_many :activities
+  attr_accessible :activities, :archived, :code, :notes, :customer_id, :hourly_rate, :activities_attributes
 
   accepts_nested_attributes_for :customer
   accepts_nested_attributes_for :activities, :allow_destroy => true
 
   def self.create_new
-    @job_order = JobOrder.new
-    @job_order.activities.push(Activity.new)
-    @job_order.activities.push(Activity.new)
-    @job_order.customer = Customer.new
+    job_order = JobOrder.new
+    job_order.activities.push(JobOrderActivity.new)
+    job_order.activities.push(JobOrderActivity.new)
+    job_order.customer = Customer.new
 
-    return @job_order
+    return job_order
+  end
+
+  def total_estimated_hours
+    activities.sum(:estimated_hours)
+  end
+
+  def total_executed_hours
+    activities.joins(:user_activities).sum(:hours)
   end
 end
-
