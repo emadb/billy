@@ -27,6 +27,11 @@ end
 
 group :development do
   gem 'meta_request', '0.2.0'
+  gem 'sqlite3'
+end
+
+group :production do
+  gem 'pg'
 end
 
 gem 'jquery-rails'
