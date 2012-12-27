@@ -40,6 +40,8 @@ class InvoicesController < ApplicationController
 
   def show
     @invoice = Invoice.find(params[:id])
+    
+    WickedPdf.config[:exe_path] = Rails.root.join('bin', 'wkhtmltopdf-amd64').to_s
     render  :pdf => "fattura_#{@invoice.number}",
             :layout => 'pdf_invoice.html'
     
