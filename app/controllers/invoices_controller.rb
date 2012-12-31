@@ -44,7 +44,7 @@ class InvoicesController < ApplicationController
 
     render  :pdf => "fattura_#{@invoice.number}",
             :layout => 'pdf_invoice.html',
-            :footer => {:content => '<h1>sono un footer</h1>'}
+            :footer => {:layout => {'pdf_invoice_footer.html'}}
     
   end
 end
