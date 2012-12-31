@@ -1,0 +1,128 @@
+it:
+  admin:
+    home:
+      name: Home
+    pagination:
+      previous: "&laquo; Precedente"
+      next: "Successivo &raquo;"
+      truncate: "…"
+    misc:
+      search: "Cercare"
+      filter: "Filtrare"
+      refresh: "Attualizzare"
+      show_all: "Mostrare tutto"
+      add_filter: "Aggiungi filtro..."
+      bulk_menu_title: "Elementi selezionati..."
+      remove: "Eliminare"
+      add_new: "Aggiungere nuovo"
+      chosen: "Selezionato %{name}"
+      chose_all: "Selezionare tutto"
+      clear_all: "Cancellare tutto"
+      up: "Sopra"
+      down: "Sotto"
+      navigation: "Navigazione"
+      log_out: "Uscire"
+      ago: "indietro"
+    flash:
+      successful: "%{name} è stato %{action} con successo"
+      error: "%{name} non ha potuto essere %{action}"
+      noaction: "Nessuna azione è stata intrapresa"
+      model_not_found: "Il modello '%{model}' non è stato trovato"
+      object_not_found: "%{model} con l'id '%{id}' non è stato trovato"
+    table_headers:
+      model_name: "Nome del modello"
+      last_used: "Ultimo utilizzo"
+      records: "Registri"
+      username: "Utente"
+      changes: "Cambi"
+      created_at: "Data/Ora"
+      item: "Elemento"
+      message: "Messaggio"
+    actions:
+      dashboard:
+        title: "Amministrazione del sito"
+        menu: "Pannello di controllo"
+        breadcrumb: "Pannello di controllo"
+      index:
+        title: "Lista di %{model_label_plural}"
+        menu: "Lista"
+        breadcrumb: "%{model_label_plural}"
+      show:
+        title: "Dettagli per %{model_label} '%{object_label}'"
+        menu: "Mostrare"
+        breadcrumb: "%{object_label}"
+      show_in_app:
+        menu: "Mostrare nell'applicazione"
+      new:
+        title: "Nuovo %{model_label}"
+        menu: "Aggiungere nuovo"
+        breadcrumb: "Nuovo"
+        link: "Aggiungere un nuovo %{model_label}"
+        done: "Creato"
+      edit:
+        title: "Modificare %{model_label} '%{object_label}'"
+        menu: "Modificare"
+        breadcrumb: "Modificare"
+        link: "Modificare questo %{model_label}"
+        done: "Modificato"
+      delete:
+        title: "Eliminare %{model_label} '%{object_label}'"
+        menu: "Eliminare"
+        breadcrumb: "Eliminare"
+        link: "Eliminare '%{object_label}'"
+        done: "Eliminato"
+      bulk_delete:
+        title: "Eliminare %{model_label_plural}"
+        menu: "Eliminare molteplici"
+        breadcrumb: "Eliminare molteplici"
+        bulk_link: "Eliminare %{model_label_plural} selezionato"
+      export:
+        title: "Esportare %{model_label}"
+        menu: "Esportare"
+        breadcrumb: "Esportare"
+        link: "Esportare %{model_label_plural} trovato"
+        bulk_link: "Esportare %{model_label_plural} selezionato"
+        done: "Esportato"
+      history_index:
+        title: "Cronologia per %{model_label_plural}"
+        menu: "Cronologiao"
+        breadcrumb: "Cronologia"
+      history_show:
+        title: "Cronologia per %{model_label} '%{object_label}'"
+        menu: "Cronologia"
+        breadcrumb: "Cronologia"
+    form:
+      cancel: "Cancellare"
+      basic_info: "Informazioni di base"
+      required: "Richiesto"
+      optional: "Opzionale"
+      one_char: "carattere"
+      char_length_up_to: "lunghezza fino a"
+      char_length_of: "lunghezza di"
+      save: "Salvare"
+      save_and_add_another: "Salvare ed aggiungere un'altro"
+      save_and_edit: "Salvare e Modificare"
+      all_of_the_following_related_items_will_be_deleted: "? Tutti i seguenti elementi correlati potrebbero essere eliminati o rimanere orfani:"
+      are_you_sure_you_want_to_delete_the_object: "Sei sicuro di voler eliminare questo %{model_name}"
+      confirmation: "Si, sono sicuro"
+      delete_confirmation: "Conferma di eliminazione"
+      bulk_delete: "I seguenti oggetti saranno eliminati, questo potrebbe eliminare o rendere orfana qualcuna delle loro correlate dipendenze:"
+    export:      
+      confirmation: "Esportare in %{name}"
+      select: "Selezionare i campi da esportare"
+      fields_from: "Campi da %{name}"
+      fields_from_associated: "Campi da %{name} associati"
+      display: "Mostrare %{name}: %{type}"
+      options_for: "Opzioni per %{name}"
+      empty_value_for_associated_objects: "<vuoto>"
+      click_to_reverse_selection: 'Cliccare per invertire la selezione'
+      csv:
+        header_for_root_methods: "%{name}" # 'model' è disponibile
+        header_for_association_methods: "%{name} [%{association}]"
+        encoding_to: "Codificare in"
+        encoding_to_help: "Scegliere come codificare l'output. Lasciare vuoto al fine di non modificare l'attuale codifica dell'input: (%{name})"
+        skip_header: "No testata"
+        skip_header_help: "Non creare output per la testata (no descrizione dei campi)"
+        default_col_sep: ","
+        col_sep: "Separatore di colonna"
+        col_sep_help: "Lasciare vuoto per il default ('%{value}')" # value is default_col_sep
