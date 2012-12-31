@@ -44,7 +44,7 @@ class InvoicesController < ApplicationController
 
     render  :pdf => "fattura_#{@invoice.number}",
             :layout => 'pdf_invoice.html',
-            :footer => {:html => { :template => 'layouts/pdf_invoice_footer.html.erb' } }
+            :footer => {:content => '<strong>CodicePlastico srl</strong>- P.IVA, CF e Registro Imprese di Brescia 03079830984 Capitale Sociale : Euro 10.000,00 i.v. - www.codiceplastico.com'}
     
   end
 end
