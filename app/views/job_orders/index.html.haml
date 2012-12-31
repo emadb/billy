@@ -17,9 +17,9 @@
           = link_to job.code, edit_job_order_path(job)
         %td 
           = job.customer.name
-        %td
+        %td.right
           = job.hourly_rate
-        %td
+        %td.right
           = "#{job.total_executed_hours}/#{job.total_estimated_hours}"
         %td
           %a{:href=> job_order_path(job), :class => 'delete' } 

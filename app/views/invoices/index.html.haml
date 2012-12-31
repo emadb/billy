@@ -18,7 +18,7 @@
         %td 
           = link_to i.number, edit_invoice_path(i)
         %td 
-          = i.date
+          = i.date.strftime('%d-%m-%Y')
         %td
           = i.customer.name
         %td.right

@@ -1,28 +1,28 @@
 %h1
-  = "Activity for #{current_user.email}"
+  = "Attività di #{current_user.name}"
 
 #activityPage
   %fieldset
     %legend &nbsp;
     %form.well.form-inline{:method => 'POST', :action => '/user_activities/index'}
-      Month:
-      = select_month @filter_date, {add_month_numbers: false}, {name: 'month', :class => 'input-small', 'data-bind' => 'value: month'}
-      Year
+      Mese:
+      = select_month @filter_date, {add_month_numbers: false, :use_short_month => true}, {name: 'month', :class => 'input-small', 'data-bind' => 'value: month'}
+      Anno
       = select_year @filter_date, {add_month_numbers: false}, {name: 'year', :class => 'input-small', 'data-bind' => 'value: year'}
-      User
+      Utente
       = select_tag 'user', options_from_collection_for_select(@users, "_id", "email"), 'data-bind' => 'value: user'
-      %button.btn{:type => 'button', 'data-bind' => 'click: reload'} apply
+      %button.btn{:type => 'button', 'data-bind' => 'click: reload'} filtra
       %a.btn{"data-toggle" => "modal", :href => '#newActivity'}
         %i.icon-plus
 
   %table.table.table-striped.table-bordered
     %thead
       %tr
-        %td Type
+        %td Tipo
         %td Data
-        %td Hours
-        %td Description
-        %td Activity
+        %td Ore
+        %td Note
+        %td Attività
         %td
     %tbody{"data-bind" => "{foreach: activities}"}
       %tr{"data-bind"=>"{visible: isVisible}"}
@@ -34,44 +34,59 @@
         %td
           %a{:href => "#", "data-bind"=> "{click: removeActivity}"}
             %i.icon-remove
-    = content_for :side_bar do
-      .well.sidebar-nav
-        %ul#stats.totals.info-panel
-          %li Oggi
-          %li.amount{"data-bind"=>"text: today_hours"}
-          %li Ieri
-          %li.amount{"data-bind"=>"text: yesterday_hours"}
-            
-#newActivity.div.modal.hide
-  %form.well.form-inline{"data-bind" => "submit: save"}
-    %fieldset
-      %legend details
-      .field.control-group
-        joborder
-        .controls
-          = select_tag :job_order, '', :data => {:bind => "value: jobOrder, options: jobOrders, optionsValue : 'id', optionsText: 'code'"}
-      .field.control-group
-        activity
-        .controls
-          = select_tag :activity, '', :data => {:bind => "value: activity, options: jobOrderActivities, optionsValue : 'id', optionsText: 'description'"}
-      .field.control-group
-        type
-        .controls
-          = select_tag :type, '', :data => {:bind => "value: type, options: activityTypes, optionsValue : 'id', optionsText: 'description'"}
-      .span2
-        .field.control-group
-          date
-          .controls
-            = text_field_tag 'date', '', :class => 'date input-small', :data => {:bind => "value: date"}
-      .field.control-group
-        hours
-        .controls
-          = text_field_tag 'hours', '', :class => 'input-small', :data => {:bind => "value: hours"}
-      .field.control-group
-        description
-        .controls
-          = text_area_tag :description, '', :data => {:bind => "value: description"}
-      %button.btn{:type => 'submit'} add
-      %a.btn{:href=>"#", "data-dismiss"=>"modal"}
-        Close
-      
+       
+
+
+#newActivity.modal.hide.fade
+  .modal-header
+    %button.close{:type => 'button', 'data-dismiss' => 'modal'} &times;
+    %h3 Nuova attività
+  .modal-body
+    %form.well.form-inline{"data-bind" => "submit: save"}
+      .row
+        .span3
+          .field.control-group
+            Commessa
+            .controls
+              = select_tag :job_order, '', :data => {:bind => "value: jobOrder, options: jobOrders, optionsValue : 'id', optionsText: 'code'"}
+        .span3
+          .field.control-group
+            Attività
+            .controls
+              = select_tag :activity, '', :data => {:bind => "value: activity, options: jobOrderActivities, optionsValue : 'id', optionsText: 'description'"}
+      .row
+        .span6
+          .field.control-group
+            Categoria
+            .controls
+              = select_tag :type, '', :data => {:bind => "value: type, options: activityTypes, optionsValue : 'id', optionsText: 'description'"}
+      .row
+        .span3
+          .field.control-group
+            Data
+            .controls
+              = text_field_tag 'date', '', :class => 'date input-small', :data => {:bind => "value: date"}
+        .span3
+          .field.control-group
+            Ore
+            .controls
+              = text_field_tag 'hours', '', :class => 'input-small', :data => {:bind => "value: hours"}
+      .row
+        .span6
+          .field.control-group
+            Note
+            .controls
+              = text_area_tag :description, '', :data => {:bind => "value: description"}
+          
+  .modal-footer
+    %a.btn{'data-dismiss' => 'modal'} annulla
+    %button.btn{:type => 'submit', 'data-bind' => 'click:save'} add    
+    
+= content_for :side_bar do
+  .well.sidebar-nav
+    %ul#stats.totals.info-panel
+      %li Oggi
+      %li.amount{"data-bind"=>"text: today_hours"}
+      %li Ieri
+      %li.amount{"data-bind"=>"text: yesterday_hours"}
+ 

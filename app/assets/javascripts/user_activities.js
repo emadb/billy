@@ -12,7 +12,6 @@ $(function(){
         self.activities = ko.observableArray(activities);
 
         postbox.subscribe(function(data){
-            console.log('new!');
             self.activities.push(data);
         }, self, 'new-activity-created');
 

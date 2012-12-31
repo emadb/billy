@@ -39,8 +39,8 @@
               %td
                 = a.text_field :estimated_hours, {:class => 'amount span1'}
               %td
+                %a#remove-activity{:href => '#', :class => 'btn-mini remove-item'}
+                  %i{:class => 'icon-trash'}
                 = a.hidden_field :_destroy
-                %a#remove-activity{:href => '#', :class => 'btn-mini btn-danger remove-item'}
-                  %i{:class => 'icon-minus'}
       .actions
         = f.submit 'Save', :class => 'btn btn_primary'

@@ -4,26 +4,26 @@
       %th
         In
       %th
-    %tr
+    %tr.info
       %td
         Fatturato
       %td.right
-        = @invoices_totals.taxable_income
+        = number_to_currency @invoices_totals.taxable_income
     %tr
       %td
         Iva
       %td.right
-        = @invoices_totals.tax
+        = number_to_currency @invoices_totals.tax
     %tr
       %td.italic
         Totale
       %td.right.italic
-        = @invoices_totals.total
-    %tr
+        = number_to_currency @invoices_totals.total
+    %tr.error
       %td
         Da incassare
       %td.right
-        = @to_receive
+        = number_to_currency @to_receive
 
 %div.span4
   %table.table
@@ -35,22 +35,22 @@
       %td
         1
       %td.right
-        = @quarters.q1
+        = number_to_currency @quarters.q1
     %tr
       %td
         2
       %td.right
-        = @quarters.q2
+        = number_to_currency @quarters.q2
     %tr
       %td
         3
       %td.right
-        = @quarters.q3
+        = number_to_currency @quarters.q3
     %tr
       %td
         4
       %td.right
-        = @quarters.q4
+        = number_to_currency @quarters.q4
 
 %div.span4
   %table.table
@@ -62,17 +62,17 @@
       %td
         Netto
       %td.right
-        = @inbound_invoices_totals.taxable_income
+        = number_to_currency @inbound_invoices_totals.taxable_income
     %tr
       %td
         Iva
       %td.right
-        = @inbound_invoices_totals.tax
+        = number_to_currency @inbound_invoices_totals.tax
     %tr
       %td.italic
         Totale
       %td.right.italic
-        = @inbound_invoices_totals.total
+        = number_to_currency @inbound_invoices_totals.total
 
 %div.span4
   %table.table
@@ -86,7 +86,7 @@
         %td
           = c['customer']
         %td.right
-          = c['taxable_income']
+          = number_to_currency c['taxable_income']
 
 %div.span4
   %table.table
