@@ -8,7 +8,7 @@ gem 'rails', '3.2.9'
 
 gem 'wicked_pdf'
 
-gem 'bootstrap-generators', '~>2.1'
+gem 'bootstrap-generators'
 gem 'bootstrap-wysihtml5-rails'
 gem 'simple_form', '~>2.0'
 

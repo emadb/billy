@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/sferik/rails_admin.git
-  revision: c06a566803a9778c9f4efc05e9048b68daac5de0
+  revision: 9e17443c67f9568e7c409d36794a34aa3d21101c
   specs:
     rails_admin (0.3.0)
       bootstrap-sass (~> 2.1)
@@ -89,7 +89,7 @@ GEM
     jquery-ui-rails (2.0.2)
       jquery-rails
       railties (>= 3.1.0)
-    json (1.7.5)
+    json (1.7.6)
     kaminari (0.14.1)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
@@ -170,7 +170,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  bootstrap-generators (~> 2.1)
+  bootstrap-generators
   bootstrap-wysihtml5-rails
   coffee-rails (~> 3.2.1)
   devise
