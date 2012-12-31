@@ -44,7 +44,7 @@ class InvoicesController < ApplicationController
 
     render  :pdf => "fattura_#{@invoice.number}",
             :layout => 'pdf_invoice.html',
-            :footer => {:html => { :template => 'pdf_invoice_footer.html.erb' } }
+            :footer => {:html => { :template => 'layouts/pdf_invoice_footer.html.erb' } }
     
   end
 end
