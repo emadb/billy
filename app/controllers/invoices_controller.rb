@@ -45,7 +45,7 @@ class InvoicesController < ApplicationController
     render  :pdf => "fattura_#{@invoice.number}",
             :layout => 'pdf_invoice.html',
             :footer => {
-              :content => '<div class="container" style="color:#777777;font-size:12px;font-family: Helvetica Neue,Helvetica"><p><strong>CodicePlastico srl</strong>- P.IVA, CF e Registro Imprese di Brescia 03079830984 Capitale Sociale : Euro 10.000,00 i.v. - www.codiceplastico.com</p></div>',
+              :content => '<div class="container" style="margin-bottom:30px;color:#777777;font-size:12px;font-family: Helvetica Neue,Helvetica"><p><strong>CodicePlastico srl</strong> - P.IVA, CF e Registro Imprese di Brescia 03079830984 Capitale Sociale : Euro 10.000,00 i.v. - www.codiceplastico.com</p></div>',
             }
     
   end
