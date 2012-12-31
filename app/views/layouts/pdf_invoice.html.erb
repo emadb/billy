@@ -4,6 +4,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <title>Fattura codiceplastico</title>
+        <%= wicked_pdf_stylesheet_link_tag "application" -%>
         <style type="text/css">
 		.total{
 			font-weight: bold;
@@ -15,55 +16,114 @@
 			height: 200px;
 		}
 		.right{
-			text-align: right;
+			text-align: right !important;
 		}
 		#footer{
 			margin-top: 30px;
 		}
+
+        /* Sticky footer styles
+      -------------------------------------------------- */
+
+      html,
+      body {
+        height: 100%;
+        /* The html and body elements cannot have any padding or margin. */
+      }
+
+      /* Wrapper for page content to push down footer */
+      #wrap {
+        min-height: 100%;
+        height: auto !important;
+        height: 100%;
+        /* Negative indent footer by it's height */
+        margin: 0 auto -60px;
+      }
+
+      /* Set the fixed height of the footer here */
+      #push,
+      #footer {
+        height: 60px;
+      }
+      #footer {
+        background-color: #f5f5f5;
+      }
+
+      /* Lastly, apply responsive CSS fixes as necessary */
+      @media (max-width: 767px) {
+        #footer {
+          margin-left: -20px;
+          margin-right: -20px;
+          padding-left: 20px;
+          padding-right: 20px;
+        }
+      }
+
+
         </style>
     </head>
     <body>
-    	<header><h2>CodicePlastico</h2></header>
-    	<table id="customer">
-    		<tr>
-    			<td colspan="3"></td>
-    			<td class="right">
-					<%= @invoice.customer.name %><br/>
-					<%= @invoice.customer.address_street %><br/>
-					<%= "#{@invoice.customer.address_zip_code} #{@invoice.customer.address_city} (#{@invoice.customer.address_province})"  %><br/
-					>
-					<%= @invoice.customer.vat_code %><br/>
-    			</td>
-    		</tr>
-    	</table>
-
-		<table id="items">
-			<% @invoice.invoice_items.each do |i| %>
-      		<tr>
-    			<td><%= i.description %></td>
-    			<td class="right"><%= number_to_currency(i.amount) %></td>
-    		</tr>
-    		<% end %>
-    		<tr>
-    			<td class="right">Imponibile</td>
-    			<td class="right"><%= number_to_currency(@invoice.taxable_income) %></td>
-			<tr>
-			<tr>
-    			<td class="right">Iva</td>
-    			<td class="right"><%= number_to_currency(@invoice.tax) %></td>
-			<tr>
-			<tr>
-    			<td class="right">Totale fattura</td>
-    			<td class="total right"><%= number_to_currency(@invoice.total) %></td>
-			<tr>
-    	</table>
-
-    	<div id="notes">
-    		Informazioni per il pagamento
-    	</div>
-    	<div id="footer">
-    		CodicePlastico srl, via B.Salvadori....
-    	</div>
+        <div id="wrap" class="container">
+            <div class="row">
+                <header style="height:120px">
+                    <%= wicked_pdf_image_tag 'codiceplastico.png'%>
+                </header>
+            </div>
+    	
+    	   <div class="row" style="margin-top:40px">
+                <div class="span2" style="text-align:right">
+                    <address>
+                        <strong>
+    					<%= @invoice.customer.name %></strong><br>
+    					<%= @invoice.customer.address_street %><br/>
+    					<%= "#{@invoice.customer.address_zip_code} #{@invoice.customer.address_city} (#{@invoice.customer.address_province})"  %><br/>
+    					IVA <%= @invoice.customer.vat_code %><br/>
+                    </address>
+                </div>
+            </div>
+            <div class="row" style="margin-top:40px">
+                <section>
+                    <h4><%= "Fattura n. #{@invoice.number} del #{@invoice.date.strftime('%d/%m/%Y')}" %></h4>
+                </section>
+            </div>
+            <div class="row">
+                <table id="items" class="table" style="margin-top:40px">
+        			<% @invoice.invoice_items.each do |i| %>
+                  		<tr>
+                			<td><%= i.description %></td>
+                			<td class="right"><%= number_to_currency(i.amount) %></td>
+                		</tr>
+            		<% end %>
+            		<tr>
+            			<td class="right"><strong>Imponibile</strong></td>
+            			<td class="right"><%= number_to_currency(@invoice.taxable_income) %></td>
+        			</tr>
+        			<tr>
+            			<td class="right"><strong>Iva</strong></td>
+            			<td class="right"><%= number_to_currency(@invoice.tax) %></td>
+        			</tr>
+        			<tr style="font-size:16px" class="info">
+            			<td class="right"><strong>Totale fattura</strong></td>
+            			<td class="total right"><%= number_to_currency(@invoice.total) %></td>
+        			</tr>
+            	</table>
+            </div>
+            <div class="row" style="margin-top:40px">
+                <h5>Note</h5>
+                <div id="notes" class="well">
+                    Pagamento tramite bonifico bancario.
+                    IBAN IT0930D9283990200D09293
+                </div>
+            </div>
+            <div id="push"></div>
+        </div>
+        <div id="footer">
+            <div class="container">
+                <p>
+                    <strong>CodicePlastico srl</strong>- P.IVA, CF e Registro Imprese di Brescia 03079830984 Capitale Sociale : Euro 10.000,00 i.v. - www.codiceplastico.com
+                </p>
+            </div>
+        </div>
 	</body>
 </html>
 
