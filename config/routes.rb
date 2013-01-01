@@ -10,7 +10,9 @@ Scrooge::Application.routes.draw do
   match '/user_activities/stats/:user/:year/:month' => 'user_activities#stats', :via => :get
   match 'user_activity_types' => 'user_activity_types#index'
 
-  resources :invoices
+  resources :invoices do
+    get 'activate'
+  end
   resources :inbound_invoices
   resources :job_orders do
     resources :job_order_activities

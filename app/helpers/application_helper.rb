@@ -1,12 +1,12 @@
 module ApplicationHelper
   def status_helper (status)
   	case status
-  		when 1 
-  			label_class = ''
-  			text = 'default'
-  		when 2
-  			label_class = 'success'
-  			text = 'success'
+  		when Invoice.temporary
+  			label_class = 'inverse'
+  			text = 'temporanea'
+  		when Invoice.active
+  			label_class = 'info'
+  			text = 'emessa'
   		when 3
   			label_class = 'warning'
   			text = 'warning'

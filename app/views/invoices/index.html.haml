@@ -14,11 +14,11 @@
       %td 
   %tbody
     -@invoices.each do |i|
-      %tr
+      %tr{:class => i.status == 1 ? "warning": ""}
         %td 
-          = link_to i.number, edit_invoice_path(i)
+          = i.number
         %td 
-          = i.date.strftime('%d-%m-%Y')
+          = i.date.strftime('%d-%m-%Y') unless i.date.nil?
         %td
           = i.customer.name
         %td.right
@@ -34,8 +34,12 @@
             %span.label.label-important no
         %td 
           = status_helper(i.status)
-
+          - if i.status == Invoice.temporary
+            %a{:href => invoice_activate_path(i)}
+              %i.icon-share
         %td
+          %a{:href => edit_invoice_path(i)}
+            %i.icon-edit
           %a{:href => invoice_path(i)} 
             %i.icon-file
           %a{:href=> invoice_path(i), :class => 'delete' } 

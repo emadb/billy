@@ -8,16 +8,29 @@ class Invoice < ActiveRecord::Base
 
   def self.create_new
     @invoice = Invoice.new
-    @invoice.number = (Invoice.maximum(:number) || 0) + 1
-    today = DateTime.now
-    @invoice.date = Date.new(today.year, today.month, 1) - 1
-    @invoice.due_date = @invoice.date + 30
+    @invoice.number = nil
     @invoice.invoice_items.push(InvoiceItem.new)
     @invoice.invoice_items.push(InvoiceItem.new)
     @invoice.customer = Customer.new
     @invoice.has_tax = true
+    @invoice.status = 1
 
     return @invoice
+  end
+
+  def self.temporary
+    1
+  end
+
+  def self.active
+    2
+  end
+
+  def activate
+    self.number = (Invoice.maximum(:number) || 0) + 1
+    self.date = Date.new(Date.today.year, Date.today.month, 1) - 1
+    self.due_date = self.date + 30
+    self.status = 2
   end
 
   def update_totals

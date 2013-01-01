@@ -1,13 +1,13 @@
 class InvoicesController < ApplicationController
   before_filter :user_is_admin?
   def index
-    @invoices = Invoice.all
+    @invoices = Invoice.order(:number)
     @totals = InvoiceTotalsInfo.new(Invoice.sum('taxable_income'), Invoice.sum('tax'), Invoice.sum('total'))
   end
 
   def new
     @invoice = Invoice.create_new    
-    @customers = Customer.all #.map{|c| [c.name, c._id]}
+    @customers = Customer.all
     @totals = InvoiceTotalsInfo.new(0, 0, 0)
   end
 
@@ -20,6 +20,13 @@ class InvoicesController < ApplicationController
     redirect_to invoices_path
   end
 
+  def activate
+    @invoice = Invoice.find(params[:invoice_id])
+    @invoice.activate
+    @invoice.save
+    redirect_to invoices_path
+  end
+
   def edit  
     @invoice = Invoice.find(params[:id])
     @customers = Customer.all #.map{|c| [c.name, c._id]}
@@ -29,6 +36,7 @@ class InvoicesController < ApplicationController
   def update  
     @invoice = Invoice.find(params[:id])
     @invoice.update_attributes!(params[:invoice])
+    @invoice.status = Invoice.active unless @invoice.number.nil?
     @invoice.save
     redirect_to invoices_path
   end
