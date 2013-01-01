@@ -41,6 +41,7 @@
   = content_for :side_bar do
     .well.sidebar-nav
       = link_to 'nuova fattura', new_inbound_invoice_path , {:class => 'btn btn-primary'}
+      %hr
       %ul.totals.info-panel
         %li Imponibile
         %li.taxable-income.amount

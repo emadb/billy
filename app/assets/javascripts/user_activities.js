@@ -2,6 +2,16 @@ $(function(){
 
     var postbox = new ko.subscribable();
 
+    ko.bindingHandlers.dateString = {
+        update: function(element, valueAccessor, allBindingsAccessor, viewModel) {
+            var value = valueAccessor(),
+                allBindings = allBindingsAccessor();
+            var valueUnwrapped = ko.utils.unwrapObservable(value);
+            
+            $(element).text(moment(valueUnwrapped).format('DD-MM-YYYY'));
+        }
+    }
+
     function ActivtyPage(activities){
         var self = this;
 
@@ -39,7 +49,7 @@ $(function(){
         self.activityTypes = ko.observableArray();
 
         self.type = ko.observable();
-        self.date = ko.observable();
+        self.date = ko.observable(moment().format('DD-MM-YYYY'));
         self.hours = ko.observable();
         self.description = ko.observable();
         self.jobOrder = ko.observable();
@@ -116,8 +126,16 @@ $(function(){
     }   
 
     function StatsViewModel(today, yesterday){
+        var self = this;
         this.today_hours = ko.observable(today);
         this.yesterday_hours = ko.observable(yesterday);
+        this.today_hours_txt = ko.computed(function(){
+            return self.today_hours() + ' h';
+        })
+
+        this.yesterday_hours_txt = ko.computed(function(){
+            return self.yesterday_hours() + ' h';
+        })
     }
 
     var month = $('#date_month').val();
