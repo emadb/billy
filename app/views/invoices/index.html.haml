@@ -14,7 +14,7 @@
       %td 
   %tbody
     -@invoices.each do |i|
-      %tr{:class => i.status == 1 ? "warning": ""}
+      %tr{:class => row_status_helper(i)}
         %td 
           = i.number
         %td 
