@@ -22,13 +22,23 @@ module ApplicationHelper
   end
 
   def row_status_helper (invoice)
-    if (invoice.status == Invoice.temporary)
+    if invoice.status == Invoice.temporary
       return 'warning'
     end
-    if (!invoice.due_date.nil? and invoice.due_date <= DateTime.now && !invoice.is_payed)
+    if !invoice.due_date.nil? and invoice.due_date <= DateTime.now && !invoice.is_payed
       return 'error'
     end
     return ''
+  end
+
+  def due_date_helper (invoice)
+    label_class = ''
+    text = nil
+    if !invoice.due_date.nil? and invoice.due_date <= DateTime.now && !invoice.is_payed
+      label_class = 'important'
+      text = 'scaduta'
+    end
+    raw("<span class=\"label label-#{label_class}\">#{text}</span>")
   end
 
 end

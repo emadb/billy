@@ -14,6 +14,10 @@
         = f.label :due_date, :class => 'control-label'
         .controls
           = f.text_field :due_date, :class => 'isdate'
+      .field.control-group
+        = f.label :notes, :class => 'control-label'
+        .controls
+          = f.text_area :notes, :cols => 20, :rows => 3
       
     .span2
       .field.control-group
@@ -32,14 +36,13 @@
     .span10
       %fieldset
         %legend 
-          items
-          %a.new-item{:href=>'#', :class => 'btn'} 
-            %i{:class => 'icon-plus'}
+          %a.new-item.btn.btn-primary{:href=>'#'} 
+            %i{:class => 'icon-plus icon-white'}
             nuova riga 
         %table.items
           %tr
-            %td description
-            %td amount
+            %td descrizione
+            %td importo
             %td 
           = f.fields_for :invoice_items do |i|
             %tr
@@ -49,9 +52,9 @@
                 = i.text_field :amount, {:class => 'amount span1'}
               %td
                 = i.hidden_field :_destroy
-                %a{:href => '#', :class => 'btn-mini btn-danger remove-item'}
-                  %i{:class => 'icon-minus'}
+                %a{:href => '#', :class => 'btn-mini btn remove-item'}
+                  %i{:class => 'icon-trash'}
   .row
     .span10              
       .actions
-        = f.submit 'Save', :class => 'btn btn_primary'
+        = f.submit 'Salva', :class => 'btn btn-primary'

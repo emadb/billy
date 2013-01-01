@@ -9,4 +9,13 @@
     %li Totale
     %li#total.amount
       = number_to_currency(@totals.total)
+  %hr
+  %ul.totals.info-panel
+    %li
+      = status_helper(@invoice.status)
+    %li
+      = due_date_helper(@invoice)
+  
+
+
  
