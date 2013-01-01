@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121231142701) do
+ActiveRecord::Schema.define(:version => 20130101201334) do
 
   create_table "customers", :force => true do |t|
     t.string   "name"
@@ -72,6 +72,7 @@ ActiveRecord::Schema.define(:version => 20121231142701) do
     t.integer  "job_order_id"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
+    t.boolean  "active"
   end
 
   add_index "job_order_activities", ["job_order_id"], :name => "index_job_order_activities_on_job_order_id"

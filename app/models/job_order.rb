@@ -23,4 +23,8 @@ class JobOrder < ActiveRecord::Base
   def total_executed_hours
     activities.joins(:user_activities).sum(:hours)
   end
+
+  def active_activities
+    activities.where(:active => true)
+  end
 end

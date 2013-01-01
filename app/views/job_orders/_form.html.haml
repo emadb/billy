@@ -23,21 +23,26 @@
             = f.check_box :archived, :class => 'span2'
     %fieldset
       %legend 
-        Activities
-        %a#new-activity.new-item{:href=>'#', :class => 'btn'} 
-          %i{:class => 'icon-plus'} 
-          new activity
-        %table.activities
+        Attività
+        %a#new-activity.new-item.btn.btn-primary{:href=>'#'} 
+          %i{:class => 'icon-plus icon-white'} 
+          nuova attività
+      %table.activities.table
+        %thead
           %tr
-            %td description
-            %td estimated hours
+            %td descrizione
+            %td ore stimate
+            %td attiva
             %td 
+        %tbody
           = f.fields_for :activities do |a|
             %tr
               %td
                 = a.text_field :description, {:class => 'span5'}
               %td
                 = a.text_field :estimated_hours, {:class => 'amount span1'}
+              %td
+                = a.check_box :active, {:class => 'span1'}
               %td
                 %a#remove-activity{:href => '#', :class => 'btn-mini remove-item'}
                   %i{:class => 'icon-trash'}
