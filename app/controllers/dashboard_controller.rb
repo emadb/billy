@@ -1,7 +1,7 @@
 class DashboardController < ApplicationController
   before_filter :user_is_admin?
   def index
-    invoices = Invoice.all
+    invoices = Invoice.where(:status => Invoice.active)
     @to_receive = 0
     invoices.each{ |x| @to_receive = @to_receive + (x.total || 0) unless x.is_payed }
     @invoices_totals = InvoiceTotalsInfo.new(Invoice.sum(:taxable_income), Invoice.sum(:tax), Invoice.sum(:total))
