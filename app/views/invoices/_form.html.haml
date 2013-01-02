@@ -32,6 +32,10 @@
         = f.label :has_tax, :class => 'control-label'
         .controls
           = f.check_box :has_tax
+      .field.control-group
+        = f.label :status, :class => 'control-label'
+        .controls
+          = f.select :status, {:temporary => 1, :active => 2}
   .row
     .span10
       %fieldset
