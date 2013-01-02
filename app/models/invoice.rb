@@ -27,9 +27,13 @@ class Invoice < ActiveRecord::Base
   end
 
   def activate
-    self.number = (Invoice.maximum(:number) || 0) + 1
-    self.date = Date.new(Date.today.year, Date.today.month, 1) - 1
-    self.due_date = self.date + 30
+    if self.number.nil?
+      self.number = (Invoice.maximum(:number) || 0) + 1
+    end
+    if self.date.nil?
+      self.date = Date.new(Date.today.year, Date.today.month, 1) - 1
+      self.due_date = self.date + 30
+    end
     self.status = 2
   end
 
