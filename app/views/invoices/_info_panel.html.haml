@@ -8,13 +8,21 @@
       = number_to_currency(@totals.tax)
     %li Totale
     %li#total.amount
-      = number_to_currency(@totals.total)
+      = number_to_currency(@totals.total)    
   %hr
   %ul.totals.info-panel
+    %li
+      Info
     %li
       = status_helper(@invoice.status)
     %li
       = due_date_helper(@invoice)
+  %hr
+  %ul.info-panel
+    %li
+      %a.btn.btn-primary#save-form salva
+
+
   
 
 

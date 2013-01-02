@@ -23,6 +23,7 @@ class JobOrdersController < ApplicationController
   def edit
     @job_order = JobOrder.find(params[:id])
     @customers = Customer.all
+    @total_estimated_hours = @job_order.total_estimated_hours
   end
 
   def create

@@ -2,6 +2,16 @@
 
 = render 'form'
 
-= link_to 'Show', @job_order
-\|
-= link_to 'Back', job_orders_path
+= content_for :side_bar do
+  .well.sidebar-nav
+    %ul.totals.info-panel
+      %li Totale ore
+      %li#taxable-income.amount
+        = @job_order.total_estimated_hours
+      %li Ore effettuate
+      %li#taxable-income.amount
+        = @job_order.total_executed_hours
+    %hr
+    %ul.info-panel
+      %li
+        %a.btn.btn-primary#save-form salva
