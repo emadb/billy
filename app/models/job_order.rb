@@ -21,10 +21,14 @@ class JobOrder < ActiveRecord::Base
   end
 
   def total_executed_hours
-    activities.joins(:user_activities).sum(:hours)
+    activities.joins(:user_activities).sum(:hours).to_f
   end
 
   def active_activities
     activities.where(:active => true)
+  end
+
+  def status
+    "error" if total_executed_hours > total_estimated_hours
   end
 end

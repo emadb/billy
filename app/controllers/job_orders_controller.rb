@@ -2,10 +2,10 @@ class JobOrdersController < ApplicationController
   before_filter :user_is_admin?
   def index
     if params[:archived] == "yes"
-      @job_orders = JobOrder.where('archived = ?', true)
+      @job_orders = JobOrder.where(:archived => true)
       @title = 'Archived job orders'
     else
-      @job_orders = JobOrder.where('archived = ?', false)
+      @job_orders = JobOrder.where(:archived => false)
       @title = 'Job orders'
     end
     
