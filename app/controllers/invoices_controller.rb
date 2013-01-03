@@ -49,13 +49,16 @@ class InvoicesController < ApplicationController
 
   def show
     @invoice = Invoice.find(params[:id])
-
+    file_name = Rails.root.join('public', "fattura_#{@invoice.number}.pdf")
     render  :pdf => "fattura_#{@invoice.number}",
             :layout => 'pdf_invoice.html',
+            :save_to_file => file_name,
             :margin => { :bottom => 15 },
             :footer => {
               :content => '<div class="container" style="text-align:center;color:#777777;font-size:12px;font-family: Helvetica Neue,Helvetica"><p><strong>CodicePlastico srl</strong> - www.codiceplastico.com - Tel: +39 030 6595 241</br>P.IVA, CF e Registro Imprese di Brescia 03079830984 Capitale Sociale : Euro 10.000,00 i.v.</p></div>'
             }
-    
+    drop_box = DropBox.new
+    drop_box.upload "fattura_#{@invoice.number}.pdf", file_name
+    File.delete file_name 
   end
 end

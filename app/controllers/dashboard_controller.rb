@@ -22,8 +22,7 @@ class DashboardController < ApplicationController
     inbound_invoices = InboundInvoice.all
     @inbound_invoices_totals = InvoiceTotalsInfo.new(InboundInvoice.sum(:taxable_income), 
       InboundInvoice.sum(:tax), 
-      InboundInvoice.sum(:total))
-
-    
+      InboundInvoice.sum(:total))    
   end
+
 end
