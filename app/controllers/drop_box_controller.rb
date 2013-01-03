@@ -13,18 +13,6 @@ class DropBoxController < ApplicationController
     request_token = OAuth::RequestToken.new(consumer, session[:request_token], session[:request_token_secret])
     access_token = request_token.get_access_token(:oauth_verifier => params[:oauth_token])
     Dropbox::API::Client.new :token => access_token.token, :secret => access_token.secret
-    logger.info '##################'
-    logger.info 'token'
-    logger.info access_token.token
-    logger.info 'secret'
-    logger.info access_token.secret
-    logger.info '##################'
     redirect_to dashboard_path
   end
-
-# token
-# hvdcbruwp4chm6w
-# secret
-# f8hw3kxt9qjxbmc
-
 end
