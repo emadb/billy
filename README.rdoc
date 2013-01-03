@@ -1,21 +1,15 @@
 == Welcome to Scrooge
 
-This is a simple invoicing application that uses the following technologies:
-- Rails 3.2
-- Haml
-- MongoDb / Mongoid
-- Devise
-- Twitter bootstrap
+This is a simple invoice and tracking application suited for small firms.
+What can you do with scrooge?
+- Tracking your daily job activities
+- Managing the job orders and checking theri status
+- Creating an invoice 
+- Generate a pdf-invoice
+- Tacking expenses
+- Tracking invoice payment status
+- View the current status (economics, in/out)
+- Creating users and managing them
+- Managing customers
 
-I'm developing it to learn Rails and Ruby.
-
-# job_order
-# => name
-# => customer
-# => notes
-# => hourly rate
-# => activities
-# => is_open
-# => => name
-# => => estimated time
-# => => 
+It's built on Rails 3.2.
