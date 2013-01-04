@@ -7,4 +7,12 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 
-User.create(email: 'admin@scrooge.com', password: 'administrator')
+User.create(email: 'admin@codiceplastico.com', password: 'administrator')
+
+UserActivityType.create(description: 'sviluppo')
+UserActivityType.create(description: 'analisi')
+UserActivityType.create(description: 'meeting')
+UserActivityType.create(description: 'formazione')
+UserActivityType.create(description: 'consulenza')
+UserActivityType.create(description: 'ferie')
+UserActivityType.create(description: 'malattia')

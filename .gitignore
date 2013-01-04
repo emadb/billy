@@ -17,3 +17,5 @@
 
 /.rspec
 .DS_Store
+/.powenv
+/set_environment.sh
