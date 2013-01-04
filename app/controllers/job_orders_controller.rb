@@ -1,6 +1,6 @@
 class JobOrdersController < ApplicationController
   before_filter :user_is_admin?, :except => [:index]
-  
+
   def index
     if params[:archived] == "yes"
       @job_orders = JobOrder.where(:archived => true)
@@ -11,8 +11,15 @@ class JobOrdersController < ApplicationController
     end
     
     respond_to do |format|
-      format.html
-      format.json { render :json => @job_orders }
+      format.html do 
+        if current_user.admin? 
+          @job_orders 
+        else
+          redirect_to root_path
+        end
+
+      end
+      format.json { render :json => @job_orders.select('id, code') }
     end
   end
 
