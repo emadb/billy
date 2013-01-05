@@ -7,7 +7,7 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 
-User.create(email: 'admin@codiceplastico.com', password: 'administrator')
+User.create(email: 'admin@codiceplastico.com', password: 'administrator', admin: true, name: 'admin')
 
 UserActivityType.create(description: 'sviluppo')
 UserActivityType.create(description: 'analisi')
