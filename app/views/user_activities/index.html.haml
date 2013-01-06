@@ -10,7 +10,7 @@
       &nbsp;&nbsp;Anno
       = select_year @filter_date, {add_month_numbers: false}, {name: 'year', :class => 'input-small', 'data-bind' => 'value: year'}
       &nbsp;&nbsp;Utente
-      = select_tag 'user', options_from_collection_for_select(@users, "_id", "email"), 'data-bind' => 'value: user'
+      = select_tag 'user', options_from_collection_for_select(@users, "id", "email", :selected => @current_user.id), 'data-bind' => 'value: user'
       &nbsp;&nbsp;
       %button.btn{:type => 'button', 'data-bind' => 'click: reload'} filtra
 
