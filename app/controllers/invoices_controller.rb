@@ -50,7 +50,7 @@ class InvoicesController < ApplicationController
   def show
     @invoice = Invoice.find(params[:id])
 
-    render  :pdf => "fattura_#{@invoice.number}",
+    render  :pdf => "#{@invoice.number} - #{@invoice.customer.file_name_template}",
             :layout => 'pdf_invoice.html',
             :margin => { :bottom => 15 },
             :footer => {
