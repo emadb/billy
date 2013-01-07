@@ -49,8 +49,8 @@ class InvoicesController < ApplicationController
 
   def show
     @invoice = Invoice.find(params[:id])
-    file_name = Rails.root.join('public', "fattura_#{@invoice.number}.pdf")
-    render  :pdf => "#{@invoice.number} - #{@invoice.customer.file_name_template}",
+    file_name = Rails.root.join('public', "#{@invoice.number} - #{@invoice.customer.file_name_template}")
+    render  :pdf => file_name,
             :layout => 'pdf_invoice.html',
             :save_to_file => file_name,
             :margin => { :bottom => 15 },
