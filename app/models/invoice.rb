@@ -45,6 +45,7 @@ class Invoice < ActiveRecord::Base
       self.total = self.taxable_income + self.tax
     else
       self.total = self.taxable_income
+      self.tax = 0
     end
 
   end

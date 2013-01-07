@@ -22,6 +22,7 @@ class JobOrdersController < ApplicationController
 
   def edit
     @job_order = JobOrder.find(params[:id])
+    @job_order.activities.push(JobOrderActivity.new) unless @job_order.activities.count > 0
     @customers = Customer.all
     @total_estimated_hours = @job_order.total_estimated_hours
   end
@@ -38,7 +39,14 @@ class JobOrdersController < ApplicationController
   def update
     @job_order = JobOrder.find(params[:id])
     @job_order.update_attributes!(params[:job_order])
-    @job_order.activities.each { |a| a.job_order_id = @job_order.id }
+    @job_order.activities.each do |a| 
+      if a.description.empty?
+        a.delete
+      else
+        a.job_order_id = @job_order.id 
+      end
+    end
+    @job_order.save
     redirect_to job_orders_path
   end
 

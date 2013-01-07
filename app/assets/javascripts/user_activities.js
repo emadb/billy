@@ -1,5 +1,4 @@
 $(function(){
-
     var postbox = new ko.subscribable();
 
     ko.bindingHandlers.dateString = {
@@ -7,7 +6,7 @@ $(function(){
             var value = valueAccessor(),
                 allBindings = allBindingsAccessor();
             var valueUnwrapped = ko.utils.unwrapObservable(value);
-            
+            console.log('handler', value, valueUnwrapped);
             $(element).text(moment(valueUnwrapped).format('DD-MM-YYYY'));
         }
     }
@@ -60,7 +59,8 @@ $(function(){
         });
 
         self.save = function(){
-            var data = { type: self.type, date:self.date(), hours:self.hours(), description: self.description(), jobOrder: self.jobOrder(), activity: self.activity() };
+            var dateTemp = $('#date').val();
+            var data = { type: self.type, date:dateTemp, hours:self.hours(), description: self.description(), jobOrder: self.jobOrder(), activity: self.activity() };
             console.log(data);
             $.post('/user_activities', data, function (data){  
                 var result = $.parseJSON(data);
@@ -164,15 +164,6 @@ $(function(){
         $.getJSON('/user_activities/stats/'+ user + '/' + year + '/' + month, function (response){
             var stats = new StatsViewModel(response.today_hours, response.yesterday_hours);
             ko.applyBindings(stats, $('#stats')[0]);
-        });
-
-      
+        }); 
     }
-
-    // ko.extenders.logChange = function(target, option) {
-    // target.subscribe(function(newValue) {
-    //    console.log(option + ": " + newValue);
-    // });
-    //return target;
-    //};
 });
