@@ -22,6 +22,7 @@ class JobOrdersController < ApplicationController
 
   def edit
     @job_order = JobOrder.find(params[:id])
+    @job_order.activities.all
     @job_order.activities.push(JobOrderActivity.new)
     @customers = Customer.all
     @total_estimated_hours = @job_order.total_estimated_hours

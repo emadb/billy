@@ -9,8 +9,14 @@ $(function (){
     });
 
     $('#taxable-income').text(total.toFixed(2));
-    $('#tax').text((total * 0.21).toFixed(2));
-    $('#total').text((total * 1.21).toFixed(2));
+    var hasTax = $('#invoice_has_tax').attr('checked')?true:false;
+    if (hasTax){
+      $('#tax').text((total * 0.21).toFixed(2));
+      $('#total').text((total * 1.21).toFixed(2));
+    } else {
+        $('#tax').text(0);
+        $('#total').text((total).toFixed(2));
+    }
   }
 
   $('.new-item').click(function(evt){
@@ -27,5 +33,9 @@ $(function (){
     $(this).prev("input[type=hidden]").val(1);
     $(this).parent().parent().slideUp('slow');
     updateTotals();
+  });
+
+  $('#invoice_has_tax').click(function(){
+      updateTotals();
   });
 })
