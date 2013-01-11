@@ -6,7 +6,6 @@ $(function(){
             var value = valueAccessor(),
                 allBindings = allBindingsAccessor();
             var valueUnwrapped = ko.utils.unwrapObservable(value);
-            console.log('handler', value, valueUnwrapped);
             $(element).text(moment(valueUnwrapped).format('DD-MM-YYYY'));
         }
     }
@@ -33,6 +32,7 @@ $(function(){
             });
 
             $.getJSON('/user_activities/stats/'+ user + '/' + year + '/' + month, function (response){
+                console.log('stats', response);
                 var stats = new StatsViewModel(response.today_hours, response.yesterday_hours);
                 ko.applyBindings(stats, $('#stats')[0]);
             });
@@ -90,7 +90,6 @@ $(function(){
             $.getJSON('/user_activity_types', function(data){
                 self.activityTypes(data);
             });
-
         }
 
     }
