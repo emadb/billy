@@ -71,11 +71,11 @@ class UserActivitiesController < ApplicationController
   end
 
   def stats
-    activities = UserActivity.get(params[:year], params[:month], current_user.id)
-
+    user = User.find(params[:user])
+    
     stats = ActivityStats.new
-    stats.today_hours = UserActivity.sum(:hours, :conditions => ["user_id = ? and DATE(date) = ?", current_user.id, Date.today.to_date])
-    stats.yesterday_hours = UserActivity.sum(:hours, :conditions => ["user_id = ? and DATE(date) = ?", current_user.id, Date.yesterday.to_date])
+    stats.today_hours = UserActivity.sum(:hours, :conditions => ["user_id = ? and DATE(date) = ?", user.id, Date.today.to_date])
+    stats.yesterday_hours = UserActivity.sum(:hours, :conditions => ["user_id = ? and DATE(date) = ?", user.id, Date.yesterday.to_date])
 
     render :json => stats
   end
