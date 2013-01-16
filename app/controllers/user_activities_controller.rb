@@ -53,7 +53,7 @@ class UserActivitiesController < ApplicationController
       :hours => @activity.hours,
       :description => @activity.description,
       :jobOrder => job_order.code,
-      :activity => @activity.job_order_activity.description
+      :activity => JobOrderActivity.find(@activity.job_order_activity.id).description
     }
 
     respond_to do |format|

@@ -1,6 +1,14 @@
 $(function(){
     var postbox = new ko.subscribable();
 
+    var updateStats = function(){
+        $.getJSON('/user_activities/stats/'+ user + '/' + year + '/' + month, function (response){
+            var stats = new StatsViewModel(response.today_hours, response.yesterday_hours);
+            ko.applyBindings(stats, $('#stats')[0]);
+        });
+    };
+
+
     ko.bindingHandlers.dateString = {
         update: function(element, valueAccessor, allBindingsAccessor, viewModel) {
             var value = valueAccessor(),
@@ -31,11 +39,8 @@ $(function(){
                 });
             });
 
-            $.getJSON('/user_activities/stats/'+ user + '/' + year + '/' + month, function (response){
-                console.log('stats', response);
-                var stats = new StatsViewModel(response.today_hours, response.yesterday_hours);
-                ko.applyBindings(stats, $('#stats')[0]);
-            });
+            updateStats();
+           
         };
 
     }
@@ -61,15 +66,14 @@ $(function(){
         self.save = function(){
             var dateTemp = $('#date').val();
             var data = { type: self.type, date:dateTemp, hours:self.hours(), description: self.description(), jobOrder: self.jobOrder(), activity: self.activity() };
-            console.log(data);
             $.post('/user_activities', data, function (data){  
                 var result = $.parseJSON(data);
-                newActivity = new ActivityVM(result.id, result.type, result.date, result.hours, result.description, result.jobOrder, result.activity);
+                var newActivity = new ActivityVM(result.id, result.type, result.date, result.hours, result.description, result.jobOrder, result.activity);
                 postbox.notifySubscribers(newActivity, 'new-activity-created');
-               
                 self.hours('');
                 self.description('');    
-                $('#newActivity').modal('hide')
+                $('#newActivity').modal('hide');
+                updateStats();
             });
         }
 
@@ -118,6 +122,7 @@ $(function(){
                         url: 'user_activities/' + self.id(),
                         success: function(){
                              self.isVisible(false);
+                             updateStats();
                         }
                 });
             }
@@ -160,9 +165,6 @@ $(function(){
         activity.init();
         ko.applyBindings(activity, $('#newActivity')[0]);
 
-        $.getJSON('/user_activities/stats/'+ user + '/' + year + '/' + month, function (response){
-            var stats = new StatsViewModel(response.today_hours, response.yesterday_hours);
-            ko.applyBindings(stats, $('#stats')[0]);
-        }); 
+       updateStats();
     }
 });
