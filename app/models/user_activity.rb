@@ -1,7 +1,6 @@
 class UserActivity < ActiveRecord::Base
   belongs_to :user
   belongs_to :job_order_activity
-  belongs_to :user_activity_type
   attr_accessible :date, :description, :hours
 
 

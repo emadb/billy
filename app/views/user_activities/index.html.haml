@@ -17,19 +17,19 @@
   %table.table.table-striped.table-bordered
     %thead
       %tr
-        %td Tipo
         %td Data
         %td Ore
         %td Note
+        %td Commessa
         %td Attività
         %td
     %tbody{"data-bind" => "{foreach: activities}"}
       %tr{"data-bind"=>"{visible: isVisible}"}
-        %td{"data-bind"=>"{text: type}"}
         %td{"data-bind"=>"{dateString: date}"}
         %td{"data-bind"=>"{text: hours}"}
         %td{"data-bind"=>"{text: description}"}
-        %td{"data-bind"=>"{text: activityJobOrder}"}
+        %td{"data-bind"=>"{text: jobOrder}"}
+        %td{"data-bind"=>"{text: activity}"}
         %td
           %a{:href => "#", "data-bind"=> "{click: removeActivity}"}
             %i.icon-remove
@@ -53,12 +53,6 @@
             Attività
             .controls
               = select_tag :activity, '', :data => {:bind => "value: activity, options: jobOrderActivities, optionsValue : 'id', optionsText: 'description'"}
-      .row
-        .span6
-          .field.control-group
-            Categoria
-            .controls
-              = select_tag :type, '', :data => {:bind => "value: type, options: activityTypes, optionsValue : 'id', optionsText: 'description'"}
       .row
         .span3
           .field.control-group

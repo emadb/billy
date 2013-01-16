@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130106142033) do
+ActiveRecord::Schema.define(:version => 20130116213902) do
 
   create_table "customers", :force => true do |t|
     t.string   "name"
@@ -117,12 +117,6 @@ ActiveRecord::Schema.define(:version => 20130106142033) do
   add_index "user_activities", ["job_order_activity_id"], :name => "index_user_activities_on_job_order_activity_id"
   add_index "user_activities", ["user_activity_type_id"], :name => "index_user_activities_on_activity_type_id"
   add_index "user_activities", ["user_id"], :name => "index_user_activities_on_user_id"
-
-  create_table "user_activity_types", :force => true do |t|
-    t.string   "description"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
-  end
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
