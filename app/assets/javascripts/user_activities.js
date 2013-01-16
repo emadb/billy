@@ -35,7 +35,7 @@ $(function(){
             $.getJSON('/user_activities/'+ self.user() + '/' + self.year() + '/' + self.month(), function (result){
                 self.activities.removeAll();
                 $.each(result, function(index, item){
-                    self.activities.push(new ActivityVM(item.id, item.type, item.date, item.hours, item.description, item.jobOrder, item.activity));
+                    self.activities.push(new ActivityVM(item.id, item.date, item.hours, item.description, item.jobOrder, item.activity));
                 });
             });
 
@@ -50,9 +50,7 @@ $(function(){
 
         self.jobOrders = ko.observableArray();
         self.jobOrderActivities = ko.observableArray();
-        self.activityTypes = ko.observableArray();
 
-        self.type = ko.observable();
         self.date = ko.observable(moment().format('DD-MM-YYYY'));
         self.hours = ko.observable();
         self.description = ko.observable();
@@ -65,10 +63,10 @@ $(function(){
 
         self.save = function(){
             var dateTemp = $('#date').val();
-            var data = { type: self.type, date:dateTemp, hours:self.hours(), description: self.description(), jobOrder: self.jobOrder(), activity: self.activity() };
+            var data = { date:dateTemp, hours:self.hours(), description: self.description(), jobOrder: self.jobOrder(), activity: self.activity() };
             $.post('/user_activities', data, function (data){  
                 var result = $.parseJSON(data);
-                var newActivity = new ActivityVM(result.id, result.type, result.date, result.hours, result.description, result.jobOrder, result.activity);
+                var newActivity = new ActivityVM(result.id, result.date, result.hours, result.description, result.jobOrder, result.activity);
                 postbox.notifySubscribers(newActivity, 'new-activity-created');
                 self.hours('');
                 self.description('');    
@@ -89,22 +87,16 @@ $(function(){
                 self.jobOrders(data);
                 self.loadJobOrderActivities(self.jobOrder());
             });
-
-
-            $.getJSON('/user_activity_types', function(data){
-                self.activityTypes(data);
-            });
         }
 
     }
 
 
-    function ActivityVM(id, type, date, hours, description, jobOrder, activity)
+    function ActivityVM(id, date, hours, description, jobOrder, activity)
     {
         var self = this;
 
         this.id = ko.observable(id);
-        this.type = ko.observable(type);
         this.date = ko.observable(date);
         this.hours = ko.observable(hours);
         this.description = ko.observable(description);
@@ -153,7 +145,7 @@ $(function(){
         $.getJSON('/user_activities/'+ user + '/' + year + '/' + month, function (result){
             var current = [];
             $.each(result, function(index, item){
-                current.push(new ActivityVM(item.id, item.type, item.date, item.hours, item.description, item.jobOrder, item.activity));
+                current.push(new ActivityVM(item.id, item.date, item.hours, item.description, item.jobOrder, item.activity));
             });
             activityList.activities(current);
         });

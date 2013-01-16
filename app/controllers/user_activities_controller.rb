@@ -24,7 +24,6 @@ class UserActivitiesController < ApplicationController
       format.html
       format.json { render :json => @activities.map{ |a| {
           :id => a.id,
-          :type => a.user_activity_type.description, 
           :date => a.date,
           :hours => a.hours,
           :description => a.description,
@@ -37,7 +36,6 @@ class UserActivitiesController < ApplicationController
   def create
     @activity = UserActivity.new()
     
-    @activity.user_activity_type = UserActivityType.find(params[:type])
     @activity.date = DateTime.parse(params[:date])
     @activity.hours = params[:hours].to_f
     @activity.description = params[:description]
@@ -48,7 +46,6 @@ class UserActivitiesController < ApplicationController
 
     @result = {
       :id => @activity.id,
-      :type => @activity.user_activity_type.description, 
       :date => @activity.date,
       :hours => @activity.hours,
       :description => @activity.description,
