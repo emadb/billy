@@ -19,7 +19,7 @@ class JobOrdersController < ApplicationController
         end
 
       end
-      format.json { render :json => @job_orders.select('id, code') }
+      format.json { render :json => @job_orders.select('id, code').order('code') }
     end
   end
 
