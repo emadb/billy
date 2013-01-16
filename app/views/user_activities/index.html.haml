@@ -20,6 +20,7 @@
         %td Data
         %td Ore
         %td Note
+        %td Commessa
         %td Attività
         %td
     %tbody{"data-bind" => "{foreach: activities}"}
@@ -27,7 +28,8 @@
         %td{"data-bind"=>"{dateString: date}"}
         %td{"data-bind"=>"{text: hours}"}
         %td{"data-bind"=>"{text: description}"}
-        %td{"data-bind"=>"{text: activityJobOrder}"}
+        %td{"data-bind"=>"{text: jobOrder}"}
+        %td{"data-bind"=>"{text: activity}"}
         %td
           %a{:href => "#", "data-bind"=> "{click: removeActivity}"}
             %i.icon-remove
