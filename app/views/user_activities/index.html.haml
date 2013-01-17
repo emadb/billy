@@ -17,22 +17,23 @@
   %table.table.table-striped.table-bordered
     %thead
       %tr
-        %td Data
-        %td Ore
-        %td Note
-        %td Commessa
-        %td Attività
-        %td
+        %th Data
+        %th Ore
+        %th Commessa
+        %th Attività
+        %th Note
+        %th
     %tbody{"data-bind" => "{foreach: activities}"}
       %tr{"data-bind"=>"{visible: isVisible}"}
         %td{"data-bind"=>"{dateString: date}"}
         %td{"data-bind"=>"{text: hours}"}
-        %td{"data-bind"=>"{text: description}"}
         %td{"data-bind"=>"{text: jobOrder}"}
         %td{"data-bind"=>"{text: activity}"}
+        %td{"data-bind"=>"{text: description}"}
+        
         %td
           %a{:href => "#", "data-bind"=> "{click: removeActivity}"}
-            %i.icon-remove
+            %i.icon-trash
        
 
 
