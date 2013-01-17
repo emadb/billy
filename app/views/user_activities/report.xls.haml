@@ -1,0 +1,20 @@
+%table
+	%tr
+		%th Data
+		%th Ore
+		%th Commessa
+		%th Attivita
+		%th Note
+	- @activities.each do |a|
+		%tr
+			%td 
+				= a.date
+			%td 
+				= a.hours
+			%td 
+				= a.job_order_activity.job_order.code
+			%td 
+				= a.job_order_activity.description
+			%td 
+				= a.description
+	

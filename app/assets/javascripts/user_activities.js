@@ -159,4 +159,21 @@ $(function(){
 
        updateStats();
     }
+
+    $('#report').click(function(){
+        
+        var month = $('#date_month').val();
+        var year = $('#date_year').val();
+        var user = $('#user').val();
+
+        if (month !== undefined && year !== undefined && user !== undefined){
+            var url = $(this).attr('href') +'?user=' + user + '&year=' + year + '&month=' + month;
+            console.log(url);
+            $('#frm').src = url;
+            window.location = url;
+        }
+        return false;
+
+
+    });
 });

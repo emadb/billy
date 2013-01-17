@@ -78,8 +78,14 @@
     
 = content_for :side_bar do
   .well.sidebar-nav
-    %a.btn.btn-primary{"data-toggle" => "modal", :href => '#newActivity'}
-      Nuova attività
+    %ul.info-panel
+      %li
+        %a.btn.btn-primary{"data-toggle" => "modal", :href => '#newActivity'}
+          Nuova attività
+      %li
+        %a.btn#report{:href => '/user_activities/report.xls'}
+          Genera report
+    %iframe#frm{:style => "display:none"}
     %hr
     %ul#stats.totals.info-panel  
       %li Oggi
