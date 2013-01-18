@@ -39,11 +39,11 @@ $(function(){
                 var currentDay = null;
                 var background = 'warning';
                 $.each(result, function(index, item){
-                    if (currentDay !== item.date.day){
-                        currentDay = item.date.day;
-                        background === 'warning' ? 'info':'warning'
+                    var day = moment(item.date).date()
+                    if (currentDay !== day){
+                        currentDay = day;
+                        background = background === 'warning' ? 'info':'warning'
                     }
-                    console.log('bak', background);
                     self.activities.push(new ActivityVM(item.id, item.date, item.hours, item.description, item.jobOrder, item.activity, background));
                 });
             });
@@ -106,7 +106,7 @@ $(function(){
         this.id = ko.observable(id);
         this.date = ko.observable(date);
         this.day = ko.computed(function(){
-            return days[moment(date).day()];
+            return days[moment(date).day() - 1];
         });
         this.hours = ko.observable(hours);
         this.description = ko.observable(description);
@@ -159,10 +159,7 @@ $(function(){
                 var day = moment(item.date).date()
                 if (currentDay !== day){
                     currentDay = day;
-                    if (background === 'warning')
-                        background = 'info';
-                    else
-                        background = 'warning';
+                    background = background === 'warning' ? 'info':'warning'
                 }
                 current.push(new ActivityVM(item.id, item.date, item.hours, item.description, item.jobOrder, item.activity, background));
             });
@@ -187,7 +184,6 @@ $(function(){
 
         if (month !== undefined && year !== undefined && user !== undefined){
             var url = $(this).attr('href') +'?user=' + user + '&year=' + year + '&month=' + month;
-            console.log(url);
             $('#frm').src = url;
             window.location = url;
         }
