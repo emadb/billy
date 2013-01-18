@@ -1,6 +1,6 @@
 $(function(){
     var postbox = new ko.subscribable();
-
+    var days = ['lunedì', 'martedì', 'mercoledì', 'giovedì', 'venerdì', 'sabato', 'domenica'];
     var updateStats = function(){
         $.getJSON('/user_activities/stats/'+ user + '/' + year + '/' + month, function (response){
             var stats = new StatsViewModel(response.today_hours, response.yesterday_hours);
@@ -14,7 +14,9 @@ $(function(){
             var value = valueAccessor(),
                 allBindings = allBindingsAccessor();
             var valueUnwrapped = ko.utils.unwrapObservable(value);
-            $(element).text(moment(valueUnwrapped).format('DD-MM-YYYY'));
+            window.date = moment(valueUnwrapped);
+            $(element).text(date.format('DD-MM-YYYY'));
+            
         }
     }
 
@@ -95,16 +97,17 @@ $(function(){
                 self.loadJobOrderActivities(self.jobOrder());
             });
         }
-
     }
-
-
+    
     function ActivityVM(id, date, hours, description, jobOrder, activity, background)
     {
         var self = this;
 
         this.id = ko.observable(id);
         this.date = ko.observable(date);
+        this.day = ko.computed(function(){
+            return days[moment(date).day()];
+        });
         this.hours = ko.observable(hours);
         this.description = ko.observable(description);
         this.jobOrder = ko.observable(jobOrder);

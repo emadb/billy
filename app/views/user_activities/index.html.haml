@@ -18,6 +18,7 @@
     %thead
       %tr
         %th Data
+        %th Giorno
         %th Ore
         %th Commessa
         %th Attività
@@ -26,6 +27,7 @@
     %tbody{"data-bind" => "{foreach: activities}"}
       %tr{"data-bind"=>"{visible: isVisible, attr: {class: background}}"}
         %td{"data-bind"=>"{dateString: date}"}
+        %td{"data-bind"=>"{text: day}"}
         %td{"data-bind"=>"{text: hours}"}
         %td{"data-bind"=>"{text: jobOrder}"}
         %td{"data-bind"=>"{text: activity}"}
