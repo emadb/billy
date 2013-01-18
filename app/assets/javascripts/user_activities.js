@@ -34,8 +34,15 @@ $(function(){
         this.reload = function(){
             $.getJSON('/user_activities/'+ self.user() + '/' + self.year() + '/' + self.month(), function (result){
                 self.activities.removeAll();
+                var currentDay = null;
+                var background = 'warning';
                 $.each(result, function(index, item){
-                    self.activities.push(new ActivityVM(item.id, item.date, item.hours, item.description, item.jobOrder, item.activity));
+                    if (currentDay !== item.date.day){
+                        currentDay = item.date.day;
+                        background === 'warning' ? 'info':'warning'
+                    }
+                    console.log('bak', background);
+                    self.activities.push(new ActivityVM(item.id, item.date, item.hours, item.description, item.jobOrder, item.activity, background));
                 });
             });
 
@@ -92,7 +99,7 @@ $(function(){
     }
 
 
-    function ActivityVM(id, date, hours, description, jobOrder, activity)
+    function ActivityVM(id, date, hours, description, jobOrder, activity, background)
     {
         var self = this;
 
@@ -102,10 +109,9 @@ $(function(){
         this.description = ko.observable(description);
         this.jobOrder = ko.observable(jobOrder);
         this.activity = ko.observable(activity);
-        this.activityJobOrder  = ko.computed(function() {
-            return this.activity() + ' (' + this.jobOrder() + ')'
-        }, this);
+
         this.isVisible = ko.observable(true);
+        this.background = ko.observable(background);
 
         self.removeActivity = function(){
             if (window.confirm('cancellare?')){
@@ -144,8 +150,18 @@ $(function(){
         
         $.getJSON('/user_activities/'+ user + '/' + year + '/' + month, function (result){
             var current = [];
+            var currentDay = null;
+            var background = 'warning';
             $.each(result, function(index, item){
-                current.push(new ActivityVM(item.id, item.date, item.hours, item.description, item.jobOrder, item.activity));
+                var day = moment(item.date).date()
+                if (currentDay !== day){
+                    currentDay = day;
+                    if (background === 'warning')
+                        background = 'info';
+                    else
+                        background = 'warning';
+                }
+                current.push(new ActivityVM(item.id, item.date, item.hours, item.description, item.jobOrder, item.activity, background));
             });
             activityList.activities(current);
         });

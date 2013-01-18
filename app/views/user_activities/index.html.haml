@@ -24,7 +24,7 @@
         %th Note
         %th
     %tbody{"data-bind" => "{foreach: activities}"}
-      %tr{"data-bind"=>"{visible: isVisible}"}
+      %tr{"data-bind"=>"{visible: isVisible, attr: {class: background}}"}
         %td{"data-bind"=>"{dateString: date}"}
         %td{"data-bind"=>"{text: hours}"}
         %td{"data-bind"=>"{text: jobOrder}"}
