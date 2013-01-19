@@ -18,7 +18,6 @@
     %thead
       %tr
         %th Data
-        %th Giorno
         %th Ore
         %th Commessa
         %th Attività
@@ -26,8 +25,10 @@
         %th
     %tbody{"data-bind" => "{foreach: activities}"}
       %tr{"data-bind"=>"{visible: isVisible}"}
-        %td{"data-bind"=>"{dateString: date, attr: {class: background}}"}
-        %td{"data-bind"=>"{text: day, attr: {class: background}}"}
+        %td{"data-bind"=>"{attr: {class: background}}"}
+          %span{"data-bind"=>"{dateString: date}"}
+          %br
+          %small.grey{"data-bind"=>"{text: day}"}
         %td{"data-bind"=>"{text: hours, attr: {class: background}}"}
         %td{"data-bind"=>"{text: jobOrder, attr: {class: background}}"}
         %td{"data-bind"=>"{text: activity, attr: {class: background}}"}

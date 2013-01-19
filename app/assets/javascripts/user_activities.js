@@ -36,11 +36,11 @@ $(function(){
         this.reload = function(){
             $.getJSON('/user_activities/'+ self.user() + '/' + self.year() + '/' + self.month(), function (result){
                 self.activities.removeAll();
-                var currentDay = null;
-                var background = 'warning';
+                var currentDay = moment(result[0].date).date();
+                var background = '';
                 $.each(result, function(index, item){
                     var day = moment(item.date).date()
-                    if (currentDay !== day){
+                     if (currentDay !== day){
                         currentDay = day;
                         background = background === '' ? 'line':'';
                     }
