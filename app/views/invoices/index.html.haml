@@ -14,11 +14,13 @@
       %td 
   %tbody
     -@invoices.each do |i|
-      %tr{:class => row_status_helper(i)}
+      %tr
         %td 
           = i.number
         %td 
           = i.date.strftime('%d-%m-%Y') unless i.date.nil?
+          - if i.is_in_late?
+            %span.badge.badge-important !
         %td
           = i.customer.name
         %td.right
@@ -31,7 +33,7 @@
           -if i.is_payed
             %span.label.label-success si
           - else
-            %span.label.label-important no
+            %span.label.label-warning no
         %td 
           = status_helper(i.status)
           - if i.status == Invoice.temporary
