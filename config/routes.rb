@@ -17,7 +17,9 @@ Scrooge::Application.routes.draw do
     resources :job_order_activities
   end
 
-  resources :user_activities
+  resources :user_activities do
+    get 'report', :on => :collection, :action => 'report'
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

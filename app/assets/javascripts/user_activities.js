@@ -1,6 +1,6 @@
 $(function(){
     var postbox = new ko.subscribable();
-
+    var days = ['lunedì', 'martedì', 'mercoledì', 'giovedì', 'venerdì', 'sabato', 'domenica'];
     var updateStats = function(){
         $.getJSON('/user_activities/stats/'+ user + '/' + year + '/' + month, function (response){
             var stats = new StatsViewModel(response.today_hours, response.yesterday_hours);
@@ -14,7 +14,9 @@ $(function(){
             var value = valueAccessor(),
                 allBindings = allBindingsAccessor();
             var valueUnwrapped = ko.utils.unwrapObservable(value);
-            $(element).text(moment(valueUnwrapped).format('DD-MM-YYYY'));
+            window.date = moment(valueUnwrapped);
+            $(element).text(date.format('DD-MM-YYYY'));
+            
         }
     }
 
@@ -34,8 +36,15 @@ $(function(){
         this.reload = function(){
             $.getJSON('/user_activities/'+ self.user() + '/' + self.year() + '/' + self.month(), function (result){
                 self.activities.removeAll();
+                var currentDay = moment(result[0].date).date();
+                var background = '';
                 $.each(result, function(index, item){
-                    self.activities.push(new ActivityVM(item.id, item.date, item.hours, item.description, item.jobOrder, item.activity));
+                    var day = moment(item.date).date()
+                     if (currentDay !== day){
+                        currentDay = day;
+                        background = background === '' ? 'line':'';
+                    }
+                    self.activities.push(new ActivityVM(item.id, item.date, item.hours, item.description, item.jobOrder, item.activity, background));
                 });
             });
 
@@ -88,24 +97,24 @@ $(function(){
                 self.loadJobOrderActivities(self.jobOrder());
             });
         }
-
     }
-
-
-    function ActivityVM(id, date, hours, description, jobOrder, activity)
+    
+    function ActivityVM(id, date, hours, description, jobOrder, activity, background)
     {
         var self = this;
 
         this.id = ko.observable(id);
         this.date = ko.observable(date);
+        this.day = ko.computed(function(){
+            return days[moment(date).day() - 1];
+        });
         this.hours = ko.observable(hours);
         this.description = ko.observable(description);
         this.jobOrder = ko.observable(jobOrder);
         this.activity = ko.observable(activity);
-        this.activityJobOrder  = ko.computed(function() {
-            return this.activity() + ' (' + this.jobOrder() + ')'
-        }, this);
+
         this.isVisible = ko.observable(true);
+        this.background = ko.observable(background);
 
         self.removeActivity = function(){
             if (window.confirm('cancellare?')){
@@ -144,8 +153,16 @@ $(function(){
         
         $.getJSON('/user_activities/'+ user + '/' + year + '/' + month, function (result){
             var current = [];
+            var currentDay = moment(result[0].date).date();
+            
             $.each(result, function(index, item){
-                current.push(new ActivityVM(item.id, item.date, item.hours, item.description, item.jobOrder, item.activity));
+                var background = '';
+                var day = moment(item.date).date();
+                if (currentDay !== day){
+                    currentDay = day;
+                    background = background === '' ? 'line':'';
+                }
+                current.push(new ActivityVM(item.id, item.date, item.hours, item.description, item.jobOrder, item.activity, background));
             });
             activityList.activities(current);
         });
@@ -159,4 +176,20 @@ $(function(){
 
        updateStats();
     }
+
+    $('#report').click(function(){
+        
+        var month = $('#date_month').val();
+        var year = $('#date_year').val();
+        var user = $('#user').val();
+
+        if (month !== undefined && year !== undefined && user !== undefined){
+            var url = $(this).attr('href') +'?user=' + user + '&year=' + year + '&month=' + month;
+            $('#frm').src = url;
+            window.location = url;
+        }
+        return false;
+
+
+    });
 });

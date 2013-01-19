@@ -14,25 +14,29 @@
       &nbsp;&nbsp;
       %button.btn{:type => 'button', 'data-bind' => 'click: reload'} filtra
 
-  %table.table.table-striped.table-bordered
+  %table.table.table-bordered.table-striped
     %thead
       %tr
-        %td Data
-        %td Ore
-        %td Note
-        %td Commessa
-        %td Attività
-        %td
+        %th Data
+        %th Ore
+        %th Commessa
+        %th Attività
+        %th Note
+        %th
     %tbody{"data-bind" => "{foreach: activities}"}
       %tr{"data-bind"=>"{visible: isVisible}"}
-        %td{"data-bind"=>"{dateString: date}"}
-        %td{"data-bind"=>"{text: hours}"}
-        %td{"data-bind"=>"{text: description}"}
-        %td{"data-bind"=>"{text: jobOrder}"}
-        %td{"data-bind"=>"{text: activity}"}
-        %td
+        %td{"data-bind"=>"{attr: {class: background}}"}
+          %span{"data-bind"=>"{dateString: date}"}
+          %br
+          %small.grey{"data-bind"=>"{text: day}"}
+        %td{"data-bind"=>"{text: hours, attr: {class: background}}"}
+        %td{"data-bind"=>"{text: jobOrder, attr: {class: background}}"}
+        %td{"data-bind"=>"{text: activity, attr: {class: background}}"}
+        %td{"data-bind"=>"{text: description, attr: {class: background}}"}
+        
+        %td{"data-bind"=>"{attr: {class: background}}"}
           %a{:href => "#", "data-bind"=> "{click: removeActivity}"}
-            %i.icon-remove
+            %i.icon-trash
        
 
 
@@ -77,8 +81,14 @@
     
 = content_for :side_bar do
   .well.sidebar-nav
-    %a.btn.btn-primary{"data-toggle" => "modal", :href => '#newActivity'}
-      Nuova attività
+    %ul.info-panel
+      %li
+        %a.btn.btn-primary{"data-toggle" => "modal", :href => '#newActivity'}
+          Nuova attività
+      %li
+        %a.btn#report{:href => '/user_activities/report.xls'}
+          Genera report
+    %iframe#frm{:style => "display:none"}
     %hr
     %ul#stats.totals.info-panel  
       %li Oggi

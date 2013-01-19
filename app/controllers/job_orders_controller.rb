@@ -3,10 +3,10 @@ class JobOrdersController < ApplicationController
 
   def index
     if params[:archived] == "yes"
-      @job_orders = JobOrder.where(:archived => true)
+      @job_orders = JobOrder.where(:archived => true).order('code')
       @title = 'Archived job orders'
     else
-      @job_orders = JobOrder.where(:archived => false)
+      @job_orders = JobOrder.where(:archived => false).order('code')
       @title = 'Job orders'
     end
     

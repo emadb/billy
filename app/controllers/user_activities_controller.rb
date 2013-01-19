@@ -77,6 +77,13 @@ class UserActivitiesController < ApplicationController
     render :json => stats
   end
 
+  def report
+    @activities = UserActivity.get(params[:year], params[:month], params[:user])
+    respond_to do |format|
+      format.xls 
+    end
+  end
+
 end
 
 

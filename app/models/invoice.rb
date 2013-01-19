@@ -47,6 +47,9 @@ class Invoice < ActiveRecord::Base
       self.total = self.taxable_income
       self.tax = 0
     end
-
+  end
+  
+  def is_in_late?
+    !self.due_date.nil? and self.due_date <= DateTime.now && !self.is_payed
   end
 end

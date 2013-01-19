@@ -28,7 +28,7 @@ class JobOrder < ActiveRecord::Base
     activities.where(:active => true)
   end
 
-  def status
-    "error" if total_executed_hours > total_estimated_hours
+  def warning?
+    total_executed_hours > total_estimated_hours
   end
 end

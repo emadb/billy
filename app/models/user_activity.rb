@@ -22,4 +22,5 @@ class UserActivity < ActiveRecord::Base
     .where('date = ? and user_id = ?', date, userId)
 	.sum(:hours) || 0
   end
+
 end
