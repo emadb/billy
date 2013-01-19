@@ -14,7 +14,7 @@
       &nbsp;&nbsp;
       %button.btn{:type => 'button', 'data-bind' => 'click: reload'} filtra
 
-  %table.table.table-bordered
+  %table.table.table-bordered.table-striped
     %thead
       %tr
         %th Data
@@ -25,15 +25,15 @@
         %th Note
         %th
     %tbody{"data-bind" => "{foreach: activities}"}
-      %tr{"data-bind"=>"{visible: isVisible, attr: {class: background}}"}
-        %td{"data-bind"=>"{dateString: date}"}
-        %td{"data-bind"=>"{text: day}"}
-        %td{"data-bind"=>"{text: hours}"}
-        %td{"data-bind"=>"{text: jobOrder}"}
-        %td{"data-bind"=>"{text: activity}"}
-        %td{"data-bind"=>"{text: description}"}
+      %tr{"data-bind"=>"{visible: isVisible}"}
+        %td{"data-bind"=>"{dateString: date, attr: {class: background}}"}
+        %td{"data-bind"=>"{text: day, attr: {class: background}}"}
+        %td{"data-bind"=>"{text: hours, attr: {class: background}}"}
+        %td{"data-bind"=>"{text: jobOrder, attr: {class: background}}"}
+        %td{"data-bind"=>"{text: activity, attr: {class: background}}"}
+        %td{"data-bind"=>"{text: description, attr: {class: background}}"}
         
-        %td
+        %td{"data-bind"=>"{attr: {class: background}}"}
           %a{:href => "#", "data-bind"=> "{click: removeActivity}"}
             %i.icon-trash
        

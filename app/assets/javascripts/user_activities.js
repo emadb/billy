@@ -42,7 +42,7 @@ $(function(){
                     var day = moment(item.date).date()
                     if (currentDay !== day){
                         currentDay = day;
-                        background = background === 'warning' ? 'info':'warning'
+                        background = background === '' ? 'line':'';
                     }
                     self.activities.push(new ActivityVM(item.id, item.date, item.hours, item.description, item.jobOrder, item.activity, background));
                 });
@@ -153,13 +153,14 @@ $(function(){
         
         $.getJSON('/user_activities/'+ user + '/' + year + '/' + month, function (result){
             var current = [];
-            var currentDay = null;
-            var background = 'warning';
+            var currentDay = moment(result[0].date).date();
+            
             $.each(result, function(index, item){
-                var day = moment(item.date).date()
+                var background = '';
+                var day = moment(item.date).date();
                 if (currentDay !== day){
                     currentDay = day;
-                    background = background === 'warning' ? 'info':'warning'
+                    background = background === '' ? 'line':'';
                 }
                 current.push(new ActivityVM(item.id, item.date, item.hours, item.description, item.jobOrder, item.activity, background));
             });
