@@ -25,7 +25,12 @@ class JobOrder < ActiveRecord::Base
   end
 
   def percent
-    total_executed_hours / total_estimated_hours * 100
+    percent = (total_executed_hours / total_estimated_hours * 100)
+    if percent.nan?
+      0
+    else
+      percent.ceil 
+    end
   end
 
   def active_activities
