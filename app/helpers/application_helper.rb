@@ -31,4 +31,14 @@ module ApplicationHelper
     raw("<span class=\"label label-#{label_class}\">#{text}</span>")
   end
 
+  def job_order_status_helper (job_order)
+    if job_order.percent > 99
+      return "progress-danger" 
+    end
+    if job_order.percent > 85
+      return "progress-warning"
+    end
+
+  end
+
 end
