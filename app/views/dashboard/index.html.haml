@@ -1,99 +1,111 @@
-%div.span4
-  %table.table
-    %tr
-      %th
-        In
-      %th
-    %tr.info
-      %td
-        Fatturato
-      %td.right
-        = number_to_currency @invoices_totals.taxable_income
-    %tr
-      %td
-        Iva
-      %td.right
-        = number_to_currency @invoices_totals.tax
-    %tr
-      %td.italic
-        Totale
-      %td.right.italic
-        = number_to_currency @invoices_totals.total
-    %tr.error
-      %td
-        Da incassare
-      %td.right
-        = number_to_currency @to_receive
-
-%div.span4
-  %table.table
-    %tr
-      %th
-        Fatturato per trimestre
-      %th
-    %tr
-      %td
-        1
-      %td.right
-        = number_to_currency @quarters.q1
-    %tr
-      %td
-        2
-      %td.right
-        = number_to_currency @quarters.q2
-    %tr
-      %td
-        3
-      %td.right
-        = number_to_currency @quarters.q3
-    %tr
-      %td
-        4
-      %td.right
-        = number_to_currency @quarters.q4
-
-%div.span4
-  %table.table
-    %tr
-      %th
-        Out
-      %th
-    %tr
-      %td
-        Netto
-      %td.right
-        = number_to_currency @inbound_invoices_totals.taxable_income
-    %tr
-      %td
-        Iva
-      %td.right
-        = number_to_currency @inbound_invoices_totals.tax
-    %tr
-      %td.italic
-        Totale
-      %td.right.italic
-        = number_to_currency @inbound_invoices_totals.total
-
-%div.span4
-  %table.table
-    %tr
-      %th
-        Fatturato per cliente
-      %th
-        
-    - @perCustomer.each do |c|
+.row
+  .span4
+    %table.table
+      %tr
+        %th
+          In
+        %th
+      %tr.info
+        %td
+          Fatturato
+        %td.right
+          = number_to_currency @invoices_totals.taxable_income
       %tr
         %td
-          = c['customer']
+          Iva
         %td.right
-          = number_to_currency c['taxable_income']
+          = number_to_currency @invoices_totals.tax
+      %tr
+        %td.italic
+          Totale
+        %td.right.italic
+          = number_to_currency @invoices_totals.total
+      %tr.error
+        %td
+          Da incassare
+        %td.right
+          = number_to_currency @to_receive
 
-%div.span4
-  %table.table
-    %tr
-      %th
-        Attività di ieri (TODO)
-      %th
+  .span4
+    %table.table
+      %tr
+        %th
+          Fatturato per trimestre
+        %th
+      %tr
+        %td
+          1
+        %td.right
+          = number_to_currency @quarters.q1
+      %tr
+        %td
+          2
+        %td.right
+          = number_to_currency @quarters.q2
+      %tr
+        %td
+          3
+        %td.right
+          = number_to_currency @quarters.q3
+      %tr
+        %td
+          4
+        %td.right
+          = number_to_currency @quarters.q4
+.row
+  .span4
+    %table.table
+      %tr
+        %th
+          Out
+        %th
+      %tr
+        %td
+          Netto
+        %td.right
+          = number_to_currency @inbound_invoices_totals.taxable_income
+      %tr
+        %td
+          Iva
+        %td.right
+          = number_to_currency @inbound_invoices_totals.tax
+      %tr
+        %td.italic
+          Totale
+        %td.right.italic
+          = number_to_currency @inbound_invoices_totals.total
+
+  .span4
+    %table.table
+      %tr
+        %th
+          Fatturato per cliente
+        %th
+          
+      - @perCustomer.each do |c|
+        %tr
+          %td
+            = c['customer']
+          %td.right
+            = number_to_currency c['taxable_income']
+.row
+  .span8
+    %table.table
+      %tr
+        %th
+          Commesse
+        %th
+        %th
+      - @job_orders.each do |j|
+        %tr
+          %td
+            = j.code
+          %td
+            = "#{j.total_executed_hours}/#{j.total_estimated_hours}"
+          %td{:style => "width:400px"}
+            .progress
+              .bar{:style => "width:#{j.percent}%"}
+
         
    
       

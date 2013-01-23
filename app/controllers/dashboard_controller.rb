@@ -24,6 +24,7 @@ class DashboardController < ApplicationController
       InboundInvoice.sum(:tax), 
       InboundInvoice.sum(:total))
 
+    @job_orders = JobOrder.where(:archived => false).order('code')
     
   end
 end
