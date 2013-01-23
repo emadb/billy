@@ -29,7 +29,7 @@ class JobOrder < ActiveRecord::Base
     if percent.nan?
       0
     else
-      percent.ceil 
+      percent
     end
   end
 
