@@ -37,8 +37,8 @@ $(function(){
             $.getJSON('/user_activities/'+ self.user() + '/' + self.year() + '/' + self.month(), function (result){
                 self.activities.removeAll();
                 var currentDay = moment(result[0].date).date();
-                var background = '';
                 $.each(result, function(index, item){
+                    var background = '';
                     var day = moment(item.date).date()
                      if (currentDay !== day){
                         currentDay = day;
