@@ -1,0 +1,20 @@
+%table.table
+  %tr
+    %th
+      Out
+    %th
+  %tr
+    %td
+      Netto
+    %td.right
+      = number_to_currency @inbound_invoices_totals.taxable_income
+  %tr
+    %td
+      Iva
+    %td.right
+      = number_to_currency @inbound_invoices_totals.tax
+  %tr
+    %td.italic
+      Totale
+    %td.right.italic
+      = number_to_currency @inbound_invoices_totals.total

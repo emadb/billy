@@ -1,0 +1,25 @@
+%table.table
+  %tr
+    %th
+      Fatturato per trimestre
+    %th
+  %tr
+    %td
+      1
+    %td.right
+      = number_to_currency @quarters.q1
+  %tr
+    %td
+      2
+    %td.right
+      = number_to_currency @quarters.q2
+  %tr
+    %td
+      3
+    %td.right
+      = number_to_currency @quarters.q3
+  %tr
+    %td
+      4
+    %td.right
+      = number_to_currency @quarters.q4
