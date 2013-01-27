@@ -1,17 +1,18 @@
-%table.table
-  %tr
-    %th
-      Commesse
-    %th
-    %th
-  - @job_orders.each do |j|
+.well
+  %table.table
     %tr
-      %td
-        = j.code
-      %td.right
-        = "#{j.total_executed_hours}/#{j.total_estimated_hours}"
-        .grey
-          = "#{j.percent}%"
-      %td{:style => "width:400px"}
-        .progress{:class => job_order_status_helper(j)}
-          .bar{:style => "width:#{j.percent}%"}
+      %th
+        Commesse
+      %th
+      %th
+    - @job_orders.each do |j|
+      %tr
+        %td
+          = j.code
+        %td.right
+          = "#{j.total_executed_hours}/#{j.total_estimated_hours}"
+          .grey
+            = "#{j.percent}%"
+        %td{:style => "width:400px"}
+          .progress{:class => job_order_status_helper(j)}
+            .bar{:style => "width:#{j.percent}%"}
