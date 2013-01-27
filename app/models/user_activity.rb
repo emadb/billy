@@ -10,7 +10,7 @@ class UserActivity < ActiveRecord::Base
     else
       filter_date= Date.new(year.to_i, month.to_i, 1)
     end
-    filter_date_next = filter_date.to_time.advance(:months => 1).to_date
+    filter_date_next = filter_date + 1.month
 
     query = UserActivity
       .where('date >= ? and date <= ? and user_id = ?', filter_date, filter_date_next, selected_user_id)

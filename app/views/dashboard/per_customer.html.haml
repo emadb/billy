@@ -1,0 +1,13 @@
+.well
+  %table.table
+    %tr
+      %th
+        Fatturato per cliente
+      %th
+        
+    - @perCustomer.each do |c|
+      %tr
+        %td
+          = c['customer']
+        %td.right
+          = number_to_currency c['taxable_income']

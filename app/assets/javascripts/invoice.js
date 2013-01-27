@@ -25,8 +25,8 @@ $(function (){
     $('.items').append('<tr><td><input type="text" name="invoice[invoice_items_attributes][' + nextRow + ' ][description]" class="span5"></td><td><input type="text" name="invoice[invoice_items_attributes][' + nextRow + ' ][amount]" class="amount span1"></td></tr>');
   });
 
-  $('.amount').live('blur',function(){
-    updateTotals();
+  $(document).on('blur','.amount',function(){
+      updateTotals();
   });
 
   $('.remove-item').click(function(){

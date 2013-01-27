@@ -6,7 +6,7 @@ class InboundInvoicesController < ApplicationController
     else
       @filter_date= Date.new(params[:date][:year].to_i, params[:date][:month].to_i, 1)
     end
-    filter_date_next = @filter_date.to_time.advance(:months => 1).to_date
+    filter_date_next = @filter_date + 1.month
 
     @invoices = InboundInvoice
       .where('date >= ? and date <= ?', @filter_date, filter_date_next)

@@ -24,6 +24,14 @@ class JobOrder < ActiveRecord::Base
     activities.joins(:user_activities).sum(:hours).to_f
   end
 
+  def percent
+    if total_estimated_hours != 0
+      percent = (total_executed_hours / total_estimated_hours * 100).ceil
+    else
+      0
+    end
+  end
+
   def active_activities
     activities.where(:active => true)
   end

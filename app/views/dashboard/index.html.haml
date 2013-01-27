@@ -1,103 +1,16 @@
-%div.span4
-  %table.table
-    %tr
-      %th
-        In
-      %th
-    %tr.info
-      %td
-        Fatturato
-      %td.right
-        = number_to_currency @invoices_totals.taxable_income
-    %tr
-      %td
-        Iva
-      %td.right
-        = number_to_currency @invoices_totals.tax
-    %tr
-      %td.italic
-        Totale
-      %td.right.italic
-        = number_to_currency @invoices_totals.total
-    %tr.error
-      %td
-        Da incassare
-      %td.right
-        = number_to_currency @to_receive
+#dashboard
+  .row
+    .span4#invoices
+    .span4#quarters
+  .row
+    .span4#inbound_invoices
+    .span4#per_customer
+  .row
+    .span8#activities
+  .row
+    .span8#job_orders
 
-%div.span4
-  %table.table
-    %tr
-      %th
-        Fatturato per trimestre
-      %th
-    %tr
-      %td
-        1
-      %td.right
-        = number_to_currency @quarters.q1
-    %tr
-      %td
-        2
-      %td.right
-        = number_to_currency @quarters.q2
-    %tr
-      %td
-        3
-      %td.right
-        = number_to_currency @quarters.q3
-    %tr
-      %td
-        4
-      %td.right
-        = number_to_currency @quarters.q4
-
-%div.span4
-  %table.table
-    %tr
-      %th
-        Out
-      %th
-    %tr
-      %td
-        Netto
-      %td.right
-        = number_to_currency @inbound_invoices_totals.taxable_income
-    %tr
-      %td
-        Iva
-      %td.right
-        = number_to_currency @inbound_invoices_totals.tax
-    %tr
-      %td.italic
-        Totale
-      %td.right.italic
-        = number_to_currency @inbound_invoices_totals.total
-
-%div.span4
-  %table.table
-    %tr
-      %th
-        Fatturato per cliente
-      %th
-        
-    - @perCustomer.each do |c|
-      %tr
-        %td
-          = c['customer']
-        %td.right
-          = number_to_currency c['taxable_income']
-
-%div.span4
-  %table.table
-    %tr
-      %th
-        Attività di ieri (TODO)
-      %th
-        
-   
-      
-
+  
 
 = content_for :side_bar do
   .well.sidebar-nav
@@ -106,5 +19,5 @@
         = link_to 'nuova fattura', new_invoice_path , {:class => 'btn btn-primary'}
       %li
         = link_to 'nuova fattura inbound', new_inbound_invoice_path , {:class => 'btn btn-primary'}
-    
-      
+      %li
+        = link_to 'nuova commessa', new_job_order_path , {:class => 'btn btn-primary'}
