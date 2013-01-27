@@ -54,7 +54,7 @@ class DashboardController < ApplicationController
 
     @filter_date = from_date
     
-    @activities = ActiveRecord::Base.connection.select_all("
+    activities = ActiveRecord::Base.connection.select_all("
       SELECT users.name, job_orders.code, sum(user_activities.hours) as total 
       FROM user_activities 
       INNER JOIN users ON users.id = user_activities.user_id
@@ -63,6 +63,23 @@ class DashboardController < ApplicationController
       WHERE user_activities.date >= '#{from_date.strftime('%Y-%m-%d')}' and user_activities.date <= '#{to_date.strftime('%Y-%m-%d')}'
       GROUP BY users.name, job_orders.code
       ORDER BY job_orders.code, users.name")
+
+ 
+    @result = []
+    item = {}
+    current_job_order = nil
+    activities.each do |a|
+      if a["code"] != current_job_order
+        item = {}
+        item["code"] = a["code"]
+        item[a["name"]] = a["total"]
+        current_job_order = a["code"]
+        @result << item
+      else
+        item[a["name"]] = a["total"]
+      end
+    end
+    @users = User.all
 
     # @activities = UserActivity
     #   .joins(:user)

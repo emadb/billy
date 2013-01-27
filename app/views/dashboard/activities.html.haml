@@ -7,15 +7,15 @@
   %table.table
     %tr
       %th Commessa
-      %th User
-      %th Ore
-    - @activities.each do |a|
-      %tr
-        %td
-          = a['code']
-        %td
-          = a['name']
-        %td.right
-          = a['total']
+      - @users.each do |u|
+        %th
+          = u.name
+      - @result.each do |a|
+        %tr
+          %th
+            = a["code"]
+          - @users.each do |u|
+            %td
+              = a[u.name]
         
         
