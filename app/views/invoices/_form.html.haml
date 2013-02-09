@@ -1,11 +1,11 @@
 = form_for @invoice, {:html => {:class => 'form-horizontal'}} do |f|
   = f.hidden_field :status
-  .row
-    .span4
+  .row-fluid
+    .span5
       .field.control-group
         = f.label :number, :class => 'control-label'
         .controls
-          = f.text_field :number, :class => 'span1'
+          = f.text_field :number, :class => 'input-small'
       .field.control-group
         = f.label :customer, :class => 'control-label'
         .controls
@@ -19,7 +19,7 @@
         .controls
           = f.text_area :notes, :cols => 20, :rows => 3
       
-    .span4
+    .span5
       .field.control-group
         = f.label :date, :class => 'control-label'
         .controls
@@ -36,8 +36,8 @@
         = f.label :status, :class => 'control-label'
         .controls
           = f.select :status, {:temporary => 1, :active => 2}
-  .row
-    .span10
+  .row-fluid
+    .span12
       %fieldset
         %legend 
           %a.new-item.btn.btn-primary{:href=>'#'} 
@@ -51,9 +51,9 @@
           = f.fields_for :invoice_items do |i|
             %tr
               %td
-                = i.text_field :description, {:class => 'span5'}
+                = i.text_field :description, {:class => 'input-xxlarge'}
               %td
-                = i.text_field :amount, {:class => 'amount span1'}
+                = i.text_field :amount, {:class => 'amount input-small'}
               %td
                 = i.hidden_field :_destroy
                 %a{:href => '#', :class => 'btn-mini btn remove-item'}

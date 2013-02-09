@@ -36,7 +36,7 @@
         
         %td{"data-bind"=>"{attr: {class: background}}"}
           %a{:href => "#", "data-bind"=> "{click: removeActivity}"}
-            %i.icon-trash
+            %i.icon-trash.icon-large.text-error
        
 
 
@@ -46,30 +46,30 @@
     %h3 Nuova attività
   .modal-body
     %form.well.form-inline{"data-bind" => "submit: save"}
-      .row
-        .span3
+      .row-fluid
+        .span6
           .field.control-group
             Commessa
             .controls
               = select_tag :job_order, '', :data => {:bind => "value: jobOrder, options: jobOrders, optionsValue : 'id', optionsText: 'code'"}
-        .span3
+        .span6
           .field.control-group
             Attività
             .controls
               = select_tag :activity, '', :data => {:bind => "value: activity, options: jobOrderActivities, optionsValue : 'id', optionsText: 'description'"}
-      .row
-        .span3
+      .row-fluid
+        .span6
           .field.control-group
             Data
             .controls
               = text_field_tag 'date', '', :class => 'isdate input-small', :data => {:bind => "value: date"}
-        .span3
+        .span6
           .field.control-group
             Ore
             .controls
               = text_field_tag 'hours', '', :class => 'input-small', :data => {:bind => "value: hours"}
-      .row
-        .span6
+      .row-fluid
+        .span12
           .field.control-group
             Note
             .controls
