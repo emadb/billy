@@ -13,7 +13,7 @@
       .field.control-group
         = f.label :due_date, :class => 'control-label'
         .controls
-          = f.text_field :due_date, :class => 'isdate', :value => @invoice.due_date.strftime('%d-%m-%Y')
+          = f.text_field :due_date, :class => 'isdate', :value => @invoice.due_date.strftime('%d-%m-%Y') unless @invoice.due_date.nil?
       .field.control-group
         = f.label :notes, :class => 'control-label'
         .controls
@@ -23,7 +23,7 @@
       .field.control-group
         = f.label :date, :class => 'control-label'
         .controls
-          = f.text_field :date, :class => 'isdate', :value => @invoice.date.strftime('%d-%m-%Y')
+          = f.text_field :date, :class => 'isdate', :value => @invoice.date.strftime('%d-%m-%Y') unless @invoice.date.nil?
       .field.control-group
         = f.label :is_payed, :class => 'control-label'
         .controls
