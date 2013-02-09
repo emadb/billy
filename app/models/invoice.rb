@@ -52,4 +52,12 @@ class Invoice < ActiveRecord::Base
   def is_in_late?
     !self.due_date.nil? and self.due_date <= DateTime.now && !self.is_payed
   end
+
+  def string_date
+    self.date.strftime('%d-%m-%Y') unless self.date.nil?
+  end
+
+  def string_due_date
+    self.due_date.strftime('%d-%m-%Y') unless self.due_date.nil?
+  end
 end
