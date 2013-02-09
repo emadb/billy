@@ -6,7 +6,7 @@
         $('#per_customer').load('/dashboard/per_customer');
         $('#inbound_invoices').load('/dashboard/inbound_invoices');
         $('#job_orders').load('/dashboard/job_orders');
-        $('#activities').load('/dashboard/activities?year=' + today.getFullYear() + '&month=' + today.getMonth() + 1);
+        $('#activities').load('/dashboard/activities?year=' + today.getFullYear() + '&month=' + (today.getMonth() + 1));
 
 
         $(document).on('click','#dashboard-activities', function(){
