@@ -5,10 +5,12 @@ class DashboardController < ApplicationController
   end
 
   def invoices
-    invoices = Invoice.where(:status => Invoice.active)
+    active_invoices = Invoice.where(:status => Invoice.active)
     @to_receive = 0
-    invoices.each{ |x| @to_receive = @to_receive + (x.total || 0) unless x.is_payed }
-    @invoices_totals = InvoiceTotalsInfo.new(Invoice.sum(:taxable_income), Invoice.sum(:tax), Invoice.sum(:total))
+    active_invoices.each{ |x| @to_receive = @to_receive + (x.total || 0) unless x.is_payed }
+    @invoices_totals = InvoiceTotalsInfo.new(active_invoices.sum(:taxable_income), 
+      active_invoices.sum(:tax), 
+      active_invoices.sum(:total))
     render :layout=> false
   end
 

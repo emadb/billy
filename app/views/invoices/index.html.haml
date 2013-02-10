@@ -3,15 +3,16 @@
 %table.table.table-striped.table-bordered
   %thead
     %tr
-      %td Numero
-      %td Data
-      %td Cliente
-      %td.right Imponibile
-      %td.right Iva
-      %td.right Totale
-      %td Pagata
-      %td Stato
-      %td 
+      %th Numero
+      %th Data
+      %th Cliente
+      %th.right Imponibile
+      %th.right Iva
+      %th.right Totale
+      %th Pagata
+      %th Stato
+      %th 
+      %th
   %tbody
     -@invoices.each do |i|
       %tr
@@ -38,14 +39,15 @@
           = status_helper(i.status)
           - if i.status == Invoice.temporary
             %a{:href => invoice_activate_path(i)}
-              %i.icon-share
+              %i.icon-share.icon-large
         %td
           %a{:href => edit_invoice_path(i)}
-            %i.icon-edit
+            %i.icon-edit.icon-large
           %a{:href => invoice_path(i)} 
-            %i.icon-file
+            %i.icon-file.icon-large
+        %td
           %a{:href=> invoice_path(i), :class => 'delete' } 
-            %i.icon-trash
+            %i.icon-trash.icon-large.text-error
 
   = content_for :side_bar do
     .well.sidebar-nav
