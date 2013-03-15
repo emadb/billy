@@ -24,7 +24,6 @@ class UserActivitiesController < ApplicationController
       format.html
       format.json { render :json => @activities.map{ |a| {
           :id => a.id,
-          :type => a.user_activity_type.description, 
           :date => a.date,
           :hours => a.hours,
           :description => a.description,
@@ -37,7 +36,6 @@ class UserActivitiesController < ApplicationController
   def create
     @activity = UserActivity.new()
     
-    @activity.user_activity_type = UserActivityType.find(params[:type])
     @activity.date = DateTime.parse(params[:date])
     @activity.hours = params[:hours].to_f
     @activity.description = params[:description]
@@ -48,12 +46,11 @@ class UserActivitiesController < ApplicationController
 
     @result = {
       :id => @activity.id,
-      :type => @activity.user_activity_type.description, 
       :date => @activity.date,
       :hours => @activity.hours,
       :description => @activity.description,
       :jobOrder => job_order.code,
-      :activity => @activity.job_order_activity.description
+      :activity => JobOrderActivity.find(@activity.job_order_activity.id).description
     }
 
     respond_to do |format|
@@ -72,13 +69,19 @@ class UserActivitiesController < ApplicationController
 
   def stats
     user = User.find(params[:user])
-    @activities = UserActivity.get(params[:year], params[:month], user.id)
-
+    
     stats = ActivityStats.new
-    stats.today_hours = UserActivity.find_by_user_and_date(user.id, "#{Date.today} 00:00:00")
-    stats.yesterday_hours = UserActivity.find_by_user_and_date(user.id, "#{Date.yesterday} 00:00:00")
+    stats.today_hours = UserActivity.sum(:hours, :conditions => ["user_id = ? and DATE(date) = ?", user.id, Date.today.to_date])
+    stats.yesterday_hours = UserActivity.sum(:hours, :conditions => ["user_id = ? and DATE(date) = ?", user.id, Date.yesterday.to_date])
 
     render :json => stats
+  end
+
+  def report
+    @activities = UserActivity.get(params[:year], params[:month], params[:user])
+    respond_to do |format|
+      format.xls 
+    end
   end
 
 end

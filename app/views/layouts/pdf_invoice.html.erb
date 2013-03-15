@@ -64,13 +64,13 @@
     </head>
     <body>
         <div id="wrap" class="container">
-            <div class="row">
+            <div class="row-fluid">
                 <header style="height:120px">
                     <%= wicked_pdf_image_tag 'codiceplastico.png'%>
                 </header>
             </div>
     	
-    	   <div class="row" style="margin-top:40px">
+    	   <div class="row-fluid" style="margin-top:40px">
                 <div class="span2" style="text-align:right">
                     <address>
                         <strong>
@@ -81,12 +81,12 @@
                     </address>
                 </div>
             </div>
-            <div class="row" style="margin-top:40px">
+            <div class="row-fluid" style="margin-top:40px">
                 <section>
                     <h4><%= "Fattura n. #{@invoice.number} del #{@invoice.date.strftime('%d/%m/%Y')}" %></h4>
                 </section>
             </div>
-            <div class="row">
+            <div class="row-fluid">
                 <table id="items" class="table" style="margin-top:40px">
         			<% @invoice.invoice_items.each do |i| %>
                   		<tr>
@@ -104,15 +104,15 @@
         			</tr>
         			<tr style="font-size:16px" class="info">
             			<td class="right"><strong>Totale fattura</strong></td>
-            			<td class="total right"><%= number_to_currency(@invoice.total) %></td>
+            			<td nowrap class="total right" style="text-wrap: none"><%= number_to_currency(@invoice.total) %></td>
         			</tr>
             	</table>
             </div>
-            <div class="row" style="margin-top:40px">
+            <div class="row-fluid" style="margin-top:40px">
                 <h5>Note</h5>
                 <div id="notes" class="well">
-                    Pagamento tramite bonifico bancario.
-                    IBAN IT0930D9283990200D09293<br/>
+                    Pagamento tramite bonifico bancario.<br/>
+                    IBAN IT25I0316501600000110434021<br/>
                     <hr/>
                     <%= @invoice.notes %>
                 </div>

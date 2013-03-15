@@ -11,10 +11,10 @@ $(function(){
         $('table.activities').append(row);
     });
 
-    $('#remove-activity').on('click', function(evt){
-        evt.preventDefault();
-        $(this).prev().val('1');
+    $(document).on('click', '#remove-activity', function(){
+        $(this).next().val('1');
+        console.log('removing',$(this).next());
         $(this).parent().parent().hide();
-
+        return false;
     });
 })

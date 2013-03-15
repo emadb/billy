@@ -14,25 +14,29 @@
       &nbsp;&nbsp;
       %button.btn{:type => 'button', 'data-bind' => 'click: reload'} filtra
 
-  %table.table.table-striped.table-bordered
+  %table.table.table-bordered.table-striped
     %thead
       %tr
-        %td Tipo
-        %td Data
-        %td Ore
-        %td Note
-        %td Attività
-        %td
+        %th Data
+        %th Ore
+        %th Commessa
+        %th Attività
+        %th Note
+        %th
     %tbody{"data-bind" => "{foreach: activities}"}
       %tr{"data-bind"=>"{visible: isVisible}"}
-        %td{"data-bind"=>"{text: type}"}
-        %td{"data-bind"=>"{dateString: date}"}
-        %td{"data-bind"=>"{text: hours}"}
-        %td{"data-bind"=>"{text: description}"}
-        %td{"data-bind"=>"{text: activityJobOrder}"}
-        %td
+        %td{"data-bind"=>"{attr: {class: background}}"}
+          %span{"data-bind"=>"{dateString: date}"}
+          %br
+          %small.grey{"data-bind"=>"{text: day}"}
+        %td{"data-bind"=>"{text: hours, attr: {class: background}}"}
+        %td{"data-bind"=>"{text: jobOrder, attr: {class: background}}"}
+        %td{"data-bind"=>"{text: activity, attr: {class: background}}"}
+        %td{"data-bind"=>"{text: description, attr: {class: background}}"}
+        
+        %td{"data-bind"=>"{attr: {class: background}}"}
           %a{:href => "#", "data-bind"=> "{click: removeActivity}"}
-            %i.icon-remove
+            %i.icon-trash.icon-large.text-error
        
 
 
@@ -42,36 +46,30 @@
     %h3 Nuova attività
   .modal-body
     %form.well.form-inline{"data-bind" => "submit: save"}
-      .row
-        .span3
+      .row-fluid
+        .span6
           .field.control-group
             Commessa
             .controls
               = select_tag :job_order, '', :data => {:bind => "value: jobOrder, options: jobOrders, optionsValue : 'id', optionsText: 'code'"}
-        .span3
+        .span6
           .field.control-group
             Attività
             .controls
               = select_tag :activity, '', :data => {:bind => "value: activity, options: jobOrderActivities, optionsValue : 'id', optionsText: 'description'"}
-      .row
+      .row-fluid
         .span6
-          .field.control-group
-            Categoria
-            .controls
-              = select_tag :type, '', :data => {:bind => "value: type, options: activityTypes, optionsValue : 'id', optionsText: 'description'"}
-      .row
-        .span3
           .field.control-group
             Data
             .controls
               = text_field_tag 'date', '', :class => 'isdate input-small', :data => {:bind => "value: date"}
-        .span3
+        .span6
           .field.control-group
             Ore
             .controls
               = text_field_tag 'hours', '', :class => 'input-small', :data => {:bind => "value: hours"}
-      .row
-        .span6
+      .row-fluid
+        .span12
           .field.control-group
             Note
             .controls
@@ -83,8 +81,14 @@
     
 = content_for :side_bar do
   .well.sidebar-nav
-    %a.btn.btn-primary{"data-toggle" => "modal", :href => '#newActivity'}
-      Nuova attività
+    %ul.info-panel
+      %li
+        %a.btn.btn-primary{"data-toggle" => "modal", :href => '#newActivity'}
+          Nuova attività
+      %li
+        %a.btn#report{:href => '/user_activities/report.xls'}
+          Genera report
+    %iframe#frm{:style => "display:none"}
     %hr
     %ul#stats.totals.info-panel  
       %li Oggi

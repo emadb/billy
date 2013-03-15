@@ -1,10 +1,10 @@
-.row
+.row-fluid
   = form_for @job_order, {:html => {:class => 'form-horizontal'}} do |f|
-    .span8
+    .span12
       .field.control-group
         = f.label :code, :class => 'control-label'
         .controls
-          = f.text_field :code, :class => 'span2'
+          = f.text_field :code, :class => 'input-medium'
       .field.control-group
         = f.label :customer, :class => 'control-label'
         .controls
@@ -12,15 +12,15 @@
       .field.control-group
         = f.label :hourly_rate, :class => 'control-label'
         .controls
-          = f.text_field :hourly_rate, :class => 'span1'
+          = f.text_field :hourly_rate, :class => 'input-medium'
       .field.control-group
         = f.label :notes, :class => 'control-label'
         .controls
-          = f.text_area :notes, :class => 'span2', rows: 3
+          = f.text_area :notes, :class => 'input-medium', rows: 3
         .field.control-group
           = f.label :archived, :class => 'control-label'
           .controls
-            = f.check_box :archived, :class => 'span2'
+            = f.check_box :archived, :class => 'input-medium'
     %fieldset
       %legend 
         Attività
@@ -38,12 +38,12 @@
           = f.fields_for :activities do |a|
             %tr
               %td
-                = a.text_field :description, {:class => 'span5'}
+                = a.text_field :description, {:class => 'input-xxlarge'}
               %td
-                = a.text_field :estimated_hours, {:class => 'amount span1'}
+                = a.text_field :estimated_hours, {:class => 'amount input-small'}
               %td
-                = a.check_box :active, {:class => 'span1'}
+                = a.check_box :active, {:class => 'input-medium'}
               %td
-                %a#remove-activity{:href => '#', :class => 'btn-mini remove-item'}
-                  %i{:class => 'icon-trash'}
+                %a#remove-activity{:href => '#', :class => 'btn'}
+                  %i{:class => 'icon-trash icon-large'}
                 = a.hidden_field :_destroy

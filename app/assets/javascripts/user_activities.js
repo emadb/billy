@@ -1,14 +1,22 @@
 $(function(){
-
     var postbox = new ko.subscribable();
+    var days = ['lunedì', 'martedì', 'mercoledì', 'giovedì', 'venerdì', 'sabato', 'domenica'];
+    var updateStats = function(){
+        $.getJSON('/user_activities/stats/'+ user + '/' + year + '/' + month, function (response){
+            var stats = new StatsViewModel(response.today_hours, response.yesterday_hours);
+            ko.applyBindings(stats, $('#stats')[0]);
+        });
+    };
+
 
     ko.bindingHandlers.dateString = {
         update: function(element, valueAccessor, allBindingsAccessor, viewModel) {
             var value = valueAccessor(),
                 allBindings = allBindingsAccessor();
             var valueUnwrapped = ko.utils.unwrapObservable(value);
+            window.date = moment(valueUnwrapped);
+            $(element).text(date.format('DD-MM-YYYY'));
             
-            $(element).text(moment(valueUnwrapped).format('DD-MM-YYYY'));
         }
     }
 
@@ -28,15 +36,20 @@ $(function(){
         this.reload = function(){
             $.getJSON('/user_activities/'+ self.user() + '/' + self.year() + '/' + self.month(), function (result){
                 self.activities.removeAll();
+                var currentDay = moment(result[0].date).date();
                 $.each(result, function(index, item){
-                    self.activities.push(new ActivityVM(item.id, item.type, item.date, item.hours, item.description, item.jobOrder, item.activity));
+                    var background = '';
+                    var day = moment(item.date).date()
+                     if (currentDay !== day){
+                        currentDay = day;
+                        background = background === '' ? 'line':'';
+                    }
+                    self.activities.push(new ActivityVM(item.id, item.date, item.hours, item.description, item.jobOrder, item.activity, background));
                 });
             });
 
-            $.getJSON('/user_activities/stats/'+ user + '/' + year + '/' + month, function (response){
-                var stats = new StatsViewModel(response.today_hours, response.yesterday_hours);
-                ko.applyBindings(stats, $('#stats')[0]);
-            });
+            updateStats();
+           
         };
 
     }
@@ -46,9 +59,7 @@ $(function(){
 
         self.jobOrders = ko.observableArray();
         self.jobOrderActivities = ko.observableArray();
-        self.activityTypes = ko.observableArray();
 
-        self.type = ko.observable();
         self.date = ko.observable(moment().format('DD-MM-YYYY'));
         self.hours = ko.observable();
         self.description = ko.observable();
@@ -60,16 +71,16 @@ $(function(){
         });
 
         self.save = function(){
-            var data = { type: self.type, date:self.date(), hours:self.hours(), description: self.description(), jobOrder: self.jobOrder(), activity: self.activity() };
-            console.log(data);
+            var dateTemp = $('#date').val();
+            var data = { date:dateTemp, hours:self.hours(), description: self.description(), jobOrder: self.jobOrder(), activity: self.activity() };
             $.post('/user_activities', data, function (data){  
                 var result = $.parseJSON(data);
-                newActivity = new ActivityVM(result.id, result.type, result.date, result.hours, result.description, result.jobOrder, result.activity);
+                var newActivity = new ActivityVM(result.id, result.date, result.hours, result.description, result.jobOrder, result.activity);
                 postbox.notifySubscribers(newActivity, 'new-activity-created');
-               
                 self.hours('');
                 self.description('');    
-                $('#newActivity').modal('hide')
+                $('#newActivity').modal('hide');
+                updateStats();
             });
         }
 
@@ -85,32 +96,25 @@ $(function(){
                 self.jobOrders(data);
                 self.loadJobOrderActivities(self.jobOrder());
             });
-
-
-            $.getJSON('/user_activity_types', function(data){
-                self.activityTypes(data);
-            });
-
         }
-
     }
-
-
-    function ActivityVM(id, type, date, hours, description, jobOrder, activity)
+    
+    function ActivityVM(id, date, hours, description, jobOrder, activity, background)
     {
         var self = this;
 
         this.id = ko.observable(id);
-        this.type = ko.observable(type);
         this.date = ko.observable(date);
+        this.day = ko.computed(function(){
+            return days[moment(date).day() - 1];
+        });
         this.hours = ko.observable(hours);
         this.description = ko.observable(description);
         this.jobOrder = ko.observable(jobOrder);
         this.activity = ko.observable(activity);
-        this.activityJobOrder  = ko.computed(function() {
-            return this.activity() + ' (' + this.jobOrder() + ')'
-        }, this);
+
         this.isVisible = ko.observable(true);
+        this.background = ko.observable(background);
 
         self.removeActivity = function(){
             if (window.confirm('cancellare?')){
@@ -119,6 +123,7 @@ $(function(){
                         url: 'user_activities/' + self.id(),
                         success: function(){
                              self.isVisible(false);
+                             updateStats();
                         }
                 });
             }
@@ -148,8 +153,16 @@ $(function(){
         
         $.getJSON('/user_activities/'+ user + '/' + year + '/' + month, function (result){
             var current = [];
+            var currentDay = moment(result[0].date).date();
+            
             $.each(result, function(index, item){
-                current.push(new ActivityVM(item.id, item.type, item.date, item.hours, item.description, item.jobOrder, item.activity));
+                var background = '';
+                var day = moment(item.date).date();
+                if (currentDay !== day){
+                    currentDay = day;
+                    background = background === '' ? 'line':'';
+                }
+                current.push(new ActivityVM(item.id, item.date, item.hours, item.description, item.jobOrder, item.activity, background));
             });
             activityList.activities(current);
         });
@@ -161,18 +174,22 @@ $(function(){
         activity.init();
         ko.applyBindings(activity, $('#newActivity')[0]);
 
-        $.getJSON('/user_activities/stats/'+ user + '/' + year + '/' + month, function (response){
-            var stats = new StatsViewModel(response.today_hours, response.yesterday_hours);
-            ko.applyBindings(stats, $('#stats')[0]);
-        });
-
-      
+       updateStats();
     }
 
-    // ko.extenders.logChange = function(target, option) {
-    // target.subscribe(function(newValue) {
-    //    console.log(option + ": " + newValue);
-    // });
-    //return target;
-    //};
+    $('#report').click(function(){
+        
+        var month = $('#date_month').val();
+        var year = $('#date_year').val();
+        var user = $('#user').val();
+
+        if (month !== undefined && year !== undefined && user !== undefined){
+            var url = $(this).attr('href') +'?user=' + user + '&year=' + year + '&month=' + month;
+            $('#frm').src = url;
+            window.location = url;
+        }
+        return false;
+
+
+    });
 });

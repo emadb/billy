@@ -9,7 +9,6 @@
     /[if lt IE 9]
       = javascript_include_tag "http://html5shim.googlecode.com/svn/trunk/html5.js"
     = stylesheet_link_tag "application", :media => "all"
-    %link(href="images/favicon.ico" rel="shortcut icon")
     %link(href="images/apple-touch-icon.png" rel="apple-touch-icon")
     %link(href="images/apple-touch-icon-72x72.png" rel="apple-touch-icon" sizes="72x72")
     %link(href="images/apple-touch-icon-114x114.png" rel="apple-touch-icon" sizes="114x114")
@@ -17,13 +16,13 @@
   %body    
     .navbar.navbar-fixed-top
       .navbar-inner
-        .container
+        .container-fluid
           %a.btn.btn-navbar(data-target=".nav-collapse" data-toggle="collapse")
             %span.icon-bar
             %span.icon-bar
             %span.icon-bar
           %a.brand(href="#") Scrooge
-          .container.nav-collapse
+          .container-fluid.nav-collapse
             -if user_signed_in?
               %ul.nav
                 %li= link_to "Attività", "/user_activities"
@@ -36,15 +35,15 @@
                 %li= link_to 'Logout', destroy_user_session_path, :method => :delete          
                 
 
-    .container.wrap
-      .row
+    .container-fluid.wrap
+      .row-fluid
         .span9
           = yield
         .span3
           = yield :side_bar
       #push
     #footer
-      .container
+      .container-fluid
         %p.muted.credit CodicePlastico
     /
       Javascripts

@@ -1,17 +1,25 @@
 class JobOrdersController < ApplicationController
-  before_filter :user_is_admin?
+  before_filter :user_is_admin?, :except => [:index]
+
   def index
     if params[:archived] == "yes"
-      @job_orders = JobOrder.where(:archived => true)
+      @job_orders = JobOrder.where(:archived => true).order('code')
       @title = 'Archived job orders'
     else
-      @job_orders = JobOrder.where(:archived => false)
+      @job_orders = JobOrder.where(:archived => false).order('code')
       @title = 'Job orders'
     end
     
     respond_to do |format|
-      format.html
-      format.json { render :json => @job_orders }
+      format.html do 
+        if current_user.admin? 
+          @job_orders 
+        else
+          redirect_to root_path
+        end
+
+      end
+      format.json { render :json => @job_orders.select('id, code').order('code') }
     end
   end
 
@@ -22,6 +30,7 @@ class JobOrdersController < ApplicationController
 
   def edit
     @job_order = JobOrder.find(params[:id])
+    @job_order.activities.push(JobOrderActivity.new) unless @job_order.activities.count > 0
     @customers = Customer.all
     @total_estimated_hours = @job_order.total_estimated_hours
   end
@@ -38,7 +47,14 @@ class JobOrdersController < ApplicationController
   def update
     @job_order = JobOrder.find(params[:id])
     @job_order.update_attributes!(params[:job_order])
-    @job_order.activities.each { |a| a.job_order_id = @job_order.id }
+    @job_order.activities.each do |a| 
+      if a.description.empty?
+        a.delete
+      else
+        a.job_order_id = @job_order.id 
+      end
+    end
+    @job_order.save
     redirect_to job_orders_path
   end
 
