@@ -1,5 +1,7 @@
-Dropbox::API::Config.app_key    = ENV['dropbox_app_key'] 
-Dropbox::API::Config.app_secret =  ENV['dropbox_app_secret']
-Dropbox::API::Config.mode       = "sandbox" # if you have a single-directory app or "dropbox" if it has access to the whole dropbox
+ENV['DROPBOX_FOLDER'] ||= 'CodicePlastico/_Fatture/'
+ENV['DROPBOX_APP_MODE'] ||= 'dropbox'
 
+Dropbox::API::Config.app_key = ENV["DROPBOX_APP_KEY"]
+Dropbox::API::Config.app_secret = ENV["DROPBOX_APP_SECRET"] 
+Dropbox::API::Config.mode = ENV['DROPBOX_APP_MODE']
     
