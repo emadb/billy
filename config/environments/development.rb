@@ -39,6 +39,6 @@ Scrooge::Application.configure do
     WICKED_PDF[:exe_path] = "/usr/local/bin/wkhtmltopdf"
   end
 
-  config.redirect_url = 'http://scrooge.dev/drop_box/show'
+  config.invoice_folder = 'CodicePlastico/_Fatture/'
 
 end
