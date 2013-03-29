@@ -60,8 +60,8 @@ class InvoicesController < ApplicationController
             }
 
     #if !ENV['DROPBOX_FOLDER']
-      drop_box = DropBoxService.new
-      drop_box.upload file_name, full_path
+    # drop_box = DropBoxService.new
+    # drop_box.upload file_name, full_path
     #end
     #File.delete full_path
   end
