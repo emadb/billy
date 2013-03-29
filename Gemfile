@@ -7,6 +7,7 @@ gem 'wicked_pdf'
 gem 'bootstrap-generators'
 gem 'bootstrap-wysihtml5-rails'
 gem 'simple_form', '~>2.0'
+gem 'dropbox-api'
 
 # Gems used only for assets and not required
 # in production environments by default.

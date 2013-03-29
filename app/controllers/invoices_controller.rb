@@ -49,13 +49,20 @@ class InvoicesController < ApplicationController
 
   def show
     @invoice = Invoice.find(params[:id])
-
-    render  :pdf => "#{@invoice.number} - #{@invoice.customer.file_name_template}",
+    file_name = "#{@invoice.number} - #{@invoice.customer.file_name_template}"
+    full_path = Rails.root.join('public', file_name)
+    render  :pdf => full_path,
             :layout => 'pdf_invoice.html',
+            :save_to_file => full_path,
             :margin => { :bottom => 15 },
             :footer => {
               :content => '<div class="container" style="text-align:center;color:#777777;font-size:12px;font-family: Helvetica Neue,Helvetica"><p><strong>CodicePlastico srl</strong> - www.codiceplastico.com</p></div>'
             }
-    
+
+    # if !ENV['DROPBOX_FOLDER']
+    #   drop_box = DropBoxService.new
+    #   drop_box.upload file_name, full_path
+    # end
+    File.delete full_path
   end
 end

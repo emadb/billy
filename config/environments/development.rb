@@ -39,4 +39,6 @@ Scrooge::Application.configure do
     WICKED_PDF[:exe_path] = "/usr/local/bin/wkhtmltopdf"
   end
 
+  config.invoice_folder = 'CodicePlastico/_Fatture/'
+
 end

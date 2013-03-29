@@ -89,6 +89,7 @@ class DashboardController < ApplicationController
     #   .where('date >= ? and date < ?', Date.new(2013,1,1), Date.new(2013,2,1))
     render :layout=> false
   end
+
 end
 
 
