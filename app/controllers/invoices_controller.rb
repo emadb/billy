@@ -59,10 +59,10 @@ class InvoicesController < ApplicationController
               :content => '<div class="container" style="text-align:center;color:#777777;font-size:12px;font-family: Helvetica Neue,Helvetica"><p><strong>CodicePlastico srl</strong> - www.codiceplastico.com</p></div>'
             }
 
-    # if !ENV['DROPBOX_FOLDER']
-    #   drop_box = DropBoxService.new
-    #   drop_box.upload file_name, full_path
-    # end
-    File.delete full_path
+    #if !ENV['DROPBOX_FOLDER']
+      drop_box = DropBoxService.new
+      drop_box.upload file_name, full_path
+    #end
+    #File.delete full_path
   end
 end
