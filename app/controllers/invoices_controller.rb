@@ -50,7 +50,7 @@ class InvoicesController < ApplicationController
   def show
     @invoice = Invoice.find(params[:id])
     file_name = "#{@invoice.number} - #{@invoice.customer.file_name_template}"
-    full_path = Rails.root.join('public', file_name)
+    full_path = Rails.root.join('tmp', file_name)
     render  :pdf => full_path,
             :layout => 'pdf_invoice.html',
             :save_to_file => full_path,
@@ -61,9 +61,9 @@ class InvoicesController < ApplicationController
             }
 
     #if !ENV['DROPBOX_FOLDER']
-    #drop_box = DropBoxService.new
-    #drop_box.upload file_name, full_path
+    drop_box = DropBoxService.new
+    drop_box.upload file_name, full_path
     #end
-    File.delete full_path
+    #File.delete full_path
   end
 end
