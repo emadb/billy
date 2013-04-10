@@ -23,7 +23,7 @@ class TestController < ApplicationController
     
     file_content = File.read(full_path)
     
-    client.upload 'prova1.pdf', file_content
+    #client.upload 'prova1.pdf', file_content
     client.upload 'prova2.pdf', pdf
 
     send_file full_path, :type=> "application/pdf", :disposition => 'inline'
