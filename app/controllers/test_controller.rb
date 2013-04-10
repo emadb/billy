@@ -25,9 +25,9 @@ class TestController < ApplicationController
 
 
     client = Dropbox::API::Client.new(:token  => ENV['DROPBOX_TOKEN'], :secret => ENV['DROPBOX_SECRET'])
-    logger.info client.ls
+    
 
-    file_content = File.read(full_path)
+    file_content = File.read(Rails.root.join('public', 'codiceplastico.png'))
     
     client.upload file_name, file_content
 
