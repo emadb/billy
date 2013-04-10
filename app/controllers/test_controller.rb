@@ -18,19 +18,14 @@ class TestController < ApplicationController
     File.open(full_path, 'wb') do |file|
       file.write(pdf)
     end
-    
-    logger.info '########################'
-    logger.info full_path
-    logger.info file_name
-
 
     client = Dropbox::API::Client.new(:token  => ENV['DROPBOX_TOKEN'], :secret => ENV['DROPBOX_SECRET'])
     
-
-    file_content = File.read(Rails.root.join('public', 'codiceplastico.png'))
+    file_content = File.read(full_path)
     
-    client.upload file_name, file_content
+    client.upload 'prova1.pdf', file_content
+    client.upload 'prova2.pdf', pdf
 
-    #send_file full_path, :type=> "application/pdf", :disposition => 'inline'
+    send_file full_path, :type=> "application/pdf", :disposition => 'inline'
   end
 end
