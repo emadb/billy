@@ -25,3 +25,4 @@ class TestController < ApplicationController
 
     send_file full_path, :type=> "application/pdf", :disposition => 'inline'
   end
+end
