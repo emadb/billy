@@ -19,10 +19,19 @@ class TestController < ApplicationController
       file << pdf
     end
     
+    logger.info '########################'
+    logger.info full_path
+    logger.info file_name
+
+
     client = Dropbox::API::Client.new(:token  => ENV['DROPBOX_TOKEN'], :secret => ENV['DROPBOX_SECRET'])
+    logger.info client.ls
+
     file_content = File.read(full_path)
+    logger.info file_content
+
     client.upload file_name, file_content
 
-    send_file full_path, :type=> "application/pdf", :disposition => 'inline'
+    #send_file full_path, :type=> "application/pdf", :disposition => 'inline'
   end
 end
