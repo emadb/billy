@@ -28,8 +28,7 @@ class TestController < ApplicationController
     logger.info client.ls
 
     file_content = File.read(full_path)
-    logger.info file_content
-
+    
     client.upload file_name, file_content
 
     #send_file full_path, :type=> "application/pdf", :disposition => 'inline'
