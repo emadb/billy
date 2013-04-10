@@ -61,14 +61,10 @@ class InvoicesController < ApplicationController
               :content => '<div class="container" style="text-align:center;color:#777777;font-size:12px;font-family: Helvetica Neue,Helvetica"><p><strong>CodicePlastico srl</strong> - www.codiceplastico.com - Tel: +39 030 6595 241</br>P.IVA, CF e Registro Imprese di Brescia 03079830984 Capitale Sociale : Euro 10.000,00 i.v.</p></div>'
             })
 
-    File.open(full_path, 'wb') do |file|
-      file << pdf
+    if !ENV['DROPBOX_FOLDER']
+      drop_box = DropBoxService.new
+      drop_box.upload file_name, pdf
     end
-    
-    # if !ENV['DROPBOX_FOLDER']
-    #   drop_box = DropBoxService.new
-    #   drop_box.upload file_name, full_path
-    # end
 
     send_file full_path, :type=> "application/pdf", :disposition => 'inline'
   end
