@@ -48,27 +48,28 @@ class InvoicesController < ApplicationController
   end
 
   def show
-    logger.info '###########################'
+    
     @invoice = Invoice.find(params[:id])
     file_name = "#{@invoice.number} - #{@invoice.customer.file_name_template}.pdf"
     full_path = Rails.root.join('tmp', file_name)
-
-    logger.info full_path
-
-    render  :pdf => full_path,
-            :layout => 'pdf_invoice.html',
-            :save_to_file => full_path,
+  
+    pdf = render_to_string(
+            :pdf => file_name,
+            :template => 'invoices/show.pdf.html.erb',
             :margin => { :bottom => 15 },
             :footer => {
               :content => '<div class="container" style="text-align:center;color:#777777;font-size:12px;font-family: Helvetica Neue,Helvetica"><p><strong>CodicePlastico srl</strong> - www.codiceplastico.com - Tel: +39 030 6595 241</br>P.IVA, CF e Registro Imprese di Brescia 03079830984 Capitale Sociale : Euro 10.000,00 i.v.</p></div>'
-            
-            }
-    logger.info file_name
+            })
 
-    #if !ENV['DROPBOX_FOLDER']
-    #drop_box = DropBoxService.new
-    #drop_box.upload file_name, full_path
-    #end
-    #File.delete full_path
+    File.open(full_path, 'wb') do |file|
+      file << pdf
+    end
+
+    send_file full_path, :type=> "application/pdf", :disposition => 'inline'
+    
+    if !ENV['DROPBOX_FOLDER']
+      drop_box = DropBoxService.new
+      drop_box.upload file_name, full_path
+    end
   end
 end
