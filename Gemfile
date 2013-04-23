@@ -17,9 +17,10 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
-group :development do
+group :development, :test do
   gem 'meta_request', '0.2.0'
   gem 'sqlite3'
+  gem "rspec-rails", "~> 2.0"
 end
 
 group :production do

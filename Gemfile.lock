@@ -68,6 +68,7 @@ GEM
       orm_adapter (~> 0.1)
       railties (~> 3.1)
       warden (~> 1.2.1)
+    diff-lcs (1.2.4)
     dropbox-api (0.3.2)
       hashie
       multi_json
@@ -144,6 +145,17 @@ GEM
     rdoc (3.12)
       json (~> 1.4)
     remotipart (1.0.2)
+    rspec-core (2.13.1)
+    rspec-expectations (2.13.0)
+      diff-lcs (>= 1.1.3, < 2.0)
+    rspec-mocks (2.13.1)
+    rspec-rails (2.13.0)
+      actionpack (>= 3.0)
+      activesupport (>= 3.0)
+      railties (>= 3.0)
+      rspec-core (~> 2.13.0)
+      rspec-expectations (~> 2.13.0)
+      rspec-mocks (~> 2.13.0)
     sass (3.2.5)
     sass-rails (3.2.6)
       railties (~> 3.2.0)
@@ -188,6 +200,7 @@ DEPENDENCIES
   pg
   rails (= 3.2.11)
   rails_admin!
+  rspec-rails (~> 2.0)
   sass-rails
   simple_form (~> 2.0)
   sqlite3
