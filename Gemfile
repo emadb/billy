@@ -47,4 +47,5 @@ gem 'jquery-rails'
 gem "devise"
 gem "haml", ">= 3.0.0"
 gem "haml-rails"
-gem "rails_admin", :git => "git://github.com/sferik/rails_admin.git"
+gem "rails_admin"
+gem "safe_yaml", "=0.8.6"
