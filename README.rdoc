@@ -3,13 +3,13 @@
 This is a simple invoice and tracking application suited for small firms.
 What can you do with scrooge?
 - Tracking your daily job activities
-- Managing the job orders and checking theri status
+- Managing the job orders and checking their status
 - Creating an invoice 
 - Generate a pdf-invoice
 - Tacking expenses
 - Tracking invoice payment status
 - View the current status (economics, in/out)
-- Creating users and managing them
+- Managing users
 - Managing customers
 
 It's built on Rails 3.2.
