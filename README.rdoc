@@ -13,3 +13,6 @@ What can you do with scrooge?
 - Managing customers
 
 It's built on Rails 3.2.
+
+=== Version history 
+11-04-2013 Drop 1 (first release with basic functionalities)

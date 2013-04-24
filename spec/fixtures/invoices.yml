@@ -1,0 +1,11 @@
+invoice1:
+    number: 1
+    date: 2013-04-09
+    has_tax: true
+    notes: nothing to say
+
+invoice2:
+    number: 2
+    date: 2013-04-11
+    has_tax: true
+    notes: something to say

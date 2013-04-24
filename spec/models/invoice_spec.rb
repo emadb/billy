@@ -1,6 +1,8 @@
 require "spec_helper"
 
 describe Invoice do
+  fixtures :invoices
+
   context "new invoice" do
     before do
       @invoice = Invoice.create_new
@@ -13,6 +15,19 @@ describe Invoice do
     end
     it "number should be nil" do
       @invoice.number.should be_nil
+    end
+  end
+  
+  context 'invoice to activate' do
+    it 'should set the correct invoice number' do
+      invoice = Invoice.create_new
+      invoice.activate
+      expect(invoice.number).to eq(3)
+    end
+    it 'should set the correct state' do
+      invoice = Invoice.create_new
+      invoice.activate
+      expect(invoice.status).to eq(Invoice.active)
     end
   end
 end
