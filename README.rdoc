@@ -14,6 +14,13 @@ What can you do with scrooge?
 
 It's built on Rails 3.2.
 
+You can find a demo here:
+
+[http://plasticscrooge-demo.herokuapp.com/dashboard](http://plasticscrooge-demo.herokuapp.com/dashboard) 
+Use this credentials:
+user: demo@codiceplastico.com
+pwd: demopwd
+
 === Version history 
 11-04-2013 Drop 1 (first release with basic functionalities)
 
