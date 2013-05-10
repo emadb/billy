@@ -31,22 +31,55 @@
     <!-- MAIN CONTENT -->
     <div id="main_content_wrap" class="outer">
       <section id="main_content" class="inner">
-        <h2>Welcome to Scrooge</h2>
+        <h1>Welcome to Scrooge</h1>
 
-<p>This is a simple invoice and tracking web application suited for small firms.
+<p>This is a simple invoice and tracking application suited for small firms.
 What can you do with scrooge?</p>
 
 <ul>
-<li>Tracking your team daily job activities</li>
+<li>Tracking your daily job activities</li>
 <li>Managing the job orders and checking their status</li>
 <li>Creating an invoice </li>
 <li>Generate a pdf-invoice</li>
 <li>Tacking expenses</li>
 <li>Tracking invoice payment status</li>
-<li>View the current status (economics, in/out, activities, ...)</li>
-<li>Creating users and managing them</li>
-<li>Managing customers and all the lookup data</li>
+<li>View the current status (economics, in/out)</li>
+<li>Managing users</li>
+<li>Managing customers</li>
 </ul><p>It's built on Rails 3.2.</p>
+
+<p>You can find a live demo here <a href="http://plasticscrooge-demo.herokuapp.com/">http://plasticscrooge-demo.herokuapp.com/</a></p>
+
+<p>Use this credentials:
+user: <a href="mailto:demo@codiceplastico.com">demo@codiceplastico.com</a>
+pwd: demopwd</p>
+
+<h2>Installation</h2>
+
+<ol>
+<li><p>Clone the repository</p></li>
+<li><p>Install the gems with <code>bundle install</code></p></li>
+<li><p>Setup the database <code>rake db:migrate</code> and <code>rake db:seed</code></p></li>
+<li><p>Start the server <code>rails s</code></p></li>
+</ol><h2>Configuration</h2>
+
+<p>There are some environment variables to setup for dropbox and others information
+These are:</p>
+
+<ul>
+<li>IBAN the bank account number</li>
+<li>DROPBOX_ENABLED (true or false) enable and disable dropbox service</li>
+<li>DROPBOX_APP_KEY</li>
+<li>DROPBOX_APP_SECRET</li>
+<li>DROPBOX_TOKEN</li>
+<li>DROPBOX_SECRET</li>
+<li>DROPBOX_FOLDER</li>
+<li>DROPBOX_APP_MODE</li>
+</ul><p>To obtain the keys for DROPBOX you can read this article <a href="http://ema.codiceplastico.com/blog/2013/03/22/usare-dropbox-da-unapplicazione-rails/">http://ema.codiceplastico.com/blog/2013/03/22/usare-dropbox-da-unapplicazione-rails/</a></p>
+
+<h3>Version history</h3>
+
+<p>11-04-2013 Drop 1 (first release with basic functionalities)</p>
       </section>
     </div>
 
