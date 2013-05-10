@@ -14,7 +14,7 @@ What can you do with scrooge?
 
 It's built on Rails 3.2.
 
-You can find a live demo [here](http://plasticscrooge-demo.herokuapp.com/dashboard) 
+You can find a live demo http://plasticscrooge-demo.herokuapp.com/
 Use this credentials:
 
 user: demo@codiceplastico.com
@@ -40,7 +40,7 @@ These are:
 - DROPBOX_FOLDER
 - DROPBOX_APP_MODE
 
-To obtain the keys for DROPBOX you can read this [article](http://ema.codiceplastico.com/blog/2013/03/22/usare-dropbox-da-unapplicazione-rails/)
+To obtain the keys for DROPBOX you can read this http://ema.codiceplastico.com/blog/2013/03/22/usare-dropbox-da-unapplicazione-rails/
 
 
 
