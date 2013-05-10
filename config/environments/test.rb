@@ -34,4 +34,6 @@ Scrooge::Application.configure do
 
   # Print deprecation notices to the stderr
   config.active_support.deprecation = :stderr
+
+  SKIP_RAILS_ADMIN_INITIALIZER=false
 end
