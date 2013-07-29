@@ -33,12 +33,19 @@ class UserActivitiesController < ApplicationController
     end
   end
 
+  def show
+    activity = UserActivity.find(params[:id])
+    render :json => activity
+  end
+
   def create
-    activity = UserActivity.new
-    
+    if  (params[:id].nil?)
+      activity = UserActivity.new
+    else
+      activity = UserActivity.find(params[:id])
+    end
     create_or_update activity
     create_response activity
-
   end
 
   def update
@@ -53,7 +60,7 @@ class UserActivitiesController < ApplicationController
       :date => activity.date,
       :hours => activity.hours,
       :description => activity.description,
-      :jobOrder => job_order.code,
+      :jobOrder => activity.job_order_activity.job_order.code,
       :activity => JobOrderActivity.find(activity.job_order_activity.id).description
     }
 

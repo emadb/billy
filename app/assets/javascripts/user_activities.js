@@ -33,19 +33,34 @@ $(function(){
             self.activities.push(data);
         }, self, 'new-activity-created');
 
+         postbox.subscribe(function(data){
+            for(var i=0; i<self.activities().length;i++){
+                if (self.activities()[i].id() == data.id()){
+                    var activity = self.activities()[i];
+                    activity.date(data.date());
+                    activity.hours(data.hours())
+                    activity.description(data.description());
+                    activity.jobOrder(data.jobOrder());
+                    activity.activity(data.activity());
+                }
+            }
+        }, self, 'activity-updated');
+
         this.reload = function(){
             $.getJSON('/user_activities/'+ self.user() + '/' + self.year() + '/' + self.month(), function (result){
                 self.activities.removeAll();
-                var currentDay = moment(result[0].date).date();
-                $.each(result, function(index, item){
-                    var background = '';
-                    var day = moment(item.date).date()
-                     if (currentDay !== day){
-                        currentDay = day;
-                        background = background === '' ? 'line':'';
-                    }
-                    self.activities.push(new ActivityVM(item.id, item.date, item.hours, item.description, item.jobOrder, item.activity, background));
-                });
+                if (result.length > 0){
+                    var currentDay = moment(result[0].date).date();
+                    $.each(result, function(index, item){
+                        var background = '';
+                        var day = moment(item.date).date()
+                         if (currentDay !== day){
+                            currentDay = day;
+                            background = background === '' ? 'line':'';
+                        }
+                        self.activities.push(new ActivityVM(item.id, item.date, item.hours, item.description, item.jobOrder, item.activity, background));
+                    });
+                }
             });
 
             updateStats();
@@ -56,7 +71,7 @@ $(function(){
 
     function NewActivityVM(){
         var self = this;
-
+        self.id = ko.observable();
         self.jobOrders = ko.observableArray();
         self.jobOrderActivities = ko.observableArray();
 
@@ -72,11 +87,15 @@ $(function(){
 
         self.save = function(){
             var dateTemp = $('#date').val();
-            var data = { date:dateTemp, hours:self.hours(), description: self.description(), jobOrder: self.jobOrder(), activity: self.activity() };
+            var data = { id: self.id(), date:dateTemp, hours:self.hours(), description: self.description(), jobOrder: self.jobOrder(), activity: self.activity() };
             $.post('/user_activities', data, function (data){  
                 var result = $.parseJSON(data);
                 var newActivity = new ActivityVM(result.id, result.date, result.hours, result.description, result.jobOrder, result.activity);
-                postbox.notifySubscribers(newActivity, 'new-activity-created');
+                if(self.id() === undefined){
+                    postbox.notifySubscribers(newActivity, 'new-activity-created');
+                }else{
+                    postbox.notifySubscribers(newActivity, 'activity-updated');
+                }
                 self.hours('');
                 self.description('');    
                 $('#newActivity').modal('hide');
@@ -97,6 +116,20 @@ $(function(){
                 self.loadJobOrderActivities(self.jobOrder());
             });
         }
+        postbox.subscribe(function(id){
+            $.get('user_activities/' + id, function(activity){
+                self.id(id);
+                self.jobOrder(activity.job_order_id);
+                self.date(activity.date);
+                self.hours(activity.hours);
+                self.description(activity.description);
+                self.activity(activity.job_order_activity_id);
+                $('#newActivity').modal('show');    
+            })
+
+            
+        }, self, 'edit-activity');
+
     }
     
     function ActivityVM(id, date, hours, description, jobOrder, activity, background)
@@ -128,6 +161,9 @@ $(function(){
                 });
             }
         };
+        self.editActivity = function(){
+            postbox.notifySubscribers(self.id(), 'edit-activity');
+        }
     }   
 
     function StatsViewModel(today, yesterday){

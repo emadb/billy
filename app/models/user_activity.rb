@@ -23,4 +23,14 @@ class UserActivity < ActiveRecord::Base
 	.sum(:hours) || 0
   end
 
+  def job_order_id
+    job_order_activity.job_order.id
+  end
+
+  def as_json(options = { })
+    h = super(options)
+    h[:job_order_id]   = job_order_id
+    h
+  end
+
 end
