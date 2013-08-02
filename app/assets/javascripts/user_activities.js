@@ -120,7 +120,7 @@ $(function(){
             $.get('user_activities/' + id, function(activity){
                 self.id(id);
                 self.jobOrder(activity.job_order_id);
-                self.date(activity.date);
+                self.date(moment(activity.date).format('DD-MM-YYYY'));
                 self.hours(activity.hours);
                 self.description(activity.description);
                 self.activity(activity.job_order_activity_id);
