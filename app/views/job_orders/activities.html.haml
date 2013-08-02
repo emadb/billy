@@ -27,4 +27,11 @@
 
   = content_for :side_bar do
     .well.sidebar-nav
+      %ul.totals.info-panel
+        %li Totale ore
+        %li#taxable-income.amount
+          = @job_order.total_estimated_hours
+        %li Ore effettuate
+        %li#taxable-income.amount
+          = @job_order.total_executed_hours
     
