@@ -5,12 +5,13 @@
 %table.table.table-striped.table-bordered
   %thead
     %tr
-      %td Codice
-      %td Cliente
-      %td Tariffa oraria
-      %td Stato (ore fatte/totale)
-      %td
-      %td 
+      %th Codice
+      %th Cliente
+      %th Tariffa oraria
+      %th Stato (ore fatte/totale)
+      %th
+      %th
+      %th 
   %tbody
     -@job_orders.each do |job|
       %tr
@@ -25,10 +26,13 @@
         %td
           - if job.warning?
             %span.badge.badge-important !
-            
+        %td
+          %a{:href=> job_order_activities_path(job)}
+            %i.icon-list.icon-large
         %td
           %a{:href=> job_order_path(job), :class => 'delete' } 
             %i.icon-trash.icon-large
+        
 
   = content_for :side_bar do
     .well.sidebar-nav

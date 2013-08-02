@@ -19,6 +19,7 @@ Scrooge::Application.routes.draw do
   end
   resources :inbound_invoices
   resources :job_orders do
+    get 'activities', to: 'job_orders#activities'
     resources :job_order_activities
   end
 

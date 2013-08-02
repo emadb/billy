@@ -1,0 +1,30 @@
+%h1
+  = "Attività della commessa #{@job_order.code}"
+%fieldset
+  %legend &nbsp;
+%table.table.table-striped.table-bordered
+  %thead
+    %tr
+      %th Codice
+      %th Data
+      %th Ore
+      %th Utente
+      %th Description
+      
+  %tbody
+    -@user_activities.each do |a|
+      %tr
+        %td 
+          = a.id
+        %td
+          = a.date
+        %td
+          = a.hours
+        %td
+          = a.user.name
+        %td
+          = a.description
+
+  = content_for :side_bar do
+    .well.sidebar-nav
+    
