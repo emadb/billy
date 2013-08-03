@@ -39,13 +39,13 @@
           = status_helper(i.status)
           - if i.status == Invoice.temporary
             %a{:href => invoice_activate_path(i)}
-              %i.icon-share.icon-large
+              %i.icon-chevron-sign-right.icon-large
         %td
           %a{:href => edit_invoice_path(i)}
             %i.icon-edit.icon-large
           %a{:href => invoice_path(i)} 
-            %i.icon-file.icon-large
-          %a{:href => invoice_path(i)} 
+            %i.icon-file-alt.icon-large
+          %a{:href => invoice_drop_box_path(i), :class=> 'drop-box'} 
             %i.icon-dropbox.icon-large
         %td
           %a{:href=> invoice_path(i), :class => 'delete' } 

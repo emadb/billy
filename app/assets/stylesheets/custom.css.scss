@@ -64,3 +64,8 @@ td.right{
 .grey{
   color: #A7A7A7;
 }
+
+a:hover i[class^="icon-"],
+a:hover i[class*=" icon-"]{
+   text-decoration: none;
+}

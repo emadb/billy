@@ -16,10 +16,11 @@ Scrooge::Application.routes.draw do
   resources :drop_box
   resources :invoices do
     get 'activate'
+    get 'drop_box'
   end
   resources :inbound_invoices
   resources :job_orders do
-    get 'activities', to: 'job_orders#activities'
+    get 'activities'
     resources :job_order_activities
   end
 
