@@ -15,7 +15,7 @@
     -@user_activities.each do |a|
       %tr
         %td 
-          = a.id
+          = a.job_order_activity.description
         %td
           = a.date
         %td
