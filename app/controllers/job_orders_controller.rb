@@ -72,12 +72,13 @@ class JobOrdersController < ApplicationController
   end
 
   def activities
-    @user_activities = []
-    @job_order = JobOrder.find(params[:job_order_id], :include => :activities)
-    @job_order.activities.each do |a|
-      a = UserActivity.where('job_order_activity_id = ?', a.id).all
-      @user_activities = @user_activities + a
-    end
-    @user_activities = @user_activities.sort_by{|e| e[:date]}
+    @user_activities = UserActivity
+      .joins(job_order_activity: [:job_order])
+      .where('job_order_id = ?', params[:job_order_id])
+      .order(:date)
+    @job_order = JobOrder.find(params[:job_order_id])
   end
 end
+
+
+
