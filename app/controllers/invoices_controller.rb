@@ -52,7 +52,7 @@ class InvoicesController < ApplicationController
     file_name = "#{@invoice.number} - #{@invoice.customer.file_name_template}.pdf"
     render pdf: file_name,
       template: 'invoices/show.pdf.html.erb',
-      :margin => { :bottom => 15 },
+      :margin => { :bottom => 20 },
       :footer => {
         :content => AppSettings.footer
       }
@@ -66,7 +66,7 @@ class InvoicesController < ApplicationController
     pdf = render_to_string(
             :pdf => file_name,
             :template => 'invoices/show.pdf.html.erb',
-            :margin => { :bottom => 15 },
+            :margin => { :bottom => 20 },
             :footer => {
               :content => AppSettings.footer
             })
