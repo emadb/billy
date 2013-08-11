@@ -1,22 +1,17 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.11'
+gem 'rails', '~>4.0.0'
 
 gem 'wicked_pdf'
 
 gem 'bootstrap-generators'
 gem 'bootstrap-wysihtml5-rails'
-gem 'simple_form', '~>2.0'
+gem 'simple_form', '~>3.0.0.rc'
 gem 'dropbox-api'
 
-# Gems used only for assets and not required
-# in production environments by default.
-group :assets do
-  gem 'sass-rails'
-  gem 'coffee-rails', '~> 3.2.1'
-  gem 'uglifier', '>= 1.0.3'
-end
-
+gem 'sass-rails'
+gem 'uglifier', '>= 1.0.3'
+gem 'protected_attributes'
 group :development, :test do
   gem 'meta_request', '0.2.0'
   gem 'sqlite3'
@@ -47,5 +42,5 @@ gem 'jquery-rails'
 gem "devise"
 gem "haml", ">= 3.0.0"
 gem "haml-rails"
-gem "rails_admin"
-gem "safe_yaml", "=0.8.6"
+gem "rails_admin", "~> 0.5.0"
+gem "safe_yaml"

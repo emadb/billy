@@ -9,7 +9,7 @@
       .field.control-group
         = f.label :customer, :class => 'control-label'
         .controls
-          = select_tag "invoice[customer_id]", options_from_collection_for_select(@customers, "_id", "name", @invoice.customer._id)
+          = select_tag "invoice[customer_id]", options_from_collection_for_select(@customers, "id", "name", @invoice.customer.id)
       .field.control-group
         = f.label :due_date, :class => 'control-label'
         .controls
