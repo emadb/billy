@@ -80,4 +80,5 @@ Scrooge::Application.configure do
   
   config.eager_load = false
   config.active_record.migration_error = :page_load
+  
 end

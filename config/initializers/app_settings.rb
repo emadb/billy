@@ -29,6 +29,7 @@ class AppSettings
   def self.dropbox_app_mode
     ENV['DROPBOX_APP_MODE'] || 'dropbox'
   end
+
   def self.footer
     ENV['FOOTER'] || '<div>put your footer here</div>'
   end
