@@ -29,7 +29,7 @@ class InvoicesController < ApplicationController
 
   def edit  
     @invoice = Invoice.find(params[:id])
-    @customers = Customer.all #.map{|c| [c.name, c._id]}
+    @customers = Customer.all 
     @totals = InvoiceTotalsInfo.new(@invoice.taxable_income, @invoice.tax, @invoice.total)
   end
 

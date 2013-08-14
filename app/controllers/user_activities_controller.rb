@@ -39,7 +39,7 @@ class UserActivitiesController < ApplicationController
   end
 
   def create
-    if  (params[:id].nil?)
+    if params[:id].nil?
       activity = UserActivity.new
     else
       activity = UserActivity.find(params[:id])

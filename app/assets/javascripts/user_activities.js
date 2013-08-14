@@ -183,6 +183,12 @@ $(function(){
     var year = $('#date_year').val();
     var user = $('#user').val();
 
+    $('#openModal').click(function(){
+        $('#newActivity').find('#id').val('');
+        $('#newActivity').modal();
+    });
+
+
     if (month !== undefined && year !== undefined && user !== undefined){
 
         var activityList = new ActivtyPage([]);

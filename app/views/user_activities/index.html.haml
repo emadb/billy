@@ -46,7 +46,7 @@
     %h3 Nuova attività
   .modal-body
     %form.well.form-inline{"data-bind" => "submit: save"}
-      = hidden_field_tag 'id', '', :data => {:bind => "value: id"}
+      = text_field_tag 'id', '', :data => {:bind => "value: id"}
       .row-fluid
         .span6
           .field.control-group
@@ -84,7 +84,7 @@
   .well.sidebar-nav
     %ul.info-panel
       %li
-        %a.btn.btn-primary{"data-toggle" => "modal", :href => '#newActivity'}
+        %a.btn.btn-primary#openModal{:href => '#newActivity'}
           Nuova attività
       %li
         %a.btn#report{:href => '/user_activities/report.xls'}

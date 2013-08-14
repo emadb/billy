@@ -8,7 +8,7 @@
       .field.control-group
         = f.label :customer, :class => 'control-label'
         .controls
-          = select_tag "job_order[customer_id]", options_from_collection_for_select(@customers, "_id", "name", @job_order.customer._id)
+          = select_tag "job_order[customer_id]", options_from_collection_for_select(@customers, "id", "name", @job_order.customer.id)
       .field.control-group
         = f.label :hourly_rate, :class => 'control-label'
         .controls
