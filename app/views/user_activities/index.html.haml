@@ -46,7 +46,7 @@
     %h3 Nuova attività
   .modal-body
     %form.well.form-inline{"data-bind" => "submit: save"}
-      = text_field_tag 'id', '', :data => {:bind => "value: id"}
+      = text_hidden_tag 'id', '', :data => {:bind => "value: id"}
       .row-fluid
         .span6
           .field.control-group
