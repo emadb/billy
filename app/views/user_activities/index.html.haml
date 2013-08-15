@@ -1,18 +1,18 @@
 %h1
   = "Attività di #{current_user.name}"
 
-#activityPage
+#activityPage{'ng-controller' => 'UserActivitiesCtrl'}
   %fieldset
     %legend &nbsp;
     %form.well.form-inline{:method => 'POST', :action => '/user_activities/index'}
       Mese:
-      = select_month @filter_date, {add_month_numbers: false, :use_short_month => true}, {name: 'month', :class => 'input-small', 'data-bind' => 'value: month'}
+      = select_month @filter_date, {add_month_numbers: false, :use_short_month => true}, {name: 'month', :class => 'input-small', 'ng-model' => 'month'}
       &nbsp;&nbsp;Anno
-      = select_year @filter_date, {add_month_numbers: false}, {name: 'year', :class => 'input-small', 'data-bind' => 'value: year'}
+      = select_year @filter_date, {add_month_numbers: false}, {name: 'year', :class => 'input-small', 'ng-model' => 'year'}
       &nbsp;&nbsp;Utente
-      = select_tag 'user', options_from_collection_for_select(@users, "id", "email", :selected => @current_user.id), 'data-bind' => 'value: user'
+      = select_tag 'user', options_from_collection_for_select(@users, "id", "email"), 'ng-model' => 'user', 'ng-init' => "user='#{@current_user.id}'"
       &nbsp;&nbsp;
-      %button.btn{:type => 'button', 'data-bind' => 'click: reload'} filtra
+      %button.btn{:type => 'button', 'ng-click' => 'filter()'} filtra
 
   %table.table.table-bordered.table-striped
     %thead
@@ -23,58 +23,64 @@
         %th Attività
         %th Note
         %th
-    %tbody{"data-bind" => "{foreach: activities}"}
-      %tr{"data-bind"=>"{visible: isVisible}"}
-        %td{"data-bind"=>"{attr: {class: background}}"}
-          %span{"data-bind"=>"{dateString: date}"}
+    %tbody
+      %tr{'ng-repeat' => 'a in activities'}
+        %td
+          %span
+            {{a.date}}
           %br
-          %small.grey{"data-bind"=>"{text: day}"}
-        %td{"data-bind"=>"{text: hours, attr: {class: background}}"}
-        %td{"data-bind"=>"{text: jobOrder, attr: {class: background}}"}
-        %td{"data-bind"=>"{text: activity, attr: {class: background}}"}
-        %td{"data-bind"=>"{text: description, attr: {class: background}}"}
+          %small.grey{'ng-bind' => 'getDay(a.date)'}
+            
+        %td
+          {{a.hours}}
+        %td
+          {{a.jobOrder}}
+        %td
+          {{a.activity}}
+        %td
+          {{a.description}}
         
-        %td{"data-bind"=>"{attr: {class: background}}"}
-          %a{:href => "#", "data-bind"=> "{click: editActivity}"}
+        %td
+          %a{:href => "#editActivity", "ng-click"=> "edit(a.id)", "data-toggle"=>"modal"}
             %i.icon-edit.icon-large
-          %a{:href => "#", "data-bind"=> "{click: removeActivity}"}
+          %a{:href => "#", "ng-click"=> "delete(a.id)"}
             %i.icon-trash.icon-large.text-error
 
-#newActivity.modal.hide.fade
+#editActivity.modal.hide.fade{'ng-controller' => 'UserActivityCtrl'}
   .modal-header
     %button.close{:type => 'button', 'data-dismiss' => 'modal'} &times;
     %h3 Nuova attività
   .modal-body
     %form.well.form-inline{"data-bind" => "submit: save"}
-      = text_hidden_tag 'id', '', :data => {:bind => "value: id"}
+      = hidden_field_tag 'id', '', :data => {:bind => "value: id"}
       .row-fluid
         .span6
           .field.control-group
             Commessa
             .controls
-              = select_tag :job_order, '', :data => {:bind => "value: jobOrder, options: jobOrders, optionsValue : 'id', optionsText: 'code'"}
+              = select_tag :job_order, '', 'ng-model' => 'activity.jobOrder', 'ng-options' => 'j.code for j in jobOrders'
         .span6
           .field.control-group
             Attività
             .controls
-              = select_tag :activity, '', :data => {:bind => "value: activity, options: jobOrderActivities, optionsValue : 'id', optionsText: 'description'"}
+              = select_tag :activity, '', 'ng-model' => 'jobOrderActivity', 'ng-options' => 'j.description for j in jobOrderActivities'
       .row-fluid
         .span6
           .field.control-group
             Data
             .controls
-              = text_field_tag 'date', '', :class => 'isdate input-small', :data => {:bind => "value: date"}
+              = text_field_tag 'date', '', :class => 'isdate input-small', 'ng-model' => "activity.date"
         .span6
           .field.control-group
             Ore
             .controls
-              = text_field_tag 'hours', '', :class => 'input-small', :data => {:bind => "value: hours"}
+              = text_field_tag 'hours', '', :class => 'input-small', 'ng-model' => "activity.hours"
       .row-fluid
         .span12
           .field.control-group
             Note
             .controls
-              = text_area_tag :description, '', :data => {:bind => "value: description"}
+              = text_area_tag :description, '', 'ng-model' => "activity.description"
           
   .modal-footer
     %a.btn{'data-dismiss' => 'modal'} annulla

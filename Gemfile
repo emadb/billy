@@ -13,6 +13,8 @@ gem 'dropbox-api'
 gem 'sass-rails'
 gem 'uglifier', '>= 1.0.3'
 gem 'protected_attributes'
+gem 'angular-ui-bootstrap-rails'
+
 group :development, :test do
   gem 'meta_request', '0.2.0'
   gem 'sqlite3'
