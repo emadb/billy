@@ -74,8 +74,8 @@ class UserActivitiesController < ApplicationController
     activity.date = DateTime.parse(params[:date])
     activity.hours = params[:hours].to_f
     activity.description = params[:description]
-    job_order = JobOrder.find(params[:jobOrder])
-    activity.job_order_activity = job_order.activities.select{|a| a.id = params[:activity]}[0]
+    job_order = JobOrder.find(params[:job_order_id])
+    activity.job_order_activity = job_order.activities.select{|a| a.id = params[:job_order_activity_id]}[0]
     activity.user = current_user
     activity.save
   end

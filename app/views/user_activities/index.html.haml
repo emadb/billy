@@ -58,12 +58,12 @@
           .field.control-group
             Commessa
             .controls
-              = select_tag :job_order, '', 'ng-model' => 'activity.jobOrder', 'ng-options' => 'j.code for j in jobOrders'
+              = select_tag :job_order, '', 'ng-model' => 'activity.job_order_id', 'ng-options' => 'j.id as j.code for j in jobOrders'
         .span6
           .field.control-group
             Attività
             .controls
-              = select_tag :activity, '', 'ng-model' => 'jobOrderActivity', 'ng-options' => 'j.description for j in jobOrderActivities'
+              = select_tag :activity, '', 'ng-model' => 'activity.job_order_activity_id', 'ng-options' => 'j.id as j.description for j in jobOrderActivities'
       .row-fluid
         .span6
           .field.control-group
@@ -84,7 +84,7 @@
           
   .modal-footer
     %a.btn{'data-dismiss' => 'modal'} annulla
-    %button.btn.btn-primary{:type => 'submit', 'data-bind' => 'click:save'} salva    
+    %button.btn.btn-primary{:type => 'submit', 'data-dismiss' => 'modal', 'ng-click' => 'save()'} salva    
     
 = content_for :side_bar do
   .well.sidebar-nav

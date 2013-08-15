@@ -14,9 +14,11 @@ window.scrooge.factory('ActivityService', ['$http', function($http){
             $http.get('/job_orders').success(successCallback);
         },
         getJobOrderActivities: function(jobOrderId, successCallback){
-          $http.get('/job_orders/' + jobOrderId + '/job_order_activities').success(successCallback);  
+            $http.get('/job_orders/' + jobOrderId + '/job_order_activities').success(successCallback);  
+        },
+        save: function(activity, successCallback){
+            $http.post('/user_activities', activity).success(successCallback);
         }
-
     }
 }]);
 
@@ -30,11 +32,7 @@ window.scrooge.controller('UserActivitiesCtrl', ['$scope', '$rootScope', 'Activi
     }
     
     $scope.filter = function(){
-        console.log('click');
-        ActivityService.getActivities($scope.month, $scope.year, $scope.user, function(result){
-            $scope.activities = result;
-            console.log('filter', result);
-        });
+        loadActivities();
     }
 
     $scope.edit = function(id){
@@ -42,15 +40,20 @@ window.scrooge.controller('UserActivitiesCtrl', ['$scope', '$rootScope', 'Activi
     }   
 
     $scope.delete = function(id){
-        console.log('delete', id);
     }
 
     if ($scope.month !== undefined && $scope.year !== undefined && $scope.user !== undefined){
         ActivityService.getActivities($scope.month, $scope.year, $scope.user, function(result){
             $scope.activities = result;
-            console.log('1', result);
         });
     }
+
+    function loadActivities(){
+        ActivityService.getActivities($scope.month, $scope.year, $scope.user, function(result){
+            $scope.activities = result;
+        });
+    }
+    setTimeout(function(){loadActivities();}, 0);
 
        //  ko.applyBindings(activityList, $('#activityPage')[0]);
 
@@ -68,9 +71,13 @@ window.scrooge.controller('UserActivityCtrl', ['$scope', '$rootScope', 'Activity
         $scope.jobOrders = result;
     })
 
-    ActivityService.getJobOrderActivities(2, function(result){
-        $scope.jobOrderActivities = result;
-    })
+    $scope.$watch('activity.job_order_id', function(jobOrderId){
+        if (jobOrderId !== undefined){
+            ActivityService.getJobOrderActivities(jobOrderId, function(result){
+                $scope.jobOrderActivities = result;
+            });    
+        }
+    });
 
 
     $rootScope.$on('activity:edit', function(event, id) {
@@ -78,6 +85,13 @@ window.scrooge.controller('UserActivityCtrl', ['$scope', '$rootScope', 'Activity
             $scope.activity = activity;
         })
     });
+
+    $scope.save = function(){    
+        ActivityService.save($scope.activity, function(result){
+            console.log('updated');
+        });
+    
+    }
 }]);
 
 
