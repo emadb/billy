@@ -18,6 +18,9 @@ window.scrooge.factory('ActivityService', ['$http', function($http){
         },
         save: function(activity, successCallback){
             $http.post('/user_activities', activity).success(successCallback);
+        },
+        delete: function(id, successCallback){
+            $http.delete('/user_activities/' + id).success(successCallback);
         }
     }
 }]);
@@ -40,6 +43,11 @@ window.scrooge.controller('UserActivitiesCtrl', ['$scope', '$rootScope', 'Activi
     }   
 
     $scope.delete = function(id){
+        if (window.confirm('Sicuro?')){
+            ActivityService.delete(id, function(){
+                $scope.activities = _.reject($scope.activities, function(a){ return a.id == id; })
+            });
+        }
     }
 
     if ($scope.month !== undefined && $scope.year !== undefined && $scope.user !== undefined){
