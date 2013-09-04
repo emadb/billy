@@ -100,7 +100,9 @@
     %hr
     %ul#stats.totals.info-panel  
       %li Oggi
-      %li.amount{"data-bind"=>"text: today_hours_txt"}
+      %li.amount
+        {{todayHours}}
       %li Ieri
-      %li.amount{"data-bind"=>"text: yesterday_hours_txt"}
+      %li.amount
+        {{yestardayHours}}
  

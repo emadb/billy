@@ -89,7 +89,7 @@ class UserActivitiesController < ApplicationController
   end
 
   def stats
-    user = User.find(params[:user])
+    user = current_user #User.find(params[:user])
     
     stats = ActivityStats.new
     stats.today_hours = UserActivity.sum(:hours, :conditions => ["user_id = ? and DATE(date) = ?", user.id, Date.today.to_date])

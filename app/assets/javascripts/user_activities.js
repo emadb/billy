@@ -21,9 +21,14 @@ window.scrooge.factory('ActivityService', ['$http', function($http){
         },
         delete: function(id, successCallback){
             $http.delete('/user_activities/' + id).success(successCallback);
+        },
+        getStats: function(year, month, successCallback){
+            $http.get('/user_activities/stats/'+ year + '/' + month).success(successCallback);
         }
     }
 }]);
+
+
 
 window.scrooge.controller('UserActivitiesCtrl', ['$scope', '$rootScope', 'ActivityService', function($scope, $rootScope, ActivityService){
     $scope.days = ['lunedì', 'martedì', 'mercoledì', 'giovedì', 'venerdì', 'sabato', 'domenica'];
@@ -46,6 +51,7 @@ window.scrooge.controller('UserActivitiesCtrl', ['$scope', '$rootScope', 'Activi
         if (window.confirm('Sicuro?')){
             ActivityService.delete(id, function(){
                 $scope.activities = _.reject($scope.activities, function(a){ return a.id == id; })
+                $rootScope.$broadcast('activity:updated', -1);
             });
         }
     }
@@ -66,17 +72,7 @@ window.scrooge.controller('UserActivitiesCtrl', ['$scope', '$rootScope', 'Activi
         loadActivities();
     });
 
-
     setTimeout(function(){loadActivities();}, 0);
-
-       //  ko.applyBindings(activityList, $('#activityPage')[0]);
-
-       //  // fill the modal popup
-       //  var activity = new NewActivityVM();
-       //  activity.init();
-       //  ko.applyBindings(activity, $('#newActivity')[0]);
-
-       // updateStats();
 }]);
 
 window.scrooge.controller('UserActivityCtrl', ['$scope', '$rootScope', 'ActivityService', function($scope, $rootScope, ActivityService){
@@ -113,10 +109,24 @@ window.scrooge.controller('UserActivityCtrl', ['$scope', '$rootScope', 'Activity
     }
 }]);
 
-window.scrooge.controller('RightPanelCtrl', ['$scope', '$rootScope', function($scope, $rootScope){
+window.scrooge.controller('RightPanelCtrl', ['$scope', '$rootScope', 'ActivityService', function($scope, $rootScope, ActivityService){
     $scope.newActivity = function(){
         $rootScope.$broadcast('activity:new');
     }
+
+    function updateStats(){
+        ActivityService.getStats(moment().year(), moment().month(), function(stats){
+            $scope.todayHours = stats.today_hours;
+            $scope.yestardayHours = stats.yesterday_hours;
+        });    
+    }
+
+    $rootScope.$on('activity:updated', function(event, id) {
+        updateStats();
+    });
+
+    updateStats();
+
 }]);
 
 
