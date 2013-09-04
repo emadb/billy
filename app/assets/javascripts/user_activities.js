@@ -53,6 +53,12 @@ window.scrooge.controller('UserActivitiesCtrl', ['$scope', '$rootScope', 'Activi
             $scope.activities = result;
         });
     }
+
+    $rootScope.$on('activity:updated', function(event, id) {
+        loadActivities();
+    });
+
+
     setTimeout(function(){loadActivities();}, 0);
 
        //  ko.applyBindings(activityList, $('#activityPage')[0]);
@@ -69,7 +75,7 @@ window.scrooge.controller('UserActivityCtrl', ['$scope', '$rootScope', 'Activity
         
     ActivityService.getJobOrders(function(result){
         $scope.jobOrders = result;
-    })
+    });
 
     $scope.$watch('activity.job_order_id', function(jobOrderId){
         if (jobOrderId !== undefined){
@@ -82,16 +88,55 @@ window.scrooge.controller('UserActivityCtrl', ['$scope', '$rootScope', 'Activity
 
     $rootScope.$on('activity:edit', function(event, id) {
         ActivityService.getActivity(id, function(activity){
+            // HACK: to resolve date issue
+            activity.date = moment(activity.date, 'YYYY-MM-DD').format('DD-MM-YYYY');
             $scope.activity = activity;
-        })
+        });
     });
 
-    $scope.save = function(){    
+    $rootScope.$on('activity:new', function(event, id) {
+        $scope.activity = {date: moment().format('DD-MM-YYYY')};
+    });
+
+    $scope.save = function(){
         ActivityService.save($scope.activity, function(result){
-            console.log('updated');
+            $rootScope.$broadcast('activity:updated', result.id);
         });
-    
     }
 }]);
+
+window.scrooge.controller('RightPanelCtrl', ['$scope', '$rootScope', function($scope, $rootScope){
+    $scope.newActivity = function(){
+        $rootScope.$broadcast('activity:new');
+    }
+}]);
+
+
+window.scrooge.
+  directive('bDatepicker', function(){
+    return {
+      require: '?ngModel',
+      restrict: 'A',
+      link: function($scope, element, attrs, controller) {
+        var updateModel = function(ev) {
+          element.datepicker('hide');
+          element.blur();
+          return $scope.$apply(function() {
+            return controller.$setViewValue(moment(ev.date).format('YYYY-MM-DD'));
+          });
+        };
+
+        if (controller != null) {
+          controller.$render = function() {
+            element.datepicker('setValue', controller.$viewValue);
+            return controller.$viewValue;
+          };
+        }
+        return attrs.$observe('bDatepicker', function(value) {
+          return element.datepicker({format: 'dd-mm-yyyy'}).on('changeDate', updateModel);
+        });
+      }
+    };
+  });
 
 

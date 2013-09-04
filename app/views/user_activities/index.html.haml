@@ -27,7 +27,7 @@
       %tr{'ng-repeat' => 'a in activities'}
         %td
           %span
-            {{a.date}}
+            {{a.date | date:'dd-MM-yyyy'}}
           %br
           %small.grey{'ng-bind' => 'getDay(a.date)'}
             
@@ -69,7 +69,8 @@
           .field.control-group
             Data
             .controls
-              = text_field_tag 'date', '', :class => 'isdate input-small', 'ng-model' => "activity.date"
+              = text_field_tag 'date', '', :class => 'input-small', 'ng-model' => "activity.date", "b-datepicker" => ""
+
         .span6
           .field.control-group
             Ore
@@ -87,10 +88,10 @@
     %button.btn.btn-primary{:type => 'submit', 'data-dismiss' => 'modal', 'ng-click' => 'save()'} salva    
     
 = content_for :side_bar do
-  .well.sidebar-nav
+  .well.sidebar-nav{'ng-controller' => 'RightPanelCtrl'}
     %ul.info-panel
       %li
-        %a.btn.btn-primary#openModal{:href => '#newActivity'}
+        %a.btn.btn-primary#openModal{:href => '#editActivity', 'ng-click' => 'newActivity()', "data-toggle"=>"modal"}
           Nuova attività
       %li
         %a.btn#report{:href => '/user_activities/report.xls'}
