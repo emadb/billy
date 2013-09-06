@@ -24,7 +24,7 @@
         %th Note
         %th
     %tbody
-      %tr{'ng-repeat' => 'a in activities'}
+      %tr{'ng-repeat' => 'a in activities', 'row-color' => '{{$index}}'}
         %td
           %span
             {{a.date | date:'dd-MM-yyyy'}}

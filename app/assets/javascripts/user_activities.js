@@ -29,7 +29,6 @@ window.scrooge.factory('ActivityService', ['$http', function($http){
 }]);
 
 
-
 window.scrooge.controller('UserActivitiesCtrl', ['$scope', '$rootScope', 'ActivityService', function($scope, $rootScope, ActivityService){
     $scope.days = ['lunedì', 'martedì', 'mercoledì', 'giovedì', 'venerdì', 'sabato', 'domenica'];
     $scope.month = moment().month() + 1;
@@ -156,5 +155,33 @@ window.scrooge.
       }
     };
   });
+
+// TODO: hack.
+var rowStyle = 'success';
+
+window.scrooge.directive('rowColor', function () {
+    return {
+        restrict: 'A',
+        link: function (scope, element, attrs) {
+            
+            attrs.$observe('rowColor', function(value) {
+                var preAct = scope.activities[value - 1];
+                var act = scope.activities[value];
+                if (preAct != undefined && act.date != preAct.date){
+                    act.rowStyle = (preAct.rowStyle == "success"? "info":"success");
+                } else{
+                    if (preAct == undefined){
+                        act.rowStyle = 'success';
+                    } else{
+                        act.rowStyle = preAct.rowStyle;
+                    }
+                }
+
+                element.attr('class', act.rowStyle);
+            });
+
+        }
+    };
+})
 
 
