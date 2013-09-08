@@ -157,7 +157,7 @@ window.scrooge.
   });
 
 // TODO: hack.
-var rowStyle = 'success';
+var rowStyle = 'nobg';
 
 window.scrooge.directive('rowColor', function () {
     return {
@@ -168,10 +168,10 @@ window.scrooge.directive('rowColor', function () {
                 var preAct = scope.activities[value - 1];
                 var act = scope.activities[value];
                 if (preAct != undefined && act.date != preAct.date){
-                    act.rowStyle = (preAct.rowStyle == "success"? "info":"success");
+                    act.rowStyle = (preAct.rowStyle == "nobg"? "lightbg":"nobg");
                 } else{
                     if (preAct == undefined){
-                        act.rowStyle = 'success';
+                        act.rowStyle = 'nobg';
                     } else{
                         act.rowStyle = preAct.rowStyle;
                     }
