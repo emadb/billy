@@ -30,7 +30,7 @@ window.scrooge.factory('ActivityService', ['$http', function($http){
 
 
 window.scrooge.controller('UserActivitiesCtrl', ['$scope', '$rootScope', 'ActivityService', function($scope, $rootScope, ActivityService){
-    $scope.days = ['lunedì', 'martedì', 'mercoledì', 'giovedì', 'venerdì', 'sabato', 'domenica'];
+    $scope.days = ['domenica', 'lunedì', 'martedì', 'mercoledì', 'giovedì', 'venerdì', 'sabato'];
     $scope.month = moment().month() + 1;
     $scope.year = moment().year(); 
     
