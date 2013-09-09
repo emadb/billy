@@ -12,7 +12,6 @@
       %th
       %th Stato (costo fatto/totale)
       %th
-      %th
       %th 
   %tbody
     -@job_orders.each do |job|
@@ -28,8 +27,6 @@
         %td
           - if job.warning?
             %span.badge.badge-important !
-        %td.right
-          = "#{job.total_consumed_cost} - #{job.total_estimated_cost}"
         %td.right
           = job_order_cost_status_helper(job)
         %td
