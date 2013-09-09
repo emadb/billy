@@ -29,8 +29,12 @@ class UserActivity < ActiveRecord::Base
 
   def as_json(options = { })
     h = super(options)
-    h[:job_order_id]   = job_order_id
+    h[:job_order_id] = job_order_id
     h
+  end
+
+  def cost
+    self.hours * self.user.hourly_cost
   end
 
 end
