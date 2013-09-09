@@ -41,6 +41,7 @@ module ApplicationHelper
   end
 
   def job_order_cost_status_helper(job)
+    return 'xxx';
     delta = job.total_estimated_cost - job.total_consumed_cost 
     delta_perc = (delta / job.total_estimated_cost * 100)
     

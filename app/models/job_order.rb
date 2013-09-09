@@ -32,10 +32,12 @@ class JobOrder < ActiveRecord::Base
     end
   end
 
+  # TODO: write SQL query
   def total_estimated_cost
     total_estimated_hours * self.hourly_rate
   end
 
+  # TODO: write SQL query
   def total_consumed_cost
     sum = 0
     activities.joins(:user_activities).each do |a|
