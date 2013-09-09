@@ -32,6 +32,18 @@ class JobOrder < ActiveRecord::Base
     end
   end
 
+  def total_estimated_cost
+    total_estimated_hours * self.hourly_rate
+  end
+
+  def total_consumed_cost
+    sum = 0
+    activities.joins(:user_activities).each do |a|
+      sum = a.user_activities.reduce(0){|sum, a| sum + a.cost} 
+    end
+    sum.to_f
+  end
+
   def active_activities
     activities.where(:active => true)
   end
