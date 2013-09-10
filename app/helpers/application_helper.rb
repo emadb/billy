@@ -41,19 +41,23 @@ module ApplicationHelper
   end
 
   def job_order_cost_status_helper(job)
-    delta = job.total_estimated_cost - job.total_consumed_cost
-    delta_perc = (delta / job.total_estimated_cost * 100).ceil
-    
-    label_class = 'info'
-    if delta_perc.abs > 80.0
-      label_class = 'warning'
-    end
+    begin
+      delta = job.total_estimated_cost - job.total_consumed_cost
+      delta_perc = (delta / job.total_estimated_cost * 100).ceil
+      
+      label_class = 'info'
+      if delta_perc.abs > 80.0
+        label_class = 'warning'
+      end
 
-    if delta_perc.abs > 100
-      label_class = 'important'
-    end
+      if delta_perc.abs > 100
+        label_class = 'important'
+      end
 
-    return raw("<span class=\"label label-#{label_class}\">#{delta_perc.abs}</span>")
+      return raw("<span class=\"label label-#{label_class}\">#{delta_perc.abs}</span>")
+    rescue
+      return raw("<span class=\"label\">Na</span>")
+    end
   end
 
 end
