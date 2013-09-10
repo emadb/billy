@@ -44,7 +44,7 @@ class JobOrder < ActiveRecord::Base
               inner join job_order_activities joa on joa.id = ua.job_order_activity_id
               where joa.job_order_id = " + self.id.to_s
     sum = ActiveRecord::Base.connection.execute(query)
-    sum[0]["cost"]
+    sum[0]["cost"].to_f
   end
 
   def active_activities
