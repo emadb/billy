@@ -2,7 +2,8 @@ class JobOrder < ActiveRecord::Base
   belongs_to :customer
   has_many :activities, :foreign_key => 'job_order_id', :class_name => "JobOrderActivity"
   
-  attr_accessible :activities, :archived, :code, :notes, :customer_id, :hourly_rate, :activities_attributes
+  attr_accessible :activities, :archived, :code, :notes, :customer_id, 
+  :hourly_rate, :activities_attributes, :price
 
   accepts_nested_attributes_for :customer
   accepts_nested_attributes_for :activities, :allow_destroy => true
@@ -30,10 +31,6 @@ class JobOrder < ActiveRecord::Base
     else
       0
     end
-  end
-
-  def total_estimated_cost
-    total_estimated_hours * self.hourly_rate
   end
 
   def total_consumed_cost

@@ -14,6 +14,10 @@
         .controls
           = f.text_field :hourly_rate, :class => 'input-medium'
       .field.control-group
+        = f.label :price, :class => 'control-label'
+        .controls
+          = f.text_field :price, :class => 'input-medium'
+      .field.control-group
         = f.label :notes, :class => 'control-label'
         .controls
           = f.text_area :notes, :class => 'input-medium', rows: 3
