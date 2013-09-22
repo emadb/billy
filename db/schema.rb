@@ -102,6 +102,7 @@ ActiveRecord::Schema.define(version: 20130909211319) do
     t.integer  "customer_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.decimal  "price"
   end
 
   add_index "job_orders", ["customer_id"], name: "index_job_orders_on_customer_id"

@@ -24,6 +24,6 @@ module Scrooge
     config.assets.enabled = true
     config.assets.paths << Rails.root.join("app", "assets", "font")
     # Precompile additional assets
-    config.assets.precompile += %w( .svg .eot .woff .ttf )
+    config.assets.precompile << /\.(?:svg|eot|woff|ttf)$/
   end
 end
