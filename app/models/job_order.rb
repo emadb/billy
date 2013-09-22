@@ -2,7 +2,8 @@ class JobOrder < ActiveRecord::Base
   belongs_to :customer
   has_many :activities, :foreign_key => 'job_order_id', :class_name => "JobOrderActivity"
   
-  attr_accessible :activities, :archived, :code, :notes, :customer_id, :hourly_rate, :activities_attributes
+  attr_accessible :activities, :archived, :code, :notes, :customer_id, 
+  :hourly_rate, :activities_attributes, :price
 
   accepts_nested_attributes_for :customer
   accepts_nested_attributes_for :activities, :allow_destroy => true
@@ -32,16 +33,15 @@ class JobOrder < ActiveRecord::Base
     end
   end
 
-  def total_estimated_cost
-    total_estimated_hours * self.hourly_rate
-  end
-
   def total_consumed_cost
-    sum = 0
-    activities.joins(:user_activities).each do |a|
-      sum = a.user_activities.reduce(0){|sum, a| sum + a.cost} 
-    end
-    sum.to_f
+
+    query = "select sum(ua.hours * u.hourly_cost) as cost
+              from user_activities ua 
+              inner join users u on ua.user_id = u.id 
+              inner join job_order_activities joa on joa.id = ua.job_order_activity_id
+              where joa.job_order_id = " + self.id.to_s
+    sum = ActiveRecord::Base.connection.execute(query)
+    sum[0]["cost"].to_f
   end
 
   def active_activities
