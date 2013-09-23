@@ -17,6 +17,12 @@ class JobOrder < ActiveRecord::Base
     return job_order
   end
 
+  def a_project?
+    if not self.price.nil? and self.price > 0
+      price
+    end
+  end
+
   def total_estimated_hours
     activities.sum(:estimated_hours)
   end

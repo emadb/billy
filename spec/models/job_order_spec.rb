@@ -13,6 +13,21 @@ describe JobOrder do
     it "customer should not be nil" do
       expect(@job_order.customer).not_to be_nil
     end
+
+    it 'price is nil. Should be nil' do
+      @job_order.price = nil
+      expect(@job_order.a_project?).to be_nil
+    end
+
+    it 'price is zero. Should be nil' do
+      @job_order.price = 0
+      expect(@job_order.a_project?).to be_nil
+    end
+
+    it 'price is not zero. Should not be nil' do
+      @job_order.price = 10
+      expect(@job_order.a_project?).not_to be_nil
+    end
   end
 
   context 'using fixtures' do
