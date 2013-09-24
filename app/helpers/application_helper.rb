@@ -58,7 +58,7 @@ module ApplicationHelper
 
         return raw("<span style=\"width:190px\" class=\"label label-#{label_class}\">#{job.price} - #{job.total_consumed_cost} = #{delta}</span>")
       else
-        delta = job.total_consumed_cost - (job.total_executed_hours * job.hourly_rate)
+        delta = (job.total_executed_hours * job.hourly_rate) - job.total_consumed_cost
         return raw("<span style=\"width:190px\" class=\"label label-info\">#{delta}</span>")
       end
 
