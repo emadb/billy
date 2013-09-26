@@ -6,4 +6,11 @@ class JobOrderActivitiesController < ApplicationController
       format.json { render :json => @job_order_activities }
     end
   end
+
+  def show
+    @job_order_activity = JobOrderActivity.find(params[:id])
+    respond_to do |format|
+      format.json { render :json => @job_order_activity }
+    end    
+  end
 end

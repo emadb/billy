@@ -1,0 +1,49 @@
+%div{'ng-controller' => 'TrackerCtrl'}
+  .row-fluid
+    .span3
+      = select_tag :job_order, '', 'ng-model' => 'job_order_id', 'ng-options' => 'j.id as j.code for j in jobOrders'
+    .span3
+      = select_tag :activity, '', 'ng-model' => 'job_order_activity_id', 'ng-options' => 'j.id as j.description for j in jobOrderActivities'
+    .span4
+      %textarea
+    .span2
+      %button.btn.btn-block{'ng-click' => 'start()', 'class' => '{{cssClass}}'} {{operation}}
+  .row-fluid
+    .span12
+      %h2.text-center {{timer}}
+  .row-fluid
+    .span12
+      %table.table.table-bordered
+        %thead
+          %tr
+            %th Commessa
+            %th Attività
+            %th Note
+            %th Tempo
+            %th
+        %tbody
+          %tr{'ng-repeat' => 'a in activities', 'row-color' => '{{$index}}'}
+            %td
+              {{a.jobOrder}}
+            %td
+              {{a.activity}}
+            %td
+              note
+            %td
+              {{a.time}}
+            %td
+              
+  = content_for :side_bar do
+    .well.sidebar-nav
+      = link_to 'salva ', new_invoice_path , {:class => 'btn btn-primary'}
+      %hr
+      %ul.totals.info-panel
+        %li Imponibile
+        %li.taxable-income.amount
+          = 123
+        %li IVA
+        %li.tax.amount
+          = 456
+        %li Totale
+        %li.total.amount
+          = 789

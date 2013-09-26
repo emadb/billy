@@ -12,6 +12,8 @@ Scrooge::Application.routes.draw do
   match '/user_activities/:user/:year/:month' => 'user_activities#index', :via => :get
   match '/user_activities/index' => 'user_activities#index', :via => :post
   
+  match '/tracker' => 'activities_tracker#index', :via => :get
+  match '/job_order_activities/:id' => 'job_order_activities#show', :via => :get
 
   resources :test
   resources :drop_box

@@ -1,33 +1,3 @@
-window.scrooge.factory('ActivityService', ['$http', function($http){
-    return {
-        getActivities: function(month, year, user, successCallback) {
-            $http
-                .get('/user_activities/'+ user + '/' + year + '/' + month)
-                .success(successCallback);
-        },
-        getActivity: function(id, successCallback){
-            $http
-                .get('/user_activities/' + id)
-                .success(successCallback);
-        },
-        getJobOrders: function(successCallback){
-            $http.get('/job_orders').success(successCallback);
-        },
-        getJobOrderActivities: function(jobOrderId, successCallback){
-            $http.get('/job_orders/' + jobOrderId + '/job_order_activities').success(successCallback);  
-        },
-        save: function(activity, successCallback){
-            $http.post('/user_activities', activity).success(successCallback);
-        },
-        delete: function(id, successCallback){
-            $http.delete('/user_activities/' + id).success(successCallback);
-        },
-        getStats: function(year, month, successCallback){
-            $http.get('/user_activities/stats/'+ year + '/' + month).success(successCallback);
-        }
-    }
-}]);
-
 
 window.scrooge.controller('UserActivitiesCtrl', ['$scope', '$rootScope', 'ActivityService', function($scope, $rootScope, ActivityService){
     $scope.days = ['domenica', 'lunedì', 'martedì', 'mercoledì', 'giovedì', 'venerdì', 'sabato'];
@@ -62,7 +32,7 @@ window.scrooge.controller('UserActivitiesCtrl', ['$scope', '$rootScope', 'Activi
     }
 
     function loadActivities(){
-        ActivityService.getActivities($scope.month, $scope.year, $scope.user, function(result){
+        ActivityService.getUserActivities($scope.month, $scope.year, $scope.user, function(result){
             $scope.activities = result;
         });
     }
@@ -90,7 +60,7 @@ window.scrooge.controller('UserActivityCtrl', ['$scope', '$rootScope', 'Activity
 
 
     $rootScope.$on('activity:edit', function(event, id) {
-        ActivityService.getActivity(id, function(activity){
+        ActivityService.getUserActivity(id, function(activity){
             // HACK: to resolve date issue
             activity.date = moment(activity.date, 'YYYY-MM-DD').format('DD-MM-YYYY');
             $scope.activity = activity;
