@@ -28,9 +28,13 @@ window.scrooge.controller('TrackerCtrl', ['$scope', '$rootScope', '$timeout', 'A
         ActivityService.getJobOrder($scope.job_order_id, function(job_order){
             ActivityService.getActivity($scope.job_order_activity_id, function(activity){
                 $scope.activities.push({
+                    id: $scope.activities.length,
                     jobOrder: job_order.code, 
                     activity: activity.description,
-                    time: watch.getTime()
+                    time: watch.getTime(),
+                    job_order_id: $scope.job_order_id,
+                    job_order_activity_id: $scope.job_order_activity_id
+
                 });
             });    
         })
@@ -39,6 +43,7 @@ window.scrooge.controller('TrackerCtrl', ['$scope', '$rootScope', '$timeout', 'A
 
     $scope.start = function(){
         if (!isStarted){
+            watch.reset();
             $scope.operation = 'Stop';
             $scope.cssClass = 'btn-danger';
             clocktimer = $timeout(update, 10);
@@ -55,10 +60,32 @@ window.scrooge.controller('TrackerCtrl', ['$scope', '$rootScope', '$timeout', 'A
 
     };
 
+    $scope.resume = function(activity){
+        if (!isStarted){
+            watch.reset();
+            $scope.operation = 'Stop';
+            $scope.cssClass = 'btn-danger';
+            $scope.job_order_id = activity.job_order_id;
+            $scope.job_order_activity_id = activity.job_order_activity_id;
+            clocktimer = $timeout(update, 10);
+            watch.start();
+        } else{
+            $scope.operation = 'Start';
+            $scope.cssClass = 'btn-success';
+            $timeout.cancel(clocktimer);
+            watch.stop();
+            trackActivity();
+        }
+
+        isStarted = !isStarted;
+        
+    };
+
     
     function Stopwatch() {
         var startAt = 0;    // Time of last start / resume. (0 if not running)
         var lapTime = 0;    // Time on the clock when last stopped in milliseconds
+        var resumeTime = 0;
  
         var now = function() {
             return (new Date()).getTime(); 
@@ -69,7 +96,7 @@ window.scrooge.controller('TrackerCtrl', ['$scope', '$rootScope', '$timeout', 'A
         };
 
         this.getTime = function() {
-            var t = this.time();
+            var t = this.time() + resumeTime;
             var h = m = s = 0;
             var newTime = '';
          
@@ -104,6 +131,15 @@ window.scrooge.controller('TrackerCtrl', ['$scope', '$rootScope', '$timeout', 'A
         // Duration
         this.time = function() {
             return lapTime + (startAt ? now() - startAt : 0); 
+        };
+
+        this.resume = function(time){
+            var parts = time.split(':');
+            var s = parseInt(parts[2]);
+            var m = parseInt(parts[1]);
+            var h = parseInt(parts[0]);
+            resumeTime = (s + (m * 60) + (h * 60 * 60)) * 1000;
+            this.start();
         };
     };
 
