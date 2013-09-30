@@ -11,7 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130909211319) do
+ActiveRecord::Schema.define(version: 20130930120052) do
+
+  create_table "activity_trackers", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "job_order_activity_id"
+    t.string   "time"
+    t.string   "notes"
+    t.date     "date"
+    t.time     "start_time"
+    t.time     "stop_time"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "customers", force: true do |t|
     t.string   "name"

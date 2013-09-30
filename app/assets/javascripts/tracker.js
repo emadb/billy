@@ -6,6 +6,13 @@ window.scrooge.controller('TrackerCtrl', ['$scope', '$rootScope', '$timeout', 'A
     $scope.operation = 'Start';
     $scope.cssClass = 'btn-success';
 
+    ActivityService.getActivityTrackedToday(function(activities){
+        activities.forEach(function(activity){
+            $scope.activities.push(activity);    
+        });
+    })
+
+
     $rootScope.$on('tracker:deleteAll', function(event) {
         $scope.activities.length = 0;
     });
@@ -44,6 +51,13 @@ window.scrooge.controller('TrackerCtrl', ['$scope', '$rootScope', '$timeout', 'A
         isStarted = !isStarted;
     };
 
+    $scope.delete = function(activity){
+        ActivityService.deleteTrackedActivity(activity.id, function(){
+            index = $scope.activities.map(function(a) { return a.id; }).indexOf(activity);    
+            $scope.activities.splice(index, 1);
+        });    
+    }
+
 
     function buildDuration(time){
         var hours = 0;
@@ -66,16 +80,21 @@ window.scrooge.controller('TrackerCtrl', ['$scope', '$rootScope', '$timeout', 'A
     function trackActivity(){
         ActivityService.getJobOrder($scope.job_order_id, function(job_order){
             ActivityService.getActivity($scope.job_order_activity_id, function(activity){
-                $scope.activities.push({
+                var activityToTrack = {
                     jobOrder: job_order.code, 
                     activity: activity.description,
                     time: watch.getTime(),
                     job_order_id: $scope.job_order_id,
                     job_order_activity_id: $scope.job_order_activity_id,
                     notes: $scope.notes
+                };
+                $scope.activities.push(activityToTrack);
+                ActivityService.trackActivity(activityToTrack, function(response){
+                    activityToTrack.id = response.activityId;    
                 });
             });    
-        })
+        });
+
         
     }
 

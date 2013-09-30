@@ -35,6 +35,15 @@ window.scrooge.factory('ActivityService', ['$http', function($http){
         },
         getStats: function(year, month, successCallback){
             $http.get('/user_activities/stats/'+ year + '/' + month).success(successCallback);
+        },
+        trackActivity: function(activity, successCallback){
+            $http.post('/activities_tracker', activity).success(successCallback);
+        },
+        getActivityTrackedToday: function(successCallback){
+            $http.get('/activities_tracker/today').success(successCallback);
+        },
+        deleteTrackedActivity: function(id, successCallback){
+            $http.delete('/activities_tracker/' + id).success(successCallback);
         }
     }
 }]);

@@ -11,10 +11,11 @@ Scrooge::Application.routes.draw do
   match '/user_activities/stats/:year/:month' => 'user_activities#stats', :via => :get
   match '/user_activities/:user/:year/:month' => 'user_activities#index', :via => :get
   match '/user_activities/index' => 'user_activities#index', :via => :post
-  
-  match '/tracker' => 'activities_tracker#index', :via => :get
   match '/job_order_activities/:id' => 'job_order_activities#show', :via => :get
 
+  resources :activities_tracker do
+    get 'today', :on => :collection, :action => 'today'
+  end
   resources :test
   resources :drop_box
   resources :invoices do
