@@ -44,6 +44,10 @@ window.scrooge.factory('ActivityService', ['$http', function($http){
         },
         deleteTrackedActivity: function(id, successCallback){
             $http.delete('/activities_tracker/' + id).success(successCallback);
+        },
+        markSaved: function(activity){
+            activity.status = 2
+            $http.put('/activities_tracker/' + activity.id, activity);
         }
     }
 }]);

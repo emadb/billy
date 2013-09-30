@@ -19,11 +19,16 @@ window.scrooge.controller('TrackerCtrl', ['$scope', '$rootScope', '$timeout', 'A
 
     $rootScope.$on('tracker:saveAll', function(event) {
         $scope.activities.forEach(function(activity){
-            activity.date = moment().format('YYYY-MM-DD')
-            activity.hours = buildDuration(activity.time);
-            activity.description = activity.notes;
-            ActivityService.save(activity, function(response){
-                
+            var newTrackeActivity = {
+                time: activity.time, 
+                job_order_id: activity.job_order_id,
+                job_order_activity_id: activity.job_order_activity_id,
+                date: moment().format('YYYY-MM-DD'),
+                hours: buildDuration(activity.time),
+                description: activity.notes
+            };
+            ActivityService.save(newTrackeActivity, function(response){
+                ActivityService.markSaved(activity);
             });
         });
         $scope.activities.length = 0;
@@ -44,8 +49,10 @@ window.scrooge.controller('TrackerCtrl', ['$scope', '$rootScope', '$timeout', 'A
 
     $scope.start = function(activity){
         if (!isStarted){
+            $scope.startTime = moment().format('HH:mm');
             startTimer(activity);
         } else{
+            $scope.stopTime = moment().format('HH:mm')
             stopTimerAndTrack();
         }
         isStarted = !isStarted;
@@ -56,6 +63,14 @@ window.scrooge.controller('TrackerCtrl', ['$scope', '$rootScope', '$timeout', 'A
             index = $scope.activities.map(function(a) { return a.id; }).indexOf(activity);    
             $scope.activities.splice(index, 1);
         });    
+    }
+
+    $scope.isStarted = function(){
+        return isStarted;
+    }
+
+    $scope.isCompleted = function(){
+        return !isStarted && $scope.timer !== undefined && $scope.timer !== '';
     }
 
 
@@ -74,7 +89,7 @@ window.scrooge.controller('TrackerCtrl', ['$scope', '$rootScope', '$timeout', 'A
 
     function update() {
         $scope.timer = watch.getTime();
-        clocktimer = $timeout(update, 10);
+        clocktimer = $timeout(update, 30);
     }
 
     function trackActivity(){
@@ -86,7 +101,9 @@ window.scrooge.controller('TrackerCtrl', ['$scope', '$rootScope', '$timeout', 'A
                     time: watch.getTime(),
                     job_order_id: $scope.job_order_id,
                     job_order_activity_id: $scope.job_order_activity_id,
-                    notes: $scope.notes
+                    notes: $scope.notes,
+                    start_time: $scope.startTime,
+                    stop_time: $scope.stopTime
                 };
                 $scope.activities.push(activityToTrack);
                 ActivityService.trackActivity(activityToTrack, function(response){

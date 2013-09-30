@@ -11,6 +11,9 @@
   .row-fluid
     .span12.well
       %h2.text-center {{timer}}
+      %h5.text-center{'ng-show' => 'isStarted()'} Attività iniziata alle {{startTime}}
+      %h5.text-center{'ng-show' => 'isCompleted()'} Attività iniziata alle {{startTime}} e terminate alle {{stopTime}}
+      
   .row-fluid
     .span12
       %table.table.table-bordered
@@ -32,6 +35,8 @@
               {{a.notes}}
             %td
               {{a.time}}
+              %br
+              %p.muted {{a.start_time}}-{{a.stop_time}}
             %td
               %a{:href => "#", "ng-click"=> "delete(a)"}
                 %i.icon-trash.icon-large.text-error
@@ -40,7 +45,7 @@
               
   = content_for :side_bar do
     .well.sidebar-nav{'ng-controller' => 'TrackerSideBarCtrl'}
-      %button.btn.btn-success.btn-block{'ng-click' => 'saveAll()'} salva tutto
+      %button.btn.btn-info.btn-block{'ng-click' => 'saveAll()'} salva tutto
       %br
       %button.btn.btn-block{'ng-click' => 'deleteAll()'} cancella tutto
       %hr
