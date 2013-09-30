@@ -5,11 +5,11 @@
     .span3
       = select_tag :activity, '', 'ng-model' => 'job_order_activity_id', 'ng-options' => 'j.id as j.description for j in jobOrderActivities'
     .span4
-      %textarea
+      %textarea{'ng-model' => 'notes'}
     .span2
       %button.btn.btn-block{'ng-click' => 'start()', 'class' => '{{cssClass}}'} {{operation}}
   .row-fluid
-    .span12
+    .span12.well
       %h2.text-center {{timer}}
   .row-fluid
     .span12
@@ -28,23 +28,25 @@
             %td
               {{a.activity}}
             %td
-              note
+              {{a.notes}}
             %td
               {{a.time}}
             %td
-              %button.btn{'ng-click' => 'resume(a)'} Riprendi
+              %button.btn{'ng-click' => 'start(a)'} Riprendi
               
   = content_for :side_bar do
-    .well.sidebar-nav
-      = link_to 'salva ', new_invoice_path , {:class => 'btn btn-primary'}
+    .well.sidebar-nav{'ng-controller' => 'TrackerSideBarCtrl'}
+      %button.btn.btn-block{'ng-click' => 'saveAll()'} salva tutto
+      %br
+      %button.btn.btn-block{'ng-click' => 'deleteAll()'} cancella tutto
       %hr
       %ul.totals.info-panel
-        %li Imponibile
+        %li bla
         %li.taxable-income.amount
           = 123
-        %li IVA
+        %li blu
         %li.tax.amount
           = 456
-        %li Totale
+        %li bli
         %li.total.amount
           = 789

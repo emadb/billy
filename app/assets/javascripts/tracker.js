@@ -6,6 +6,22 @@ window.scrooge.controller('TrackerCtrl', ['$scope', '$rootScope', '$timeout', 'A
     $scope.operation = 'Start';
     $scope.cssClass = 'btn-success';
 
+    $rootScope.$on('tracker:deleteAll', function(event) {
+        $scope.activities.length = 0;
+    });
+
+    $rootScope.$on('tracker:saveAll', function(event) {
+        $scope.activities.forEach(function(activity){
+            activity.date = moment().format('YYYY-MM-DD')
+            activity.hours = buildDuration(activity.time);
+            activity.description = activity.notes;
+            ActivityService.save(activity, function(response){
+                
+            });
+        });
+        $scope.activities.length = 0;
+    });
+
 
     ActivityService.getJobOrders(function(result){
         $scope.jobOrders = result;
@@ -19,6 +35,29 @@ window.scrooge.controller('TrackerCtrl', ['$scope', '$rootScope', '$timeout', 'A
         }
     });
 
+    $scope.start = function(activity){
+        if (!isStarted){
+            startTimer(activity);
+        } else{
+            stopTimerAndTrack();
+        }
+        isStarted = !isStarted;
+    };
+
+
+    function buildDuration(time){
+        var hours = 0;
+        var duration = moment.duration(time)
+        hours = duration.hours()
+        if (duration.minutes() > 15 && duration.minutes() < 45){
+            hours = hours + 0.5
+        }
+        if (duration.minutes() > 45){
+            hours = hours + 1
+        }
+        return hours;
+    }
+
     function update() {
         $scope.timer = watch.getTime();
         clocktimer = $timeout(update, 10);
@@ -28,58 +67,38 @@ window.scrooge.controller('TrackerCtrl', ['$scope', '$rootScope', '$timeout', 'A
         ActivityService.getJobOrder($scope.job_order_id, function(job_order){
             ActivityService.getActivity($scope.job_order_activity_id, function(activity){
                 $scope.activities.push({
-                    id: $scope.activities.length,
                     jobOrder: job_order.code, 
                     activity: activity.description,
                     time: watch.getTime(),
                     job_order_id: $scope.job_order_id,
-                    job_order_activity_id: $scope.job_order_activity_id
-
+                    job_order_activity_id: $scope.job_order_activity_id,
+                    notes: $scope.notes
                 });
             });    
         })
         
     }
 
-    $scope.start = function(){
-        if (!isStarted){
-            watch.reset();
-            $scope.operation = 'Stop';
-            $scope.cssClass = 'btn-danger';
-            clocktimer = $timeout(update, 10);
-            watch.start();
-        } else{
-            $scope.operation = 'Start';
-            $scope.cssClass = 'btn-success';
-            $timeout.cancel(clocktimer);
-            watch.stop();
-            trackActivity();
-        }
-
-        isStarted = !isStarted;
-
-    };
-
-    $scope.resume = function(activity){
-        if (!isStarted){
-            watch.reset();
-            $scope.operation = 'Stop';
-            $scope.cssClass = 'btn-danger';
+    function startTimer(activity){
+        if (activity !== undefined){
             $scope.job_order_id = activity.job_order_id;
             $scope.job_order_activity_id = activity.job_order_activity_id;
-            clocktimer = $timeout(update, 10);
-            watch.start();
-        } else{
-            $scope.operation = 'Start';
-            $scope.cssClass = 'btn-success';
-            $timeout.cancel(clocktimer);
-            watch.stop();
-            trackActivity();
+            $scope.notes = activity.notes;
         }
+        watch.reset();
+        $scope.operation = 'Stop';
+        $scope.cssClass = 'btn-danger';
+        clocktimer = $timeout(update, 30);
+        watch.start();
+    }
 
-        isStarted = !isStarted;
-        
-    };
+    function stopTimerAndTrack(){
+        $scope.operation = 'Start';
+        $scope.cssClass = 'btn-success';
+        $timeout.cancel(clocktimer);
+        watch.stop();
+        trackActivity();
+    }
 
     
     function Stopwatch() {
@@ -142,7 +161,18 @@ window.scrooge.controller('TrackerCtrl', ['$scope', '$rootScope', '$timeout', 'A
             this.start();
         };
     };
-
-
 }]);
+
+window.scrooge.controller('TrackerSideBarCtrl', ['$scope', '$rootScope',function($scope, $rootScope){
+    
+    $scope.deleteAll = function(){
+        if (window.confirm('Sicuro?')){
+            $rootScope.$broadcast('tracker:deleteAll');
+        }
+    }
+
+    $scope.saveAll = function(){
+        $rootScope.$broadcast('tracker:saveAll');
+    }   
+}])
 
