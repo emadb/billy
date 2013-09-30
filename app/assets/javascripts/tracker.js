@@ -135,8 +135,9 @@ window.scrooge.controller('TrackerCtrl', ['$scope', '$rootScope', '$timeout', 'A
         watch.stop();
         trackActivity();
     }
+}]);
 
-    
+
     function Stopwatch() {
         var startAt = 0;    // Time of last start / resume. (0 if not running)
         var lapTime = 0;    // Time on the clock when last stopped in milliseconds
@@ -197,8 +198,7 @@ window.scrooge.controller('TrackerCtrl', ['$scope', '$rootScope', '$timeout', 'A
             this.start();
         };
     };
-}]);
-
+    
 window.scrooge.controller('TrackerSideBarCtrl', ['$scope', '$rootScope',function($scope, $rootScope){
     
     $scope.deleteAll = function(){

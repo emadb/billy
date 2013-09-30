@@ -26,6 +26,7 @@
             -if user_signed_in?
               %ul.nav
                 %li= link_to "Attività", "/user_activities"
+                %li= link_to "Tracker", "/activities_tracker"
                 - if current_user.admin?
                   %li= link_to 'Dashboard', "/dashboard"
                   %li= link_to 'Fatture', "/invoices"
