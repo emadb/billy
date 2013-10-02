@@ -31,7 +31,7 @@
     <!-- MAIN CONTENT -->
     <div id="main_content_wrap" class="outer">
       <section id="main_content" class="inner">
-        <h1>Welcome to Scrooge</h1>
+        <p>== Welcome to Scrooge</p>
 
 <p>This is a simple invoice and tracking application suited for small firms.
 What can you do with scrooge?</p>
@@ -46,24 +46,25 @@ What can you do with scrooge?</p>
 <li>View the current status (economics, in/out)</li>
 <li>Managing users</li>
 <li>Managing customers</li>
-</ul><p>It's built on Rails 3.2.</p>
+<li>
+<em>NEW</em> Real-time activity tracker</li>
+</ul><p>It's built on Rails 4.0.</p>
 
-<p>You can find a live demo here <a href="http://plasticscrooge-demo.herokuapp.com/">http://plasticscrooge-demo.herokuapp.com/</a></p>
+<p>You can find a live demo <a href="http://plasticscrooge-demo.herokuapp.com/">http://plasticscrooge-demo.herokuapp.com/</a>
+Use this credentials:</p>
 
-<p>Use this credentials:
-user: <a href="mailto:demo@codiceplastico.com">demo@codiceplastico.com</a>
-pwd: demopwd</p>
+<p>user: <a href="mailto:demo@codiceplastico.com">demo@codiceplastico.com</a></p>
 
-<h2>Installation</h2>
+<p>pwd: demopwd</p>
 
-<ol>
-<li><p>Clone the repository</p></li>
-<li><p>Install the gems with <code>bundle install</code></p></li>
-<li><p>Setup the database <code>rake db:migrate</code> and <code>rake db:seed</code></p></li>
-<li><p>Start the server <code>rails s</code></p></li>
-</ol><h2>Configuration</h2>
+<p>=== Installation
+1. Clone the repository
+2. Install the gems with <code>bundle install</code>
+3. Setup the database <code>rake db:migrate</code> and <code>rake db:seed</code>
+4. Start the server <code>rails s</code></p>
 
-<p>There are some environment variables to setup for dropbox and others information
+<p>=== Configuration
+There are some environment variables to setup for dropbox and others information
 These are:</p>
 
 <ul>
@@ -75,11 +76,12 @@ These are:</p>
 <li>DROPBOX_SECRET</li>
 <li>DROPBOX_FOLDER</li>
 <li>DROPBOX_APP_MODE</li>
-</ul><p>To obtain the keys for DROPBOX you can read this article <a href="http://ema.codiceplastico.com/blog/2013/03/22/usare-dropbox-da-unapplicazione-rails/">http://ema.codiceplastico.com/blog/2013/03/22/usare-dropbox-da-unapplicazione-rails/</a></p>
+</ul><p>To obtain the keys for DROPBOX you can read this <a href="http://ema.codiceplastico.com/blog/2013/03/22/usare-dropbox-da-unapplicazione-rails/">http://ema.codiceplastico.com/blog/2013/03/22/usare-dropbox-da-unapplicazione-rails/</a></p>
 
-<h3>Version history</h3>
-
-<p>11-04-2013 Drop 1 (first release with basic functionalities)</p>
+<p>=== Version history 
+11-04-2013 Drop 1 (first release with basic functionalities)
+10-09-2013 Drop 2 (migrated to Rails 4.0 and Ruby 2.0)
+02-10-2013 Drop 3 (Activity tracker and bug fixes)</p>
       </section>
     </div>
 
