@@ -46,46 +46,48 @@
           %a{:href => "#", "ng-click"=> "delete(a.id)"}
             %i.icon-trash.icon-large.text-error
 
-#editActivity.modal.hide.fade{'ng-controller' => 'UserActivityCtrl'}
-  .modal-header
-    %button.close{:type => 'button', 'data-dismiss' => 'modal'} &times;
-    %h3 Nuova attività
-  .modal-body
-    %form.well.form-inline{"data-bind" => "submit: save"}
-      = hidden_field_tag 'id', '', :data => {:bind => "value: id"}
-      .row-fluid
-        .span6
-          .field.control-group
-            Commessa
-            .controls
-              = select_tag :job_order, '', 'ng-model' => 'activity.job_order_id', 'ng-options' => 'j.id as j.code for j in jobOrders'
-        .span6
-          .field.control-group
-            Attività
-            .controls
-              = select_tag :activity, '', 'ng-model' => 'activity.job_order_activity_id', 'ng-options' => 'j.id as j.description for j in jobOrderActivities'
-      .row-fluid
-        .span6
-          .field.control-group
-            Data
-            .controls
-              = text_field_tag 'date', '', :class => 'input-small', 'ng-model' => "activity.date", "b-datepicker" => ""
+#editActivity.modal.fade{'ng-controller' => 'UserActivityCtrl'}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{:type => 'button', 'data-dismiss' => 'modal'} &times;
+        %h3 Nuova attività
+      .modal-body
+        %form.well.form-inline{"data-bind" => "submit: save"}
+          = hidden_field_tag 'id', '', :data => {:bind => "value: id"}
+          .row
+            .col-md-6
+              .field.control-group
+                Commessa
+                .controls
+                  = select_tag :job_order, '', 'ng-model' => 'activity.job_order_id', 'ng-options' => 'j.id as j.code for j in jobOrders'
+            .col-md-6
+              .field.control-group
+                Attività
+                .controls
+                  = select_tag :activity, '', 'ng-model' => 'activity.job_order_activity_id', 'ng-options' => 'j.id as j.description for j in jobOrderActivities'
+          .row
+            .col-md-6
+              .field.control-group
+                Data
+                .controls
+                  = text_field_tag 'date', '', :class => 'input-small', 'ng-model' => "activity.date", "b-datepicker" => ""
 
-        .span6
-          .field.control-group
-            Ore
-            .controls
-              = text_field_tag 'hours', '', :class => 'input-small', 'ng-model' => "activity.hours"
-      .row-fluid
-        .span12
-          .field.control-group
-            Note
-            .controls
-              = text_area_tag :description, '', 'ng-model' => "activity.description"
-          
-  .modal-footer
-    %a.btn{'data-dismiss' => 'modal'} annulla
-    %button.btn.btn-primary{:type => 'submit', 'data-dismiss' => 'modal', 'ng-click' => 'save()'} salva    
+            .col-md-6
+              .field.control-group
+                Ore
+                .controls
+                  = text_field_tag 'hours', '', :class => 'input-small', 'ng-model' => "activity.hours"
+          .row
+            .col-md-12
+              .field.control-group
+                Note
+                .controls
+                  = text_area_tag :description, '', 'ng-model' => "activity.description"
+              
+      .modal-footer
+        %a.btn{'data-dismiss' => 'modal'} annulla
+        %button.btn.btn-primary{:type => 'submit', 'data-dismiss' => 'modal', 'ng-click' => 'save()'} salva    
     
 = content_for :side_bar do
   .well.sidebar-nav{'ng-controller' => 'RightPanelCtrl'}

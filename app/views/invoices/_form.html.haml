@@ -1,7 +1,7 @@
 = form_for @invoice, {:html => {:class => 'form-horizontal'}} do |f|
   = f.hidden_field :status
-  .row-fluid
-    .span5
+  .row
+    .col-md-5
       .field.control-group
         = f.label :number, :class => 'control-label'
         .controls
@@ -19,7 +19,7 @@
         .controls
           = f.text_area :notes, :cols => 20, :rows => 3
       
-    .span5
+    .col-md-5
       .field.control-group
         = f.label :date, :class => 'control-label'
         .controls
@@ -36,8 +36,8 @@
         = f.label :status, :class => 'control-label'
         .controls
           = f.select :status, {:temporary => 1, :active => 2}
-  .row-fluid
-    .span12
+  .row
+    .col-md-12
       %fieldset
         %legend 
           %a.new-item.btn.btn-primary{:href=>'#'} 

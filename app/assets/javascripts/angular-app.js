@@ -1,6 +1,6 @@
 "use strict";
 
-window.scrooge = angular.module('Scrooge', ['ngResource', 'ui.bootstrap']);
+window.scrooge = angular.module('Scrooge', ['ngResource']);
 
 window.scrooge.config([
   "$httpProvider", function($httpProvider) {

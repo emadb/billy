@@ -1,21 +1,21 @@
 %div{'ng-controller' => 'TrackerCtrl'}
-  .row-fluid
-    .span3
+  .row
+    .col-md-3
       = select_tag :job_order, '', 'ng-model' => 'job_order_id', 'ng-options' => 'j.id as j.code for j in jobOrders'
-    .span3
+    .col-md-3
       = select_tag :activity, '', 'ng-model' => 'job_order_activity_id', 'ng-options' => 'j.id as j.description for j in jobOrderActivities'
-    .span4
+    .col-md-4
       %textarea{'ng-model' => 'notes'}
-    .span2
+    .col-md-2
       %button.btn.btn-block{'ng-click' => 'start()', 'class' => '{{cssClass}}'} {{operation}}
-  .row-fluid
-    .span12.well
+  .row
+    .col-md-12.well
       %h2.text-center {{timer}}
       %h5.text-center{'ng-show' => 'isStarted()'} Attività iniziata alle {{startTime}}
       %h5.text-center{'ng-show' => 'isCompleted()'} Attività iniziata alle {{startTime}} e terminate alle {{stopTime}}
       
-  .row-fluid
-    .span12
+  .row
+    .col-md-12
       %table.table.table-bordered
         %thead
           %tr

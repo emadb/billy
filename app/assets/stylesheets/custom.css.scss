@@ -6,7 +6,7 @@ html, body {
   height: auto !important;
   height: 100%;
   /* Negative indent footer by it's height */
-  margin: 0 auto -60px;
+  margin: 60px auto -60px auto;
 }
 
 /* Set the fixed height of the footer here */
@@ -75,4 +75,8 @@ a:hover i[class*=" icon-"]{
 }
 .lightbg{
   background-color: #F0F0F0;
+}
+
+.container{
+  max-width: 2000px;
 }

@@ -5,15 +5,12 @@ gem 'rails', '~>4.0.0'
 
 gem 'wicked_pdf'
 
-gem 'bootstrap-generators'
-gem 'bootstrap-wysihtml5-rails'
 gem 'simple_form', '~>3.0.0.rc'
 gem 'dropbox-api'
 
 gem 'sass-rails'
 gem 'uglifier', '>= 1.0.3'
 gem 'protected_attributes'
-gem 'angular-ui-bootstrap-rails'
 
 group :development, :test do
   gem 'meta_request', '0.2.0'

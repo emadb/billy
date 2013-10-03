@@ -1,6 +1,6 @@
-.row-fluid
+.row
   = form_for @invoice, {:html => {:class => 'form-horizontal'}} do |f|
-    .span5
+    .col-md-5
       .field.control-group
         = f.label :number, :class => 'control-label'
         .controls
@@ -23,7 +23,7 @@
           = f.label :taxable_income, :class => 'control-label'
           .controls
             = f.text_field :taxable_income, :class => 'input-medium'
-    .span5
+    .col-md-5
       .field.control-group
         = f.label :date, :class => 'control-label'
         .controls
