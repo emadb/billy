@@ -1,82 +1,156 @@
-html, body {
-  height: 100%;
-}
-.wrap {
-  min-height: 100%;
-  height: auto !important;
-  height: 100%;
-  /* Negative indent footer by it's height */
-  margin: 60px auto -60px auto;
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800,300);
+
+$navbarBackGroundColorActive: #93cbf9;
+$navbarBackGroundColor: #438eb9;
+$color2: #555555;
+$color3: #892e65; 
+$color4: #2e8965;
+$sidebarBackgroundColor: #f5f5f5;
+$disabledColor: #cbcbcb;
+$enabledColor: #47A447;
+
+html,
+body {
+    height: 100%;
+    font-family: 'Open Sans', sans-serif;
 }
 
-/* Set the fixed height of the footer here */
-#push,
-#footer {
-  height: 60px;
-}
-#footer {
-  background-color: #f5f5f5;
-}
-
-/* Lastly, apply responsive CSS fixes as necessary */
-@media (max-width: 767px) {
-  #footer {
-    margin-left: -20px;
-    margin-right: -20px;
-    padding-left: 20px;
-    padding-right: 20px;
-  }
-}
-.sidebar-nav{
-  text-align: center;
-  a{
-    width: 140px;
-  }
-  hr{
-    background-color: #000;
-    height: 1px;
-  }
-}
-
-ul.info-panel{
-  list-style:none;
-  li{
-    margin-top: 10px;
-  }
-}
-
-.totals{
-  text-align: right;
-}
-
-.amount{
-  font-size: 20px;
-  font-weight: bold;
-}
-td.right{
-  text-align: right;
-}
-
-.line {
-  border-top: 2px dotted #B0B0B0 !important;
-}
-
-.grey{
-  color: #A7A7A7;
-}
-
-a:hover i[class^="icon-"],
-a:hover i[class*=" icon-"]{
-   text-decoration: none;
-}
-
-.nobg{
-  background-color: #FFFFFF;
-}
-.lightbg{
-  background-color: #F0F0F0;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.1;
+    color: #0088cc;
 }
 
 .container{
+  margin: 50px 50px 0px 50px;
   max-width: 2000px;
+}
+
+th,td,.table-bordered {
+  border-radius: 0!important
+}
+.table thead tr {
+  color: #707070;
+  font-weight: normal;
+  background: #f2f2f2;
+  background-color: #f3f3f3;
+  background-image: -moz-linear-gradient(top,#f8f8f8,#ececec);
+  background-image: -webkit-gradient(linear,0 0,0 100%,from(#f8f8f8),to(#ececec));
+  background-image: -webkit-linear-gradient(top,#f8f8f8,#ececec);
+  background-image: -o-linear-gradient(top,#f8f8f8,#ececec);
+  background-image: linear-gradient(to bottom,#f8f8f8,#ececec);
+  background-repeat: repeat-x;
+  
+}
+.table thead tr th {
+  border-color: #DDD;
+  font-weight: bold;
+}
+.table thead tr th:first-child {
+  border-left-color: #f1f1f1
+}
+.table thead tr th:left-child {
+  border-right-color: #f1f1f1
+}
+.table.table-bordered thead tr th {
+  vertical-align: middle
+}
+.table.table-bordered thead tr th:first-child {
+  border-left-color: #DDD
+}
+.table.table-hover tbody tr:hover td {
+  background-color: #f1f1f1
+}
+
+.table th.symbol, .table td.symbol {
+  width: 20px;
+}
+.table th.symbol > i.disabled, .table td.symbol > i.disabled {
+  color: $disabledColor;
+}
+.table th.symbol > i.enabled, .table td.symbol > i.enabled {
+  color: $enabledColor;
+}
+#wrap > .content {
+    padding: 45px 0 0;
+}
+
+.navbar-inverse {
+  border-color: $navbarBackGroundColor;
+}
+.navbar {
+  background-color: $navbarBackGroundColor;
+  border-radius: 0;
+  min-height: 45px;
+  height:45px;
+  .navbar-inner {
+    min-height: 45px;
+  }
+
+  a.navbar-brand {
+      color: #EEEEEE;
+      font-size: 24px;
+  }
+
+  .navbar-inverse {
+    border-color: $navbarBackGroundColorActive;
+    .navbar-nav > .active > a,
+    .navbar-nav > .active > a:hover,
+    .navbar-nav > .active > a:focus {
+      color: #ffffff;
+      background-color: $navbarBackGroundColorActive;
+    }
+  }
+}
+
+.nav{
+  li{
+    a{
+      color: #ffffff !important;
+    }
+  }
+}
+ul.list-group-orizontal{
+  list-style: none;
+  li{
+    display: inline;
+  }
+}
+
+.dropdown-button{
+  width:50px;
+  height:50px; 
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  color: #0088cc;
+}
+
+.sidebar-row{
+  margin-bottom: 30px;
+}
+
+ul.info-panel{
+  padding: 0;
+  text-align: right;
+  list-style: none;
+  font-size: 1.2em;
+  .header{
+    font-weight: bold;
+  }
+  .amount{
+    margin-bottom: 5px;
+  }
 }

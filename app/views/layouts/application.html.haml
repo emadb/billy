@@ -16,7 +16,7 @@
   %body{'ng-app' => 'Scrooge'}
     %nav.navbar.navbar-default.navbar-fixed-top{:role=>"navigation"}
       .navbar-header
-        %a.navbar-brand{:href =>"#"} Scrooge
+        %a.navbar-brand{:href =>"#"} SCROOGE
       .collapse.navbar-collapse.navbar-ex1-collapse
         -if user_signed_in?
           %ul.nav.navbar-nav
@@ -32,11 +32,7 @@
                    
 
     .container.wrap
-      .row
-        .col-lg-9
-          = yield
-        .col-lg-3
-          = yield :side_bar
+      = yield
       #push
     #footer
       .container

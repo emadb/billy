@@ -2,7 +2,7 @@ module ApplicationHelper
   def status_helper (status)
   	case status
   		when Invoice.temporary
-  			label_class = 'inverse'
+  			label_class = 'default'
   			text = 'temporanea'
   		when Invoice.active
   			label_class = 'info'
