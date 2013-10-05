@@ -1,7 +1,7 @@
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800,300);
 
-$navbarBackGroundColorActive: #93cbf9;
-$navbarBackGroundColor: #438eb9;
+$navbarBackGroundColorActive: #453540; //make lighter
+$navbarBackGroundColor: #453540;
 $color2: #555555;
 $color3: #892e65; 
 $color4: #2e8965;
@@ -30,7 +30,8 @@ h6,
     font-family: 'Open Sans', sans-serif;
     font-weight: 300;
     line-height: 1.1;
-    color: #0088cc;
+    color: #02808F;
+    margin-bottom: 20px;
 }
 
 .container{
@@ -56,7 +57,7 @@ th,td,.table-bordered {
 }
 .table thead tr th {
   border-color: #DDD;
-  font-weight: bold;
+  font-weight: normal;
 }
 .table thead tr th:first-child {
   border-left-color: #f1f1f1
@@ -153,4 +154,9 @@ ul.info-panel{
   .amount{
     margin-bottom: 5px;
   }
+}
+
+span.fixed-size{
+  width: 100px;
+  display: block;
 }

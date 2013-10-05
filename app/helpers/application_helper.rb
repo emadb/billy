@@ -18,7 +18,7 @@ module ApplicationHelper
   			text = 'inverse'
   	end
   	
-  	raw("<span class=\"label label-#{label_class}\">#{text}</span>")
+  	raw("<span class=\"label fixed-size label-#{label_class}\">#{text}</span>")
   end
 
   def due_date_helper (invoice)
