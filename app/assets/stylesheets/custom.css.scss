@@ -201,3 +201,17 @@ form.well{
     min-height: 110px;
   }
 }
+
+span.user{
+  color: #FFFFFF;
+  span{
+    margin-left: 10px;
+  }
+  img{
+    width: 50px;
+    height: 50px;
+    -webkit-border-radius: 25em;
+    -moz-border-radius: 25em;
+    border-radius: 25em;
+  }
+}
