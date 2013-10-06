@@ -1,21 +1,32 @@
-%div{'ng-controller' => 'TrackerCtrl'}
+.row
+  .col-lg-12
+    %h1
+      = "Tracking attività di #{current_user.name}"
+
+.col-lg-12{'ng-controller' => 'TrackerCtrl'}
   .row
-    .col-md-3
-      = select_tag :job_order, '', 'ng-model' => 'job_order_id', 'ng-options' => 'j.id as j.code for j in jobOrders'
-    .col-md-3
-      = select_tag :activity, '', 'ng-model' => 'job_order_activity_id', 'ng-options' => 'j.id as j.description for j in jobOrderActivities'
-    .col-md-4
-      %textarea{'ng-model' => 'notes'}
-    .col-md-2
-      %button.btn.btn-block{'ng-click' => 'start()', 'class' => '{{cssClass}}'} {{operation}}
-  .row
-    .col-md-12.well
+    %form.form-inline
+    
+      .form-group.col-lg-3
+        %label Commessa
+        = select_tag :job_order, '', 'ng-model' => 'job_order_id', 'ng-options' => 'j.id as j.code for j in jobOrders', :class => 'form-control'
+      .form-group.col-lg-3
+        %label Attività
+        = select_tag :activity, '', 'ng-model' => 'job_order_activity_id', 'ng-options' => 'j.id as j.description for j in jobOrderActivities', :class => 'form-control'
+      .form-group.col-lg-4
+        %label Note
+        %textarea{'ng-model' => 'notes', :class => 'form-control'}
+      .form-group.col-lg-2
+        %label &nbsp;
+        %a.btn.btn-block{'ng-click' => 'start()', 'class' => '{{cssClass}} form-control'} {{operation}}
+  .row.timer
+    .col-lg-12.well
       %h2.text-center {{timer}}
       %h5.text-center{'ng-show' => 'isStarted()'} Attività iniziata alle {{startTime}}
       %h5.text-center{'ng-show' => 'isCompleted()'} Attività iniziata alle {{startTime}} e terminate alle {{stopTime}}
       
   .row
-    .col-md-12
+    .col-md-9
       %table.table.table-bordered
         %thead
           %tr
@@ -23,7 +34,6 @@
             %th Attività
             %th Note
             %th Tempo
-            %th
             %th
         %tbody
           %tr{'ng-repeat' => 'a in activities', 'row-color' => '{{$index}}'}
@@ -38,16 +48,30 @@
               %br
               %p.muted {{a.start_time}}-{{a.stop_time}}
             %td
-              %a{:href => "#", "ng-click"=> "delete(a)"}
-                %i.icon-trash.icon-large.text-error
-            %td
-              %button.btn{'ng-click' => 'start(a)'} Riprendi
-              
-  = content_for :side_bar do
-    .well.sidebar-nav{'ng-controller' => 'TrackerSideBarCtrl'}
-      %button.btn.btn-info.btn-block{'ng-click' => 'saveAll()'} salva tutto
-      %br
-      %button.btn.btn-block{'ng-click' => 'deleteAll()'} cancella tutto
-      %hr
-      %ul.totals.info-panel
-        
+              .btn-group
+                %button.btn.btn-default.dropdown-toggle{"data-toggle" => "dropdown"}
+                  Azioni 
+                  %span.caret
+                %ul.dropdown-menu{:role => "menu"}
+                  %li
+                    %a{:href => "#", "ng-click"=> "start(a)"}
+                      %i.icon-play
+                      Riprendi
+                  %li
+                    %a{:href => "#", "ng-click"=> "delete(a)"}
+                      %i.icon-trash.text-error
+                      Elimina
+                  
+    .col-lg-3.sidebar-nav{'ng-controller' => 'TrackerSideBarCtrl'}
+      .row.sidebar-row
+        %button.btn.btn-info.btn-block{'ng-click' => 'saveAll()'} salva tutto
+        %br
+        %button.btn.btn-default.btn-block{'ng-click' => 'deleteAll()'} cancella tutto
+      .row.sidebar-row
+        .panel.panel-default
+          .panel-heading
+            %h3.panel-title.text-center Riepilogo
+          .panel-body
+            %ul#stats.info-panel
+              %li.header Todo
+            
