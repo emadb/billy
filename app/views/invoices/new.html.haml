@@ -1,7 +1,9 @@
-%fieldset
-  %legend 
-    = "Nuova fattura"
-  = render 'form'
-
-= content_for :side_bar do
-  = render 'info_panel'
+.row
+  .col-lg-12
+    %h2
+      = 'Nuova fattura'
+.row
+  .col-lg-9
+    = render 'form'
+  .col-lg-3
+    = render 'info_panel'
