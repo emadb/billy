@@ -19,32 +19,36 @@
         = f.label :date
         = f.text_field :date, :class => 'isdate form-control', :value => @invoice.string_date
       .form-group
-        = f.label :is_payed
+        = f.label :is_payed, 'Pagata'
         = f.check_box :is_payed, :class => 'form-control'
       .form-group
-        = f.label :has_tax
+        = f.label :has_tax, 'Iva'
         = f.check_box :has_tax, :class => 'form-control'
       .form-group
-        = f.label :status
-        = f.select :status, {:temporary => 1, :active => 2}, :class => 'form-control'
+        = f.label :status, 'Stato'
+        = f.select :status, {:bozza => 1, :emessa => 2}, {}, {:class => 'form-control'}
+  .row
+    %hr
   .row
     .col-md-12
-      %fieldset
-        %legend 
-          %a.new-item.btn.btn-primary{:href=>'#'} 
-            %i{:class => 'icon-plus icon-white'}
-            nuova riga 
-        %table.items
+      %h3 
+        Righe
+        %a.new-item.btn.btn-info.pull-right{:href=>'#'} 
+          %i{:class => 'icon-plus icon-white'}
+          Nuova riga 
+      %table.items.table
+        %thead
           %tr
-            %td descrizione
-            %td importo
-            %td 
+            %th Descrizione
+            %th Importo
+            %th 
+        %tbody
           = f.fields_for :invoice_items do |i|
             %tr
               %td
-                = i.text_field :description, {:class => 'input-xxlarge'}
+                = i.text_field :description, {:class => 'col-lg-10 form-control'}
               %td
-                = i.text_field :amount, {:class => 'amount input-small'}
+                = i.text_field :amount, {:class => 'amount col-lg-2 form-control'}
               %td
                 = i.hidden_field :_destroy
                 %a{:href => '#', :class => 'btn-mini btn remove-item'}

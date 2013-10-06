@@ -3,7 +3,7 @@ module ApplicationHelper
   	case status
   		when Invoice.temporary
   			label_class = 'default'
-  			text = 'temporanea'
+  			text = 'bozza'
   		when Invoice.active
   			label_class = 'info'
   			text = 'emessa'
@@ -25,7 +25,7 @@ module ApplicationHelper
     label_class = ''
     text = nil
     if !invoice.due_date.nil? and invoice.due_date <= DateTime.now && !invoice.is_payed
-      label_class = 'important'
+      label_class = 'danger'
       text = 'scaduta'
     end
     raw("<span class=\"label label-#{label_class}\">#{text}</span>")

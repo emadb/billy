@@ -163,3 +163,28 @@ span.fixed-size{
   width: 100px;
   display: block;
 }
+
+table.items{
+  thead{
+    tr{
+      background-image: none;
+      background: #FFFFFF;
+    }
+  }
+  tbody{
+    tr{
+      td:first-child{
+        width: 80%;
+      }
+    } 
+  }
+}
+ul.info-panel{
+  li.center{
+    text-align:center;
+    margin-bottom: 5px;
+    span{
+      display:inline;
+    }
+  }
+}

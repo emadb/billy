@@ -22,7 +22,7 @@ $(function (){
   $('.new-item').click(function(evt){
     evt.preventDefault();
     var nextRow = $('.items').children.length + 1;
-    $('.items').append('<tr><td><input type="text" name="invoice[invoice_items_attributes][' + nextRow + ' ][description]" class="span5"></td><td><input type="text" name="invoice[invoice_items_attributes][' + nextRow + ' ][amount]" class="amount span1"></td></tr>');
+    $('.items').append('<tr><td><input type="text" name="invoice[invoice_items_attributes][' + nextRow + ' ][description]" class="col-lg-10 form-control"></td><td><input type="text" name="invoice[invoice_items_attributes][' + nextRow + ' ][amount]" class="amount col-lg-2 form-control"></td></tr>');
   });
 
   $(document).on('blur','.amount',function(){
