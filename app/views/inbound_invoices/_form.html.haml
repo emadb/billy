@@ -1,32 +1,27 @@
-.row
-  = form_for @invoice, {:html => {:class => 'form-horizontal'}} do |f|
-    .col-md-5
-      .field.control-group
-        = f.label :number, :class => 'control-label'
-        .controls
-          = f.text_field :number, :class => 'input-small'
-      .field.control-group
-        = f.label :customer, :class => 'control-label'
-        .controls
-          = f.text_field :customer, :class => 'input-medium'          
-      %fieldset
-        %legend Totali
-        .field.control-group
-          = f.label :total, :class => 'control-label'
-          .controls
-            = f.text_field :total, :class => 'input-medium'
-        .field.control-group
-          = f.label :tax, :class => 'control-label'
-          .controls
-            = f.text_field :tax, :class => 'input-medium'
-        .field.control-group
-          = f.label :taxable_income, :class => 'control-label'
-          .controls
-            = f.text_field :taxable_income, :class => 'input-medium'
-    .col-md-5
-      .field.control-group
-        = f.label :date, :class => 'control-label'
-        .controls
-          = f.text_field :date, :class => 'isdate input-medium'
+= form_for @invoice, {:html => {}} do |f|
+  .row
+    .col-lg-6
+      .form-group
+        = f.label :number
+        = f.text_field :number, :class => 'form-control'
+      .form-group
+        = f.label :customer
+        = f.text_field :customer, :class => 'form-control'          
+      .form-group
+        = f.label :date
+        = f.text_field :date, :class => 'isdate form-control'
+    .col-lg-6
+      .form-group
+        = f.label :total
+        = f.text_field :total, :class => 'form-control'
+      .form-group
+        = f.label :tax
+        = f.text_field :tax, :class => 'form-control'
+      .form-group
+        = f.label :taxable_income
+        = f.text_field :taxable_income, :class => 'form-control'
+  .row
+    .col-lg-12
+      %a.btn.btn-info.btn-block#save-form Salva
 
     
