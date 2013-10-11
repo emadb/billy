@@ -6,6 +6,8 @@ class Invoice < ActiveRecord::Base
   accepts_nested_attributes_for :customer, :invoice_items, :allow_destroy => true
   before_save :update_totals
 
+  scope :actives, -> { where(status: 2) }
+
   def self.create_new
     @invoice = Invoice.new
     @invoice.number = nil
@@ -34,7 +36,7 @@ class Invoice < ActiveRecord::Base
       self.date = Date.new(Date.today.year, Date.today.month, 1) - 1
       self.due_date = self.date + 30
     end
-    self.status = 2
+    self.status = Invoice.active
   end
 
   def update_totals

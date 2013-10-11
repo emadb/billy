@@ -8,7 +8,8 @@ class DashboardController < ApplicationController
     active_invoices = Invoice.where(:status => Invoice.active)
     @to_receive = 0
     active_invoices.each{ |x| @to_receive = @to_receive + (x.total || 0) unless x.is_payed }
-    @invoices_totals = InvoiceTotalsInfo.new(active_invoices.sum(:taxable_income), 
+    @invoices_totals = InvoiceTotalsInfo.new(
+      active_invoices.sum(:taxable_income), 
       active_invoices.sum(:tax), 
       active_invoices.sum(:total))
     render :layout=> false
