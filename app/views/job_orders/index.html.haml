@@ -1,62 +1,74 @@
-%h1
-  Commesse
-%fieldset
-  %legend &nbsp;
-%table.table.table-striped.table-bordered
-  %thead
-    %tr
-      %th Codice
-      %th Cliente
-      %th Tariffa oraria
-      %th Stato (ore fatte/totale)
-      %th
-      %th Guadagno (Stima - Speso)
-      %th
-      %th 
-  %tbody
-    -@job_orders.each do |job|
-      %tr
-        %td 
-          = link_to job.code, edit_job_order_path(job)
-        %td 
-          = job.customer.name
-        %td.right
-          = job.hourly_rate
-        %td.right
-          = "#{job.total_executed_hours}/#{job.total_estimated_hours}"
-        %td
-          - if job.warning?
-            %span.badge.badge-important !
-        %td.right
-          = job_order_cost_status_helper(job)
-        %td
-          %a{:href=> job_order_activities_path(job)}
-            %i.icon-list.icon-large
-        %td
-          %a{:href=> job_order_path(job), :class => 'delete' } 
-            %i.icon-trash.icon-large
-        
+.row
+  .col-lg-12
+    %h2 Elenco fatture
 
-  = content_for :side_bar do
-    .well.sidebar-nav
-      
-      %ul.info-panel
-        %li
-          = link_to 'nuova commessa', new_job_order_path , {:class => 'btn btn-primary'}
-        %li
-          %a{href: job_orders_path + "/?archived=yes", class: 'archived-job-order, btn'}
-            commesse archiviate
-      %hr
-      %ul.totals.info-panel
-        %li
-          Commesse attive
-        %li
-          = @job_orders.where(:archived => false).count
-        %li
-          Totale ore stimate
-        %li
-          = @job_orders.sum(&:total_estimated_hours)
-        %li
-          Totale ore effettuate
-        %li
-          = @job_orders.sum(&:total_executed_hours)
+.row
+  .col-lg-9        
+    %table.table.table-striped.table-bordered
+      %thead
+        %tr
+          %th
+          %th Codice
+          %th Cliente
+          %th Tariffa oraria
+          %th Stato (ore fatte/totale)
+          %th Guadagno (Stima - Speso)
+          %th
+      %tbody
+        -@job_orders.each do |job|
+          %tr
+            %td
+              - if job.warning?
+                %span.label.label-danger !
+            %td 
+              = job.code
+            %td 
+              = job.customer.name
+            %td
+              %span.pull-right 
+                = job.hourly_rate
+            %td
+              %span.pull-right 
+                = "#{job.total_executed_hours}/#{job.total_estimated_hours}"
+            %td
+              %span.pull-right 
+                = job_order_cost_status_helper(job)
+            %td
+              .btn-group
+                %button.btn.btn-default.dropdown-toggle{"data-toggle" => "dropdown"}
+                  Azioni 
+                  %span.caret
+                %ul.dropdown-menu{:role => "menu"}
+                  %li
+                    %a{:href=> edit_job_order_path(job)} 
+                      %i.icon-edit
+                      Modifica
+                  %li
+                    %a{:href=> job_order_activities_path(job)}
+                      %i.icon-list.icon-large
+                      Elenco attività
+                  %li
+                    %a{:href=> job_order_path(job), :class => 'delete' } 
+                      %i.icon-trash.icon-large
+                      Elimina
+  .col-lg-3
+    .row.sidebar-row
+      = link_to 'Nuova commessa', new_job_order_path, {:class => 'btn btn-info btn-block btn-lg'}
+      %a{href: job_orders_path + "/?archived=yes", class: 'archived-job-order btn btn-default btn-block btn-lg'}
+        Commesse archiviate
+    .row.sidebar-row
+      .panel.panel-default
+        .panel-heading
+          %h3.panel-title.text-center Riepilogo
+        .panel-body
+          %ul.info-panel
+            %li.header Commesse attive
+            %li.amount
+              = @job_orders.where(:archived => false).count
+            %li.header Totale ore stimate
+            %li.amount
+              = @job_orders.sum(&:total_estimated_hours)
+            %li.header Totale ore effettuate
+            %li.amount
+              = @job_orders.sum(&:total_executed_hours)
+                    

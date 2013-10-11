@@ -56,14 +56,14 @@ module ApplicationHelper
           label_class = 'important'
         end
 
-        return raw("<span style=\"width:190px\" class=\"label label-#{label_class}\">#{job.price} - #{job.total_consumed_cost} = #{delta}</span>")
+        return "#{job.price} - #{job.total_consumed_cost} = #{delta}"
       else
         delta = (job.total_executed_hours * job.hourly_rate) - job.total_consumed_cost
-        return raw("<span style=\"width:190px\" class=\"label label-info\">#{delta}</span>")
+        return "#{delta}"
       end
 
     rescue
-      return raw("<span class=\"label\">Na</span>")
+      return "Na"
     end
   end
 

@@ -1,7 +1,5 @@
 %h1
   = "Attività della commessa #{@job_order.code}"
-%fieldset
-  %legend &nbsp;
 %table.table.table-striped.table-bordered
   %thead
     %tr
@@ -9,7 +7,7 @@
       %th Data
       %th Ore
       %th Utente
-      %th Description
+      %th Note
       
   %tbody
     -@user_activities.each do |a|

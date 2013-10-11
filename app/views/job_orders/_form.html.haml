@@ -1,53 +1,71 @@
-.row
-  = form_for @job_order, {:html => {:class => 'form-horizontal'}} do |f|
-    .col-md-12
-      .field.control-group
-        = f.label :code, :class => 'control-label'
-        .controls
-          = f.text_field :code, :class => 'input-medium'
-      .field.control-group
-        = f.label :customer, :class => 'control-label'
-        .controls
-          = select_tag "job_order[customer_id]", options_from_collection_for_select(@customers, "id", "name", @job_order.customer.id)
-      .field.control-group
-        = f.label :hourly_rate, :class => 'control-label'
-        .controls
-          = f.text_field :hourly_rate, :class => 'input-medium'
-      .field.control-group
-        = f.label :price, :class => 'control-label'
-        .controls
-          = f.text_field :price, :class => 'input-medium'
-      .field.control-group
-        = f.label :notes, :class => 'control-label'
-        .controls
-          = f.text_area :notes, :class => 'input-medium', rows: 3
-        .field.control-group
-          = f.label :archived, :class => 'control-label'
-          .controls
-            = f.check_box :archived, :class => 'input-medium'
-    %fieldset
-      %legend 
-        Attività
-        %a#new-activity.new-item.btn.btn-primary{:href=>'#'} 
-          %i{:class => 'icon-plus icon-white'} 
-          nuova attività
-      %table.activities.table
-        %thead
-          %tr
-            %td descrizione
-            %td ore stimate
-            %td attiva
-            %td 
-        %tbody
-          = f.fields_for :activities do |a|
+.col-lg-9
+  = form_for @job_order, {:html => {:role => "form"}} do |f|
+    .row
+      .col-lg-6
+        .form-group
+          = f.label :code
+          = f.text_field :code, :class => 'form-control'
+        .form-group
+          = f.label :hourly_rate
+          = f.text_field :hourly_rate, :class => 'form-control'
+        .form-group
+          = f.label :notes
+          = f.text_area :notes, :class => 'form-control'
+
+      .col-lg-6
+        .form-group
+          = f.label :customer
+          = select_tag "job_order[customer_id]", options_from_collection_for_select(@customers, "id", "name", @job_order.customer.id), :class => 'form-control'
+        .form-group
+          = f.label :price
+          = f.text_field :price, :class => 'form-control'
+        .form-group
+          = f.label :archived
+          = f.check_box :archived, :class => 'form-control'
+    .row
+      %hr
+    .row
+      .col-md-12
+        %h3 
+          Attività
+          %a#new-activity.btn.btn-info.pull-right{:href=>''} 
+            %i{:class => 'icon-plus icon-white'} 
+            Nuova attività
+        %table.items.activities.table
+          %thead
             %tr
-              %td
-                = a.text_field :description, {:class => 'input-xxlarge'}
-              %td
-                = a.text_field :estimated_hours, {:class => 'amount input-small'}
-              %td
-                = a.check_box :active, {:class => 'input-medium'}
-              %td
-                %a#remove-activity{:href => '#', :class => 'btn'}
-                  %i{:class => 'icon-trash icon-large'}
-                = a.hidden_field :_destroy
+              %td Descrizione
+              %td Ore 
+              %td Attività
+              %td 
+          %tbody
+            = f.fields_for :activities do |a|
+              %tr
+                %td
+                  = a.text_field :description, {:class => 'form-control'}
+                %td
+                  = a.text_field :estimated_hours, {:class => 'amount form-control'}
+                %td
+                  = a.check_box :active, {:class => 'form-control'}
+                %td
+                  %a#remove-activity{:href => '#', :class => 'btn'}
+                    %i{:class => 'icon-trash icon-large'}
+                  = a.hidden_field :_destroy
+.col-lg-3
+  .row.sidebar-row
+    %a.btn.btn-info.btn-block.btn-lg#save-form{:href => ''}
+      Salva
+    %a.btn.btn-default.btn-block.btn-lg{:href => job_order_activities_path(@job_order)}
+      Elenco attività
+  .row.sidebar-row
+    .panel.panel-default
+      .panel-heading
+        %h3.panel-title.text-center Riepilogo
+      .panel-body
+        %ul.info-panel
+          %li.header Totale ore
+          %li.amount
+            = @job_order.total_estimated_hours
+          %li.header Ore effettuate
+          %li.amount
+            = @job_order.total_executed_hours

@@ -1,17 +1,6 @@
-%h1 Editing job_order
-
-= render 'form'
-
-= content_for :side_bar do
-  .well.sidebar-nav
-    %ul.totals.info-panel
-      %li Totale ore
-      %li#taxable-income.amount
-        = @job_order.total_estimated_hours
-      %li Ore effettuate
-      %li#taxable-income.amount
-        = @job_order.total_executed_hours
-    %hr
-    %ul.info-panel
-      %li
-        %a.btn.btn-primary#save-form salva
+.row
+  .col-lg-12
+    %h2
+      = "Dettaglio commessa #{@job_order.code}"
+.row
+  = render 'form'
