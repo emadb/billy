@@ -1,23 +1,16 @@
-#dashboard
-  .row
-    .col-md-6#invoices
-    .col-md-6#quarters
-  .row
-    .col-md-6#inbound_invoices
-    .col-md-6#per_customer
-  .row
-    .col-md-12#activities
-  .row
-    .col-md-12#job_orders
+#dashboard.row
+  .col-lg-12
+    %h1
+      = "Dashboard"
 
-  
-
-= content_for :side_bar do
-  .well.sidebar-nav
-    %ul.info-panel
-      %li
-        = link_to 'nuova fattura', new_invoice_path , {:class => 'btn btn-primary'}
-      %li
-        = link_to 'nuova fattura inbound', new_inbound_invoice_path , {:class => 'btn btn-primary'}
-      %li
-        = link_to 'nuova commessa', new_job_order_path , {:class => 'btn btn-primary'}
+  .col-lg-12{'ng-controller' => 'TrackerCtrl'}
+    .row
+      .col-lg-6#invoices
+      .col-lg-6#quarters
+    .row
+      .col-lg-6#inbound_invoices
+      .col-lg-6#per_customer
+    .row
+      .col-lg-12#activities
+    .row
+      .col-lg-12#job_orders

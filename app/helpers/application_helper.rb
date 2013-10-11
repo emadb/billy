@@ -33,10 +33,10 @@ module ApplicationHelper
 
   def job_order_status_helper (job_order)
     if job_order.percent > 99
-      return "progress-danger" 
+      return "progress-bar-danger" 
     end
     if job_order.percent > 85
-      return "progress-warning"
+      return "progress-bar-warning"
     end
   end
 

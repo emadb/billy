@@ -9,10 +9,12 @@
       %tr
         %td
           = j.code
-        %td.right
-          = "#{j.total_executed_hours}/#{j.total_estimated_hours}"
-          .grey
-            = "#{j.percent}%"
+        %td
+          %span.pull-right
+            = "#{j.total_executed_hours}/#{j.total_estimated_hours}"
+            .text-muted
+              %span.pull-right
+                = "#{j.percent}%"
         %td{:style => "width:400px"}
-          .progress{:class => job_order_status_helper(j)}
-            .bar{:style => "width:#{j.percent}%"}
+          .progress
+            .progress-bar{:style => "width:#{j.percent}%", :class => job_order_status_helper(j)}

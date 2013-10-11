@@ -6,21 +6,27 @@
       %th
     %tr.info
       %td
-        Fatturato
-      %td.right
-        = number_to_currency @invoices_totals.taxable_income
+        %span.text-success
+          Fatturato
+      %td
+        %span.pull-right.text-success
+          = number_to_currency @invoices_totals.taxable_income
     %tr
       %td
         Iva
-      %td.right
-        = number_to_currency @invoices_totals.tax
+      %td
+        %span.pull-right
+          = number_to_currency @invoices_totals.tax
     %tr
       %td.italic
         Totale
-      %td.right.italic
-        = number_to_currency @invoices_totals.total
+      %td
+        %span.pull-right        
+          = number_to_currency @invoices_totals.total
     %tr.error
       %td
-        Da incassare
-      %td.right
-        = number_to_currency @to_receive
+        %span.text-info
+          Da incassare
+      %td
+        %span.pull-right.text-info
+          = number_to_currency @to_receive

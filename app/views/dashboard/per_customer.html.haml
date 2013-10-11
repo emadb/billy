@@ -9,5 +9,6 @@
       %tr
         %td
           = c['customer']
-        %td.right
-          = number_to_currency c['taxable_income']
+        %td
+          %span.pull-right
+            = number_to_currency c['taxable_income']
