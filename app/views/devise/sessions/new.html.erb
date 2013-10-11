@@ -1,0 +1,72 @@
+<style>
+        .form-signin {
+            max-width: 480px;
+            padding: 15px;
+            margin: 150px auto;
+
+        }
+
+        .form-signin .form-signin-heading,
+        .form-signin .checkbox {
+            margin-bottom: 40px;
+        }
+
+        .form-signin .checkbox {
+            font-weight: normal;
+        }
+
+        .form-signin .form-control {
+            position: relative;
+            font-size: 16px;
+            height: auto;
+            padding: 10px;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+
+            .form-signin .form-control:focus {
+                z-index: 2;
+            }
+
+        .form-signin input[type="text"] {
+            margin-bottom: -1px;
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+
+        .form-signin input[type="password"] {
+            margin-bottom: 10px;
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+        }
+        .rememberme{
+            margin-bottom: 20px;
+            display: block;
+            text-align: center;
+        }
+    </style>
+
+
+ <div class="container">
+
+        
+    <form accept-charset="UTF-8" action="/users/sign_in" class="form-signin" id="new_user" method="post" novalidate="novalidate">
+        <div style="margin:0;padding:0;display:inline">
+            <input name="utf8" type="hidden" value="&#x2713;" />
+            <input name="authenticity_token" type="hidden" value="GPvWb1JF69lmCQHZjkoDGiDd5jccTbdeRYDYixcoAuc=" />
+        </div>
+        <h2 class="form-signin-heading">Inserire username e password</h2>
+        <input autofocus="autofocus" class="form-control" id="user_email" name="user[email]" type="email" placeholder="Username"/>
+        <input class="form-control" placeholder="Password" id="user_password" name="user[password]" type="password" />
+        <input name="user[remember_me]" type="hidden" value="0" />
+        <span class="rememberme">
+            <input class="" id="user_remember_me" name="user[remember_me]" type="checkbox" value="1" />
+            Ricordati
+        </span>
+        
+        <input class="btn btn-lg btn-primary btn-block" name="commit" type="submit" value="Sign in" />
+  
+    </form>
+</div>
+
