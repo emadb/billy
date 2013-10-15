@@ -1,6 +1,6 @@
 ## Welcome to Scrooge
 
-This is a simple invoice and tracking application suited for small firms.
+This is a simple invoice and tracking application suited for small companies.
 
 What can you do with scrooge?
 
@@ -55,13 +55,24 @@ To obtain the keys for DROPBOX you can read this http://ema.codiceplastico.com/b
 
 ### Screenshots
 ![img](doc/images/img1.png)
+***
 ![img](doc/images/img2.png)
+***
 ![img](doc/images/img3.png)
+***
 ![img](doc/images/img4.png)
+***
 ![img](doc/images/img5.png)
+***
 ![img](doc/images/img6.png)
+***
 ![img](doc/images/img7.png)
+***
 ![img](doc/images/img8.png)
+***
 ![img](doc/images/img9.png)
+***
 ![img](doc/images/img10.png)
+***
 ![img](doc/images/img11.png)
+***
