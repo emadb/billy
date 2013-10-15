@@ -1,7 +1,9 @@
-== Welcome to Scrooge
+## Welcome to Scrooge
 
 This is a simple invoice and tracking application suited for small firms.
+
 What can you do with scrooge?
+
 - Tracking your daily job activities
 - Managing the job orders and checking their status
 - Creating an invoice 
@@ -11,24 +13,24 @@ What can you do with scrooge?
 - View the current status (economics, in/out)
 - Managing users
 - Managing customers
-- *NEW* Real-time activity tracker
+- **NEW Real-time activity tracker**
 
-It's built on Rails 4.0.
+It's built on **Rails 4.0**.
 
-You can find a live demo http://plasticscrooge-demo.herokuapp.com/
+You can find a live demo: [http://plasticscrooge-demo.herokuapp.com/](http://plasticscrooge-demo.herokuapp.com/)
 Use this credentials:
 
 user: demo@codiceplastico.com
 
 pwd: demopwd
 
-=== Installation
+### Installation
 1. Clone the repository
 2. Install the gems with `bundle install`
 3. Setup the database `rake db:migrate` and `rake db:seed`
 4. Start the server `rails s`
 
-=== Configuration
+### Configuration
 There are some environment variables to setup for dropbox and others information
 These are:
 
@@ -44,12 +46,22 @@ These are:
 To obtain the keys for DROPBOX you can read this http://ema.codiceplastico.com/blog/2013/03/22/usare-dropbox-da-unapplicazione-rails/
 
 
-=== Version history 
+### Version history 
 - 11-04-2013 Drop 1 (first release with basic functionalities)
 - 10-09-2013 Drop 2 (migrated to Rails 4.0 and Ruby 2.0)
 - 02-10-2013 Drop 3 (Activity tracker and bug fixes)
 - 11-10-2013 Drop 4 (new design based on Boostrap 3.0)
 
 
-=== Screenshots
-
+### Screenshots
+![img](doc/images/img1.png)
+![img](doc/images/img2.png)
+![img](doc/images/img3.png)
+![img](doc/images/img4.png)
+![img](doc/images/img5.png)
+![img](doc/images/img6.png)
+![img](doc/images/img7.png)
+![img](doc/images/img8.png)
+![img](doc/images/img9.png)
+![img](doc/images/img10.png)
+![img](doc/images/img11.png)
