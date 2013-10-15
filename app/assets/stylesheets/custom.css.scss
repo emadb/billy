@@ -1,4 +1,5 @@
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800,300);
+@import url(http://fonts.googleapis.com/css?family=Delius+Swash+Caps);
 
 $navbarBackGroundColorActive: #453540; //make lighter
 $navbarBackGroundColor: #453540;
@@ -214,4 +215,16 @@ span.user{
     -moz-border-radius: 25em;
     border-radius: 25em;
   }
+}
+
+.logo{
+  font-family: 'Delius Swash Caps', cursive;
+  font-size: 9em;
+  text-align: center;
+  font-weight:bold;
+}
+
+.navbar-brand{
+  font-family: 'Delius Swash Caps', cursive;  
+  line-height: 15px;
 }
