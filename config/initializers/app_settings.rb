@@ -1,4 +1,7 @@
 class AppSettings
+  def self.iva
+    0.22
+  end
   def self.iban
     ENV['IBAN'] || 'define_your_iban_in_the_env'
   end

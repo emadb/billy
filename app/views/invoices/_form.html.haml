@@ -1,5 +1,6 @@
 = form_for @invoice, {:html => {:role => "form"}} do |f|
   = f.hidden_field :status
+  = hidden_field_tag 'iva', @iva
   .row
     .col-lg-6
       .form-group

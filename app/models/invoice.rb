@@ -43,7 +43,7 @@ class Invoice < ActiveRecord::Base
     self.taxable_income = self.invoice_items.sum(:amount)
 
     if self.has_tax then
-      self.tax = self.taxable_income * 0.21
+      self.tax = self.taxable_income * AppSettings.iva
       self.total = self.taxable_income + self.tax
     else
       self.total = self.taxable_income

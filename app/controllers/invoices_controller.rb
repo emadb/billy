@@ -12,6 +12,7 @@ class InvoicesController < ApplicationController
     @invoice = Invoice.create_new    
     @customers = Customer.all
     @totals = InvoiceTotalsInfo.new(0, 0, 0)
+    @iva = AppSettings.iva
   end
 
   def create
@@ -34,6 +35,7 @@ class InvoicesController < ApplicationController
     @invoice = Invoice.find(params[:id])
     @customers = Customer.all 
     @totals = InvoiceTotalsInfo.new(@invoice.taxable_income, @invoice.tax, @invoice.total)
+    @iva = AppSettings.iva
   end
 
   def update  

@@ -8,15 +8,14 @@
     .panel-body
       %ul.info-panel
         %li.header Imponibile
-        %li.amount
+        %li.amount{:id => 'taxable-income'}
           = number_to_currency(@totals.taxable_income)
         %li.header IVA
-        %li.amount
+        %li.amount{:id => 'tax'}
           = number_to_currency(@totals.tax)
         %li.header Totale
-        %li.amount
+        %li.amount{:id => 'total'}
           = number_to_currency(@totals.total)
-      
     .panel-heading
       %h3.panel-title.text-center Stato
     .panel-body
