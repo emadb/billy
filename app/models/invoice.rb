@@ -1,12 +1,13 @@
 class Invoice < ActiveRecord::Base
   belongs_to :customer
-  attr_accessible :date, :due_date, :has_tax, :is_payed, :notes, :number, :status, :tax, :taxable_income, :total
+  attr_accessible :date, :due_date, :has_tax, :is_payed, :notes, :number, :status, :tax, :taxable_income, :total, :fiscal_year
   has_many :invoice_items
   attr_accessible :customer_id, :invoice_items_attributes
   accepts_nested_attributes_for :customer, :invoice_items, :allow_destroy => true
   before_save :update_totals
 
   scope :actives, -> { where(status: 2) }
+  scope :fiscal_year, ->(year) {where('date between ? and ?', Date.new(year, 1, 1), Date.new(year, 12, 31)) }
 
   def self.create_new
     @invoice = Invoice.new
@@ -61,5 +62,9 @@ class Invoice < ActiveRecord::Base
 
   def string_due_date
     self.due_date.strftime('%d-%m-%Y') unless self.due_date.nil?
+  end
+
+  def fiscal_year
+    self.date.year
   end
 end
