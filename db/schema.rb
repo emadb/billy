@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130930142755) do
+ActiveRecord::Schema.define(version: 20131105164749) do
 
   create_table "activity_trackers", force: true do |t|
     t.integer  "user_id"
@@ -34,10 +34,26 @@ ActiveRecord::Schema.define(version: 20130930142755) do
     t.string   "address_zip_code"
     t.string   "address_city"
     t.string   "address_province"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
     t.string   "file_name_template"
   end
+
+  create_table "delayed_jobs", force: true do |t|
+    t.integer  "priority",   default: 0
+    t.integer  "attempts",   default: 0
+    t.text     "handler"
+    t.text     "last_error"
+    t.datetime "run_at"
+    t.datetime "locked_at"
+    t.datetime "failed_at"
+    t.string   "locked_by"
+    t.string   "queue"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority"
 
   create_table "inbound_invoices", force: true do |t|
     t.string   "customer"
@@ -48,16 +64,16 @@ ActiveRecord::Schema.define(version: 20130930142755) do
     t.float    "tax"
     t.float    "taxable_income"
     t.text     "notes"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
   end
 
   create_table "invoice_items", force: true do |t|
     t.string   "description"
     t.float    "amount"
     t.integer  "invoice_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   add_index "invoice_items", ["invoice_id"], name: "index_invoice_items_on_invoice_id"
@@ -74,8 +90,8 @@ ActiveRecord::Schema.define(version: 20130930142755) do
     t.text     "notes"
     t.boolean  "is_payed"
     t.integer  "customer_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
   end
 
   add_index "invoices", ["customer_id"], name: "index_invoices_on_customer_id"
@@ -84,8 +100,8 @@ ActiveRecord::Schema.define(version: 20130930142755) do
     t.string   "description"
     t.integer  "estimated_hours"
     t.integer  "job_order_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
     t.boolean  "active"
   end
 
@@ -97,8 +113,8 @@ ActiveRecord::Schema.define(version: 20130930142755) do
     t.float    "hourly_rate"
     t.boolean  "archived"
     t.integer  "customer_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
     t.decimal  "price"
   end
 
@@ -111,11 +127,18 @@ ActiveRecord::Schema.define(version: 20130930142755) do
     t.string   "table"
     t.integer  "month",      limit: 2
     t.integer  "year",       limit: 5
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
   end
 
   add_index "rails_admin_histories", ["item", "table", "month", "year"], name: "index_rails_admin_histories"
+
+  create_table "settings", force: true do |t|
+    t.string   "key"
+    t.string   "value"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "user_activities", force: true do |t|
     t.integer  "user_id"
@@ -124,12 +147,12 @@ ActiveRecord::Schema.define(version: 20130930142755) do
     t.date     "date"
     t.float    "hours"
     t.string   "description"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
   end
 
   add_index "user_activities", ["job_order_activity_id"], name: "index_user_activities_on_job_order_activity_id"
-  add_index "user_activities", ["user_activity_type_id"], name: "index_user_activities_on_user_activity_type_id"
+  add_index "user_activities", ["user_activity_type_id"], name: "index_user_activities_on_activity_type_id"
   add_index "user_activities", ["user_id"], name: "index_user_activities_on_user_id"
 
   create_table "users", force: true do |t|
@@ -143,8 +166,8 @@ ActiveRecord::Schema.define(version: 20130930142755) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
     t.boolean  "admin"
     t.string   "name"
     t.float    "hourly_cost"

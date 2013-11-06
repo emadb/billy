@@ -1,4 +1,5 @@
 class AppSettings
+  #TODO: move these settings to the database
   def self.iva
     0.22
   end
@@ -13,15 +14,15 @@ class AppSettings
     ENV['DROPBOX_APP_KEY']
   end
 
-    def self.dropbox_app_secret
+  def self.dropbox_app_secret
     ENV['DROPBOX_APP_SECRET']
   end
 
-    def self.dropbox_token
+  def self.dropbox_token
     ENV['DROPBOX_TOKEN']
   end
 
-    def self.dropbox_secret
+  def self.dropbox_secret
     ENV['DROPBOX_SECRET']
   end
 
@@ -35,5 +36,11 @@ class AppSettings
 
   def self.footer
     ENV['FOOTER'] || '<div>put your footer here</div>'
+  end
+
+  # Load settings from database
+  settings = Setting.all
+  settings.each do |s|
+    self.class.send :define_method, s.key, proc{ s.value }
   end
 end

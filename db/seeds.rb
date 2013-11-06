@@ -8,3 +8,4 @@
 
 
 User.create(email: 'demo@codiceplastico.com', password: 'demo', admin: true, name: 'demo')
+Setting.create(key: 'fiscal_year', value: 2013)

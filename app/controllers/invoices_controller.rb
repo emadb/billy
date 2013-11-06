@@ -1,7 +1,17 @@
 class InvoicesController < ApplicationController
   before_filter :user_is_admin?
+  
   def index
-    @invoices = Invoice.order(:number)
+    if params[:date].nil? or params[:date][:year].nil?
+      @invoices = Invoice.current_year.order(:number)
+      @year = Date.today.year
+    else
+      logger.info '##################'
+      logger.info params[:date][:year]
+      @invoices = Invoice.fiscal_year(params[:date][:year]).order(:number)
+      @year = params[:date][:year].to_i
+    end
+
     @totals = InvoiceTotalsInfo.new(
       Invoice.actives.sum('taxable_income'), 
       Invoice.actives.sum('tax'), 

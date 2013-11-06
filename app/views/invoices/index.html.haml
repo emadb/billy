@@ -3,7 +3,18 @@
     %h2 Elenco fatture
 
 .row
-  .col-lg-9        
+  
+
+
+.row
+  .col-lg-9   
+    %form.well.form-inline{:method => 'GET', :action => '/invoices'}
+      .form-group
+        %label Anno:
+        = select_year @year, {}, {:class => 'form-control'}
+      %button.btn.btn-info.pull-right{:type => 'submit', } Applica  
+
+
     %table.table.table-striped.table-bordered
       %thead
         %tr

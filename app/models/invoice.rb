@@ -7,7 +7,8 @@ class Invoice < ActiveRecord::Base
   before_save :update_totals
 
   scope :actives, -> { where(status: 2) }
-  scope :fiscal_year, ->(year) {where('date between ? and ?', Date.new(year, 1, 1), Date.new(year, 12, 31)) }
+  scope :fiscal_year, ->(year) {where('date between ? and ?', Date.new(year.to_i, 1, 1), Date.new(year.to_i, 12, 31)) }
+  scope :current_year, -> {where('date between ? and ?', Date.new(AppSettings.fiscal_year.to_i, 1, 1), Date.new(AppSettings.fiscal_year.to_i, 12, 31)) }
 
   def self.create_new
     @invoice = Invoice.new
