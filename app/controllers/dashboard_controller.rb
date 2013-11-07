@@ -36,7 +36,8 @@ class DashboardController < ApplicationController
   end
 
   def inbound_invoices
-    inbound_invoices = InboundInvoice.all
+    year = AppSettings.fiscal_year
+    inbound_invoices = InboundInvoice.where('date between ? and ?', Date.new(year.to_i, 1, 1), Date.new(year.to_i, 12, 31))
     @inbound_invoices_totals = InvoiceTotalsInfo.new(InboundInvoice.sum(:taxable_income), 
       InboundInvoice.sum(:tax), 
       InboundInvoice.sum(:total))
