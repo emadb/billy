@@ -9,7 +9,9 @@
 .row
   .col-lg-9   
     %form.well.form-inline{:method => 'GET', :action => '/invoices'}
-      
+      .form-group
+        %label Mese:
+        = select_month @month, {:include_blank => true}, {:class => 'form-control'}
       .form-group
         %label Anno:
         = select_year @year, {}, {:class => 'form-control'}

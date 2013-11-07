@@ -3,11 +3,19 @@ class InvoicesController < ApplicationController
   
   def index
     if params[:date].nil? or params[:date][:year].nil?
-      @invoices = Invoice.current_year.order(:number)
       @year = Date.today.year
-      #@month = Date.today.month
+      @month = nil
+      @invoices = Invoice.current_year.order(:number)
+      
     else
-      @invoices = Invoice.fiscal_year(params[:date][:year]).order(:number)
+      if params[:date][:month].nil? or params[:date][:month].blank?
+        @invoices = Invoice.fiscal_year(params[:date][:year])
+      else
+        @month = params[:date][:month].to_i
+        @invoices = Invoice.year_month(params[:date][:year], params[:date][:month])
+      end
+
+      @invoices = @invoices.order(:number)
       @year = params[:date][:year].to_i
     end
 
