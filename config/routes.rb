@@ -13,10 +13,14 @@ Scrooge::Application.routes.draw do
   match '/user_activities/index' => 'user_activities#index', :via => :post
   match '/job_order_activities/:id' => 'job_order_activities#show', :via => :get
 
+  match '/settings' => 'settings#index', :via => :get
+  match '/settings/update' => 'settings#update', :via => :post
+
   resources :activities_tracker do
     get 'today', :on => :collection, :action => 'today'
   end
   resources :test
+
   resources :drop_box
   resources :invoices do
     get 'activate'

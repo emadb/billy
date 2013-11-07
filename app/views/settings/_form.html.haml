@@ -1,0 +1,9 @@
+= simple_form_for(@setting, :defaults => { :input_html => { :class => 'input-xlarge' } }) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = @setting.key
+
+    = f.input 'value'
+  .form-actions
+    = f.button :submit, :class => "btn-primary"

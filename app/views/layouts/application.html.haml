@@ -20,14 +20,15 @@
           %a.navbar-brand{:href =>"#"} Scrooge
         .collapse.navbar-collapse.navbar-ex1-collapse
           %ul.nav.navbar-nav
-            %li= link_to "Attività", "/user_activities"
-            %li= link_to "Tracker", "/activities_tracker"
             - if current_user.admin?
               %li= link_to 'Dashboard', "/dashboard"
               %li= link_to 'Fatture', "/invoices"
               %li= link_to 'Fatture passive', "/inbound_invoices"
               %li= link_to 'Commesse', "/job_orders"
+              %li= link_to 'Impostazioni', "/settings"
               %li= link_to 'Gestione tabelle', "/admin"
+            %li= link_to "Attività", "/user_activities"
+            %li= link_to "Tracker", "/activities_tracker"
             %li= link_to 'Logout', destroy_user_session_path, :method => :delete
           %ul.nav.navbar-nav.pull-right
             %li
