@@ -6,7 +6,7 @@ class Invoice < ActiveRecord::Base
   accepts_nested_attributes_for :customer, :invoice_items, :allow_destroy => true
   before_save :update_totals
 
-  scope :actives, -> { where(status: 2) }
+  scope :actives, -> { where(status: active) }
   scope :fiscal_year, ->(year) {where('date between ? and ?', Date.new(year.to_i, 1, 1), Date.new(year.to_i, 12, 31)) }
   scope :current_year, -> {where('date between ? and ?', Date.new(AppSettings.fiscal_year.to_i, 1, 1), Date.new(AppSettings.fiscal_year.to_i, 12, 31)) }
 

@@ -5,7 +5,7 @@ class DashboardController < ApplicationController
   end
 
   def invoices
-    active_invoices = Invoice.where(:status => Invoice.active)
+    active_invoices = Invoice.current_year.where(:status => Invoice.active)
     @to_receive = 0
     active_invoices.each{ |x| @to_receive = @to_receive + (x.total || 0) unless x.is_payed }
     @invoices_totals = InvoiceTotalsInfo.new(
@@ -16,7 +16,7 @@ class DashboardController < ApplicationController
   end
 
   def quarters
-    invoices = Invoice.where(:status => Invoice.active)
+    invoices = Invoice.current_year.where(:status => Invoice.active)
     @quarters = Quarters.new
     #TODO: refactor this...it's too c-sharpy!
     invoices.each do |i|

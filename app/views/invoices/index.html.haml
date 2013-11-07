@@ -9,6 +9,7 @@
 .row
   .col-lg-9   
     %form.well.form-inline{:method => 'GET', :action => '/invoices'}
+      
       .form-group
         %label Anno:
         = select_year @year, {}, {:class => 'form-control'}
@@ -82,7 +83,8 @@
     .row.sidebar-row
       .panel.panel-default
         .panel-heading
-          %h3.panel-title.text-center Riepilogo
+          %h3.panel-title.text-center 
+            = "Riepilogo #{AppSettings.fiscal_year}"
         .panel-body
           %ul.info-panel
             %li.header Imponibile
