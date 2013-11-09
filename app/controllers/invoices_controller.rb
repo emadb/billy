@@ -9,7 +9,7 @@ class InvoicesController < ApplicationController
       
     else
       if params[:date][:month].nil? or params[:date][:month].blank?
-        @invoices = Invoice.fiscal_year(params[:date][:year])
+        @invoices = Invoice.year(params[:date][:year])
       else
         @month = params[:date][:month].to_i
         @invoices = Invoice.year_month(params[:date][:year], params[:date][:month])

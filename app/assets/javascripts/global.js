@@ -1,9 +1,14 @@
 $(function(){
-  var dp = $('.isdate');
 
+  $.ajaxSetup({
+    headers: {
+      'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+    }
+  });
+  
+  var dp = $('.isdate');
   dp.datepicker({format: 'dd-mm-yyyy'});
   dp.on('changeDate', function(ev){
-    console.log('changed', dp.val(), ev.target.value );
     dp.val(ev.target.value);
   });
   
