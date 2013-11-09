@@ -33,7 +33,7 @@ class Invoice < ActiveRecord::Base
 
   def activate
     if self.number.nil?
-      self.number = (Invoice.maximum(:number) || 0) + 1
+      self.number = (Invoice.current_year.maximum(:number) || 0) + 1
     end
     if self.date.nil?
       self.date = Date.new(Date.today.year, Date.today.month, 1) - 1
