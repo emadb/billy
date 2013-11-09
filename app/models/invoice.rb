@@ -7,9 +7,9 @@ class Invoice < ActiveRecord::Base
   before_save :update_totals
 
   scope :actives, -> { where(status: active) }
-  scope :fiscal_year, ->(year) {where('date between ? and ?', Date.new(year.to_i, 1, 1), Date.new(year.to_i, 12, 31)) }
+  scope :fiscal_year, ->(year) {where('date is null or date between ? and ?', Date.new(year.to_i, 1, 1), Date.new(year.to_i, 12, 31)) }
   scope :year_month, ->(year, month) {where('date between ? and ?', Date.new(year.to_i, month.to_i, 1), Date.new(year.to_i, month.to_i, Time.days_in_month(month.to_i, year.to_i))) }
-  scope :current_year, -> {where('date between ? and ?', Date.new(AppSettings.fiscal_year.to_i, 1, 1), Date.new(AppSettings.fiscal_year.to_i, 12, 31)) }
+  scope :current_year, -> {where('date is null or date between ? and ?', Date.new(AppSettings.fiscal_year.to_i, 1, 1), Date.new(AppSettings.fiscal_year.to_i, 12, 31)) }
 
   def self.create_new
     @invoice = Invoice.new
@@ -46,7 +46,7 @@ class Invoice < ActiveRecord::Base
     self.taxable_income = self.invoice_items.sum(:amount)
 
     if self.has_tax then
-      self.tax = self.taxable_income * AppSettings.iva
+      self.tax = self.taxable_income * AppSettings.iva.to_f
       self.total = self.taxable_income + self.tax
     else
       self.total = self.taxable_income
