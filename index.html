@@ -1,41 +1,42 @@
 <!DOCTYPE html>
 <html>
-
   <head>
-    <meta charset='utf-8' />
-    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
-    <meta name="description" content="Scrooge : A simple invoicing and tracking system for small companies" />
-
-    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
-
-    <title>Scrooge</title>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <link href='https://fonts.googleapis.com/css?family=Chivo:900' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <title>Scrooge by emadb</title>
   </head>
 
   <body>
+    <div id="container">
+      <div class="inner">
 
-    <!-- HEADER -->
-    <div id="header_wrap" class="outer">
-        <header class="inner">
-          <a id="forkme_banner" href="https://github.com/emadb/scrooge">View on GitHub</a>
-
-          <h1 id="project_title">Scrooge</h1>
-          <h2 id="project_tagline">A simple invoicing and tracking system for small companies</h2>
-
-            <section id="downloads">
-              <a class="zip_download_link" href="https://github.com/emadb/scrooge/zipball/master">Download this project as a .zip file</a>
-              <a class="tar_download_link" href="https://github.com/emadb/scrooge/tarball/master">Download this project as a tar.gz file</a>
-            </section>
+        <header>
+          <h1>Scrooge</h1>
+          <h2>A simple invoicing and tracking system for small companies</h2>
         </header>
-    </div>
 
-    <!-- MAIN CONTENT -->
-    <div id="main_content_wrap" class="outer">
-      <section id="main_content" class="inner">
-        <h2>
+        <section id="downloads" class="clearfix">
+          <a href="https://github.com/emadb/scrooge/zipball/master" id="download-zip" class="button"><span>Download .zip</span></a>
+          <a href="https://github.com/emadb/scrooge/tarball/master" id="download-tar-gz" class="button"><span>Download .tar.gz</span></a>
+          <a href="https://github.com/emadb/scrooge" id="view-on-github" class="button"><span>View on GitHub</span></a>
+        </section>
+
+        <hr>
+
+        <section id="main_content">
+          <h2>
 <a name="welcome-to-scrooge" class="anchor" href="#welcome-to-scrooge"><span class="octicon octicon-link"></span></a>Welcome to Scrooge</h2>
 
-<p>This is a simple invoice and tracking application suited for small firms.
-What can you do with scrooge?</p>
+<p>This is a simple invoice and tracking application suited for small companies.</p>
+
+<p>What can you do with scrooge?</p>
 
 <ul>
 <li>Tracking your daily job activities</li>
@@ -47,14 +48,15 @@ What can you do with scrooge?</p>
 <li>View the current status (economics, in/out)</li>
 <li>Managing users</li>
 <li>Managing customers</li>
-<li><strong><em>NEW</em> Real-time activity tracker</strong></li>
-</ul><p>It's built with Rails 4.0 and Ruby 2.0.</p>
+<li><strong>NEW Real-time activity tracker</strong></li>
+</ul><p>It's built on <strong>Rails 4.0</strong>.</p>
 
-<p>You can find a live demo <a href="http://plasticscrooge-demo.herokuapp.com/">http://plasticscrooge-demo.herokuapp.com/</a>
+<p>You can find a live demo: <a href="http://plasticscrooge-demo.herokuapp.com/">http://plasticscrooge-demo.herokuapp.com/</a>
 Use this credentials:</p>
 
-<p>user: <a href="mailto:demo@codiceplastico.com">demo@codiceplastico.com</a>
-pwd: demopwd</p>
+<p>user: <a href="mailto:demo@codiceplastico.com">demo@codiceplastico.com</a></p>
+
+<p>pwd: demopwd</p>
 
 <h3>
 <a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h3>
@@ -84,24 +86,49 @@ These are:</p>
 <li>DROPBOX_APP_MODE</li>
 </ul><p>To obtain the keys for DROPBOX you can read this <a href="http://ema.codiceplastico.com/blog/2013/03/22/usare-dropbox-da-unapplicazione-rails/">http://ema.codiceplastico.com/blog/2013/03/22/usare-dropbox-da-unapplicazione-rails/</a></p>
 
-<hr><h3>
+<h3>
 <a name="version-history" class="anchor" href="#version-history"><span class="octicon octicon-link"></span></a>Version history</h3>
 
-<p>11-04-2013 Drop 1 (first release with basic functionalities)
-10-09-2013 Drop 2 (migrated to Rails 4.0 and Ruby 2.0)
-02-10-2013 Drop 3 (Activity tracker and bug fixes)</p>
-      </section>
+<ul>
+<li>11-04-2013 Drop 1 (first release with basic functionalities)</li>
+<li>10-09-2013 Drop 2 (migrated to Rails 4.0 and Ruby 2.0)</li>
+<li>02-10-2013 Drop 3 (Activity tracker and bug fixes)</li>
+<li>11-10-2013 Drop 4 (new design based on Boostrap 3.0)</li>
+</ul><h3>
+<a name="screenshots" class="anchor" href="#screenshots"><span class="octicon octicon-link"></span></a>Screenshots</h3>
+
+<p><img src="doc/images/img1.png" alt="img"></p>
+
+<hr><p><img src="doc/images/img2.png" alt="img"></p>
+
+<hr><p><img src="doc/images/img3.png" alt="img"></p>
+
+<hr><p><img src="doc/images/img4.png" alt="img"></p>
+
+<hr><p><img src="doc/images/img5.png" alt="img"></p>
+
+<hr><p><img src="doc/images/img6.png" alt="img"></p>
+
+<hr><p><img src="doc/images/img7.png" alt="img"></p>
+
+<hr><p><img src="doc/images/img8.png" alt="img"></p>
+
+<hr><p><img src="doc/images/img9.png" alt="img"></p>
+
+<hr><p><img src="doc/images/img10.png" alt="img"></p>
+
+<hr><p><img src="doc/images/img11.png" alt="img"></p>
+
+<hr>
+        </section>
+
+        <footer>
+          Scrooge is maintained by <a href="https://github.com/emadb">emadb</a><br>
+          This page was generated by <a href="http://pages.github.com">GitHub Pages</a>. Tactile theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.
+        </footer>
+
+        
+      </div>
     </div>
-
-    <!-- FOOTER  -->
-    <div id="footer_wrap" class="outer">
-      <footer class="inner">
-        <p class="copyright">Scrooge maintained by <a href="https://github.com/emadb">emadb</a></p>
-        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
-      </footer>
-    </div>
-
-    
-
   </body>
 </html>
