@@ -6,5 +6,7 @@ class AppSettings
       self.class.send :define_method, s.key, proc{ s.value }
     end
   end
-  init
+
+  def self.method_missing (method, *args, &block)
+  end
 end
