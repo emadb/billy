@@ -51,6 +51,7 @@ To obtain the keys for DROPBOX you can read this http://ema.codiceplastico.com/b
 - 10-09-2013 Drop 2 (migrated to Rails 4.0 and Ruby 2.0)
 - 02-10-2013 Drop 3 (Activity tracker and bug fixes)
 - 11-10-2013 Drop 4 (new design based on Boostrap 3.0)
+- 15-11-2013 Drop 5 (added settings and year-month filter in invoice view)
 
 
 ### Screenshots
