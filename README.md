@@ -31,7 +31,7 @@ pwd: demopwd
 4. Start the server `rails s`
 
 ### Configuration
-There are some environment variables to setup for dropbox and others information
+There are some settings that you have to set in the setting page.
 These are:
 
 - IBAN the bank account number
@@ -42,6 +42,7 @@ These are:
 - DROPBOX_SECRET
 - DROPBOX_FOLDER
 - DROPBOX_APP_MODE
+- FISCAL_YEAR the default year used to create the invoices
 
 To obtain the keys for DROPBOX you can read this http://ema.codiceplastico.com/blog/2013/03/22/usare-dropbox-da-unapplicazione-rails/
 
