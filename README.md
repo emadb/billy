@@ -78,3 +78,7 @@ To obtain the keys for DROPBOX you can read this http://ema.codiceplastico.com/b
 ***
 ![img](doc/images/img11.png)
 ***
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/emadb/scrooge/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
