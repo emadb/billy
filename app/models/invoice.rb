@@ -12,15 +12,15 @@ class Invoice < ActiveRecord::Base
   scope :current_year, -> {where('date is null or date between ? and ?', Date.new(AppSettings.fiscal_year.to_i, 1, 1), Date.new(AppSettings.fiscal_year.to_i, 12, 31)) }
 
   def self.create_new
-    @invoice = Invoice.new
-    @invoice.number = nil
-    @invoice.invoice_items.push(InvoiceItem.new)
-    @invoice.invoice_items.push(InvoiceItem.new)
-    @invoice.customer = Customer.new
-    @invoice.has_tax = true
-    @invoice.status = 1
+    invoice = Invoice.new
+    invoice.number = nil
+    invoice.invoice_items.push(InvoiceItem.new)
+    invoice.invoice_items.push(InvoiceItem.new)
+    invoice.customer = Customer.new
+    invoice.has_tax = true
+    invoice.status = 1
 
-    return @invoice
+    return invoice
   end
 
   def self.temporary
@@ -43,8 +43,9 @@ class Invoice < ActiveRecord::Base
   end
 
   def update_totals
-    self.taxable_income = self.invoice_items.sum(:amount)
-
+    self.invoice_items.each {|i| logger.info i.amount}
+    self.taxable_income = self.invoice_items.inject(0){|t, i| t + i.amount}
+    
     if self.has_tax then
       self.tax = self.taxable_income * AppSettings.iva.to_f
       self.total = self.taxable_income + self.tax
@@ -52,6 +53,7 @@ class Invoice < ActiveRecord::Base
       self.total = self.taxable_income
       self.tax = 0
     end
+    logger.info self.to_yaml
   end
   
   def is_in_late?
@@ -68,5 +70,25 @@ class Invoice < ActiveRecord::Base
 
   def fiscal_year
     self.date.year
+  end
+
+  def clone
+    invoice = Invoice.create_new
+    invoice.customer = self.customer
+    invoice.notes = self.notes
+
+    invoice.invoice_items.clear
+    self.invoice_items.each do |i|
+      item = InvoiceItem.new
+      item.description = i.description
+      item.amount = i.amount
+      invoice.invoice_items << item
+    end
+
+    invoice.taxable_income = self.taxable_income
+    invoice.total =  self.total
+    invoice.has_tax = self.has_tax
+    
+    invoice
   end
 end

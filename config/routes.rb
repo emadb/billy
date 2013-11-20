@@ -25,6 +25,7 @@ Scrooge::Application.routes.draw do
   resources :invoices do
     get 'activate'
     get 'drop_box'
+    get 'clone'
   end
   resources :inbound_invoices
   resources :job_orders do

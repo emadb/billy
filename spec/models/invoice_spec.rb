@@ -1,8 +1,17 @@
 require "spec_helper"
 
-describe Invoice do
-  fixtures :invoices
+# TODO: There should be a better way
+class FakeSettings
+  def self.fiscal_year
+    '2013'
+  end
+end
 
+
+describe Invoice do
+  AppSettings = FakeSettings
+  fixtures :invoices
+  
   context "new invoice" do
     before do
       @invoice = Invoice.create_new
@@ -57,6 +66,25 @@ describe Invoice do
       invoice.due_date = DateTime.now - 10
       invoice.is_payed = true
       expect(invoice.is_in_late?).to be_false
+    end
+  end
+
+  context 'on existing invoice' do
+    it 'should be able to clone' do
+      invoice = Invoice.create_new
+      invoice.customer = Customer.new 
+      invoice.customer.id = 42
+      invoice.due_date = DateTime.now - 10
+      invoice.is_payed = true
+      invoice.invoice_items[0].description = 'item one'
+      invoice.invoice_items[1].description = 'item two' 
+      invoice.taxable_income = 30
+      invoice.activate
+
+      new_invoice = invoice.clone
+      expect(new_invoice.customer.id).to eq(42)
+      expect(new_invoice.invoice_items[0].description).to eq('item one')
+      expect(new_invoice.taxable_income).to eq(30)
     end
   end
 end

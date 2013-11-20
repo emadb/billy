@@ -65,6 +65,10 @@
                       %i.icon-file-alt
                       Visualizza
                   %li
+                    %a{:href => invoice_clone_path(i)} 
+                      %i.icon-copy
+                      Duplica
+                  %li
                     %a{:href => invoice_drop_box_path(i), :class=> 'drop-box'} 
                       %i.icon-dropbox
                       Invia a dropbox

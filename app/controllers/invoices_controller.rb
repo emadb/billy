@@ -37,7 +37,7 @@ class InvoicesController < ApplicationController
     @invoice.customer = Customer.find(params[:invoice][:customer_id])
     @invoice.invoice_items = @invoice.invoice_items.delete_if {|i| i.description.empty?}
     @invoice.save
-    @invoice.save #TODO: why update_totals doesn't work if I don't call save twice?
+    #@invoice.save #TODO: why update_totals doesn't work if I don't call save twice?
     redirect_to invoices_path
   end
 
@@ -98,5 +98,13 @@ class InvoicesController < ApplicationController
       drop_box.upload file_name, pdf
     end
     render :json => {satus: 'success'}
+  end
+
+  def clone
+    invoice = Invoice.find(params[:invoice_id])
+    new_invoice = invoice.clone
+    new_invoice.save
+
+    redirect_to invoices_path
   end
 end
