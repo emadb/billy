@@ -16,7 +16,7 @@ RailsAdmin.config do |config|
     redirect_to main_app.root_path unless current_user.admin?
   end
 
-  config.included_models = [User, Customer, Invoice, InboundInvoice, JobOrder, UserActivity]
+  config.included_models = [User, Customer, Invoice, InboundInvoice, JobOrder, UserActivity, Setting]
 
 
   # If you want to track changes on your models:
