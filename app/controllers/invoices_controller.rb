@@ -33,18 +33,18 @@ class InvoicesController < ApplicationController
   end
 
   def create
-    @invoice = Invoice.new(params[:invoice])
-    @invoice.customer = Customer.find(params[:invoice][:customer_id])
-    @invoice.invoice_items = @invoice.invoice_items.delete_if {|i| i.description.empty?}
-    @invoice.save
+    invoice = Invoice.new(params[:invoice])
+    invoice.customer = Customer.find(params[:invoice][:customer_id])
+    invoice.invoice_items = invoice.invoice_items.delete_if {|i| i.description.empty?}
+    invoice.save
     #@invoice.save #TODO: why update_totals doesn't work if I don't call save twice?
     redirect_to invoices_path
   end
 
   def activate
-    @invoice = Invoice.find(params[:invoice_id])
-    @invoice.activate
-    @invoice.save
+    invoice = Invoice.find(params[:invoice_id])
+    invoice.activate
+    invoice.save
     redirect_to invoices_path
   end
 
@@ -56,16 +56,16 @@ class InvoicesController < ApplicationController
   end
 
   def update  
-    @invoice = Invoice.find(params[:id])
-    @invoice.update_attributes!(params[:invoice])
-    @invoice.status = Invoice.active unless @invoice.number.nil?
-    @invoice.save
+    invoice = Invoice.find(params[:id])
+    invoice.update_attributes!(params[:invoice])
+    invoice.status = Invoice.active unless invoice.number.nil?
+    invoice.save
     redirect_to invoices_path
   end
   
   def destroy
-    @invoice = Invoice.find(params[:id])
-    @invoice.destroy
+    invoice = Invoice.find(params[:id])
+    invoice.destroy
     redirect_to invoices_url
   end
 
