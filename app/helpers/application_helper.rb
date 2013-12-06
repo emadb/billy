@@ -3,19 +3,19 @@ module ApplicationHelper
   	case status
   		when Invoice.temporary
   			label_class = 'default'
-  			text = 'bozza'
+  			text = t('helpers.invoice_status.draft')
   		when Invoice.active
   			label_class = 'info'
-  			text = 'emessa'
+  			text = t('helpers.invoice_status.active')
   		when 3
   			label_class = 'warning'
-  			text = 'warning'
+  			text = t('helpers.invoice_status.warning')
   		when 4
   			label_class = 'info'
-  			text = 'info'
+  			text = t('helpers.invoice_status.info')
   		when 5
   			label_class = 'inverse'
-  			text = 'inverse'
+  			text = t('helpers.invoice_status.inverse')
   	end
   	
   	raw("<span class=\"label fixed-size label-#{label_class}\">#{text}</span>")
@@ -26,7 +26,7 @@ module ApplicationHelper
     text = nil
     if !invoice.due_date.nil? and invoice.due_date <= DateTime.now && !invoice.is_payed
       label_class = 'danger'
-      text = 'scaduta'
+      text = t('helpers.dates.expired')
     end
     raw("<span class=\"label label-#{label_class}\">#{text}</span>")
   end

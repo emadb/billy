@@ -1,4 +1,38 @@
 it:
+  v: 
+    top_bar:
+      dashboard: dashboard
+      invoices: fatture
+      inbound_invoices: fatture in ingresso
+      job_orders: commesse
+      settings: impostazioni
+      tables: tabelle
+      activities: attività
+      tracker: tracker
+      logout: logout
+    dashboard:
+      title: Dashboard
+      invoiced:
+        title_in: in
+        invoiced: fatturato
+        vat: iva
+        total: totale
+        to_get: da incassare
+      quarters:
+        first: 1
+        second: 2
+        third: 3
+        fourth: 4
+      inbound_invoices:
+        net: netto
+        vat: iva
+        total: totale
+      per_customer:
+      job_orders:
+        apply: applica
+      job_orders_status:
+        progress: avanzamento
+
   date:
     abbr_day_names:
     - Dom

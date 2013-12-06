@@ -1,6 +1,7 @@
 .row
   .col-lg-12
-    %h2 Elenco fatture
+    %h2 
+      = t('views.invoices.invoice_list')
 
 .row
   
@@ -10,23 +11,32 @@
   .col-lg-9   
     %form.well.form-inline{:method => 'GET', :action => '/invoices'}
       .form-group
-        %label Mese:
+        %label 
+          = t('views.invoices.month')
         = select_month @month, {:include_blank => true}, {:class => 'form-control'}
       .form-group
-        %label Anno:
+        %label 
+          = t('views.invoices.year')
         = select_year @year, {}, {:class => 'form-control'}
-      %button.btn.btn-info.pull-right{:type => 'submit', } Applica  
+      %button.btn.btn-info.pull-right{:type => 'submit', } 
+        = t('views.invoices.apply')  
 
 
     %table.table.table-striped.table-bordered
       %thead
         %tr
-          %th Numero
-          %th Data
-          %th Cliente
-          %th.right Imponibile
-          %th Pagata
-          %th Stato
+          %th 
+            = t('views.invoices.number')
+          %th
+            = t('views.invoices.date')
+          %th 
+            = t('views.invoices.customer')
+          %th.right
+            = t('views.invoices.taxable_income')
+          %th 
+            = t('views.invoices.is_payed')
+          %th 
+            = t('views.invoices.status')
           %th 
       %tbody
         -@invoices.each do |i|
@@ -53,53 +63,56 @@
             %td
               .btn-group
                 %button.btn.btn-default.dropdown-toggle{"data-toggle" => "dropdown"}
-                  Azioni 
+                  = t('views.invoices.actions') 
                   %span.caret
                 %ul.dropdown-menu{:role => "menu"}
                   %li
                     %a{:href => edit_invoice_path(i)}
                       %i.icon-edit
-                      Modifica
+                      = t('views.invoices.edit')
                   %li
                     %a{:href => invoice_path(i)} 
                       %i.icon-file-alt
-                      Visualizza
+                      = t('views.invoices.show')
                   %li
                     %a{:href => invoice_clone_path(i)} 
                       %i.icon-copy
-                      Duplica
+                      = t('views.invoices.clone')
                   %li
                     %a{:href => invoice_drop_box_path(i), :class=> 'drop-box'} 
                       %i.icon-dropbox
-                      Invia a dropbox
+                      = t('views.invoices.send_to_dropbox')
                   - if i.status == Invoice.temporary
                     %li
                       %a{:href => invoice_activate_path(i)}
                         %i.icon-thumbs-up-alt 
-                        Emetti
+                        = t('views.invoices.activate')
                   %li.divider
                   %li
                     %a{:href=> invoice_path(i), :class => 'delete' } 
                       %i.icon-trash.text-error
-                      Elimina
+                      = t('views.invoices.delete')
                             
   .col-lg-3
     .row.sidebar-row
-      = link_to 'Nuova fattura', new_invoice_path , {:class => 'btn btn-info btn-block btn-lg'}
+      = link_to t('views.invoices.new_invoice'), new_invoice_path , {:class => 'btn btn-info btn-block btn-lg'}
     .row.sidebar-row
       .panel.panel-default
         .panel-heading
           %h3.panel-title.text-center 
-            = "Riepilogo #{AppSettings.fiscal_year}"
+            = t('views.invoices.summary') + " #{AppSettings.fiscal_year}"
         .panel-body
           %ul.info-panel
-            %li.header Imponibile
+            %li.header 
+              = t('views.invoices.taxable_income')
             %li.amount
               = number_to_currency(@totals.taxable_income)
-            %li.header IVA
+            %li.header 
+              = t('views.invoices.vat')
             %li.amount
               = number_to_currency(@totals.tax)
-            %li.header Totale
+            %li.header 
+              = t('views.invoices.total')
             %li.amount
               = number_to_currency(@totals.total)
           

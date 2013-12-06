@@ -20,28 +20,30 @@
         = f.label :date
         = f.text_field :date, :class => 'isdate form-control', :value => @invoice.string_date
       .form-group
-        = f.label :is_payed, 'Pagata'
+        = f.label :is_payed
         = f.check_box :is_payed, :class => 'form-control'
       .form-group
-        = f.label :has_tax, 'Iva'
+        = f.label :has_tax
         = f.check_box :has_tax, :class => 'form-control'
       .form-group
-        = f.label :status, 'Stato'
-        = f.select :status, {:bozza => 1, :emessa => 2}, {}, {:class => 'form-control'}
+        = f.label :status
+        = f.select :status, {t('views.invoices.draft') => 1, t('views.invoices.active') => 2}, {}, {:class => 'form-control'}
   .row
     %hr
   .row
     .col-md-12
       %h3 
-        Righe
+        = t('views.invoices.items')
         %a.new-item.btn.btn-info.pull-right{:href=>'#'} 
           %i{:class => 'icon-plus icon-white'}
-          Nuova riga 
+          = t('views.invoices.new_item')
       %table.items.table
         %thead
           %tr
-            %th Descrizione
-            %th Importo
+            %th 
+              = t('views.invoices.description')
+            %th
+              = t('views.invoices.amount')
             %th 
         %tbody
           = f.fields_for :invoice_items do |i|
