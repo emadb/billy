@@ -29,6 +29,14 @@ en:
       inverse: inverse
     dates:
       expired: expired
+  entities:
+    job_order: job_order
+    job_orders: job_orders
+    invoice: invoice
+    invoices: invoices
+    activity: activity
+    activities: activities
+
   views: 
     top_bar:
       dashboard: dashboard
@@ -53,13 +61,17 @@ en:
         second: 2
         third: 3
         fourth: 4
+        invoiced: invoiced per quarter
       inbound_invoices:
         net: net
         vat: vat
         total: total
+        expenses: expenses
       per_customer:
+        invoiced: invoiced per customer
       job_orders:
         apply: apply
+        job_orders_status: job orders status
       job_orders_status:
         progress: progress
     invoices:
@@ -91,7 +103,17 @@ en:
       description: description
       amount: amount
       new_item: new item
-
+    tracker:
+      tracking_of: tracking activities of 
+      notes: notes 
+      activity_started_at: activity started at 
+      activity_completed_at: activity completed at
+      time: time
+      resume: resume
+      remove: remove
+      save_all: save all
+      remove_all: remove all
+      summary: summary
   date:
     abbr_day_names:
     - Sun
@@ -125,7 +147,7 @@ en:
     - Saturday
     formats:
       default: ! '%Y-%m-%d'
-      long: ! '%B %d, %Y'
+      long: ! '%B %d %Y'
       short: ! '%b %d'
     month_names:
     -
@@ -192,10 +214,10 @@ en:
     format: ! '%{attribute} %{message}'
     messages:
       accepted: must be accepted
-      blank: can't be blank
+      blank: cant be blank
       present: must be blank
-      confirmation: ! "doesn't match %{attribute}"
-      empty: can't be empty
+      confirmation: ! "doesnt match %{attribute}"
+      empty: cant be empty
       equal_to: must be equal to %{count}
       even: must be even
       exclusion: is reserved
@@ -302,3 +324,11 @@ en:
   activerecord:
     errors:
       <<: *errors
+    models:
+      invoice:
+          one: invoice
+          other: invoices
+    attributes:
+      invoice:
+          has_tax: has tax
+          

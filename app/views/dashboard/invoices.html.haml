@@ -7,26 +7,26 @@
     %tr.info
       %td
         %span.text-success
-          Fatturato
+          = t('views.dashboard.invoiced.invoiced')
       %td
         %span.pull-right.text-success
           = number_to_currency @invoices_totals.taxable_income
     %tr
       %td
-        Iva
+        = t('views.dashboard.invoiced.vat')
       %td
         %span.pull-right
           = number_to_currency @invoices_totals.tax
     %tr
       %td.italic
-        Totale
+        = t('views.dashboard.invoiced.total')
       %td
         %span.pull-right        
           = number_to_currency @invoices_totals.total
     %tr.error
       %td
         %span.text-info
-          Da incassare
+          = t('views.dashboard.invoiced.to_get')
       %td
         %span.pull-right.text-info
           = number_to_currency @to_receive

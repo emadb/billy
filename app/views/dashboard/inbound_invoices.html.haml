@@ -2,23 +2,23 @@
   %table.table
     %tr
       %th
-        Out
+        = t('views.dashboard.inbound_invoices.expenses')
       %th
     %tr
       %td
-        Netto
+        = t('views.dashboard.inbound_invoices.net')
       %td
         %span.pull-right
           = number_to_currency @inbound_invoices_totals.taxable_income
     %tr
       %td
-        Iva
+        = t('views.dashboard.inbound_invoices.vat')
       %td
         %span.pull-right
           = number_to_currency @inbound_invoices_totals.tax
     %tr
       %td
-        Totale
+        = t('views.dashboard.inbound_invoices.total')
       %td
         %span.pull-right
           = number_to_currency @inbound_invoices_totals.total

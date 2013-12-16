@@ -8,11 +8,13 @@
         = select_year @filter_date, {add_month_numbers: false}, {name: 'year', :class => ' form-control'}
     .col-lg-2
       .form-group
-        %a.btn.btn-info{:id => 'dashboard-activities'} Applica
+        %a.btn.btn-info{:id => 'dashboard-activities'} 
+          = t('views.dashboard.job_orders.apply')
 
   %table.table
     %tr
-      %th Commessa
+      %th 
+        = t('views.entities.job_order')
       - @users.each do |u|
         %td.right
           = u.name
