@@ -2,9 +2,9 @@
   .col-lg-12
     %h1
       = "Attività di #{current_user.name}"
-.row
+.row{'ng-controller' => 'UserActivitiesCtrl'}
   .col-lg-9
-    #activityPage{'ng-controller' => 'UserActivitiesCtrl'}
+    #activityPage
       %form.well.form-inline{:method => 'POST', :action => '/user_activities/index'}
         .form-group
           %label Mese:
@@ -59,7 +59,7 @@
     .row.sidebar-row
       %a.btn.btn-info.btn-block#openModal{:href => '#editActivity', 'ng-click' => 'newActivity()', "data-toggle"=>"modal"}
         Nuova attività
-      %a.btn.btn-default.btn-block#report{:href => '/user_activities/report.xls'}
+      %a.btn.btn-default.btn-block#report{"href" => '/user_activities/report.xls?month={{month}}&year={{year}}&user={{user}}'}
         Genera report
       %iframe#frm{:style => "display:none"}
     .row.sidebar-row
