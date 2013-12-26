@@ -9,15 +9,15 @@
     
       .form-group.col-lg-3
         %label 
-          = t('entities.job_order')
+          = t('views.tracker.job_order')
         = select_tag :job_order, '', 'ng-model' => 'job_order_id', 'ng-options' => 'j.id as j.code for j in jobOrders', :class => 'form-control'
       .form-group.col-lg-3
         %label 
-          = t('entities.activity')
+          = t('views.tracker.activity')
         = select_tag :activity, '', 'ng-model' => 'job_order_activity_id', 'ng-options' => 'j.id as j.description for j in jobOrderActivities', :class => 'form-control'
       .form-group.col-lg-4
         %label 
-          = t('entities.notes')
+          = t('views.tracker.notes')
         %textarea{'ng-model' => 'notes', :class => 'form-control'}
       .form-group.col-lg-2
         %label &nbsp;
@@ -39,9 +39,9 @@
         %thead
           %tr
             %th 
-              = t('entities.job_order')
+              = t('views.tracker.job_order')
             %th 
-              = t('entities.activity')
+              = t('views.tracker.activity')
             %th 
               = t('views.tracker.notes')
             %th 

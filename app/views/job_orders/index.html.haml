@@ -1,6 +1,7 @@
 .row
   .col-lg-12
-    %h2 Elenco fatture
+    %h2 
+      = t('views.job_orders.title')
 
 .row
   .col-lg-9        
@@ -8,11 +9,16 @@
       %thead
         %tr
           %th
-          %th Codice
-          %th Cliente
-          %th Tariffa oraria
-          %th Stato (ore fatte/totale)
-          %th Guadagno (Stima - Speso)
+          %th 
+            = t('views.job_orders.code')
+          %th 
+            = t('views.job_orders.customer')
+          %th 
+            = t('views.job_orders.hourly_rate')
+          %th 
+            = t('views.job_orders.status')
+          %th 
+            = t('views.job_orders.earn')
           %th
       %tbody
         -@job_orders.each do |job|
@@ -36,39 +42,43 @@
             %td
               .btn-group
                 %button.btn.btn-default.dropdown-toggle{"data-toggle" => "dropdown"}
-                  Azioni 
+                  = t('views.job_orders.actions') 
                   %span.caret
                 %ul.dropdown-menu{:role => "menu"}
                   %li
                     %a{:href=> edit_job_order_path(job)} 
                       %i.icon-edit
-                      Modifica
+                      = t('views.job_orders.edit')
                   %li
                     %a{:href=> job_order_activities_path(job)}
                       %i.icon-list.icon-large
-                      Elenco attività
+                      = t('views.job_orders.activities')
                   %li
                     %a{:href=> job_order_path(job), :class => 'delete' } 
                       %i.icon-trash.icon-large
-                      Elimina
+                      = t('views.job_orders.delete')
   .col-lg-3
     .row.sidebar-row
-      = link_to 'Nuova commessa', new_job_order_path, {:class => 'btn btn-info btn-block btn-lg'}
+      = link_to t('views.job_orders.new_job_order'), new_job_order_path, {:class => 'btn btn-info btn-block btn-lg'}
       %a{href: job_orders_path + "/?archived=yes", class: 'archived-job-order btn btn-default btn-block btn-lg'}
-        Commesse archiviate
+        = t('views.job_orders.archived_job_order')
     .row.sidebar-row
       .panel.panel-default
         .panel-heading
-          %h3.panel-title.text-center Riepilogo
+          %h3.panel-title.text-center 
+            = t('views.job_orders.summary')
         .panel-body
           %ul.info-panel
-            %li.header Commesse attive
+            %li.header 
+              = t('views.job_orders.active_job_orders')
             %li.amount
               = @job_orders.where(:archived => false).count
-            %li.header Totale ore stimate
+            %li.header 
+              = t('views.job_orders.estimated_hours')
             %li.amount
               = @job_orders.sum(&:total_estimated_hours)
-            %li.header Totale ore effettuate
+            %li.header 
+              = t('views.job_orders.done_hours')
             %li.amount
               = @job_orders.sum(&:total_executed_hours)
                     

@@ -114,6 +114,75 @@ en:
       save_all: save all
       remove_all: remove all
       summary: summary
+      job_order: Job order
+      activity: Activity
+      notes: Notes
+    inbound_invoices:
+      title: Inbound invoices
+      apply: apply
+      number: number
+      date: date
+      customer: customer
+      taxable_income: taxable income
+      vat: vat
+      total: total
+      new_inbound_invoice: New inbound invoice
+      summary: summary
+      save: save
+    job_orders:
+      title: Job orders
+      code: Code
+      customer: Customer
+      hourly_rate: Hourly rate
+      status: Status (hours done/total)
+      earn: Earn (Estimate - Spent)
+      actions: Actions
+      edit: Edit
+      activities: Activities
+      delete: Delete
+      new_job_order: New Job order
+      archived_job_orders: Arcived job orders
+      summary: Summary
+      active_job_orders: Active job orders
+      estimated_hours: Estimated hours
+      done_hours: Done hours
+      total_hours: Total hours
+      save: Save
+      new_activity: New activity
+      description: description
+      hours: Hours
+      activity: Activity
+      activities: Activities
+      user: User
+      notes: Notes
+      activities_of: Activities of
+    settings:
+      title: Settings
+      key: key
+      value: Value
+      save: Save
+    activities:
+      title: Activities of
+      month: Month
+      year: Year
+      user: User
+      apply: Apply
+      date: date
+      hours: Hours
+      job_order: Job order
+      activity: Activity
+      notes: Notes
+      actions: Actions
+      edit: Edit
+      delete: Delete
+      new_activity: New activity
+      report: Report
+      summary: Summary
+      today: Today
+      yesterday: Yesterday
+      new_activity: New activity
+      job_order: Job order
+      cancel: Cancel
   date:
     abbr_day_names:
     - Sun
@@ -326,9 +395,14 @@ en:
       <<: *errors
     models:
       invoice:
-          one: invoice
-          other: invoices
+        one: invoice
+        other: invoices
+      inbound_invoice:
+        one: inbound_invoice
+        other: inbound_invoices
     attributes:
       invoice:
-          has_tax: has tax
+        has_tax: has tax
+      inbound_invoice:
+        number: Number
           

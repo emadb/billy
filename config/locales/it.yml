@@ -1,205 +1,360 @@
+# Files in the config/locales directory are used for internationalization
+# and are automatically loaded by Rails. If you want to use locales other
+# than English, add the necessary files in this directory.
+#
+# To use the locales, use `I18n.t`:
+#
+#     I18n.t 'hello'
+#
+# In views, this is aliased to just `t`:
+#
+#     <%= t('hello') %>
+#
+# To use a different locale, set it with `I18n.locale`:
+#
+#     I18n.locale = :es
+#
+# This would use the information in config/locales/es.yml.
+#
+# To learn more, please read the Rails Internationalization guide
+# available at http://guides.rubyonrails.org/i18n.html.
+
 it:
-  v: 
+  helpers:
+    invoce_status:
+      draft: Bozza
+      active: Attiva
+      warning: attenzione
+      info: info
+      inverse: inverso
+    dates:
+      expired: scaduta
+  entities:
+    job_order: Commessa
+    job_orders: Commesse
+    invoice: Fattura
+    invoices: Fatture
+    activity: Attività
+    activities: Attività
+
+  views: 
     top_bar:
-      dashboard: dashboard
-      invoices: fatture
-      inbound_invoices: fatture in ingresso
-      job_orders: commesse
-      settings: impostazioni
-      tables: tabelle
-      activities: attività
-      tracker: tracker
-      logout: logout
+      dashboard: Dashboard
+      invoices: Fatture
+      inbound_invoices: Fatture passive
+      job_orders: Commesse
+      settings: Impostazioni
+      tables: Tabelle
+      activities: Attività
+      tracker: Tracker
+      logout: Logout
     dashboard:
       title: Dashboard
       invoiced:
-        title_in: in
-        invoiced: fatturato
-        vat: iva
-        total: totale
-        to_get: da incassare
+        title_in: In
+        invoiced: Fatturato
+        vat: IVA
+        total: Totale
+        to_get: Da incassare
       quarters:
         first: 1
         second: 2
         third: 3
         fourth: 4
+        invoiced: Fatturato per trimestre
       inbound_invoices:
-        net: netto
-        vat: iva
-        total: totale
+        net: Netto
+        vat: IVA
+        total: Totale
+        expenses: Spese
       per_customer:
+        invoiced: Fatturato per cliente
       job_orders:
-        apply: applica
+        apply: Applica
+        job_orders_status: Stato commesse
       job_orders_status:
-        progress: avanzamento
-
+        progress: Avanzamento
+    invoices:
+      invoice_list: Lista fatture
+      month: Mese
+      year: Anno
+      apply: Applica
+      new_invoice: Nuova fattura
+      summary: Riepilogo
+      number: Numero
+      date: Data
+      customer: Cliente
+      taxable_income: Imponibile
+      is_payed: Pagato
+      status: Stato
+      actions: Azioni
+      edit: Modifica
+      show: Visualizza
+      clone: Copia
+      send_to_dropbox: Invia a Dropbox
+      activate: Attiva
+      delete: Elimina
+      vat: IVA
+      total: Totale
+      has_tax: Tasse
+      draft: Bozza
+      active: Attiva
+      items: Righe
+      description: Descrizione
+      amount: Importo
+      new_item: Nuova riga
+    tracker:
+      tracking_of: Tracking delle attività di
+      notes: Note
+      activity_started_at: Iniziata alle
+      activity_completed_at: Completata alle
+      time: Ore
+      resume: Riprendi
+      remove: Rimuovi
+      save_all: Salva tutto
+      remove_all: Elimina tutto
+      summary: Riepilogo
+      job_order: Commessa
+      activity: Attività
+      notes: Note
+    inbound_invoices:
+      title: Fatture passive
+      apply: Applica
+      number: Numero
+      date: Data
+      customer: Cliente
+      taxable_income: Imponibile
+      vat: IVA
+      total: Totale
+      new_inbound_invoice: Nuova fattura passiva
+      summary: Riepilogo
+      save: Salva
+    job_orders:
+      title: Commesse
+      code: Codice
+      customer: Cliente
+      hourly_rate: Tariffa oraria
+      status: Stato (ore fatte/totale)
+      earn: Guadagno (Stima-spesa)
+      actions: Azioni
+      edit: Modifica
+      activities: Attività
+      delete: Elimina
+      new_job_order: Nuova commessa
+      archived_job_orders: Commesse archiviate
+      summary: Riepilogo
+      active_job_orders: Commesse attive
+      estimated_hours: Ore stimate
+      done_hours: Ore fatte
+      total_hours: Ore totali
+      save: Salva
+      new_activity: Nuova attività
+      description: Descrizione
+      hours: Ore
+      activity: Attività
+      activities: Attività
+      user: Utente
+      notes: Note
+      activities_of: Attività di
+    settings:
+      title: Impostazioni
+      key: Chiave
+      value: Valore
+      save: Salva
+    activities:
+      title: Attività di
+      month: Mese
+      year: Anno
+      user: Utente
+      apply: Applica
+      date: Data
+      hours: Ore
+      job_order: Commessa
+      activity: Attività
+      notes: Note
+      actions: Azini
+      edit: Modifica
+      delete: Elimina
+      new_activity: Nuova Attività
+      report: Report
+      summary: Riepilogo
+      today: Oggi
+      yesterday: Ieri
+      new_activity: Nuova attività
+      job_order: Commessa
+      cancel: Annulla
   date:
     abbr_day_names:
-    - Dom
-    - Lun
-    - Mar
-    - Mer
-    - Gio
-    - Ven
-    - Sab
+    - Sun
+    - Mon
+    - Tue
+    - Wed
+    - Thu
+    - Fri
+    - Sat
     abbr_month_names:
-    - 
-    - Gen
+    -
+    - Jan
     - Feb
     - Mar
     - Apr
-    - Mag
-    - Giu
-    - Lug
-    - Ago
-    - Set
-    - Ott
+    - May
+    - Jun
+    - Jul
+    - Aug
+    - Sep
+    - Oct
     - Nov
-    - Dic
+    - Dec
     day_names:
-    - Domenica
-    - Lunedì
-    - Martedì
-    - Mercoledì
-    - Giovedì
-    - Venerdì
-    - Sabato
+    - Sunday
+    - Monday
+    - Tuesday
+    - Wednesday
+    - Thursday
+    - Friday
+    - Saturday
     formats:
-      default: '%d-%m-%Y'
-      long: ! '%d %B %Y'
-      short: ! '%d %b'
+      default: ! '%Y-%m-%d'
+      long: ! '%B %d %Y'
+      short: ! '%b %d'
     month_names:
-    - 
-    - Gennaio
-    - Febbraio
-    - Marzo
-    - Aprile
-    - Maggio
-    - Giugno
-    - Luglio
-    - Agosto
-    - Settembre
-    - Ottobre
-    - Novembre
-    - Dicembre
+    -
+    - January
+    - February
+    - March
+    - April
+    - May
+    - June
+    - July
+    - August
+    - September
+    - October
+    - November
+    - December
     order:
-    - :day
-    - :month
     - :year
+    - :month
+    - :day
   datetime:
     distance_in_words:
       about_x_hours:
-        one: circa un'ora
-        other: circa %{count} ore
+        one: about 1 hour
+        other: about %{count} hours
       about_x_months:
-        one: circa un mese
-        other: circa %{count} mesi
+        one: about 1 month
+        other: about %{count} months
       about_x_years:
-        one: circa un anno
-        other: circa %{count} anni
+        one: about 1 year
+        other: about %{count} years
       almost_x_years:
-        one: circa 1 anno
-        other: circa %{count} anni
-      half_a_minute: mezzo minuto
+        one: almost 1 year
+        other: almost %{count} years
+      half_a_minute: half a minute
       less_than_x_minutes:
-        one: meno di un minuto
-        other: meno di %{count} minuti
+        one: less than a minute
+        other: less than %{count} minutes
       less_than_x_seconds:
-        one: meno di un secondo
-        other: meno di %{count} secondi
+        one: less than 1 second
+        other: less than %{count} seconds
       over_x_years:
-        one: oltre un anno
-        other: oltre %{count} anni
+        one: over 1 year
+        other: over %{count} years
       x_days:
-        one: 1 giorno
-        other: ! '%{count} giorni'
+        one: 1 day
+        other: ! '%{count} days'
       x_minutes:
-        one: 1 minuto
-        other: ! '%{count} minuti'
+        one: 1 minute
+        other: ! '%{count} minutes'
       x_months:
-        one: 1 mese
-        other: ! '%{count} mesi'
+        one: 1 month
+        other: ! '%{count} months'
       x_seconds:
-        one: 1 secondo
-        other: ! '%{count} secondi'
+        one: 1 second
+        other: ! '%{count} seconds'
     prompts:
-      day: Giorno
-      hour: Ora
-      minute: Minuto
-      month: Mese
-      second: Secondi
-      year: Anno
+      day: Day
+      hour: Hour
+      minute: Minute
+      month: Month
+      second: Seconds
+      year: Year
   errors: &errors
     format: ! '%{attribute} %{message}'
     messages:
-      accepted: deve essere accettata
-      blank: non può essere lasciato in bianco
-      confirmation: non coincide con la conferma
-      empty: non può essere vuoto
-      equal_to: deve essere uguale a %{count}
-      even: deve essere pari
-      exclusion: è riservato
-      greater_than: deve essere superiore a %{count}
-      greater_than_or_equal_to: deve essere superiore o uguale a %{count}
-      inclusion: non è incluso nella lista
-      invalid: non è valido
-      less_than: deve essere meno di %{count}
-      less_than_or_equal_to: deve essere meno o uguale a %{count}
-      not_a_number: non è un numero
-      not_an_integer: non è un intero
-      odd: deve essere dispari
-      record_invalid: ! 'Validazione fallita: %{errors}'
-      taken: è già in uso
+      accepted: must be accepted
+      blank: cant be blank
+      present: must be blank
+      confirmation: ! "doesnt match %{attribute}"
+      empty: cant be empty
+      equal_to: must be equal to %{count}
+      even: must be even
+      exclusion: is reserved
+      greater_than: must be greater than %{count}
+      greater_than_or_equal_to: must be greater than or equal to %{count}
+      inclusion: is not included in the list
+      invalid: is invalid
+      less_than: must be less than %{count}
+      less_than_or_equal_to: must be less than or equal to %{count}
+      not_a_number: is not a number
+      not_an_integer: must be an integer
+      odd: must be odd
+      record_invalid: ! 'Validation failed: %{errors}'
+      restrict_dependent_destroy:
+        one: "Cannot delete record because a dependent %{record} exists"
+        many: "Cannot delete record because dependent %{record} exist"
+      taken: has already been taken
       too_long:
-        one: è troppo lungo (il massimo è 1 carattere)
-        other: è troppo lungo (il massimo è %{count} caratteri)
+        one: is too long (maximum is 1 character)
+        other: is too long (maximum is %{count} characters)
       too_short:
-        one: è troppo corto (il minimo è 1 carattere)
-        other: è troppo corto (il minimo è %{count} caratteri)
+        one: is too short (minimum is 1 character)
+        other: is too short (minimum is %{count} characters)
       wrong_length:
-        one: è della lunghezza sbagliata (deve essere di 1 carattere)
-        other: è della lunghezza sbagliata (deve essere di %{count} caratteri)
+        one: is the wrong length (should be 1 character)
+        other: is the wrong length (should be %{count} characters)
+      other_than: "must be other than %{count}"
     template:
-      body: ! 'Per favore ricontrolla i seguenti campi:'
+      body: ! 'There were problems with the following fields:'
       header:
-        one: ! 'Non posso salvare questo %{model}: 1 errore'
-        other: ! 'Non posso salvare questo %{model}: %{count} errori.'
+        one: 1 error prohibited this %{model} from being saved
+        other: ! '%{count} errors prohibited this %{model} from being saved'
   helpers:
     select:
-      prompt: Per favore, seleziona
+      prompt: Please select
     submit:
-      create: Crea %{model}
-      submit: Invia %{model}
-      update: Aggiorna %{model}
+      create: Create %{model}
+      submit: Save %{model}
+      update: Update %{model}
   number:
     currency:
       format:
-        delimiter: .
-        format: ! '%n %u'
+        delimiter: ! ','
+        format: ! '%u%n'
         precision: 2
-        separator: ! ','
+        separator: .
         significant: false
         strip_insignificant_zeros: false
-        unit: €
+        unit: $
     format:
-      delimiter: .
-      precision: 2
-      separator: ! ','
+      delimiter: ! ','
+      precision: 3
+      separator: .
       significant: false
       strip_insignificant_zeros: false
     human:
       decimal_units:
         format: ! '%n %u'
         units:
-          billion: Miliardi
-          million: Milioni
-          quadrillion: Biliardi
-          thousand: Mila
-          trillion: Bilioni
+          billion: Billion
+          million: Million
+          quadrillion: Quadrillion
+          thousand: Thousand
+          trillion: Trillion
           unit: ''
       format:
         delimiter: ''
-        precision: 1
+        precision: 3
         significant: true
         strip_insignificant_zeros: true
       storage_units:
@@ -207,7 +362,7 @@ it:
         units:
           byte:
             one: Byte
-            other: Byte
+            other: Bytes
           gb: GB
           kb: KB
           mb: MB
@@ -215,19 +370,20 @@ it:
     percentage:
       format:
         delimiter: ''
+        format: "%n%"
     precision:
       format:
         delimiter: ''
   support:
     array:
-      last_word_connector: ! ' e '
-      two_words_connector: ! ' e '
+      last_word_connector: ! ', and '
+      two_words_connector: ! ' and '
       words_connector: ! ', '
   time:
     am: am
     formats:
-      default: ! '%a %d %b %Y, %H:%M:%S %z'
-      long: ! '%d %B %Y %H:%M'
+      default: ! '%a, %d %b %Y %H:%M:%S %z'
+      long: ! '%B %d, %Y %H:%M'
       short: ! '%d %b %H:%M'
     pm: pm
   # remove these aliases after 'activemodel' and 'activerecord' namespaces are removed from Rails repository
@@ -237,3 +393,16 @@ it:
   activerecord:
     errors:
       <<: *errors
+    models:
+      invoice:
+        one: invoice
+        other: invoices
+      inbound_invoice:
+        one: inbound_invoice
+        other: inbound_invoices
+    attributes:
+      invoice:
+        has_tax: has tax
+      inbound_invoice:
+        number: Number
+          

@@ -1,6 +1,6 @@
 %fieldset
   %legend 
-    = "New job order"
+    = t('views.job_orders.title')
   
   = render 'form'
 
@@ -8,9 +8,11 @@
 = content_for :side_bar do
   .well.sidebar-nav
     %ul.totals.info-panel
-      %li Totale ore
+      %li 
+        = t('views.job_orders.total_hours')
       %li#taxable-income.amount
     %hr
     %ul.info-panel
       %li
-        %a.btn.btn-primary#save-form salva
+        %a.btn.btn-primary#save-form 
+          = t('views.job_orders.save')
