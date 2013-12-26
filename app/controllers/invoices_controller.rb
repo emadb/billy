@@ -93,7 +93,7 @@ class InvoicesController < ApplicationController
               :content => AppSettings.footer
             })
     
-    if AppSettings.dropbox_enabled?
+    if AppSettings.dropbox_enabled == 'true'
       drop_box = DropBoxService.new
       drop_box.upload file_name, pdf
     end

@@ -45,7 +45,7 @@ module ApplicationHelper
     begin
       if job.a_project?
         delta = job.price - job.total_consumed_cost
-        delta_perc = (delta / job.price * 100).ceil
+        delta_perc = (delta / job.price * 100).round(2)
         
         label_class = 'info'
         if delta_perc.abs > 80.0
@@ -55,11 +55,10 @@ module ApplicationHelper
         if delta_perc.abs > 100
           label_class = 'important'
         end
-
         return "#{job.price} - #{job.total_consumed_cost} = #{delta}"
       else
         delta = (job.total_executed_hours * job.hourly_rate) - job.total_consumed_cost
-        return "#{delta}"
+        return "#{delta.round(2)}"
       end
 
     rescue
