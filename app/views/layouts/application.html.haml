@@ -21,15 +21,15 @@
         .collapse.navbar-collapse.navbar-ex1-collapse
           %ul.nav.navbar-nav
             - if current_user.admin?
-              %li= link_to t('v.top_bar.dashboard'), "/dashboard"
-              %li= link_to t('v.top_bar.invoices'), "/invoices"
-              %li= link_to t('v.top_bar.inbound_invoices'), "/inbound_invoices"
-              %li= link_to t('v.top_bar.job_orders'), "/job_orders"
-              %li= link_to t('v.top_bar.settings'), "/settings"
-              %li= link_to t('v.top_bar.tables'), "/admin"
-            %li= link_to t('v.top_bar.activities'), "/user_activities"
-            %li= link_to t('v.top_bar.tracker'), "/activities_tracker"
-            %li= link_to t('v.top_bar.logout'), destroy_user_session_path, :method => :delete
+              %li= link_to t('views.top_bar.dashboard'), "/dashboard"
+              %li= link_to t('views.top_bar.invoices'), "/invoices"
+              %li= link_to t('views.top_bar.inbound_invoices'), "/inbound_invoices"
+              %li= link_to t('views.top_bar.job_orders'), "/job_orders"
+              %li= link_to t('views.top_bar.settings'), "/settings"
+              %li= link_to t('views.top_bar.tables'), "/admin"
+            %li= link_to t('views.top_bar.activities'), "/user_activities"
+            %li= link_to t('views.top_bar.tracker'), "/activities_tracker"
+            %li= link_to t('views.top_bar.logout'), destroy_user_session_path, :method => :delete
           %ul.nav.navbar-nav.pull-right
             %li
               %span.user
