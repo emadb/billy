@@ -367,3 +367,19 @@ it:
   activerecord:
     errors:
       <<: *errors
+    models:
+      invoice:
+        one: Fattura
+        other: Fatture
+      inbound_invoice:
+        one: Fattura passiva
+        other: Fatture passive
+      job_order:
+        one: Commessa
+        other: Commesse
+    attributes:
+      invoice:
+        has_tax: Tasse
+        number: Numero
+      inbound_invoice:
+        number: Numero
