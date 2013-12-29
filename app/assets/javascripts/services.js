@@ -48,6 +48,9 @@ window.scrooge.factory('ActivityService', ['$http', function($http){
         markSaved: function(activity){
             activity.status = 2
             $http.put('/activities_tracker/' + activity.id, activity);
+        },
+        getTypes: function(successCallback){
+            $http.get('/user_activity_types').success(successCallback);
         }
     }
 }]);

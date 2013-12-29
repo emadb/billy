@@ -15,6 +15,7 @@ Scrooge::Application.routes.draw do
 
   match '/settings' => 'settings#index', :via => :get
   match '/settings/update' => 'settings#update', :via => :post
+  match '/user_activity_types' => 'user_activity_types#index', :via => :get
 
   resources :activities_tracker do
     get 'today', :on => :collection, :action => 'today'

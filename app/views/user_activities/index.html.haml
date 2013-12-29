@@ -94,31 +94,46 @@
         %h3 
           = t('views.activities.new_activity')
       .modal-body
-        .row
-          %form{"data-bind" => "submit: save", :role => 'form'}
-            = hidden_field_tag 'id', '', :data => {:bind => "value: id"}
+        %form{"data-bind" => "submit: save", :role => 'form'}
+          = hidden_field_tag 'id', '', :data => {:bind => "value: id"}
+          .row
+            .col-lg-6
+              .form-group
+                %label 
+                  Tipo attività
+                = select_tag :job_order, '', 'ng-model' => 'activity.activityType', 'ng-options' => 'a.id as a.description for a in activityTypes', :class => 'form-control'
+            .col-lg-6
+              .form-group
+                
+          .row
             .col-lg-6
               .form-group
                 %label 
                   = t('views.activities.job_order')
-                = select_tag :job_order, '', 'ng-model' => 'activity.job_order_id', 'ng-options' => 'j.id as j.code for j in jobOrders', :class => 'form-control'
+                = select_tag :job_order, '', 'ng-model' => 'activity.job_order_id', 'ng-options' => 'j.id as j.code for j in jobOrders', :class => 'form-control', 'ng-disabled' => '!jobOrderEnabled()'
+            .col-lg-6
+              .form-group
+                %label
+                  = t('views.activities.activity')
+                = select_tag :activity, '', 'ng-model' => 'activity.job_order_activity_id', 'ng-options' => 'j.id as j.description for j in jobOrderActivities', :class => 'form-control', {'ng-disabled' => '!jobOrderEnabled()'}
+          .row
+            .col-lg-6
               .form-group
                 %label 
                   = t('views.activities.hours')
                 = text_field_tag 'hours', '', :class => 'input-small', 'ng-model' => "activity.hours", :class => 'form-control'
-              .form-group
-                %label 
-                  = t('views.activities.notes')
-                = text_area_tag :description, '', 'ng-model' => "activity.description", :class => 'form-control'
             .col-lg-6
-              .form-group
-                %label 
-                  = t('views.activities.activity')
-                = select_tag :activity, '', 'ng-model' => 'activity.job_order_activity_id', 'ng-options' => 'j.id as j.description for j in jobOrderActivities', :class => 'form-control'
               .form-group
                 %label 
                   = t('views.activities.date')
                 = text_field_tag 'date', '', :class => 'input-small', 'ng-model' => "activity.date", "b-datepicker" => "", :class => 'form-control'
+          .row
+            .col-lg-12
+              .form-group
+                %label 
+                  = t('views.activities.notes')
+                = text_area_tag :description, '', 'ng-model' => "activity.description", :class => 'form-control'
+              
       .modal-footer
         %a.btn.btn-default{'data-dismiss' => 'modal'} 
           = t('views.activities.cancel')

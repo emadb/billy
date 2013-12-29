@@ -46,8 +46,18 @@ window.scrooge.controller('UserActivitiesCtrl', ['$scope', '$rootScope', 'Activi
 
 window.scrooge.controller('UserActivityCtrl', ['$scope', '$rootScope', 'ActivityService', function($scope, $rootScope, ActivityService){
         
+
+    $scope.jobOrderEnabled = function(){
+        return $scope.activity.activityType === 1;
+    }
+
     ActivityService.getJobOrders(function(result){
         $scope.jobOrders = result;
+    });
+
+    ActivityService.getTypes(function(result){
+        console.log(result);
+        $scope.activityTypes = result;
     });
 
     $scope.$watch('activity.job_order_id', function(jobOrderId){
@@ -69,6 +79,7 @@ window.scrooge.controller('UserActivityCtrl', ['$scope', '$rootScope', 'Activity
 
     $rootScope.$on('activity:new', function(event, id) {
         $scope.activity = {date: moment().format('DD-MM-YYYY')};
+        $scope.activity.activityType = 1;
     });
 
     $scope.save = function(){

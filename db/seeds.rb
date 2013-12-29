@@ -20,3 +20,7 @@ Setting.create(key: 'dropbox_secret', value: 'secret')
 Setting.create(key: 'dropbox_folder', value: '/')
 Setting.create(key: 'dropbox_app_mode', value: 'dropbox')
 Setting.create(key: 'footer', value: '<div>put your footer here</div>')
+
+UserActivityType.create(description: 'lavorativa')
+UserActivityType.create(description: 'ferie')
+UserActivityType.create(description: 'malattia')
