@@ -6,15 +6,21 @@ window.scrooge.controller('UserActivitiesCtrl', ['$scope', '$rootScope', 'Activi
     
     $scope.getDay = function(date){
         return $scope.days[moment(date).day()];
-    }
+    };
     
     $scope.filter = function(){
         loadActivities();
-    }
+    };
 
     $scope.edit = function(id){
          $rootScope.$broadcast('activity:edit', id);
-    }   
+    };
+
+    $scope.getRowStyle = function(activity){
+        if (activity.user_activity_type_id !== 1){
+            return {color: 'rgba(2,128,143, 1)'};
+        } 
+    }
 
     $scope.delete = function(id){
         if (window.confirm('Sicuro?')){
@@ -23,7 +29,7 @@ window.scrooge.controller('UserActivitiesCtrl', ['$scope', '$rootScope', 'Activi
                 $rootScope.$broadcast('activity:updated', -1);
             });
         }
-    }
+    };
 
     if ($scope.month !== undefined && $scope.year !== undefined && $scope.user !== undefined){
         ActivityService.getActivities($scope.month, $scope.year, $scope.user, function(result){
@@ -45,23 +51,24 @@ window.scrooge.controller('UserActivitiesCtrl', ['$scope', '$rootScope', 'Activi
 }]);
 
 window.scrooge.controller('UserActivityCtrl', ['$scope', '$rootScope', 'ActivityService', function($scope, $rootScope, ActivityService){
-        
-
+    var workingActivities;
     $scope.jobOrderEnabled = function(){
-        return $scope.activity.activityType === 1;
-    }
+        return ($scope.activity !== undefined) && (_.contains(workingActivities, $scope.activity.user_activity_type_id));
+    };
 
     ActivityService.getJobOrders(function(result){
         $scope.jobOrders = result;
     });
 
     ActivityService.getTypes(function(result){
-        console.log(result);
         $scope.activityTypes = result;
+        console.log(result);
+        workingActivities = _.filter($scope.activityTypes, function(at){ return at.isWorking; });
+        workingActivities = _.map(workingActivities, function(at){ return at.id; });
     });
 
     $scope.$watch('activity.job_order_id', function(jobOrderId){
-        if (jobOrderId !== undefined){
+        if (jobOrderId !== undefined && jobOrderId !== null){
             ActivityService.getJobOrderActivities(jobOrderId, function(result){
                 $scope.jobOrderActivities = result;
             });    
@@ -74,12 +81,14 @@ window.scrooge.controller('UserActivityCtrl', ['$scope', '$rootScope', 'Activity
             // HACK: to resolve date issue
             activity.date = moment(activity.date, 'YYYY-MM-DD').format('DD-MM-YYYY');
             $scope.activity = activity;
+
+            console.log('edit', activity);
         });
     });
 
     $rootScope.$on('activity:new', function(event, id) {
         $scope.activity = {date: moment().format('DD-MM-YYYY')};
-        $scope.activity.activityType = 1;
+        $scope.activity.user_activity_type_id = 1;
     });
 
     $scope.save = function(){

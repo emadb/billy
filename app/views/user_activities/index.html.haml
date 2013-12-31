@@ -36,7 +36,7 @@
               = t('views.activities.notes')
             %th
         %tbody
-          %tr{'ng-repeat' => 'a in activities', 'row-color' => '{{$index}}'}
+          %tr{'ng-repeat' => 'a in activities', 'row-color' => '{{$index}}', 'ng-style' => 'getRowStyle(a)'}
             %td
               %span
                 {{a.date | date:'dd-MM-yyyy'}}
@@ -101,7 +101,7 @@
               .form-group
                 %label 
                   Tipo attività
-                = select_tag :job_order, '', 'ng-model' => 'activity.activityType', 'ng-options' => 'a.id as a.description for a in activityTypes', :class => 'form-control'
+                = select_tag :job_order, '', 'ng-model' => 'activity.user_activity_type_id', 'ng-options' => 'a.id as a.description for a in activityTypes', :class => 'form-control'
             .col-lg-6
               .form-group
                 
@@ -115,7 +115,7 @@
               .form-group
                 %label
                   = t('views.activities.activity')
-                = select_tag :activity, '', 'ng-model' => 'activity.job_order_activity_id', 'ng-options' => 'j.id as j.description for j in jobOrderActivities', :class => 'form-control', {'ng-disabled' => '!jobOrderEnabled()'}
+                = select_tag :activity, '', 'ng-model' => 'activity.job_order_activity_id', 'ng-options' => 'j.id as j.description for j in jobOrderActivities', :class => 'form-control', 'ng-disabled' => '!jobOrderEnabled()'
           .row
             .col-lg-6
               .form-group

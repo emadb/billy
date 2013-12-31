@@ -7,7 +7,7 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 
-User.create(email: 'demo@codiceplastico.com', password: 'demo', admin: true, name: 'demopwd')
+User.create(email: 'demo@codiceplastico.com', password: 'demopwd', admin: true, name: 'demopwd')
 Setting.create(key: 'fiscal_year', value: 2013)
 
 Setting.create(key: 'iva', value: 0.22)

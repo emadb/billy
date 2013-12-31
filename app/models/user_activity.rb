@@ -1,6 +1,7 @@
 class UserActivity < ActiveRecord::Base
   belongs_to :user
   belongs_to :job_order_activity
+  belongs_to :user_activity_type
   attr_accessible :date, :description, :hours
 
 
@@ -24,7 +25,9 @@ class UserActivity < ActiveRecord::Base
   end
 
   def job_order_id
-    job_order_activity.job_order.id
+    if !job_order_activity.nil?
+      job_order_activity.job_order.id
+    end
   end
 
   def as_json(options = { })

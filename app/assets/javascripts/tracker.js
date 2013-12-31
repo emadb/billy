@@ -73,7 +73,6 @@ window.scrooge.controller('TrackerCtrl', ['$scope', '$rootScope', '$timeout', 'A
         return !isStarted && $scope.timer !== undefined && $scope.timer !== '';
     }
 
-
     function buildDuration(time){
         var hours = 0;
         var duration = moment.duration(time)
@@ -111,8 +110,6 @@ window.scrooge.controller('TrackerCtrl', ['$scope', '$rootScope', '$timeout', 'A
                 });
             });    
         });
-
-        
     }
 
     function startTimer(activity){
@@ -137,67 +134,66 @@ window.scrooge.controller('TrackerCtrl', ['$scope', '$rootScope', '$timeout', 'A
     }
 }]);
 
+function Stopwatch() {
+    var startAt = 0;    // Time of last start / resume. (0 if not running)
+    var lapTime = 0;    // Time on the clock when last stopped in milliseconds
+    var resumeTime = 0;
 
-    function Stopwatch() {
-        var startAt = 0;    // Time of last start / resume. (0 if not running)
-        var lapTime = 0;    // Time on the clock when last stopped in milliseconds
-        var resumeTime = 0;
- 
-        var now = function() {
-            return (new Date()).getTime(); 
-        }; 
-        var pad = function (num, size) {
-            var s = "0000" + num;
-            return s.substr(s.length - size);
-        };
-
-        this.getTime = function() {
-            var t = this.time() + resumeTime;
-            var h = m = s = 0;
-            var newTime = '';
-         
-            h = Math.floor( t / (60 * 60 * 1000) );
-            t = t % (60 * 60 * 1000);
-            m = Math.floor( t / (60 * 1000) );
-            t = t % (60 * 1000);
-            s = Math.floor( t / 1000 );
-         
-            newTime = pad(h, 2) + ':' + pad(m, 2) + ':' + pad(s, 2);
-            return newTime;
-        };
- 
-        // Public methods
-        // Start or resume
-        this.start = function() {
-            startAt = startAt ? startAt : now();
-        };
- 
-        // Stop or pause
-        this.stop = function() {
-            // If running, update elapsed time otherwise keep it
-            lapTime = startAt ? lapTime + now() - startAt : lapTime;
-            startAt = 0; // Paused
-        };
- 
-        // Reset
-        this.reset = function() {
-            lapTime = startAt = 0;
-        };
-
-        // Duration
-        this.time = function() {
-            return lapTime + (startAt ? now() - startAt : 0); 
-        };
-
-        this.resume = function(time){
-            var parts = time.split(':');
-            var s = parseInt(parts[2]);
-            var m = parseInt(parts[1]);
-            var h = parseInt(parts[0]);
-            resumeTime = (s + (m * 60) + (h * 60 * 60)) * 1000;
-            this.start();
-        };
+    var now = function() {
+        return (new Date()).getTime(); 
+    }; 
+    var pad = function (num, size) {
+        var s = "0000" + num;
+        return s.substr(s.length - size);
     };
+
+    this.getTime = function() {
+        var t = this.time() + resumeTime;
+        var h = m = s = 0;
+        var newTime = '';
+     
+        h = Math.floor( t / (60 * 60 * 1000) );
+        t = t % (60 * 60 * 1000);
+        m = Math.floor( t / (60 * 1000) );
+        t = t % (60 * 1000);
+        s = Math.floor( t / 1000 );
+     
+        newTime = pad(h, 2) + ':' + pad(m, 2) + ':' + pad(s, 2);
+        return newTime;
+    };
+
+    // Public methods
+    // Start or resume
+    this.start = function() {
+        startAt = startAt ? startAt : now();
+    };
+
+    // Stop or pause
+    this.stop = function() {
+        // If running, update elapsed time otherwise keep it
+        lapTime = startAt ? lapTime + now() - startAt : lapTime;
+        startAt = 0; // Paused
+    };
+
+    // Reset
+    this.reset = function() {
+        lapTime = startAt = 0;
+    };
+
+    // Duration
+    this.time = function() {
+        return lapTime + (startAt ? now() - startAt : 0); 
+    };
+
+    this.resume = function(time){
+        var parts = time.split(':');
+        var s = parseInt(parts[2]);
+        var m = parseInt(parts[1]);
+        var h = parseInt(parts[0]);
+        resumeTime = (s + (m * 60) + (h * 60 * 60)) * 1000;
+        this.start();
+    };
+};
     
 window.scrooge.controller('TrackerSideBarCtrl', ['$scope', '$rootScope',function($scope, $rootScope){
     

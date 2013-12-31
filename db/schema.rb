@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131229143708) do
+ActiveRecord::Schema.define(version: 20131230203407) do
 
   create_table "activity_trackers", force: true do |t|
     t.integer  "user_id"
@@ -156,7 +156,8 @@ ActiveRecord::Schema.define(version: 20131229143708) do
   add_index "user_activities", ["user_id"], name: "index_user_activities_on_user_id"
 
   create_table "user_activity_types", force: true do |t|
-    t.string "description"
+    t.string  "description"
+    t.boolean "isWorking",   default: false
   end
 
   create_table "users", force: true do |t|
