@@ -36,6 +36,9 @@
         height: 100%;
         /* The html and body elements cannot have any padding or margin. */
       }
+      header{
+        text-align: center;
+      }
 
       /* Wrapper for page content to push down footer */
       #wrap {
@@ -65,13 +68,17 @@
         }
       }
 
+      img{
+        width:254px;
+        height:218px;        
+      }
 
         </style>
     </head>
     <body>
         <div id="wrap" class="container">
-            <div class="row-fluid">
-                <header style="height:120px">
+            <div class="row-fluid" align="center">
+                <header>
                     <%= wicked_pdf_image_tag 'codiceplastico.png'%>
                 </header>
             </div>

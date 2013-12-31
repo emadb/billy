@@ -72,12 +72,10 @@ class InvoicesController < ApplicationController
   def show
     @invoice = Invoice.find(params[:id])
     file_name = "#{@invoice.number} - #{@invoice.customer.file_name_template}.pdf"
-    render pdf: file_name,
-      template: 'invoices/show.pdf.html.erb',
-      :margin => { :bottom => 20 },
-      :footer => {
-        :content => AppSettings.footer
-      }
+    render :pdf => file_name,
+      :template => 'invoices/show.pdf.html.erb',
+      :margin => { :bottom => 20, :top => 10 },
+      :footer => { :content => AppSettings.footer }
   end
 
   def drop_box
@@ -88,10 +86,8 @@ class InvoicesController < ApplicationController
     pdf = render_to_string(
             :pdf => file_name,
             :template => 'invoices/show.pdf.html.erb',
-            :margin => { :bottom => 20 },
-            :footer => {
-              :content => AppSettings.footer
-            })
+            :margin => { :bottom => 20, :top => 10 },
+            :footer => { :content => AppSettings.footer })
     
     if AppSettings.dropbox_enabled == 'true'
       drop_box = DropBoxService.new
