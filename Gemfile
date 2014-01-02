@@ -5,7 +5,7 @@ gem 'rails', '~>4.0.0'
 
 gem 'wicked_pdf'
 
-gem 'simple_form', '~>3.0.0.rc'
+gem 'simple_form'
 gem 'dropbox-api'
 
 gem 'sass-rails'
@@ -43,5 +43,5 @@ gem 'jquery-rails'
 gem "devise"
 gem "haml", ">= 3.0.0"
 gem "haml-rails"
-gem "rails_admin", "~> 0.5.0"
+gem "rails_admin", "~> 0.6.0"
 gem "safe_yaml"

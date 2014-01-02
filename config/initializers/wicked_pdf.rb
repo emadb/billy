@@ -1,5 +1,5 @@
 if Rails.env.development?
-  wkhtmltopdf_binary = 'wkhtmltopdf-amd64'
+  wkhtmltopdf_binary = 'wkhtmltopdf'
 else
   wkhtmltopdf_binary = 'wkhtmltopdf-amd64'
 end
