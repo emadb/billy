@@ -40,4 +40,8 @@ class UserActivity < ActiveRecord::Base
     self.hours * self.user.hourly_cost
   end
 
+  def working?
+    self.user_activity_type.working?
+  end
+
 end

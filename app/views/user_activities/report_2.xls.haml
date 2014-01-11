@@ -1,0 +1,14 @@
+%table
+	%tr
+		%th Date
+		%th Ore lavorate
+		%th Ore ferie
+	- @formatted_activities.each do |a|
+		%tr
+			%td
+				= a.date
+			%td 
+				= a.working_hours
+			%td 
+				= a.holiday_hours
+		

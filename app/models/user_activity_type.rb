@@ -6,6 +6,6 @@ class UserActivityType < ActiveRecord::Base
   end
 
   def self.working_id 
-  	UserActivityType.where(isWorking: true).first
+  	UserActivityType.where(isWorking: true).first.id
   end
 end

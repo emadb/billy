@@ -70,6 +70,8 @@
         = t('views.activities.new_activity')
       %a.btn.btn-default.btn-block#report{"href" => '/user_activities/report.xls?month={{month}}&year={{year}}&user={{user}}'}
         = t('views.activities.report')
+      %a.btn.btn-default.btn-block#report2{"href" => '/user_activities/report_2.xls?month={{month}}&year={{year}}&user={{user}}'}
+        = t('views.activities.report_2')  
       %iframe#frm{:style => "display:none"}
     .row.sidebar-row
       .panel.panel-default

@@ -109,7 +109,47 @@ class UserActivitiesController < ApplicationController
     end
   end
 
-end
+  def report_2
+    from_date = Date.new(params[:year].to_i, params[:month].to_i, 1)
+    to_date = from_date + 1.month
+    user_id = params[:user]
 
+    activities = ActiveRecord::Base.connection.select_all("
+      select date, user_activity_type_id, sum(hours) as hours
+      from user_activities
+      where date >= '#{from_date.strftime('%Y-%m-%d')}' and date <= '#{to_date.strftime('%Y-%m-%d')}'
+      and user_id = #{user_id}
+      group by date, user_activity_type_id
+      order by date")
+
+    @formatted_activities = []
+
+    (from_date..to_date).each do |d|
+      r = ReportRow.new(d)
+      @formatted_activities << r
+
+      a = activities.find {|f| f['date'] == d.to_s}
+      if !a.nil?
+        if a['user_activity_type_id'] == UserActivityType.working_id
+          r.working_hours = a['hours']
+        else
+          r.holiday_hours = a['hours']
+        end
+      end
+    end
+    
+    respond_to do |format|
+      format.xls 
+    end
+  end
+
+  class ReportRow
+    attr_accessor :date, :working_hours, :holiday_hours
+    def initialize(date)
+      @date = date    
+    end
+  end
+
+end
 
 
