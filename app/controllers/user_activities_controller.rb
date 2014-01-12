@@ -141,7 +141,8 @@ class UserActivitiesController < ApplicationController
         end
       end
     end
-    
+    @month = from_date.strftime("%B")
+    @user_name = User.find(user_id).name
     respond_to do |format|
       format.xls 
     end
