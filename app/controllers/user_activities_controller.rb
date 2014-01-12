@@ -128,8 +128,8 @@ class UserActivitiesController < ApplicationController
       r = ReportRow.new(d)
       @formatted_activities << r
 
-      a = activities.find {|f| f['date'] == d.to_s}
-      if !a.nil?
+      activities_of_the_day = activities.select {|f| f['date'] == d.to_s}
+      activities_of_the_day.each do |a|
         if a['user_activity_type_id'] == UserActivityType.working_id
           r.working_hours = a['hours']
         else
