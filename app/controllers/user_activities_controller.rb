@@ -132,7 +132,7 @@ class UserActivitiesController < ApplicationController
       activities_of_the_day.each do |a|
         logger.info 'a = ' + a['user_activity_type_id'].to_s
         logger.info '== ' + (a['user_activity_type_id'] == UserActivityType.working_id).to_s
-        if a['user_activity_type_id'] == UserActivityType.working_id
+        if a['user_activity_type_id'].to_s == UserActivityType.working_id.to_s
           logger.info 'working: ' + a['hours'].to_s 
           r.working_hours = a['hours']
         else
