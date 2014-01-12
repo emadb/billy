@@ -1,20 +1,20 @@
-%table
+%table{:style=> 'border:#999 1px solid '}
 	%tr
-		%td
+		%td{:style=> 'border:#999 1px solid '}
 			data
 		- @formatted_activities.each do |a|
-			%td
+			%td{:style=> 'border:#999 1px solid '}
 				= a.date
 	%tr
-		%td
+		%td{:style=> 'border:#999 1px solid '}
 			ore lavorate
 		- @formatted_activities.each do |a|
-			%td 
+			%td{:style=> 'border:#999 1px solid '}
 				= a.working_hours
 	%tr
-		%td
+		%td{:style=> 'border:#999 1px solid '}
 			ore permesso/ferie
 		- @formatted_activities.each do |a|
-			%td
+			%td{:style=> 'border:#999 1px solid '}
 				= a.holiday_hours
 		
