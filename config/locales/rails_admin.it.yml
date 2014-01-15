@@ -85,7 +85,7 @@ it:
         done: "Esportato"
       history_index:
         title: "Cronologia per %{model_label_plural}"
-        menu: "Cronologiao"
+        menu: "Cronologia"
         breadcrumb: "Cronologia"
       history_show:
         title: "Cronologia per %{model_label} '%{object_label}'"
