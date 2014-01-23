@@ -58,8 +58,9 @@
   .row.sidebar-row
     %a.btn.btn-info.btn-block.btn-lg#save-form{:href => ''}
       = t('views.job_orders.save')
-    %a.btn.btn-default.btn-block.btn-lg{:href => job_order_activities_path(@job_order)}
-      = t('views.job_orders.activities')
+    - if !@job_order.new_record?
+      %a.btn.btn-default.btn-block.btn-lg{:href => job_order_activities_path(@job_order)}
+        = t('views.job_orders.activities')
   .row.sidebar-row
     .panel.panel-default
       .panel-heading
