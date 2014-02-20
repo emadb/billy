@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131230203407) do
+ActiveRecord::Schema.define(version: 20140220162800) do
 
   create_table "activity_trackers", force: true do |t|
     t.integer  "user_id"
@@ -146,9 +146,9 @@ ActiveRecord::Schema.define(version: 20131230203407) do
     t.integer  "user_activity_type_id"
     t.date     "date"
     t.float    "hours"
-    t.string   "description"
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
+    t.text     "description",           limit: 255
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
   end
 
   add_index "user_activities", ["job_order_activity_id"], name: "index_user_activities_on_job_order_activity_id"
