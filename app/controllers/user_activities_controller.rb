@@ -1,22 +1,10 @@
 class UserActivitiesController < ApplicationController
   def index
-    if (params[:year].nil? or params[:month].nil?)
-      @filter_date  = Date.today
-    else
-      @filter_date = Date.new(params[:year].to_i, params[:month].to_i, 1)
-    end
-
-    if (params[:user].nil?)
-      user = current_user
-    else
-      user = User.find(params[:user])
-    end
+    @filter_date = parse_filter(params)
     
-    @activities = UserActivity.get(params[:year], params[:month], user.id)
-
-    view_model = @activities.map do |a| 
-      create_view_model(a)
-    end
+    user_id = params[:user] || current_user.id
+    
+    @activities = UserActivity.get(params[:year], params[:month], user_id)
 
     if (current_user.admin?)
       @users = User.all
@@ -26,8 +14,22 @@ class UserActivitiesController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.json { render :json => view_model }
+      format.json do 
+        view_model = @activities.map do |a| 
+          create_view_model(a)
+        end
+        render :json => view_model 
+      end
     end
+  end
+
+  def parse_filter (params)
+    if (params[:year].nil? or params[:month].nil?)
+      Date.today
+    else
+      Date.new(params[:year].to_i, params[:month].to_i, 1)
+    end
+
   end
 
   def create_view_model(activity)
