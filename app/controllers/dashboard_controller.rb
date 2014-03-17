@@ -29,8 +29,12 @@ class DashboardController < ApplicationController
   end
 
   def per_customer
-    @perCustomer = ActiveRecord::Base.connection.select_all("select customers.name as customer, sum(total) as total, sum(taxable_income) as taxable_income, sum(tax) as tax 
+    first_january = Date.new(AppSettings.fiscal_year.to_i, 1, 1)
+    thirtyfirst_december = Date.new(AppSettings.fiscal_year.to_i, 12, 31)
+    connection = ActiveRecord::Base.connection
+    @perCustomer = connection.select_all("select customers.name as customer, sum(total) as total, sum(taxable_income) as taxable_income, sum(tax) as tax 
         from invoices join customers on invoices.customer_id = customers.id 
+        where invoices.date between #{connection.quote(first_january)} and #{connection.quote(thirtyfirst_december)}
         group by customers.name")
     render :layout=> false
   end
