@@ -29,7 +29,6 @@ class UserActivitiesController < ApplicationController
     else
       Date.new(params[:year].to_i, params[:month].to_i, 1)
     end
-
   end
 
   def create_view_model(activity)
@@ -125,20 +124,14 @@ class UserActivitiesController < ApplicationController
       order by date")
 
     @formatted_activities = []
-    logger.info '################## w: '+ UserActivityType.working_id.to_s
     (from_date..to_date).each do |d|
       r = ReportRow.new(d)
       @formatted_activities << r
-      logger.info 'data: ' + d.to_s
       activities_of_the_day = activities.select {|f| f['date'] == d.to_s}
       activities_of_the_day.each do |a|
-        logger.info 'a = ' + a['user_activity_type_id'].to_s
-        logger.info '== ' + (a['user_activity_type_id'] == UserActivityType.working_id).to_s
         if a['user_activity_type_id'].to_s == UserActivityType.working_id.to_s
-          logger.info 'working: ' + a['hours'].to_s 
           r.working_hours = a['hours']
         else
-          logger.info 'holiday: ' + a['hours'].to_s
           r.holiday_hours = a['hours']
         end
       end
