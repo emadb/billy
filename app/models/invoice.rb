@@ -43,17 +43,13 @@ class Invoice < ActiveRecord::Base
   end
 
   def update_totals
-    self.invoice_items.each {|i| logger.info i.amount}
     self.taxable_income = self.invoice_items.inject(0){|t, i| t + i.amount}
-    
-    if self.has_tax then
+    if self.has_tax 
       self.tax = self.taxable_income * AppSettings.iva.to_f
-      self.total = self.taxable_income + self.tax
     else
-      self.total = self.taxable_income
       self.tax = 0
     end
-    logger.info self.to_yaml
+    self.total = self.taxable_income + self.tax
   end
   
   def is_in_late?
