@@ -6,11 +6,7 @@ class UserActivitiesController < ApplicationController
     
     @activities = UserActivity.get(params[:year], params[:month], user_id)
 
-    if (current_user.admin?)
-      @users = User.all
-    else
-      @users = [current_user]  
-    end
+    load_users
 
     respond_to do |format|
       format.html
@@ -20,6 +16,14 @@ class UserActivitiesController < ApplicationController
         end
         render :json => view_model 
       end
+    end
+  end
+
+  def load_users
+    if (current_user.admin?)
+      @users = User.all
+    else
+      @users = [current_user]  
     end
   end
 
@@ -66,42 +70,11 @@ class UserActivitiesController < ApplicationController
   end
 
   def report_2
-    from_date = Date.new(params[:year].to_i, params[:month].to_i, 1)
-    to_date = from_date + 1.month
-    user_id = params[:user]
-
-    activities = ActiveRecord::Base.connection.select_all("
-      select date, user_activity_type_id, sum(hours) as hours
-      from user_activities
-      where date >= '#{from_date.strftime('%Y-%m-%d')}' and date <= '#{to_date.strftime('%Y-%m-%d')}'
-      and user_id = #{user_id}
-      group by date, user_activity_type_id
-      order by date")
-
-    @formatted_activities = []
-    (from_date..to_date).each do |d|
-      r = ReportRow.new(d)
-      @formatted_activities << r
-      activities_of_the_day = activities.select {|f| f['date'] == d.to_s}
-      activities_of_the_day.each do |a|
-        if a['user_activity_type_id'].to_s == UserActivityType.working_id.to_s
-          r.working_hours = a['hours']
-        else
-          r.holiday_hours = a['hours']
-        end
-      end
-    end
-    @month = from_date.strftime("%B")
-    @user_name = User.find(user_id).name
+    @formatted_activities = ActivityReport.report_2(params[:year].to_i, params[:month].to_i, params[:user])
+    @month = Date.new(params[:year].to_i, params[:month].to_i, 1).strftime("%B")
+    @user_name = User.find(params[:user]).name
     respond_to do |format|
       format.xls 
-    end
-  end
-
-  class ReportRow
-    attr_accessor :date, :working_hours, :holiday_hours
-    def initialize(date)
-      @date = date    
     end
   end
 
@@ -142,14 +115,20 @@ class UserActivitiesController < ApplicationController
     activity.date = DateTime.parse(params[:date])
     activity.hours = params[:hours].to_f
     activity.description = params[:description]
+    activity.user = current_user
+
     user_activity_type_id = params[:user_activity_type_id] || UserActivityType.working_id
     activity.user_activity_type = UserActivityType.find(user_activity_type_id)
     if activity.user_activity_type.working?
-      job_order = JobOrder.find(params[:job_order_id])
-      activity.job_order_activity = job_order.activities.select{|a| a.id = params[:job_order_activity_id]}[0]
+      activity.job_order_activity = get_job_order(params[:job_order_id])
     end
-    activity.user = current_user
+    
     activity.save
+  end
+
+  def get_job_order (job_order_id)
+    job_order = JobOrder.find(job_order_id)
+    job_order.activities.select{|a| a.id == params[:job_order_activity_id]}.first
   end
 
 end
