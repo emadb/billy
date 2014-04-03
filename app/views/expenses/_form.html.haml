@@ -1,0 +1,19 @@
+= form_for @expense, {:html => {:role => "form"}} do |f|
+  = f.hidden_field :user_activity_id
+  .row
+    .col-lg-10
+      .form-group
+        = f.label :description
+        = f.text_field :description, :class => 'form-control'
+      .form-group
+        = f.label :date
+        = f.text_field :date, :class => 'isdate form-control', :value => @expense.date
+      .form-group
+        = f.label :amount
+        = f.text_field :amount, :class => 'form-control', :value => @expense.amount
+      .form-group
+        = f.label :notes
+        = f.text_area :notes, :cols => 20, :rows => 3, :class => 'form-control'
+      .form-group
+        = f.label :type
+        = select_tag "expense[expense_type_id]", options_from_collection_for_select(@types, "id", "description", @expense.expense_type), :class => 'form-control'

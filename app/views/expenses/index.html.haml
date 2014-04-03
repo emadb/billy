@@ -1,0 +1,89 @@
+.row
+  .col-lg-12
+    %h2 
+      = t('views.expenses.expense_list')
+
+.row
+  .col-lg-9   
+    %form.well.form-inline{:method => 'GET', :action => '/expenses'}
+      .form-group
+        %label 
+          = t('views.expenses.month')
+        = select_month @month, {:include_blank => true}, {:class => 'form-control'}
+      .form-group
+        %label 
+          = t('views.expenses.year')
+        = select_year @year, {}, {:class => 'form-control'}
+      %button.btn.btn-info.pull-right{:type => 'submit', } 
+        = t('views.expenses.apply')  
+
+
+    %table.table.table-striped.table-bordered
+      %thead
+        %tr
+          %th 
+            = t('views.expenses.id')
+          %th
+            = t('views.expenses.date')
+          %th 
+            = t('views.expenses.description')
+          %th.right
+            = t('views.expenses.amount')
+          %th 
+            = t('views.expenses.expense_type.description')
+          %th 
+      %tbody
+        -@expenses.each do |i|
+          %tr
+            %td 
+              = i.id
+            %td
+              = i.date.strftime('%d-%m-%Y') unless i.date.nil?
+            %td
+              = i.description
+            %td
+              %span.pull-right
+            %td 
+              = i.expense_type_description
+            %td
+              .btn-group
+                %button.btn.btn-default.dropdown-toggle{"data-toggle" => "dropdown"}
+                  = t('views.expenses.actions') 
+                  %span.caret
+                %ul.dropdown-menu{:role => "menu"}
+                  %li
+                    %a{:href => edit_invoice_path(i)}
+                      %i.icon-edit
+                      = t('views.expenses.edit')
+                  %li
+                    %a{:href => invoice_path(i)} 
+                      %i.icon-file-alt
+                      = t('views.expenses.show')
+                  %li
+                    %a{:href => invoice_clone_path(i)} 
+                      %i.icon-copy
+                      = t('views.expenses.clone')
+                  %li
+                    %a{:href => invoice_drop_box_path(i), :class=> 'drop-box'} 
+                      %i.icon-dropbox
+                      = t('views.expenses.send_to_dropbox')
+                  %li.divider
+                  %li
+                    %a{:href=> invoice_path(i), :class => 'delete' } 
+                      %i.icon-trash.text-error
+                      = t('views.expenses.delete')
+                            
+  .col-lg-3
+    .row.sidebar-row
+      = link_to t('views.expenses.new_invoice'), new_invoice_path , {:class => 'btn btn-info btn-block btn-lg'}
+    .row.sidebar-row
+      .panel.panel-default
+        .panel-heading
+          %h3.panel-title.text-center 
+            = t('views.expenses.summary') + " #{AppSettings.fiscal_year}"
+        .panel-body
+          %ul.info-panel
+            %li.header 
+              = t('views.expenses.taxable_income')
+            
+          

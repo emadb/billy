@@ -20,7 +20,8 @@ Scrooge::Application.routes.draw do
   resources :activities_tracker do
     get 'today', :on => :collection, :action => 'today'
   end
-  resources :test
+
+  resources :expenses
 
   resources :drop_box
   resources :invoices do

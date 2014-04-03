@@ -24,3 +24,8 @@ Setting.create(key: 'footer', value: '<div>put your footer here</div>')
 UserActivityType.create(description: 'lavorativa', isWorking: true)
 UserActivityType.create(description: 'ferie', isWorking: false)
 UserActivityType.create(description: 'malattia', isWorking: false)
+
+ExpenseType.create(description: 'rimborso km')
+ExpenseType.create(description: 'alloggio')
+ExpenseType.create(description: 'treno')
+ExpenseType.create(description: 'vitto')

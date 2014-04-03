@@ -13,7 +13,7 @@ gem 'uglifier', '>= 1.0.3'
 gem 'protected_attributes'
 
 group :development, :test do
-  gem 'meta_request', '0.2.0'
+  gem 'meta_request'
   gem 'sqlite3'
   gem "rspec-rails", "~> 2.0"
 end
