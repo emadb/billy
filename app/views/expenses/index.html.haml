@@ -14,6 +14,10 @@
         %label 
           = t('views.expenses.year')
         = select_year @year, {}, {:class => 'form-control'}
+      .form-group
+        %label
+          = t('views.expenses.user')
+        = select_tag 'user', options_from_collection_for_select(@users, "id", "email"), :class => 'form-control'
       %button.btn.btn-info.pull-right{:type => 'submit', } 
         = t('views.expenses.apply')  
 

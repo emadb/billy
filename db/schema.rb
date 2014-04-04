@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140403122328) do
+ActiveRecord::Schema.define(version: 20140404120233) do
 
   create_table "activity_trackers", force: true do |t|
     t.integer  "user_id"
@@ -70,6 +70,7 @@ ActiveRecord::Schema.define(version: 20140403122328) do
     t.integer  "expense_type_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
   end
 
   create_table "inbound_invoices", force: true do |t|

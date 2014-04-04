@@ -1,7 +1,17 @@
 class ExpensesController < ApplicationController
   def index
-    @expenses = Expense.all
+    @expenses = Expense.where('user_id = ?', current_user.id)
+    @users = load_users
   end
+
+  def load_users
+    if (current_user.admin?)
+      User.all
+    else
+      [current_user]  
+    end
+  end
+
 
   def new
     @expense = Expense.new
@@ -13,6 +23,7 @@ class ExpensesController < ApplicationController
 
   def create
     @expense = Expense.new(params[:expense])
+    @expense.user = current_user
     @expense.expense_type = ExpenseType.find(params[:expense][:expense_type_id])
     if !params[:expense][:user_activity_id].nil?
       @expense.user_activity = UserActivity.find(params[:expense][:user_activity_id])
