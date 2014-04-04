@@ -62,7 +62,7 @@
                       = t('views.expenses.edit')
                   %li.divider
                   %li
-                    %a{:href=> expense_path(i), :class => 'delete' } 
+                    %a{:href=> expense_path(i), :class => 'delete', "data-method"=>"delete" } 
                       %i.icon-trash.text-error
                       = t('views.expenses.delete')
                             

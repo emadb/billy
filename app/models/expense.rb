@@ -10,7 +10,7 @@ class Expense < ActiveRecord::Base
 
   def self.get(year, month, selected_user_id)
     if (year.nil? or month.nil?)
-      filter_date  = Date.today
+      filter_date  = Date.new(DateTime.now.year, DateTime.now.month, 1)
     else
       filter_date= Date.new(year.to_i, month.to_i, 1)
     end

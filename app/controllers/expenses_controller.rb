@@ -66,5 +66,10 @@ class ExpensesController < ApplicationController
     @expense.save
     redirect_to expenses_path
   end
+
+  def destroy
+    Expense.find(params[:id]).destroy
+     redirect_to :action => 'index'
+  end
   
 end
