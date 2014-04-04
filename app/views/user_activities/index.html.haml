@@ -62,6 +62,10 @@
                     %a{:href => "#", "ng-click"=> "delete(a.id)"}
                       %i.icon-trash.icon-large.text-error
                       = t('views.activities.delete')
+                  %li
+                    %a{:href => "/expenses/new?user_activity_id={{a.id}}", "data-toggle"=>"modal"}
+                      %i.icon-euro.icon-large
+                      = t('views.activities.expenses')
            
               
   .col-lg-3.sidebar-nav{'ng-controller' => 'RightPanelCtrl'}

@@ -39,6 +39,7 @@ class ExpensesController < ApplicationController
     @types = ExpenseType.all
     if !params[:user_activity_id].nil?
       @expense.user_activity = UserActivity.find(params[:user_activity_id])
+      @expense.date = @expense.user_activity.date
     end
   end
 
