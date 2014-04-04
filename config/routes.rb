@@ -21,7 +21,9 @@ Scrooge::Application.routes.draw do
     get 'today', :on => :collection, :action => 'today'
   end
 
-  resources :expenses
+  resources :expenses do
+    post 'filter', :on => :collection, :action => 'filter'
+  end
 
   resources :drop_box
   resources :invoices do

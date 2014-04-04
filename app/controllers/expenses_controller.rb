@@ -1,7 +1,28 @@
 class ExpensesController < ApplicationController
+  skip_before_filter  :verify_authenticity_token
+
   def index
-    @expenses = Expense.where('user_id = ?', current_user.id)
+    @user_id = current_user.id
+    @filter_date = DateTime.now    
     @users = load_users
+    @expenses = Expense.get(nil, nil, current_user.id)
+  end
+
+  def filter
+    @user_id = params[:user] || current_user.id
+    @filter_date = parse_filter(params[:date])
+    @users = load_users
+    @expenses = Expense.get(params[:date][:year], params[:date][:month], @user_id)    
+
+    render :template => 'expenses/index'
+  end
+
+  def parse_filter (params)
+    if (params[:year].nil? or params[:month].nil?)
+      Date.today
+    else
+      Date.new(params[:year].to_i, params[:month].to_i, 1)
+    end
   end
 
   def load_users

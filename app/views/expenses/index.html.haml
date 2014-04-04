@@ -5,19 +5,19 @@
 
 .row
   .col-lg-9   
-    %form.well.form-inline{:method => 'GET', :action => '/expenses'}
+    %form.well.form-inline{:method => 'POST', :action => '/expenses/filter'}
       .form-group
         %label 
           = t('views.expenses.month')
-        = select_month @month, {:include_blank => true}, {:class => 'form-control'}
+        = select_month @filter_date, {:include_blank => true}, {:class => 'form-control'}
       .form-group
         %label 
           = t('views.expenses.year')
-        = select_year @year, {}, {:class => 'form-control'}
+        = select_year @filter_date, {}, {:class => 'form-control'}
       .form-group
         %label
           = t('views.expenses.user')
-        = select_tag 'user', options_from_collection_for_select(@users, "id", "email"), :class => 'form-control'
+        = select_tag 'user', options_from_collection_for_select(@users, "id", "email", @user_id), :class => 'form-control'
       %button.btn.btn-info.pull-right{:type => 'submit', } 
         = t('views.expenses.apply')  
 
