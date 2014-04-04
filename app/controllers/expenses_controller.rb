@@ -6,8 +6,8 @@ class ExpensesController < ApplicationController
   def new
     @expense = Expense.new
     @types = ExpenseType.all
-    if !params[:activity_id].nil?
-      @expense.user_activity = UserActivity.find(params[:activity_id])
+    if !params[:user_activity_id].nil?
+      @expense.user_activity = UserActivity.find(params[:user_activity_id])
     end
   end
 
@@ -17,6 +17,19 @@ class ExpensesController < ApplicationController
     if !params[:expense][:user_activity_id].nil?
       @expense.user_activity = UserActivity.find(params[:expense][:user_activity_id])
     end
+    @expense.save
+    redirect_to expenses_path
+  end
+
+  def edit
+    @expense = Expense.find(params[:id])
+    @types = ExpenseType.all
+  end
+
+  def update
+    @expense = Expense.find(params[:id])
+    @expense.update(params[:expense])
+    @expense.expense_type = ExpenseType.find(params[:expense][:expense_type_id])
     @expense.save
     redirect_to expenses_path
   end

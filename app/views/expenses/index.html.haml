@@ -43,6 +43,7 @@
               = i.description
             %td
               %span.pull-right
+                = number_to_currency(i.amount)
             %td 
               = i.expense_type_description
             %td
@@ -52,30 +53,16 @@
                   %span.caret
                 %ul.dropdown-menu{:role => "menu"}
                   %li
-                    %a{:href => edit_invoice_path(i)}
+                    %a{:href => edit_expense_path(i)}
                       %i.icon-edit
                       = t('views.expenses.edit')
-                  %li
-                    %a{:href => invoice_path(i)} 
-                      %i.icon-file-alt
-                      = t('views.expenses.show')
-                  %li
-                    %a{:href => invoice_clone_path(i)} 
-                      %i.icon-copy
-                      = t('views.expenses.clone')
-                  %li
-                    %a{:href => invoice_drop_box_path(i), :class=> 'drop-box'} 
-                      %i.icon-dropbox
-                      = t('views.expenses.send_to_dropbox')
                   %li.divider
                   %li
-                    %a{:href=> invoice_path(i), :class => 'delete' } 
+                    %a{:href=> expense_path(i), :class => 'delete' } 
                       %i.icon-trash.text-error
                       = t('views.expenses.delete')
                             
-  .col-lg-3
-    .row.sidebar-row
-      = link_to t('views.expenses.new_invoice'), new_invoice_path , {:class => 'btn btn-info btn-block btn-lg'}
+  .col-lg-3 
     .row.sidebar-row
       .panel.panel-default
         .panel-heading
@@ -84,6 +71,6 @@
         .panel-body
           %ul.info-panel
             %li.header 
-              = t('views.expenses.taxable_income')
+              = t('views.expenses.amount')
             
           

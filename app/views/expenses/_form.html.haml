@@ -15,5 +15,5 @@
         = f.label :notes
         = f.text_area :notes, :cols => 20, :rows => 3, :class => 'form-control'
       .form-group
-        = f.label :type
-        = select_tag "expense[expense_type_id]", options_from_collection_for_select(@types, "id", "description", @expense.expense_type), :class => 'form-control'
+        = f.label :expense_type_id
+        = f.select :expense_type_id, options_for_select(ExpenseType.all.collect {|p| [ p.description, p.id ] }, @expense.expense_type_id), {}, {:class => 'form-control'}
