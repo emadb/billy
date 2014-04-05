@@ -29,6 +29,8 @@
             = t('views.expenses.id')
           %th
             = t('views.expenses.date')
+          %th
+            = t('views.expenses.activity')
           %th 
             = t('views.expenses.description')
           %th.right
@@ -43,6 +45,11 @@
               = i.id
             %td
               = i.date.strftime('%d-%m-%Y') unless i.date.nil?
+            %td
+              = i.user_activity.job_order_activity.job_order.code
+              %br
+              %small
+                = i.user_activity.job_order_activity.description
             %td
               = i.description
             %td
