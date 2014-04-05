@@ -24,6 +24,7 @@
       %table.table.table-bordered
         %thead
           %tr
+            %th
             %th 
               = t('views.activities.date')
             %th
@@ -34,9 +35,13 @@
               = t('views.activities.activity')
             %th
               = t('views.activities.notes')
+                         
             %th
         %tbody
+
           %tr{'ng-repeat' => 'a in activities', 'row-color' => '{{$index}}', 'ng-style' => 'getRowStyle(a)'}
+            %td{:class => 'expenses-column'}
+              %i.icon-money{'ng-show' => 'a.expenses'}
             %td
               %span
                 {{a.date | date:'dd-MM-yyyy'}}
@@ -47,7 +52,6 @@
             %td {{a.jobOrder}}
             %td {{a.activity}}
             %td {{a.description}}
-           
             %td
               .btn-group
                 %button.btn.btn-default.dropdown-toggle{"data-toggle" => "dropdown"}
@@ -64,7 +68,7 @@
                       = t('views.activities.delete')
                   %li
                     %a{:href => "/expenses/new?user_activity_id={{a.id}}", "data-toggle"=>"modal"}
-                      %i.icon-euro.icon-large
+                      %i.icon-money.icon-large
                       = t('views.activities.expenses')
            
               

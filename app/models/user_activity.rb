@@ -2,6 +2,7 @@ class UserActivity < ActiveRecord::Base
   belongs_to :user
   belongs_to :job_order_activity
   belongs_to :user_activity_type
+  has_many :expenses
   attr_accessible :date, :description, :hours
 
 
@@ -14,6 +15,7 @@ class UserActivity < ActiveRecord::Base
     filter_date_next = filter_date + 1.month
 
     query = UserActivity
+      .includes(:expenses)
       .where('date >= ? and date <= ? and user_id = ?', filter_date, filter_date_next, selected_user_id)
       .order('date')
   end

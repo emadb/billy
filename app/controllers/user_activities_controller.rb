@@ -95,6 +95,7 @@ class UserActivitiesController < ApplicationController
       :hours => activity.hours,
       :description => activity.description,
       :user_activity_type_id => activity.user_activity_type.id,
+      :expenses => activity.expenses.count > 0
     }
     if activity.user_activity_type.working?
       result[:jobOrder] = activity.job_order_activity.job_order.code
