@@ -55,6 +55,7 @@ To obtain the keys for DROPBOX you can read this http://ema.codiceplastico.com/b
 - 11-10-2013 Drop 4 (new design based on Boostrap 3.0)
 - 15-11-2013 Drop 5 (added settings and year-month filter in invoice view)
 - 28-12-2013 Drop 6 (Multilanguage support throught i18n (Italian, English))
+- 18-04-2014 Drop 7 (Expenses module. Track activity expenses)
 
 ### Screenshots
 ![img](doc/images/img1.png)
@@ -79,7 +80,3 @@ To obtain the keys for DROPBOX you can read this http://ema.codiceplastico.com/b
 ***
 ![img](doc/images/img11.png)
 ***
-
-
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/emadb/scrooge/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
-
