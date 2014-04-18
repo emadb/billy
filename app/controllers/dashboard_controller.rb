@@ -52,6 +52,7 @@ class DashboardController < ApplicationController
 
   def job_orders
     @job_orders = JobOrder.where(:archived => false).order('code')
+    @job_orders_chart = @job_orders.map { |c| c.percent  }.join(',')
     render :layout=> false
   end
 
