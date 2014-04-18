@@ -17,8 +17,14 @@ class Expense < ActiveRecord::Base
 
     filter_date_next = filter_date + 1.month
 
-    query = Expense
+    Expense
       .where('date >= ? and date <= ? and user_id = ?', filter_date, filter_date_next, selected_user_id)
+      .order('date')
+  end
+
+  def self.get_by_activity(user_activity_id, user_id)
+    Expense
+      .where('user_activity_id = ? and user_id = ?', user_activity_id, user_id)
       .order('date')
   end
 
