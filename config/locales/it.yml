@@ -17,6 +17,7 @@ it:
     activities: Attività
 
   views: 
+    activity: Attività
     top_bar:
       dashboard: Dashboard
       invoices: Fatture
@@ -26,6 +27,7 @@ it:
       tables: Tabelle
       activities: Attività
       tracker: Tracker
+      expenses: Spese
       logout: Logout
     dashboard:
       title: Dashboard
@@ -162,7 +164,23 @@ it:
       new_activity: Nuova attività
       job_order: Commessa
       cancel: Annulla
-
+    expenses:
+      edit_expense: Modifica spesa
+      new_expense: Nuova spesa
+      expense_list: Lista spese
+      month: Mese
+      year: Anno
+      user: Utente
+      apply: Applica
+      date: Data
+      description: Descrizione
+      amount: Importo
+      actions: Azioni
+      delete: Elimina
+      summary: Sommario
+      save: Salva
+      expense_type:
+        description: Tipo spesa
   date:
     abbr_day_names:
     - Dom
@@ -377,9 +395,21 @@ it:
       job_order:
         one: Commessa
         other: Commesse
+      expense:
+        one: Spesa
+        other: Spese
+      expense:
+        one: Attività
+        other: Attività
     attributes:
       invoice:
         has_tax: Tasse
         number: Numero
       inbound_invoice:
         number: Numero
+      expense:
+        description: Descrizione
+        date: Data
+        amount: Importo
+        notes: Note
+        expense_type_id: Tipo spesa
