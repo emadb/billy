@@ -1,14 +1,16 @@
-.well
-  %h4
-    = t('views.dashboard.quarters.invoiced')
-  %ul.nav.nav-tabs.dashboard-tabs
-    %li.active
-      %a{:href=>"#q-num", "data-toggle"=>"tab"}
-        Numbers
-    %li
-      %a{:href=>"#q-chart", "data-toggle"=>"tab"}
-        Chart
-      
+.panel.panel-default
+  .panel-heading.dashboard-panel
+    %h3.panel-title
+      = t('views.dashboard.quarters.invoiced')
+      .pull-right
+        %ul.nav.nav-tabs.dashboard-tabs
+          %li.active
+            %a{:href=>"#q-num", "data-toggle"=>"tab"}
+              %i.icon-table
+          %li
+            %a{:href=>"#q-chart", "data-toggle"=>"tab"}
+              %i.icon-bar-chart
+  .panel-body
     #myTabContent.tab-content
       #q-num.tab-pane.fade.in.active
         %table.table

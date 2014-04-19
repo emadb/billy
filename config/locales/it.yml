@@ -32,7 +32,7 @@ it:
     dashboard:
       title: Dashboard
       invoiced:
-        title_in: In
+        title_in: Fatturato
         invoiced: Fatturato
         vat: IVA
         total: Totale
