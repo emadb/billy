@@ -37,6 +37,7 @@ class DashboardController < ApplicationController
         from invoices join customers on invoices.customer_id = customers.id 
         where invoices.date between #{connection.quote(first_january)} and #{connection.quote(thirtyfirst_december)}
         group by customers.name")
+    @per_customer_chart = @perCustomer.map { |c| c['taxable_income']  }
     render :layout=> false
   end
 

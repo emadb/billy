@@ -22,4 +22,4 @@
                 %span.pull-right
                   = number_to_currency c['taxable_income']
       #cust-chart.tab-pane.fade
-        %img{:src=>"//charts.brace.io/bar.svg?_show_legend=false&_height=200px&_width=500px&amount=#{@perCustomer.map {|p| p['taxable_income']}}"}
+        %img{:src=>"//charts.brace.io/bar.svg?_show_legend=false&_height=200px&_width=500px&amount=#{@per_customer_chart}"}
