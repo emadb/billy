@@ -25,6 +25,10 @@ $(function(){
         tr.css('background-color','#FFFFFF');
     })
   });
+  $('.dashboard-tabs a').click(function (e) {
+    e.preventDefault()
+    $(this).tab('show')
+  });
 })
 
 function isNumber(n) {

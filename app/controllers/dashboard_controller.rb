@@ -25,6 +25,7 @@ class DashboardController < ApplicationController
       @quarters.q3  = @quarters.q3 + i.taxable_income if [7,8,9].include?(i.date.month)
       @quarters.q4  = @quarters.q4 + i.taxable_income if [10, 11, 12].include?(i.date.month)
     end
+    @quarter_chart = "#{@quarters.q1},#{@quarters.q2},#{@quarters.q3},#{@quarters.q4}"
     render :layout=> false
   end
 
