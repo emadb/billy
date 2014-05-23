@@ -98,11 +98,7 @@ class UserActivitiesController < ApplicationController
       :expenses => activity.expenses.count > 0
     }
     if activity.user_activity_type.working?
-      if activity.job_order_activity.nil?
-        logger.info '*****'
-        logger.info activity.id
-        logger.info '*****'
-      else
+      if !activity.job_order_activity.nil? # this shouldn't happens...but it do.
         result[:jobOrder] = activity.job_order_activity.job_order.code
         result[:activity] = activity.job_order_activity.description 
       end
