@@ -1,16 +1,49 @@
+:javascript
+  $(document).ready(function () {
+
+      $("#btn-blog-next").click(function () {
+        $('#blogCarousel').carousel('next')
+      });
+       $("#btn-blog-prev").click(function () {
+        $('#blogCarousel').carousel('prev')
+      });
+
+       $("#btn-client-next").click(function () {
+        $('#clientCarousel').carousel('next')
+      });
+       $("#btn-client-prev").click(function () {
+        $('#clientCarousel').carousel('prev')
+      });
+      
+  });
+
+   $(window).load(function(){
+
+      $('.flexslider').flexslider({
+          animation: "slide",
+          slideshow: true,
+          start: function(slider){
+            $('body').removeClass('loading');
+          }
+      });  
+  });
+
+
+
+
 #dashboard.row
-  .col-lg-12
-    %h1
-      = "Dashboard"
+  .col-sm-3.col-lg-3
+    .dash-unit
+      %dtitle User Profile
+      %hr
+      .thumbnail
+        %img.img-circle{:src=>"assets/img/face80x80.jpg", :alt=>"Marcel Newman"} 
   
-  .col-lg-12{'ng-controller' => 'TrackerCtrl'}
-    .row
-      .col-lg-6#invoices
-      .col-lg-6#quarters
-    .row
-      .col-lg-6#inbound_invoices
-      .col-lg-6#per_customer
-    .row
-      .col-lg-12#activities
-    .row
-      .col-lg-12#job_orders
+      %h1 Marcel Newman
+      %h3 Madrid, Spain
+      %br
+        .info-user
+          %span.li_user fs1
+          %span.li_settings fs1
+          %span.li_mail fs1
+          %span.li_key fs1
