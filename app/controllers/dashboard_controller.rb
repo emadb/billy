@@ -25,6 +25,7 @@ class DashboardController < ApplicationController
       @quarters.q3  = @quarters.q3 + i.taxable_income if [7,8,9].include?(i.date.month)
       @quarters.q4  = @quarters.q4 + i.taxable_income if [10, 11, 12].include?(i.date.month)
     end
+    @quarter_chart = "#{@quarters.q1},#{@quarters.q2},#{@quarters.q3},#{@quarters.q4}"
     render :layout=> false
   end
 
@@ -36,6 +37,7 @@ class DashboardController < ApplicationController
         from invoices join customers on invoices.customer_id = customers.id 
         where invoices.date between #{connection.quote(first_january)} and #{connection.quote(thirtyfirst_december)}
         group by customers.name")
+    @per_customer_chart = @perCustomer.map { |c| c['taxable_income']  }.join(',')
     render :layout=> false
   end
 
@@ -50,6 +52,7 @@ class DashboardController < ApplicationController
 
   def job_orders
     @job_orders = JobOrder.where(:archived => false).order('code')
+    @job_orders_chart = @job_orders.map { |c| c.percent  }.join(',')
     render :layout=> false
   end
 

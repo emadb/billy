@@ -66,10 +66,15 @@
                     %a{:href => "#", "ng-click"=> "delete(a.id)"}
                       %i.icon-trash.icon-large.text-error
                       = t('views.activities.delete')
+                  %li.divider
                   %li
-                    %a{:href => "/expenses/new?user_activity_id={{a.id}}", "data-toggle"=>"modal"}
+                    %a{:href => "/expenses/new?user_activity_id={{a.id}}"}
                       %i.icon-money.icon-large
-                      = t('views.activities.expenses')
+                      = t('views.activities.add_expense')
+                  %li
+                    %a{:href => "/expenses?user_activity_id={{a.id}}"}
+                      %i.icon-euro.icon-large
+                      = t('views.activities.expense_list')
            
               
   .col-lg-3.sidebar-nav{'ng-controller' => 'RightPanelCtrl'}

@@ -2,6 +2,9 @@
   .col-lg-12
     %h2 
       = t('views.expenses.expense_list')
+      %small
+        = @subtitle
+
 
 .row
   .col-lg-9   
@@ -66,7 +69,7 @@
                   %li
                     %a{:href => edit_expense_path(i)}
                       %i.icon-edit
-                      = t('views.expenses.edit')
+                      = t('views.expenses.edit_expense')
                   %li.divider
                   %li
                     %a{:href=> expense_path(i), :class => 'delete', "data-method"=>"delete" } 
@@ -78,7 +81,7 @@
       .panel.panel-default
         .panel-heading
           %h3.panel-title.text-center 
-            = t('views.expenses.summary') + " #{@filter_date.strftime("%B")}"
+            = t('views.expenses.summary') + " #{@subtitle}"
         .panel-body
           %ul.info-panel
             %li.header 
