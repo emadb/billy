@@ -1,4 +1,4 @@
-= form_for @expense, {:html => {:role => "form"}} do |f|
+= form_for @expense, {:html => {:role => "form", :multipart => true}} do |f|
   = f.hidden_field :user_activity_id
   .row
     .col-lg-10
@@ -17,3 +17,8 @@
       .form-group
         = f.label :expense_type_id
         = f.select :expense_type_id, options_for_select(ExpenseType.all.collect {|p| [ p.description, p.id ] }, @expense.expense_type_id), {}, {:class => 'form-control'}
+      .form-group
+        = f.label :attachment
+        = f.file_field :attachment, :class => 'form-control'
+        = image_tag @expense.attachment.url
+

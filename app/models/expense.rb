@@ -2,7 +2,9 @@ class Expense < ActiveRecord::Base
   belongs_to :expense_type
   belongs_to :user_activity
   belongs_to :user
-  attr_accessible :description, :date, :amount, :notes, :activity, :user
+  has_attached_file :attachment
+  validates_attachment_content_type :attachment, :content_type => /\Aimage\/.*\Z/
+  attr_accessible :description, :date, :amount, :notes, :activity, :user, :attachment, :user_activity_id, :expense_type_id
 
   def expense_type_description
     expense_type.description unless expense_type.nil?

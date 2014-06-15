@@ -27,4 +27,12 @@ Scrooge::Application.configure do
   # number of complex assets.
   config.assets.debug = true
 
+  config.paperclip_defaults = {
+    :storage => :s3,
+    :s3_credentials => {
+      :bucket => 'scroogedev',
+      :access_key_id => 'AKIAJBUCNIVFE2RDZPOQ',
+      :secret_access_key => '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'
+    }
+  }
 end
