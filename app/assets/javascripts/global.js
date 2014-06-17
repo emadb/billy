@@ -29,6 +29,7 @@ $(function(){
     e.preventDefault()
     $(this).tab('show')
   });
+  $('input[type=file]').bootstrapFileInput();
 })
 
 function isNumber(n) {

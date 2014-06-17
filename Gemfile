@@ -8,6 +8,9 @@ gem 'wicked_pdf'
 gem 'simple_form'
 gem 'dropbox-api'
 
+gem 'paperclip'
+gem 'aws-sdk'
+
 gem 'sass-rails'
 gem 'uglifier', '>= 1.0.3'
 gem 'protected_attributes'

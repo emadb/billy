@@ -2,7 +2,23 @@ class Expense < ActiveRecord::Base
   belongs_to :expense_type
   belongs_to :user_activity
   belongs_to :user
-  attr_accessible :description, :date, :amount, :notes, :activity, :user
+  has_attached_file :attachment, :styles => {
+      :thumb => "100x100#",
+      :small  => "150x150>",
+      :medium => "200x200" },
+      :default_url => "/missing.png",
+      s3_credentials: lambda { |attachment| attachment.instance.s3_keys }
+  validates_attachment_content_type :attachment
+  attr_accessible :description, :date, :amount, :notes, :activity, :user, :attachment, :user_activity_id, :expense_type_id
+
+
+  def s3_keys
+  {
+    bucket: AppSettings.s3_bucket,
+    access_key_id: AppSettings.s3_access_key_id, 
+    secret_access_key: AppSettings.s3_secret_access_key 
+  }
+  end
 
   def expense_type_description
     expense_type.description unless expense_type.nil?

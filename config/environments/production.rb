@@ -80,5 +80,9 @@ Scrooge::Application.configure do
   
   config.eager_load = false
   config.active_record.migration_error = :page_load
+
+  config.paperclip_defaults = {
+    :storage => :s3
+  }
   
 end
