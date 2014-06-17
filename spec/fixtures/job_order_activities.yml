@@ -1,0 +1,30 @@
+job_order_activity_1:
+    id: 1
+    job_order_id: 1
+    description: this is the test 1
+    estimated_hours: 10
+job_order_activity_2:
+    id: 2
+    job_order_id: 1
+    description: this is the test 2
+    estimated_hours: 20
+
+job_order_activity_3:
+    id: 3
+    job_order_id: 2
+    description: this is the test 3
+    estimated_hours: 10
+    active: false
+job_order_activity_4:
+    id: 4
+    job_order_id: 2
+    description: this is the test 4
+    estimated_hours: 20
+    active: true
+
+job_order_activity_3:
+    id: 5
+    job_order_id: 3
+    description: this is the test 3
+    estimated_hours: 10
+    active: false

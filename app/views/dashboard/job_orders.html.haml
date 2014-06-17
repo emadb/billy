@@ -1,0 +1,32 @@
+.panel.panel-default
+  .panel-heading.dashboard-panel
+    %h3.panel-title
+      = t('views.dashboard.job_orders_status.progress')
+      .pull-right
+        %ul.nav.nav-tabs.dashboard-tabs
+          %li.active
+            %a{:href=>"#act-num", "data-toggle"=>"tab"}
+              %i.icon-table
+          %li
+            %a{:href=>"#act-chart", "data-toggle"=>"tab"}
+              %i.icon-bar-chart
+  .panel-body
+    .tab-content
+      #act-num.tab-pane.fade.in.active
+        %table.table
+        
+          - @job_orders.each do |j|
+            %tr
+              %td
+                = j.code
+              %td
+                %span.pull-right
+                  = "#{j.total_executed_hours}/#{j.total_estimated_hours}"
+                  .text-muted
+                    %span.pull-right
+                      = "#{j.percent}%"
+              %td{:style => "width:400px"}
+                .progress
+                  .progress-bar{:style => "width:#{j.percent}%", :class => job_order_status_helper(j)}
+      #act-chart.tab-pane.fade
+        %img{:src=>"//charts.brace.io/bar.svg?_show_legend=false&_height=200px&_width=500px&amount=#{@job_orders_chart}"}

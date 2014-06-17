@@ -1,0 +1,92 @@
+.row
+  .col-lg-12
+    %h2 
+      = t('views.expenses.expense_list')
+      %small
+        = @subtitle
+
+
+.row
+  .col-lg-9   
+    %form.well.form-inline{:method => 'POST', :action => '/expenses/filter'}
+      .form-group
+        %label 
+          = t('views.expenses.month')
+        = select_month @filter_date, {:include_blank => true}, {:class => 'form-control'}
+      .form-group
+        %label 
+          = t('views.expenses.year')
+        = select_year @filter_date, {}, {:class => 'form-control'}
+      .form-group
+        %label
+          = t('views.expenses.user')
+        = select_tag 'user', options_from_collection_for_select(@users, "id", "email", @user_id), :class => 'form-control'
+      %button.btn.btn-info.pull-right{:type => 'submit', } 
+        = t('views.expenses.apply')  
+
+
+    %table.table.table-striped.table-bordered
+      %thead
+        %tr
+          %th 
+            = t('views.expenses.id')
+          %th
+            = t('views.expenses.date')
+          %th
+            = t('views.expenses.activity')
+          %th 
+            = t('views.expenses.description')
+          %th.right
+            = t('views.expenses.amount')
+          %th 
+            = t('views.expenses.expense_type.description')
+          %th 
+      %tbody
+        -@expenses.each do |i|
+          %tr
+            %td 
+              = i.id
+            %td
+              = i.date.strftime('%d-%m-%Y') unless i.date.nil?
+            %td
+              = i.user_activity.job_order_activity.job_order.code
+              %br
+              %small
+                = i.user_activity.job_order_activity.description
+            %td
+              = i.description
+            %td
+              %span.pull-right
+                = number_to_currency(i.amount)
+            %td 
+              = i.expense_type_description
+            %td
+              .btn-group
+                %button.btn.btn-default.dropdown-toggle{"data-toggle" => "dropdown"}
+                  = t('views.expenses.actions') 
+                  %span.caret
+                %ul.dropdown-menu{:role => "menu"}
+                  %li
+                    %a{:href => edit_expense_path(i)}
+                      %i.icon-edit
+                      = t('views.expenses.edit_expense')
+                  %li.divider
+                  %li
+                    %a{:href=> expense_path(i), :class => 'delete', "data-method"=>"delete" } 
+                      %i.icon-trash.text-error
+                      = t('views.expenses.delete')
+                            
+  .col-lg-3 
+    .row.sidebar-row
+      .panel.panel-default
+        .panel-heading
+          %h3.panel-title.text-center 
+            = t('views.expenses.summary') + " #{@subtitle}"
+        .panel-body
+          %ul.info-panel
+            %li.header 
+              = t('views.expenses.amount')
+            %li.amount
+              = number_to_currency(@expenses.sum(:amount))
+            
+          

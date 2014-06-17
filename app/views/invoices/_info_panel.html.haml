@@ -1,0 +1,32 @@
+.row.sidebar-row
+  %a.btn.btn-info.btn-block.btn-lg#save-form{:href => ''}
+    Salva
+.row.sidebar-row
+  .panel.panel-default
+    .panel-heading
+      %h3.panel-title.text-center Riepilogo
+    .panel-body
+      %ul.info-panel
+        %li.header Imponibile
+        %li.amount{:id => 'taxable-income'}
+          = number_to_currency(@totals.taxable_income)
+        %li.header IVA
+        %li.amount{:id => 'tax'}
+          = number_to_currency(@totals.tax)
+        %li.header Totale
+        %li.amount{:id => 'total'}
+          = number_to_currency(@totals.total)
+    .panel-heading
+      %h3.panel-title.text-center Stato
+    .panel-body
+      %ul.info-panel
+        %li.center
+          = status_helper(@invoice.status)
+        %li.center
+          = due_date_helper(@invoice)
+
+
+  
+
+
+ 

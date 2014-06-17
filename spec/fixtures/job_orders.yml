@@ -1,0 +1,17 @@
+job_order_1:
+    id: 1
+    code: normal
+    hourly_rate: 100
+    archived: false
+
+job_order_2:
+    id: 2
+    code: one activity is archived
+    hourly_rate: 80
+    archived: false
+
+job_order_3:
+    id: 3
+    code: overtime
+    hourly_rate: 80
+    archived: false

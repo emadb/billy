@@ -1,0 +1,29 @@
+.page-header
+  %h2 
+    = t('views.settings.title')
+  
+  
+%form{:action => '/settings/update', :method => 'POST'}
+  %input{:name =>'authenticity_token', :type=>'hidden', :value=> form_authenticity_token}
+  .row
+    .col-lg-9   
+      %table.table.table-bordered.table-striped
+        %thead
+          %tr
+            %th 
+              = t('views.settings.key')
+            %th 
+              = t('views.settings.value')
+
+        %tbody
+          - @settings.each do |setting|
+            %tr
+              %td
+                = setting.key
+              %td
+                = text_field_tag setting.key, setting.value
+    .col-lg-3
+      .row.sidebar-row
+        %button{:type => 'submit', :class => 'btn btn-info btn-block'} 
+          = t('views.settings.save')
+      

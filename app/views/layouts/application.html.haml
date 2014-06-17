@@ -1,0 +1,51 @@
+!!! 5
+%html(lang="en")
+  %head
+    %meta(charset="utf-8")
+    %meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    %title= content_for?(:title) ? yield(:title) : "Scrooge"
+    = csrf_meta_tags
+    / Le HTML5 shim, for IE6-8 support of HTML elements
+    /[if lt IE 9]
+      = javascript_include_tag "http://html5shim.googlecode.com/svn/trunk/html5.js"
+    = stylesheet_link_tag "application", :media => "all"
+    %link(href="images/apple-touch-icon.png" rel="apple-touch-icon")
+    %link(href="images/apple-touch-icon-72x72.png" rel="apple-touch-icon" sizes="72x72")
+    %link(href="images/apple-touch-icon-114x114.png" rel="apple-touch-icon" sizes="114x114")
+
+  %body{'ng-app' => 'Scrooge'}
+    %nav.navbar.navbar-default.navbar-fixed-top{:role=>"navigation"}
+      -if user_signed_in?
+        .navbar-header
+          %a.navbar-brand{:href =>"#"} Scrooge
+        .collapse.navbar-collapse.navbar-ex1-collapse
+          %ul.nav.navbar-nav
+            - if current_user.admin?
+              %li= link_to t('views.top_bar.dashboard'), "/dashboard"
+              %li= link_to t('views.top_bar.invoices'), "/invoices"
+              %li= link_to t('views.top_bar.inbound_invoices'), "/inbound_invoices"
+              %li= link_to t('views.top_bar.job_orders'), "/job_orders"
+              %li= link_to t('views.top_bar.settings'), "/settings"
+              %li= link_to t('views.top_bar.tables'), "/admin"
+            %li= link_to t('views.top_bar.activities'), "/user_activities"
+            %li= link_to t('views.top_bar.expenses'), "/expenses"
+            %li= link_to t('views.top_bar.tracker'), "/activities_tracker"
+            %li= link_to t('views.top_bar.logout'), destroy_user_session_path, :method => :delete
+          %ul.nav.navbar-nav.pull-right
+            %li
+              %span.user
+                %img{:src => "http://www.gravatar.com/avatar/#{Digest::MD5.hexdigest(current_user.email)}"}
+                %span
+                  = current_user.name 
+
+    .container.wrap
+      = yield
+      #push
+    #footer
+      .container
+        %p.muted.credit CodicePlastico
+    /
+      Javascripts
+      \==================================================
+    / Placed at the end of the document so the pages load faster
+    = javascript_include_tag "application"

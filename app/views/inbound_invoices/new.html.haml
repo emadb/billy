@@ -1,0 +1,24 @@
+%fieldset
+  %legend 
+    = "Nuova fattura in ingresso"
+  
+  = render 'form'
+
+= content_for :side_bar do
+  .well.sidebar-nav
+    %ul.totals.info-panel
+      %li Imponibile
+      %li#taxable-income.amount
+        = number_to_currency(@totals.taxable_income)
+      %li Iva
+      %li#tax.amount
+        = number_to_currency(@totals.tax)
+      %li Totale  
+      %li#total.amount
+        = number_to_currency(@totals.total)
+    %hr
+    %ul.info-panel
+      %li
+        %a.btn.btn-primary#save-form salva
+
+   

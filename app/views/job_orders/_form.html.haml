@@ -1,0 +1,78 @@
+.col-lg-9
+  = form_for @job_order, {:html => {:role => "form"}} do |f|
+    .row
+      .col-lg-6
+        .form-group
+          = f.label :code
+          = f.text_field :code, :class => 'form-control'
+        .form-group
+          = f.label :hourly_rate
+          = f.text_field :hourly_rate, :class => 'form-control'
+        .form-group
+          = f.label :notes
+          = f.text_area :notes, :class => 'form-control'
+
+      .col-lg-6
+        .form-group
+          = f.label :customer
+          = select_tag "job_order[customer_id]", options_from_collection_for_select(@customers, "id", "name", @job_order.customer.id), :class => 'form-control'
+        .form-group
+          = f.label :price
+          = f.text_field :price, :class => 'form-control'
+        .form-group
+          = f.label :archived
+          = f.check_box :archived, :class => 'form-control'
+    .row
+      %hr
+    .row
+      .col-md-12
+        %h3 
+          = t('views.job_orders.activities')
+          %a#new-activity.btn.btn-info.pull-right{:href=>''} 
+            %i{:class => 'icon-plus icon-white'} 
+            = t('views.job_orders.new_activity')
+        %table.items.activities.table
+          %thead
+            %tr
+              %td 
+                = t('views.job_orders.description')
+              %td 
+                = t('views.job_orders.hours')
+              %td 
+                = t('views.job_orders.activity')
+              %td 
+          %tbody
+            = f.fields_for :activities do |a|
+              %tr
+                %td
+                  = a.text_field :description, {:class => 'form-control'}
+                %td
+                  = a.text_field :estimated_hours, {:class => 'amount form-control'}
+                %td
+                  = a.check_box :active, {:class => 'form-control'}
+                %td
+                  %a#remove-activity{:href => '#', :class => 'btn'}
+                    %i{:class => 'icon-trash icon-large'}
+                  = a.hidden_field :_destroy
+.col-lg-3
+  .row.sidebar-row
+    %a.btn.btn-info.btn-block.btn-lg#save-form{:href => ''}
+      = t('views.job_orders.save')
+    - if !@job_order.new_record?
+      %a.btn.btn-default.btn-block.btn-lg{:href => job_order_activities_path(@job_order)}
+        = t('views.job_orders.activities')
+  .row.sidebar-row
+    .panel.panel-default
+      .panel-heading
+        %h3.panel-title.text-center 
+          = t('views.job_orders.summary')
+      .panel-body
+        %ul.info-panel
+          %li.header 
+            = t('views.job_orders.total_hours')
+          %li.amount
+            = @job_order.total_estimated_hours
+          %li.header 
+            = t('views.job_orders.done_hours')
+          %li.amount
+            = @job_order.total_executed_hours

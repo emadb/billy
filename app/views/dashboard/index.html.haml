@@ -1,0 +1,16 @@
+#dashboard.row
+  .col-lg-12
+    %h1
+      = "Dashboard"
+  
+  .col-lg-12{'ng-controller' => 'TrackerCtrl'}
+    .row
+      .col-lg-6#invoices
+      .col-lg-6#quarters
+    .row
+      .col-lg-6#inbound_invoices
+      .col-lg-6#per_customer
+    .row
+      .col-lg-12#activities
+    .row
+      .col-lg-12#job_orders

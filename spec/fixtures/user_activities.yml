@@ -1,0 +1,16 @@
+user_actvity_1:
+    job_order_activity_id: 1
+    date: 2013-04-09
+    description: test 1
+    hours: 5
+user_actvity_2:
+    job_order_activity_id: 1
+    date: 2013-04-11
+    description: test 2
+    hours: 7
+
+user_actvity_3:
+    job_order_activity_id: 5
+    date: 2013-04-11
+    description: test 2
+    hours: 12

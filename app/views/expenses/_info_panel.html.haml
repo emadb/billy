@@ -1,0 +1,24 @@
+.row.sidebar-row
+  %a.btn.btn-info.btn-block.btn-lg#save-form{:href => ''}
+    = t('views.expenses.save')
+.row.sidebar-row
+  .panel.panel-default
+    .panel-heading
+      %h3.panel-title.text-center 
+        = t('views.activity')
+    .panel-body
+      %ul.info-panel
+        %li.header
+          = @expense.user_activity.job_order_activity.job_order.code
+        %li.header
+          = @expense.user_activity.job_order_activity.description
+        %li.header
+        %li
+          %i
+            = @expense.user_activity.description
+
+
+  
+
+
+ 

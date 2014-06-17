@@ -1,0 +1,25 @@
+.panel.panel-default
+  .panel-heading.dashboard-panel
+    %h3.panel-title
+      = t('views.dashboard.per_customer.invoiced')
+      .pull-right
+        %ul.nav.nav-tabs.dashboard-tabs
+          %li.active
+            %a{:href=>"#cust-num", "data-toggle"=>"tab"}
+              %i.icon-table
+          %li
+            %a{:href=>"#cust-chart", "data-toggle"=>"tab"}
+              %i.icon-bar-chart
+  .panel-body
+    .tab-content
+      #cust-num.tab-pane.fade.in.active
+        %table.table
+          - @perCustomer.each do |c|
+            %tr
+              %td
+                = c['customer']
+              %td
+                %span.pull-right
+                  = number_to_currency c['taxable_income']
+      #cust-chart.tab-pane.fade
+        %img{:src=>"//charts.brace.io/bar.svg?_show_legend=false&_height=200px&_width=500px&amount=#{@per_customer_chart}"}

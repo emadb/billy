@@ -1,0 +1,38 @@
+.panel.panel-default
+  .panel-heading.dashboard-panel
+    %h3.panel-title
+      = t('views.dashboard.inbound_invoices.expenses')
+      .pull-right
+        %ul.nav.nav-tabs.dashboard-tabs
+          %li.active
+            %a{:href=>"#exp-num", "data-toggle"=>"tab"}
+              %i.icon-table
+          %li
+            %a{:href=>"#exp-chart", "data-toggle"=>"tab"}
+              %i.icon-bar-chart
+  .panel-body
+    .tab-content
+      #exp-num.tab-pane.fade.in.active
+        %table.table
+          %tr
+            %th
+              = t('views.dashboard.inbound_invoices.expenses')
+            %th
+          %tr
+            %td
+              = t('views.dashboard.inbound_invoices.net')
+            %td
+              %span.pull-right
+                = number_to_currency @inbound_invoices_totals.taxable_income
+          %tr
+            %td
+              = t('views.dashboard.inbound_invoices.vat')
+            %td
+              %span.pull-right
+                = number_to_currency @inbound_invoices_totals.tax
+          %tr
+            %td
+              = t('views.dashboard.inbound_invoices.total')
+            %td
+              %span.pull-right
+                = number_to_currency @inbound_invoices_totals.total

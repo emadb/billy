@@ -1,0 +1,42 @@
+.panel.panel-default
+  .panel-heading.dashboard-panel
+    %h3.panel-title
+      = t('views.dashboard.quarters.invoiced')
+      .pull-right
+        %ul.nav.nav-tabs.dashboard-tabs
+          %li.active
+            %a{:href=>"#q-num", "data-toggle"=>"tab"}
+              %i.icon-table
+          %li
+            %a{:href=>"#q-chart", "data-toggle"=>"tab"}
+              %i.icon-bar-chart
+  .panel-body
+    #myTabContent.tab-content
+      #q-num.tab-pane.fade.in.active
+        %table.table
+          %tr
+            %td
+              1
+            %td
+              %span.pull-right
+                = number_to_currency @quarters.q1
+          %tr
+            %td
+              2
+            %td
+              %span.pull-right
+                = number_to_currency @quarters.q2
+          %tr
+            %td
+              3
+            %td
+              %span.pull-right
+                = number_to_currency @quarters.q3
+          %tr
+            %td
+              4
+            %td
+              %span.pull-right
+                = number_to_currency @quarters.q4
+      #q-chart.tab-pane.fade
+        %img{:src=>"//charts.brace.io/bar.svg?_show_legend=false&_height=200px&_width=500px&amount=#{@quarter_chart}"}

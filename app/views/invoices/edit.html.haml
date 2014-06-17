@@ -1,0 +1,9 @@
+.row
+  .col-lg-12
+    %h2
+      = "Dettaglio fattura #{@invoice.number}"
+.row
+  .col-lg-9
+    = render 'form'
+  .col-lg-3
+    = render 'info_panel'

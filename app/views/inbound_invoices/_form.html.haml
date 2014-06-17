@@ -1,0 +1,28 @@
+= form_for @invoice, {:html => {}} do |f|
+  .row
+    .col-lg-6
+      .form-group
+        = f.label :number
+        = f.text_field :number, :class => 'form-control'
+      .form-group
+        = f.label :customer
+        = f.text_field :customer, :class => 'form-control'          
+      .form-group
+        = f.label :date
+        = f.text_field :date, :class => 'isdate form-control'
+    .col-lg-6
+      .form-group
+        = f.label :total
+        = f.text_field :total, :class => 'form-control'
+      .form-group
+        = f.label :tax
+        = f.text_field :tax, :class => 'form-control'
+      .form-group
+        = f.label :taxable_income
+        = f.text_field :taxable_income, :class => 'form-control'
+  .row
+    .col-lg-12
+      %a.btn.btn-info.btn-block#save-form 
+        = t('views.inbound_invoices.save')
+
+    

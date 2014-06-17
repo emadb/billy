@@ -1,0 +1,44 @@
+.panel.panel-default
+  .panel-heading.dashboard-panel
+    %h3.panel-title
+      = t('view.dashboard.invoiced') + " #{AppSettings.fiscal_year}"
+      .pull-right
+        %ul.nav.nav-tabs.dashboard-tabs
+          %li.active
+            %a{:href=>"#home", "data-toggle"=>"tab"}
+              %i.icon-table
+          %li
+            %a{:href=>"#profile", "data-toggle"=>"tab"}
+              %i.icon-bar-chart
+  .panel-body
+    #myTabContent.tab-content
+      #home.tab-pane.fade.in.active
+        %table.table
+          %tr.info
+            %td
+              %span.text-success
+                = t('views.dashboard.invoiced.invoiced')
+            %td
+              %span.pull-right.text-success
+                = number_to_currency @invoices_totals.taxable_income
+          %tr
+            %td
+              = t('views.dashboard.invoiced.vat')
+            %td
+              %span.pull-right
+                = number_to_currency @invoices_totals.tax
+          %tr
+            %td.italic
+              = t('views.dashboard.invoiced.total')
+            %td
+              %span.pull-right        
+                = number_to_currency @invoices_totals.total
+          %tr.error
+            %td
+              %span.text-info
+                = t('views.dashboard.invoiced.to_get')
+            %td
+              %span.pull-right.text-info
+                = number_to_currency @to_receive
+      #profile.tab-pane.fade
+        %img{:src=>"//charts.brace.io/bar.svg?&invoiced=#{@invoices_totals.taxable_income}&to_get=#{@to_receive}&_height=200px&_width=500px&"}

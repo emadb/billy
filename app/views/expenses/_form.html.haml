@@ -1,0 +1,28 @@
+= form_for @expense, {:html => {:role => "form", :multipart => true}} do |f|
+  = f.hidden_field :user_activity_id
+  .row
+    .col-lg-10
+      .form-group
+        = f.label :description
+        = f.text_field :description, :class => 'form-control'
+      .form-group
+        = f.label :date
+        = f.text_field :date, :class => 'isdate form-control', :value => @expense.date
+      .form-group
+        = f.label :amount
+        = f.text_field :amount, :class => 'form-control', :value => @expense.amount
+      .form-group
+        = f.label :notes
+        = f.text_area :notes, :cols => 20, :rows => 3, :class => 'form-control'
+      .form-group
+        = f.label :expense_type_id
+        = f.select :expense_type_id, options_for_select(ExpenseType.all.collect {|p| [ p.description, p.id ] }, @expense.expense_type_id), {}, {:class => 'form-control'}
+      %fieldset
+        %legend Attachment
+        .form-group
+          - if !@expense.attachment.url.nil?
+            = link_to image_tag(@expense.attachment.url(:small)), @expense.attachment.url, {:target => '_blank'}
+        .form-group
+          = f.file_field :attachment, {:class => 'file-input'}
+        
+

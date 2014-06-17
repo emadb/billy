@@ -1,0 +1,38 @@
+.panel.panel-default
+  .panel-heading.dashboard-panel
+    %h3.panel-title
+      %form
+        .col-lg-2
+          .form-group
+            = select_month @filter_date, {add_month_numbers: false}, {name: 'month', :class => 'form-control'}
+        .col-lg-2
+          .form-group
+            = select_year @filter_date, {add_month_numbers: false}, {name: 'year', :class => ' form-control'}
+        .col-lg-2
+          .form-group
+            %a.btn.btn-info{:id => 'dashboard-activities'} 
+              = t('views.dashboard.job_orders.apply')
+      .pull-right
+        %ul.nav.nav-tabs.dashboard-tabs
+          %li.active
+            %a{:href=>"#jobs-num", "data-toggle"=>"tab"}
+              %i.icon-table
+  .panel-body
+    .tab-content
+      #act-jobs.tab-pane.fade.in.active
+        %table.table
+          %tr
+            %th 
+              = t('views.dashboard.job_orders.job_orders_status')
+            - @users.each do |u|
+              %td.right
+                = u.name
+            - @result.each do |a|
+              %tr
+                %th
+                  = a["code"]
+                - @users.each do |u|
+                  %td.right
+                    = a[u.name]
+      
+              

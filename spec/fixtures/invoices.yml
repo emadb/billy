@@ -1,0 +1,20 @@
+invoice1:
+    id: 1
+    number: 1
+    date: 2013-04-09
+    has_tax: true
+    notes: nothing to say
+    # invoice_items:
+    # 	- item1:
+    # 		description: one
+    # 		amount: 10
+    # 	- item2:
+    # 		description: two
+    # 		amount: 20
+
+invoice2:
+    id: 2
+    number: 2
+    date: 2013-04-11
+    has_tax: true
+    notes: something to say

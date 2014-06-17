@@ -1,0 +1,92 @@
+.row
+  .col-lg-12
+    %h1
+      = t('views.tracker.tracking_of') + current_user.name
+
+.col-lg-12{'ng-controller' => 'TrackerCtrl'}
+  .row
+    %form.form-inline
+    
+      .form-group.col-lg-3
+        %label 
+          = t('views.tracker.job_order')
+        = select_tag :job_order, '', 'ng-model' => 'job_order_id', 'ng-options' => 'j.id as j.code for j in jobOrders', :class => 'form-control'
+      .form-group.col-lg-3
+        %label 
+          = t('views.tracker.activity')
+        = select_tag :activity, '', 'ng-model' => 'job_order_activity_id', 'ng-options' => 'j.id as j.description for j in jobOrderActivities', :class => 'form-control'
+      .form-group.col-lg-4
+        %label 
+          = t('views.tracker.notes')
+        %textarea{'ng-model' => 'notes', :class => 'form-control'}
+      .form-group.col-lg-2
+        %label &nbsp;
+        %a.btn.btn-block{'ng-click' => 'start()', 'class' => '{{cssClass}} form-control'} {{operation}}
+  .row.timer
+    .col-lg-12.well
+      %h2.text-center {{timer}}
+      %h5.text-center{'ng-show' => 'isStarted()'} 
+        = t('views.tracker.activity_started_at')
+        {{startTime}}
+      %h5.text-center{'ng-show' => 'isCompleted()'} 
+        = t('activity_started_at')
+        {{startTime}} 
+        = t('activity_completed_at')
+        {{stopTime}}
+  .row
+    .col-md-9
+      %table.table.table-bordered
+        %thead
+          %tr
+            %th 
+              = t('views.tracker.job_order')
+            %th 
+              = t('views.tracker.activity')
+            %th 
+              = t('views.tracker.notes')
+            %th 
+              = t('views.tracker.time')
+            %th
+        %tbody
+          %tr{'ng-repeat' => 'a in activities', 'row-color' => '{{$index}}'}
+            %td
+              {{a.jobOrder}}
+            %td
+              {{a.activity}}
+            %td
+              {{a.notes}}
+            %td
+              {{a.time}}
+              %br
+              %p.muted {{a.start_time}}-{{a.stop_time}}
+            %td
+              .btn-group
+                %button.btn.btn-default.dropdown-toggle{"data-toggle" => "dropdown"}
+                  Azioni 
+                  %span.caret
+                %ul.dropdown-menu{:role => "menu"}
+                  %li
+                    %a{:href => "#", "ng-click"=> "start(a)"}
+                      %i.icon-play
+                      = t('views.tracker.resume')
+                  %li
+                    %a{:href => "#", "ng-click"=> "delete(a)"}
+                      %i.icon-trash.text-error
+                      = t('views.tracker.remove')
+                  
+    .col-lg-3.sidebar-nav{'ng-controller' => 'TrackerSideBarCtrl'}
+      .row.sidebar-row
+        %button.btn.btn-info.btn-block{'ng-click' => 'saveAll()'} 
+          = t('views.tracker.save_all')
+        %br
+        %button.btn.btn-default.btn-block{'ng-click' => 'deleteAll()'} 
+          = t('views.tracker.remove_all')
+      .row.sidebar-row
+        .panel.panel-default
+          .panel-heading
+            %h3.panel-title.text-center 
+              = t('views.tracker.summary')
+          .panel-body
+            %ul#stats.info-panel
+              %li.header Todo
+            

@@ -1,0 +1,42 @@
+%h1
+  = "#{t('views.job_orders.activities_of')} #{@job_order.code}"
+%table.table.table-striped.table-bordered
+  %thead
+    %tr
+      %th 
+        = t('views.job_orders.description')
+      %th 
+        = t('views.job_orders.date')
+      %th 
+        = t('views.job_orders.hours')
+      %th 
+        = t('views.job_orders.user')
+      %th 
+        = t('views.job_orders.notes')
+      
+  %tbody
+    -@user_activities.each do |a|
+      %tr
+        %td 
+          = a.job_order_activity.description
+        %td
+          = a.date
+        %td
+          = a.hours
+        %td
+          = a.user.name
+        %td
+          = a.description
+
+  = content_for :side_bar do
+    .well.sidebar-nav
+      %ul.totals.info-panel
+        %li 
+          = t('views.job_orders.estimated_hours')
+        %li#taxable-income.amount
+          = @job_order.total_estimated_hours
+        %li 
+          = t('views.job_orders.done_hours')
+        %li#taxable-income.amount
+          = @job_order.total_executed_hours
+    

@@ -1,0 +1,26 @@
+%table
+	%tr
+		%th Tipo attività
+		%th Data
+		%th Ore
+		%th Commessa
+		%th Attivita
+		%th Note
+	- @activities.each do |a|
+		%tr
+			%td
+				= a.user_activity_type.description
+			%td 
+				= a.date
+			%td 
+				= a.hours
+			- if a.job_order_activity.nil? 
+				%td
+				%td
+			- else
+				%td 
+					= a.job_order_activity.job_order.code
+				%td 
+					= a.job_order_activity.description
+			%td 
+				= a.description
