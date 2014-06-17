@@ -1,6 +1,6 @@
 ## Welcome to Scrooge
 
-This is a simple invoice and tracking application suited for small companies.
+This is a simple invoice and tracking application suited for small companies. It helps you in managing your daily task in your daily business: track activities, expenses and invoices.
 
 What can you do with scrooge?
 
@@ -13,8 +13,9 @@ What can you do with scrooge?
 - View the current status (economics, in/out)
 - Managing users
 - Managing customers
-- **NEW Real-time activity tracker**
+- Real-time activity tracker
 - English support
+- **NEW** Added activity expenses with attachment
 
 It's built on **Rails 4.0**.
 
@@ -35,15 +36,20 @@ pwd: demopwd
 There are some settings that you have to set in the setting page.
 These are:
 
-- IBAN the bank account number
-- DROPBOX_ENABLED (true or false) enable and disable dropbox service
-- DROPBOX_APP_KEY
-- DROPBOX_APP_SECRET
-- DROPBOX_TOKEN
-- DROPBOX_SECRET
-- DROPBOX_FOLDER
-- DROPBOX_APP_MODE
-- FISCAL_YEAR the default year used to create the invoices
+
+- *iva*: vat coeff
+- *iban* bank account number
+- *dropbox_enabled*: enable/disable dropbox support
+- *dropbox_app_key*: dropbox credentials
+- *dropbox_app_secret*: dropbox credentials
+- *dropbox_token*: dropbox credentials
+- *dropbox_secret*: dropbox credentials
+- *dropbox_folder*: dropbox folder to use
+- *dropbox_app_mode*: dropbox mode
+- *footer*: invoice footer (in pure HTML)
+- *s3_bucket*: s3 storage bucket name
+- *s3_access_key_id*: s3 credential
+- *s3_secret_access_key*: s3 credential
 
 To obtain the keys for DROPBOX you can read this http://ema.codiceplastico.com/blog/2013/03/22/usare-dropbox-da-unapplicazione-rails/
 
@@ -57,6 +63,7 @@ To obtain the keys for DROPBOX you can read this http://ema.codiceplastico.com/b
 - 28-12-2013 Drop 6 (Multilanguage support throught i18n (Italian, English))
 - 18-04-2014 Drop 7 (Expenses module. Track activity expenses)
 - 19-04-2014 Drop 8 (Added mini charts in dashboard (using [http://charts.brace.io/](http://charts.brace.io/)))
+- 17-06-2014 Drop 9 (Added expenses attachments)
 
 ### Screenshots
 ![img](doc/images/img1.png)
@@ -80,4 +87,8 @@ To obtain the keys for DROPBOX you can read this http://ema.codiceplastico.com/b
 ![img](doc/images/img10.png)
 ***
 ![img](doc/images/img11.png)
+***
+![img](doc/images/img12.png)
+***
+![img](doc/images/img13.png)
 ***
