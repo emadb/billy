@@ -8,7 +8,7 @@ class Expense < ActiveRecord::Base
       :medium => "200x200" },
       :default_url => "/missing.png",
       s3_credentials: lambda { |attachment| attachment.instance.s3_keys }
-  validates_attachment_content_type :attachment
+  validates_attachment_content_type :attachment, :content_type => [/\Aimage\/.*\Z/, 'application/pdf' ]
   attr_accessible :description, :date, :amount, :notes, :activity, :user, :attachment, :user_activity_id, :expense_type_id
 
 
