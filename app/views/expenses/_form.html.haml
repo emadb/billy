@@ -17,12 +17,13 @@
       .form-group
         = f.label :expense_type_id
         = f.select :expense_type_id, options_for_select(ExpenseType.all.collect {|p| [ p.description, p.id ] }, @expense.expense_type_id), {}, {:class => 'form-control'}
-      %fieldset
-        %legend Attachment
-        .form-group
-          - if !@expense.attachment.url.nil?
-            = link_to image_tag(@expense.attachment.url(:small)), @expense.attachment.url, {:target => '_blank'}
-        .form-group
-          = f.file_field :attachment, {:class => 'file-input'}
+      - if AppSettings.s3_enabled
+        %fieldset
+          %legend Attachment
+          .form-group
+            - if !@expense.attachment.url.nil?
+              = link_to image_tag(@expense.attachment.url(:small)), @expense.attachment.url, {:target => '_blank'}
+          .form-group
+            = f.file_field :attachment, {:class => 'file-input'}
         
 

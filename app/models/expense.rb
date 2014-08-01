@@ -11,7 +11,6 @@ class Expense < ActiveRecord::Base
   validates_attachment_content_type :attachment, :content_type => [/\Aimage\/.*\Z/, 'application/pdf' ]
   attr_accessible :description, :date, :amount, :notes, :activity, :user, :attachment, :user_activity_id, :expense_type_id
 
-
   def s3_keys
   {
     bucket: AppSettings.s3_bucket,
