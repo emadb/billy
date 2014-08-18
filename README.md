@@ -15,7 +15,7 @@ What can you do with scrooge?
 - Managing customers
 - Real-time activity tracker
 - English support
-- **NEW** Added activity expenses with attachment
+- **NEW** Added activity expenses with attachment (stored on Amazon S3)
 
 It's built on **Rails 4.0**.
 
@@ -52,6 +52,8 @@ These are:
 - *s3_secret_access_key*: s3 credential
 
 To obtain the keys for DROPBOX you can read this http://ema.codiceplastico.com/blog/2013/03/22/usare-dropbox-da-unapplicazione-rails/
+
+If you want access to S3 you need to configure the bucket on the S3 console and specify the keys on the settings page(s3_access_key_id, s3_secret_access_key).
 
 
 ### Version history 
