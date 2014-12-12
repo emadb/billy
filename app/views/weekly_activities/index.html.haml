@@ -25,6 +25,7 @@
             - @week.each do |d|
               %td 
                 = d.strftime("%a %e")
+            %td
         %tbody
           %tr{'ng-repeat' => 'row in rows', 'ng-include' => "'weekRow.html'" }
           
@@ -48,5 +49,7 @@
   - 7.times do |d|
     %td.weekly-td
       = text_field_tag "day_#{d}", '', :class => 'form-control weekly-hour', 'ng-model' => "row.hours[#{d}]" , 'ng-change' => 'updateTotals()'
-  
+  %td
+    %a{:href => '', 'ng-click' => 'deleteRow(row)'}
+      delete
 

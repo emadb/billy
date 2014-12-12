@@ -9,6 +9,12 @@ window.scrooge.controller('WeeklyActivity', ['$scope', '$http', '$location', 'Ac
     $scope.rows.push(angular.copy(emptyRow));
   };
 
+  $scope.deleteRow = function(row){
+    $scope.rows = _.reject($scope.rows, function(item) {
+        return item == row; 
+    });
+  };
+
   $scope.loadActivities = function(index, jid){
     $http.get('/job_orders/' + jid + '/job_order_activities').success(function(acts){
       $scope.rows[index].activities = acts;

@@ -35,7 +35,7 @@ class WeeklyActivitiesController < ApplicationController
   end
 
   def create
-    monday = beginning_of_week(params[:startday])
+    monday = startdate(params[:startday])
     UserActivity.where('date >= ? and date <= ? and user_id = ?', monday, monday + 7, current_user.id).destroy_all
     activites = params[:weekly_activity][:_json]
     activites.each do |a|
@@ -44,12 +44,12 @@ class WeeklyActivitiesController < ApplicationController
         act.user_activity_type_id = UserActivityType.working_id
         act.job_order_activity_id = a[:activity_id]
         act.user = current_user
-        act.date = DateTime.now.beginning_of_week + d
+        act.date = monday + d
         act.hours = a[:hours][d]        
         act.save
       end
     end
-    redirect_to '/user_activites'
+    redirect_to action: "index"
   end
 
   def startdate(p)
