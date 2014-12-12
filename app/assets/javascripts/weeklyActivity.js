@@ -1,4 +1,4 @@
-window.scrooge.controller('WeeklyActivity', ['$scope', '$http', 'ActivityService', function($scope, $http, ActivityService){
+window.scrooge.controller('WeeklyActivity', ['$scope', '$http', '$location', 'ActivityService', function($scope, $http, $location, ActivityService){
   
   var emptyRow = {job_order_id:null, activity_id:null, hours:[0, 0, 0, 0, 0, 0, 0]};
 
@@ -16,8 +16,8 @@ window.scrooge.controller('WeeklyActivity', ['$scope', '$http', 'ActivityService
   };
 
   $scope.save = function(){
-    console.log($scope.rows);
-    $http.post('/weekly_activities', $scope.rows).success(function(){
+    var startday = getStartDay();
+    $http.post('/weekly_activities?startday=' + startday, $scope.rows).success(function(){
 
     });
   };
@@ -32,7 +32,20 @@ window.scrooge.controller('WeeklyActivity', ['$scope', '$http', 'ActivityService
     $scope.jobOrders = jo;
   });
 
-  $http.get('/weekly_activities/current_week').success(function(acts){
+  var startday = getStartDay();
+  $http.get('/weekly_activities/current_week?startday=' + startday).success(function(acts){
+    createRows(acts);
+  });
+
+  function getStartDay(){
+    var startday = '';
+    if (window.location.search.indexOf('startday') > 0){
+      startday = window.location.search.split('=')[1];
+    }
+    return startday;
+  }
+
+  function createRows(acts){
     Object.keys(acts).forEach(function(a){
       var newOne = {job_order_id: acts[a].jid, activity_id:parseInt(a), hours:acts[a].hours};
       $scope.rows.push(newOne);  
@@ -42,5 +55,5 @@ window.scrooge.controller('WeeklyActivity', ['$scope', '$http', 'ActivityService
         $scope.loadActivities(i, r.job_order_id);
       }
     });
-  });
+  }
 }]);

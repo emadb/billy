@@ -2,10 +2,16 @@ class WeeklyActivitiesController < ApplicationController
 
   def index
     @week = DateTime.now.all_week
+    if params[:startday].nil?
+      @startday = DateTime.now.beginning_of_week
+    else
+      @startday = Date.parse(params[:startday]) 
+    end
   end
 
   def get_current_week
-    monday = DateTime.now.beginning_of_week
+    monday = startdate(params[:startday])
+
     activities = UserActivity.select('job_order_id as joid, job_order_activity_id as id, [date] , sum(hours) as hours')
       .joins('inner join job_order_activities joa on job_order_activity_id = joa.id')
       .where('date >= ? and date <= ? and user_id = ?', monday, monday + 7, current_user.id)
@@ -29,7 +35,7 @@ class WeeklyActivitiesController < ApplicationController
   end
 
   def create
-    monday = DateTime.now.beginning_of_week
+    monday = beginning_of_week(params[:startday])
     UserActivity.where('date >= ? and date <= ? and user_id = ?', monday, monday + 7, current_user.id).destroy_all
     activites = params[:weekly_activity][:_json]
     activites.each do |a|
@@ -44,6 +50,14 @@ class WeeklyActivitiesController < ApplicationController
       end
     end
     redirect_to '/user_activites'
+  end
+
+  def startdate(p)
+    if p.nil? || p.empty?
+      monday = DateTime.now.beginning_of_week
+    else
+      monday = Date.parse(p)
+    end
   end
 
 end

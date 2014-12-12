@@ -2,30 +2,43 @@
   .col-lg-12
     %h2 
       = t('views.weekly_activity.title')
-.row
-  .col-lg-10{'ng-controller' => 'WeeklyActivity'}
-    %table{:class => 'table'}
-      %thead
-        %tr
-          %td JobOrder
-          %td Activity
-          - @week.each do |d|
-            %td 
-              = d.strftime("%a %e")
-      %tbody
-        %tr{'ng-repeat' => 'row in rows', 'ng-include' => "'weekRow.html'" }
-        
-      %tfooter
-        %tr
-          %td
-            %a{:href=>'#', 'ng-click' => 'addRow()'}
-              new
-          %td
-          - 7.times do |d|
+%form.form-inline{'ng-controller' => 'WeeklyActivity'}      
+  .form-group
+    %a{:href => "/weekly_activities?startday=#{@startday - 7.days}", :class => 'btn btn-default'}
+      prev
+  
+  .form-group
+    %label 
+      week: 
+      = @startday.strftime("%d/%m/%Y")
+    
+  .form-group
+    %a{:href => "/weekly_activities?startday=#{@startday + 7.days}", :class => 'btn btn-default'}
+      next
+  .row
+    .col-lg-10{'ng-controller' => 'WeeklyActivity'}
+      %table{:class => 'table'}
+        %thead
+          %tr
+            %td JobOrder
+            %td Activity
+            - @week.each do |d|
+              %td 
+                = d.strftime("%a %e")
+        %tbody
+          %tr{'ng-repeat' => 'row in rows', 'ng-include' => "'weekRow.html'" }
+          
+        %tfooter
+          %tr
             %td
-              = raw("<span ng-bind=\"totals[#{d}]\" />")
-    %button{:class => 'form-control btn btn-default', 'ng-click' => 'save()' }
-      save
+              %a{:href=>'#', 'ng-click' => 'addRow()'}
+                new
+            %td
+            - 7.times do |d|
+              %td
+                = raw("<span ng-bind=\"totals[#{d}]\" />")
+      %button{:class => 'form-control btn btn-default', 'ng-click' => 'save()' }
+        save
   
 %script{:type => "text/ng-template", :id  => "weekRow.html"}
   %td
