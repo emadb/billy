@@ -17,7 +17,9 @@ Scrooge::Application.routes.draw do
   match '/settings/update' => 'settings#update', :via => :post
   match '/user_activity_types' => 'user_activity_types#index', :via => :get
 
-  resources :weekly_activities 
+  resources :weekly_activities do
+    get 'current_week', :on => :collection, :action => 'get_current_week'
+  end
 
   resources :activities_tracker do
     get 'today', :on => :collection, :action => 'today'

@@ -32,29 +32,15 @@ window.scrooge.controller('WeeklyActivity', ['$scope', '$http', 'ActivityService
     $scope.jobOrders = jo;
   });
 
-
-
-
-
-  // var getActivity = function(id, successCallback){
-  //   $http
-  //     .get('/job_order_activities/' + id)
-  //     .success(successCallback);
-  // };
-
-  // var getJobOrder: function(id, successCallback){
-  //   $http
-  //     .get('/job_orders/' + id)
-  //     .success(successCallback);
-  // };
-
-  // var getJobOrders: function(successCallback){
-  //   $http.get('/job_orders').success(successCallback);
-  // };
-
-  // var getJobOrderActivities: function(jobOrderId, successCallback){
-  //   $http.get('/job_orders/' + jobOrderId + '/job_order_activities').success(successCallback);  
-  // };
-
-
+  $http.get('/weekly_activities/current_week').success(function(acts){
+    Object.keys(acts).forEach(function(a){
+      var newOne = {job_order_id: acts[a].jid, activity_id:parseInt(a), hours:acts[a].hours};
+      $scope.rows.push(newOne);  
+    });
+    $scope.rows.forEach(function(r, i){
+      if (r.job_order_id){
+        $scope.loadActivities(i, r.job_order_id);
+      }
+    });
+  });
 }]);
