@@ -12,7 +12,7 @@ class WeeklyActivitiesController < ApplicationController
   def get_current_week
     monday = startdate(params[:startday])
 
-    activities = UserActivity.select('job_order_id as joid, job_order_activity_id as id, [date] , sum(hours) as hours')
+    activities = UserActivity.select('job_order_id as joid, job_order_activity_id as id, date , sum(hours) as hours')
       .joins('inner join job_order_activities joa on job_order_activity_id = joa.id')
       .where('date >= ? and date <= ? and user_id = ?', monday, monday + 7, current_user.id)
       .group('job_order_id')
