@@ -1,12 +1,12 @@
 class WeeklyActivitiesController < ApplicationController
 
   def index
-    @week = DateTime.now.all_week
     if params[:startday].nil?
       @startday = DateTime.now.beginning_of_week
     else
       @startday = Date.parse(params[:startday]) 
     end
+    @week = @startday.all_week
   end
 
   def get_current_week
