@@ -4,6 +4,7 @@ window.scrooge.controller('WeeklyActivity', ['$scope', '$http', '$location', 'Ac
 
   $scope.rows =[angular.copy(emptyRow)];
   $scope.totals = [0,0,0,0,0,0,0];
+  $scope.week_total = 0;
 
   $scope.addRow = function(){
     $scope.rows.push(angular.copy(emptyRow));
@@ -32,6 +33,8 @@ window.scrooge.controller('WeeklyActivity', ['$scope', '$http', '$location', 'Ac
     for(var d=0;d<7;d++){
       $scope.totals[d] = _.reduce($scope.rows, function(memo, r){ return parseInt(memo) + parseInt(r.hours[d]); }, 0);
     }
+    $scope.week_total = _.reduce($scope.totals, function(memo, num){ return memo + num; }, 0);
+
   };
 
   $http.get('/job_orders').success(function(jo){
@@ -41,6 +44,7 @@ window.scrooge.controller('WeeklyActivity', ['$scope', '$http', '$location', 'Ac
   var startday = getStartDay();
   $http.get('/weekly_activities/current_week?startday=' + startday).success(function(acts){
     createRows(acts);
+    $scope.updateTotals();
   });
 
   function getStartDay(){

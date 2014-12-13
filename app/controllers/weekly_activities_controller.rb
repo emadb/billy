@@ -29,8 +29,7 @@ class WeeklyActivitiesController < ApplicationController
       @result[act.id][:jid] = act.joid
       @result[act.id][:hours][act.date.wday - 1] = act.hours
     end
-    logger.info '%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%'
-    logger.info @result
+
     render :json => @result
   end
 
