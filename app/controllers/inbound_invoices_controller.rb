@@ -21,6 +21,8 @@ class InboundInvoicesController < ApplicationController
     @invoice = InboundInvoice.new
     @invoice.date = Date.today    
     @totals = InvoiceTotalsInfo.new(0, 0, 0)
+    @job_orders = JobOrder.where(:archived => false).order('code')
+    @invoice.job_order = @job_orders[0]
   end
 
   def create

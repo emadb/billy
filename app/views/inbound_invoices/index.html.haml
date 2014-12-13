@@ -19,6 +19,8 @@
       %thead
         %tr
           %td 
+            = t('views.inbound_invoices.job_order')
+          %td 
             = t('views.inbound_invoices.number')
           %td 
             = t('views.inbound_invoices.date')
@@ -34,6 +36,8 @@
       %tbody
         -@invoices.each do |i|
           %tr
+            %td 
+              = i.job_order.nil? ? '-' : i.job_order.code
             %td 
               = i.number
             %td 

@@ -2,6 +2,11 @@
   .row
     .col-lg-6
       .form-group
+        = f.label :job_order
+        = select_tag "inbound_invoice[job_order_id]", options_from_collection_for_select(@job_orders, "id", "code", @invoice.job_order.id), :class => 'form-control'
+  .row
+    .col-lg-6
+      .form-group
         = f.label :number
         = f.text_field :number, :class => 'form-control'
       .form-group

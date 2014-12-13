@@ -81,6 +81,8 @@
     .row.sidebar-row
       %a.btn.btn-info.btn-block#openModal{:href => '#editActivity', 'ng-click' => 'newActivity()', "data-toggle"=>"modal"}
         = t('views.activities.new_activity')
+      %a.btn.btn-info.btn-block#openModal{:href => '/weekly_activities'}
+        = t('views.activities.weekly_activities')
       %a.btn.btn-default.btn-block#report{"href" => '/user_activities/report.xls?month={{month}}&year={{year}}&user={{user}}'}
         = t('views.activities.report')
       %a.btn.btn-default.btn-block#report2{"href" => '/user_activities/report_2.xls?month={{month}}&year={{year}}&user={{user}}'}

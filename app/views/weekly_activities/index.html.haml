@@ -1,0 +1,76 @@
+.row
+  .col-lg-12
+    %h2 
+      = t('views.weekly_activity.weekly_activity')
+.row{'ng-controller' => 'WeeklyActivity'}
+  .col-lg-9
+    %form.form-inline   
+      .row   
+        .col-md-4
+          %a{:href => "/weekly_activities?startday=#{@startday - 7.days}", :class => 'btn btn-default'}
+            %i.icon-angle-left 
+            = t('views.weekly.prev')
+        
+        .col-md-2
+          %label 
+            = t('views.weekly.week') 
+            = @startday.strftime("%d/%m/%Y")
+          
+        .col-md-4
+          %a{:href => "/weekly_activities?startday=#{@startday + 7.days}", :class => 'btn btn-default pull-right'}
+            = t('views.weekly.next')
+            %i.icon-angle-right 
+    %hr      
+    .row
+      .col-lg-10
+        %table{:class => 'table'}
+          %thead
+            %tr
+              %td 
+                = t('views.activities.job_order')
+              %td
+                = t('views.activities.activity')
+              - @week.each do |d|
+                %td 
+                  = d.strftime("%a %e")
+              %td
+          %tbody
+            %tr{'ng-repeat' => 'row in rows', 'ng-include' => "'weekRow.html'" }
+            
+          %tfooter
+            %tr
+              %td
+                %a{:href=>'#', 'ng-click' => 'addRow()'}
+                  = t('views.activities.new_activity')
+              %td
+              - 7.times do |d|
+                %td
+                  = raw("<span ng-bind=\"totals[#{d}]\" />")
+  .col-lg-3 
+    .row.sidebar-row
+      %button{:class => 'btn btn-info btn-block btn-lg', 'ng-click' => 'save()' }
+        = t('views.activities.save')  
+    .row.sidebar-row
+      .panel.panel-default
+        .panel-heading
+          %h3.panel-title.text-center 
+            Weekly hours
+        .panel-body
+          %ul.info-panel
+            %li.header 
+              {{week_total}}
+            %li.header 
+              
+          
+%script{:type => "text/ng-template", :id  => "weekRow.html"}
+  %td
+    = select_tag :job_order, '', 'ng-model' => 'row.job_order_id', 'ng-options' => 'j.id as j.code for j in jobOrders', :class => 'form-control', 'ng-change' => 'loadActivities($index, row.job_order_id)'
+  %td
+    = select_tag :activity, '', 'ng-model' => 'row.activity_id', 'ng-options' => 'j.id as j.description for j in row.activities', :class => 'form-control'
+  - 7.times do |d|
+    %td.weekly-td
+      = text_field_tag "day_#{d}", '', :class => 'form-control weekly-hour', 'ng-model' => "row.hours[#{d}]" , 'ng-change' => 'updateTotals()'
+  %td
+    %a{:href => '', 'ng-click' => 'deleteRow(row)'}
+      delete
+

@@ -15,7 +15,8 @@ What can you do with scrooge?
 - Managing customers
 - Real-time activity tracker
 - English support
-- **NEW** Added activity expenses with attachment
+- Added activity expenses with attachment (stored on Amazon S3)
+- Weekly activities. Easily insert you activities of the week on one screen.
 
 It's built on **Rails 4.0**.
 
@@ -53,6 +54,8 @@ These are:
 
 To obtain the keys for DROPBOX you can read this http://ema.codiceplastico.com/blog/2013/03/22/usare-dropbox-da-unapplicazione-rails/
 
+If you want access to S3 you need to configure the bucket on the S3 console and specify the keys on the settings page(s3_access_key_id, s3_secret_access_key).
+
 
 ### Version history 
 - 11-04-2013 Drop 1 (first release with basic functionalities)
@@ -64,6 +67,7 @@ To obtain the keys for DROPBOX you can read this http://ema.codiceplastico.com/b
 - 18-04-2014 Drop 7 (Expenses module. Track activity expenses)
 - 19-04-2014 Drop 8 (Added mini charts in dashboard (using [http://charts.brace.io/](http://charts.brace.io/)))
 - 17-06-2014 Drop 9 (Added expenses attachments)
+- 13-12-2014 Drop 10 (Added weekly activities)
 
 ### Screenshots
 ![img](doc/images/img1.png)
@@ -91,4 +95,6 @@ To obtain the keys for DROPBOX you can read this http://ema.codiceplastico.com/b
 ![img](doc/images/img12.png)
 ***
 ![img](doc/images/img13.png)
+***
+![img](doc/images/img14.png)
 ***
