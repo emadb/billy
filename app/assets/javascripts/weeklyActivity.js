@@ -25,7 +25,7 @@ window.scrooge.controller('WeeklyActivity', ['$scope', '$http', '$location', 'Ac
   $scope.save = function(){
     var startday = getStartDay();
     $http.post('/weekly_activities?startday=' + startday, $scope.rows).success(function(){
-
+      alert('week saved!');
     });
   };
 
