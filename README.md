@@ -52,7 +52,7 @@ These are:
 - *s3_access_key_id*: s3 credential
 - *s3_secret_access_key*: s3 credential
 
-To obtain the keys for DROPBOX you can read this http://ema.codiceplastico.com/blog/2013/03/22/usare-dropbox-da-unapplicazione-rails/
+To obtain the keys for DROPBOX you can read this http://ema.codiceplastico.com//rails/2013/03/22/usare-dropbox-da-unapplicazione-rails.html
 
 If you want access to S3 you need to configure the bucket on the S3 console and specify the keys on the settings page(s3_access_key_id, s3_secret_access_key).
 
