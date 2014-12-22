@@ -63,7 +63,7 @@ If you want access to S3 you need to configure the bucket on the S3 console and 
 - 02-10-2013 Drop 3 (Activity tracker and bug fixes)
 - 11-10-2013 Drop 4 (new design based on Boostrap 3.0)
 - 15-11-2013 Drop 5 (added settings and year-month filter in invoice view)
-- 28-12-2013 Drop 6 (Multilanguage support throught i18n (Italian, English))
+- 28-12-2013 Drop 6 (Multilanguage support through i18n (Italian, English))
 - 18-04-2014 Drop 7 (Expenses module. Track activity expenses)
 - 19-04-2014 Drop 8 (Added mini charts in dashboard (using [http://charts.brace.io/](http://charts.brace.io/)))
 - 17-06-2014 Drop 9 (Added expenses attachments)
