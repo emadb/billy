@@ -76,9 +76,9 @@
             %li.header 
               = t('views.job_orders.estimated_hours')
             %li.amount
-              = @job_orders.sum(&:total_estimated_hours)
+              = @job_orders.to_a.sum(&:total_estimated_hours)
             %li.header 
               = t('views.job_orders.done_hours')
             %li.amount
-              = @job_orders.sum(&:total_executed_hours)
+              = @job_orders.to_a.sum(&:total_executed_hours)
                     
