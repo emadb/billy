@@ -38,7 +38,7 @@ class JobOrdersController < ApplicationController
   def create
     @job_order = JobOrder.new(params[:job_order])
     @job_order.customer = Customer.find(params[:job_order][:customer_id])
-    @job_order.activities = @job_order.activities.delete_if {|a| a.description.empty?}
+    @job_order.activities = @job_order.activities.to_a.delete_if {|a| a.description.empty?}
     @job_order.activities.each { |a| a.job_order_id = @job_order.id }
     @job_order.save
     redirect_to job_orders_path
