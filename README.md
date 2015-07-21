@@ -1,8 +1,8 @@
-## Welcome to Scrooge
+## Welcome to Billy
 
 This is a simple invoice and tracking application suited for small companies. It helps you in managing your daily task in your daily business: track activities, expenses and invoices.
 
-What can you do with scrooge?
+What can you do with billy?
 
 - Tracking your daily job activities
 - Managing the job orders and checking their status
