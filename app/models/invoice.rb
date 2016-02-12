@@ -57,11 +57,11 @@ class Invoice < ActiveRecord::Base
   end
 
   def string_date
-    self.date.strftime('%d-%m-%Y') unless self.date.nil?
+    self.date.strftime('%d/%m/%Y') unless self.date.nil?
   end
 
   def string_due_date
-    self.due_date.strftime('%d-%m-%Y') unless self.due_date.nil?
+    self.due_date.strftime('%d/%m/%Y') unless self.due_date.nil?
   end
 
   def fiscal_year

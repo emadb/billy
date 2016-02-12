@@ -6,10 +6,18 @@ $(function(){
     }
   });
   
-  var dp = $('.isdate');
-  dp.datepicker({format: 'dd-mm-yyyy'});
+  var dp = $('.isdate1');
+  dp.datepicker({format: 'dd/mm/yyyy'});
   dp.on('changeDate', function(ev){
-    dp.val(ev.target.value);
+    if (dp.attr('id') == ev.target.id){
+      dp.val(ev.target.value);
+    }
+  });
+
+  var dp2 = $('.isdate2');
+  dp2.datepicker({format: 'dd/mm/yyyy'});
+  dp2.on('changeDate', function(ev){
+    dp2.val(ev.target.value);
   });
   
   $(document).on('click', '#save-form', function(){

@@ -404,8 +404,13 @@ it:
         other: Attività
     attributes:
       invoice:
-        has_tax: Tasse
+        has_tax: IVA
         number: Numero
+        due_date: Data scadenza
+        date: Data fattura
+        customer: Cliente
+        is_payed: Pagata
+        notes: Note
       inbound_invoice:
         number: Numero
       expense:

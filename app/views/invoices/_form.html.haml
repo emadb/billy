@@ -11,22 +11,21 @@
         = select_tag "invoice[customer_id]", options_from_collection_for_select(@customers, "id", "name", @invoice.customer.id), :class => 'form-control'
       .form-group
         = f.label :due_date
-        = f.text_field :due_date, :class => 'isdate form-control', :value => @invoice.string_due_date
+        = f.text_field :due_date, :class => 'isdate1 form-control', :value => @invoice.string_due_date
       .form-group
         = f.label :notes
         = f.text_area :notes, :cols => 20, :rows => 3, :class => 'form-control'
     .col-lg-6
       .form-group
         = f.label :date
-        = f.text_field :date, :class => 'isdate form-control', :value => @invoice.string_date
+        = f.text_field :date, :class => 'isdate2 form-control', :value => @invoice.string_date
       .form-group
         = f.label :is_payed
         = f.check_box :is_payed, :class => 'form-control'
       .form-group
         = f.label :has_tax
         = f.check_box :has_tax, :class => 'form-control'
-      .form-group
-        = f.label :status
+      
         
   .row
     %hr

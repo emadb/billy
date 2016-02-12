@@ -87,6 +87,8 @@
         = t('views.activities.report')
       %a.btn.btn-default.btn-block#report2{"href" => '/user_activities/report_2.xls?month={{month}}&year={{year}}&user={{user}}'}
         = t('views.activities.report_2')  
+      -# %a.btn.btn-default.btn-block#report_tutti{"href" => '/user_activities/report_presenze.xls?month={{month}}&year={{year}}&user={{user}}'}
+      -#   Report presenze tutti  
       %iframe#frm{:style => "display:none"}
     .row.sidebar-row
       .panel.panel-default

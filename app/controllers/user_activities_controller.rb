@@ -78,6 +78,15 @@ class UserActivitiesController < ApplicationController
     end
   end
 
+  def report_presenze
+    @formatted_activities = ActivityReport.report_presenze(params[:year].to_i, params[:month].to_i)
+    @month = Date.new(params[:year].to_i, params[:month].to_i, 1).strftime("%B")
+    @user_name = 'FOOO'
+    respond_to do |format|
+      format.xls 
+    end
+  end
+
   private
 
   def parse_filter (params)

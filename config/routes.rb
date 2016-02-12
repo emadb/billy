@@ -44,6 +44,7 @@ Scrooge::Application.routes.draw do
   resources :user_activities do
     get 'report', :on => :collection, :action => 'report'
     get 'report_2', :on => :collection, :action => 'report_2'
+    get 'report_presenze', :on => :collection, :action => 'report_presenze'
   end
 
   # The priority is based upon order of creation:
