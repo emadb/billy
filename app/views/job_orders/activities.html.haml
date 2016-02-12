@@ -1,5 +1,19 @@
 %h1
   = "#{t('views.job_orders.activities_of')} #{@job_order.code}"
+.row
+  .col-lg-12
+    %form.well.form-inline{:method => 'GET', :action => "/job_orders/#{@job_order.id}/activities"}
+      .form-group
+        %label 
+          = t('views.invoices.month')
+        = select_month @month, {:include_blank => true}, {:class => 'form-control'}
+      .form-group
+        %label 
+          = t('views.invoices.year')
+        = select_year @year, {}, {:class => 'form-control'}
+      %button.btn.btn-info.pull-right{:type => 'submit'} 
+        = t('views.invoices.apply')  
+
 %table.table.table-striped.table-bordered
   %thead
     %tr

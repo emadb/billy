@@ -72,9 +72,30 @@ class JobOrdersController < ApplicationController
   end
 
   def activities
+
+    if params[:date].nil? or params[:date][:month].nil? or params[:date][:month].blank?
+      @month = Date.today.month
+    else
+      @month = params[:date][:month].to_i
+    end
+
+    if params[:date].nil? or params[:date][:year].nil? or params[:date][:year].blank?
+      @year = Date.today.year
+    else
+      @year = params[:date][:year].to_i
+    end
+
+    start_date = Date.new(@year, @month, 1)
+    end_date = start_date + 1.month
+
+    logger.info 'EMA'
+    logger.info params
+
+
     @user_activities = UserActivity
       .joins(job_order_activity: [:job_order])
       .where('job_order_id = ?', params[:job_order_id])
+      .where(date: start_date..end_date)
       .order(:date)
     @job_order = JobOrder.find(params[:job_order_id])
   end
