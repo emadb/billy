@@ -2,6 +2,9 @@ class InvoicesController < ApplicationController
   before_filter :user_is_admin?
   
   def index
+    @customers = Customer.all
+    @customer_id = params[:customer]
+    
     if params[:date].nil? or params[:date][:year].nil?
       @year = Date.today.year
       @month = nil
@@ -16,6 +19,7 @@ class InvoicesController < ApplicationController
       end
 
       @invoices = @invoices.order(:number)
+      @invoices = @invoices.where('customer_id = ?', @customer_id) unless @customer_id.empty?
       @year = params[:date][:year].to_i
     end
 

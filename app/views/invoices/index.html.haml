@@ -10,6 +10,10 @@
 .row
   .col-lg-9   
     %form.well.form-inline{:method => 'GET', :action => '/invoices'}
+      
+      .form-group
+        %label Cliente
+        = select_tag 'customer', options_from_collection_for_select(@customers, "id", "name", @customer_id),:include_blank => true, :class => 'form-control'
       .form-group
         %label 
           = t('views.invoices.month')
