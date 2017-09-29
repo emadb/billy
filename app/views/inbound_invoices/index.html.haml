@@ -33,6 +33,8 @@
           %td
             = t('views.inbound_invoices.total')
           %td
+            = t('views.inbound_invoices.category')
+          %td
       %tbody
         -@invoices.each do |i|
           %tr
@@ -53,6 +55,8 @@
             %td
               %span.pull-right 
                 = number_to_currency(i.total)
+            %td
+              = i.inbound_invoice_category.nil? ? '-' : i.inbound_invoice_category.description
             %td
               %a{:href=> inbound_invoice_path(i), :class => 'delete' } 
                 %i.icon-trash.text-error

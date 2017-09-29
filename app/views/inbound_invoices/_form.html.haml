@@ -15,6 +15,9 @@
       .form-group
         = f.label :date
         = f.text_field :date, :class => 'isdate form-control'
+      .form-group
+        = f.label :category
+        = select_tag("inbound_invoice[inbound_invoice_category_id]", options_from_collection_for_select(@categories, "id", "description", @invoice.inbound_invoice_category.id), :class => 'form-control') 
     .col-lg-6
       .form-group
         = f.label :total
