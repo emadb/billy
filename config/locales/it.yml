@@ -110,6 +110,7 @@ it:
       new_inbound_invoice: Nuova fattura passiva
       summary: Riepilogo
       save: Salva
+      category: Categoria
     job_orders:
       title: Commesse
       code: Codice
