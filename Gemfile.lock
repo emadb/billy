@@ -105,7 +105,7 @@ GEM
     pg (0.17.1)
     protected_attributes (1.0.8)
       activemodel (>= 4.0.1, < 5.0)
-    rack (1.5.2)
+    rack (1.5.5)
     rack-contrib (1.2.0)
       rack (>= 0.9.1)
     rack-pjax (0.8.0)
