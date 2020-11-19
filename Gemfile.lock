@@ -225,7 +225,7 @@ DEPENDENCIES
   wicked_pdf
 
 RUBY VERSION
-   ruby 2.0.0p481
+   ruby 2.7.2
 
 BUNDLED WITH
    1.15.4
